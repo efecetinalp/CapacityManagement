@@ -39,9 +39,19 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Department>>(_departmentDal.GetAll());
         }
 
-        public IDataResult<List<Department>> GetByManagementId(int id)
+        public IDataResult<List<Department>> GetAllByManagementId(int id)
         {
             return new SuccessDataResult<List<Department>>(_departmentDal.GetAll(d => d.ManagementId == id));
+        }
+
+        public IDataResult<List<Department>> GetAllById(int id)
+        {
+            return new SuccessDataResult<List<Department>>(_departmentDal.GetAll(d => d.DepartmentId == id));
+        }
+
+        public IDataResult<Department> GetIdByDepartmentName(string name)
+        {
+            return new SuccessDataResult<Department>(_departmentDal.Get(d => d.DepartmentName == name));
         }
     }
 }

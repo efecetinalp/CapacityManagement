@@ -2,8 +2,10 @@ using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Microsoft.Data.SqlClient.Server;
 using Microsoft.VisualBasic;
+using System;
 using System.Data;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Windows.Forms;
 
@@ -45,7 +47,7 @@ namespace DashboardUI
             }
 
             dateTimePickerStart.Value = new DateTime(2024, 01, 01);
-            dateTimePickerEnd.Value = dateTimePickerStart.Value.AddMonths(6);
+            dateTimePickerEnd.Value = dateTimePickerStart.Value.AddMonths(11);
 
             #region "Delete Later"
 
@@ -83,30 +85,160 @@ namespace DashboardUI
 
         }
 
-        private void btnCreate_Click(object sender, EventArgs e)
-        {
-            //create new project
-            //CreateMenu createMenu = new();
-            //createMenu.ShowDialog();
-        }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            //update selection
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            //delete selection
-        }
 
         private void buttonList_Click(object sender, EventArgs e)
         {
             ResetGridView();
 
+            UIRequest uiRequest = new();
+            uiRequest.ManagementIndex = comboBoxManagement.SelectedIndex + 1; //+1 because sql table starts with -1
+
+            if (comboBoxDepartment.Text != "")
+                uiRequest.DepartmentIndex = departmentManager.GetIdByDepartmentName(comboBoxDepartment.Text).Data.DepartmentId;
+            else
+                uiRequest.DepartmentIndex = 0;
+
+            uiRequest.CategotryIndex = comboBoxCategory.SelectedIndex + 1;
+            uiRequest.StartDate = dateTimePickerStart.Value;
+            uiRequest.EndDate = dateTimePickerEnd.Value;
+
+            //DateColumns(uiRequest);
+            FetchData(uiRequest);
+        }
+
+        private void DateColumns(UIRequest uiRequest)
+        {
+            dbGrid.Columns.Add("", "");
+
+            int monthCalulate = (uiRequest.EndDate.Year - uiRequest.StartDate.Year) * 12
+                + (uiRequest.EndDate.Month - uiRequest.StartDate.Month);
+
+            //month columns
+            DateTime tempMonth;
+            for (int i = 0; i <= monthCalulate; i++)
+            {
+                //empty column
+                dbGrid.Columns.Add("", "");
+
+                DataGridViewColumn column = dbGrid.Columns[i + 1];
+
+                tempMonth = dateTimePickerStart.Value.AddMonths(i);
+                column.HeaderText = tempMonth.ToString("MMM-yy");
+            }
+            #region "DELETE LATER"
+            //DELETE LATER
+            dbGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dbGrid.ColumnHeadersHeight = 50;
+            dbGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+            // Here we attach an event handler to the cell painting event
+            dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
+            #endregion
+        }
+
+        private void FetchData(UIRequest uiRequest)
+        {
+            if (uiRequest.ManagementIndex == 0)
+            {
+                dbGrid.DataSource = projectManager.GetProjectDetails().Data;
+                return;
+            }
+
+            if (uiRequest.DepartmentIndex == 0)
+            {
+                dbGrid.DataSource = projectManager.GetProjectDetails(uiRequest.ManagementIndex).Data;
+                return;
+            }
+
+            if (uiRequest.CategotryIndex == 0)
+            {
+                dbGrid.DataSource = projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex).Data;
+                return;
+            }
+
+            dbGrid.DataSource = projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex, uiRequest.CategotryIndex).Data;
+
+            //string managementTitle, departmentTitle;
+
+            //managementTitle = projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex, uiRequest.CategotryIndex).Data[0].ManagementName;
+            //departmentTitle = projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex, uiRequest.CategotryIndex).Data[0].DepartmentName;
+
+            //AddRow(managementTitle, Color.LightBlue);
+            //AddRow(departmentTitle, Color.LightGreen);
+
+            //for (int i = 0; i < projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex, uiRequest.CategotryIndex).Data.Count; i++)
+            //{
+            //    string tempData;
+            //    tempData = projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex, uiRequest.CategotryIndex).Data[i].ProjectName;
+            //    AddRow(tempData, Color.LightSkyBlue);
+
+            //}
+        }
+
+        private void FetchDatav2(UIRequest uiRequest)
+        {
+
+            if (uiRequest.ManagementIndex == 0)
+            {
+                for (int i = 0; i < managementManager.GetAll().Data.Count; i++)
+                {
+                    string tempData = managementManager.GetAll().Data[i].ManagementName;
+                    AddRow(tempData, Color.LightBlue);
+
+                    FetchDepartmant(uiRequest, i + 1);
+                }
+
+            }
+            else
+            {
+                string tempData = managementManager.GetAllById(uiRequest.ManagementIndex).Data[0].ManagementName;
+                AddRow(tempData, Color.LightBlue);
+
+                FetchDepartmant(uiRequest);
+            }
+
+        }
+
+        private void FetchDepartmant(UIRequest uiRequest, [Optional] int i)
+        {
+            if (uiRequest.DepartmentIndex == 0)
+            {
+                for (int j = 0; j < departmentManager.GetAllByManagementId(i).Data.Count; j++)
+                {
+                    string tempData = departmentManager.GetAllByManagementId(i).Data[j].DepartmentName;
+                    AddRow(tempData, Color.LightSeaGreen);
+
+                    //DataGridViewRow dataRow = new();
+                    //DataGridViewTextBoxCell dataCell = new();
+                    //dataCell.Value = departmentManager.GetAllByManagementId(i).Data[j].DepartmentName;
+                    //dataRow.DefaultCellStyle.BackColor = Color.LightSalmon;
+                    //dataRow.Cells.Add(dataCell);
+                    //dbGrid.Rows.Add(dataRow);
+                }
+            }
+            else
+            {
+                dbGrid.Rows.Add(departmentManager.GetAllById(uiRequest.DepartmentIndex).Data[0].DepartmentName);
+            }
+        }
+
+        private int AddRow(string data, Color color)
+        {
+            DataGridViewRow dataRow = new();
+            DataGridViewTextBoxCell dataCell = new();
+            dataCell.Value = data;
+            dataRow.DefaultCellStyle.BackColor = color;
+            dataRow.Cells.Add(dataCell);
+            dbGrid.Rows.Add(dataRow);
+            return dbGrid.Rows.IndexOf(dataRow);
+        }
+
+        private void FetchDatav1()
+        {
+            ResetGridView();
+
             //first column on data table
             dbGrid.Columns.Add("Projects", "Projects");
-            foreach (var data in projectCapacityManager.GetProjectCapacityDetailsByDateAndDepartmentId(new DateTime(2024,03,01), 1).Data)
+            foreach (var data in projectCapacityManager.GetProjectCapacityDetailsByDateAndDepartmentId(new DateTime(2024, 03, 01), 1).Data)
             {
                 dbGrid.Rows.Add(data.ProjectName);
             }
@@ -138,19 +270,7 @@ namespace DashboardUI
 
                 }
 
-               
-                //dbGrid.Columns.Add(column);
             }
-
-
-            //dbGrid.DataSource = projectCapacityManager.GetProjectCapacityDetailsByDateAndDepartmentId(dateTimePickerStart.Value, 1).Data;
-
-
-
-
-
-
-            //FetchDataLater();
             #region "DELETE LATER"
             //DELETE LATER
             dbGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
@@ -161,6 +281,7 @@ namespace DashboardUI
             #endregion
         }
 
+        //DELETE THIS LATER
         private void FetchDataLater()
         {
             //fetch row datas
@@ -200,11 +321,14 @@ namespace DashboardUI
 
             //reset filters
             comboBoxManagement.ResetText();
+            comboBoxManagement.SelectedIndex = -1;
             comboBoxDepartment.ResetText();
+            comboBoxDepartment.SelectedIndex = -1;
             comboBoxCategory.ResetText();
+            comboBoxCategory.SelectedIndex = -1;
 
-            dateTimePickerStart.Value = DateTime.Today;
-            dateTimePickerEnd.Value = DateTime.Today.AddMonths(1);
+            dateTimePickerStart.Value = new DateTime(2024, 01, 01);
+            dateTimePickerEnd.Value = dateTimePickerStart.Value.AddMonths(11);
         }
 
         private void ResetGridView()
@@ -220,8 +344,12 @@ namespace DashboardUI
         {
             //update department comboBox
             comboBoxDepartment.Items.Clear();
+            comboBoxDepartment.ResetText();
+            comboBoxDepartment.SelectedIndex = -1;
+            comboBoxCategory.ResetText();
+            comboBoxCategory.SelectedIndex = -1;
 
-            foreach (var department in departmentManager.GetByManagementId(comboBoxManagement.SelectedIndex + 1).Data)
+            foreach (var department in departmentManager.GetAllByManagementId(comboBoxManagement.SelectedIndex + 1).Data)
             {
                 comboBoxDepartment.Items.Add(department.DepartmentName);
             }
@@ -258,6 +386,26 @@ namespace DashboardUI
                 e.Graphics.TranslateTransform(0, -titleSize.Width);
                 e.Handled = true;
             }
+        }
+
+        //CRUD OPERTAIONS
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            CreateForm createForm = new(managementManager, departmentManager, categoryManager, projectManager);
+            createForm.ShowDialog();
+            //create new project
+            //CreateMenu createMenu = new();
+            //createMenu.ShowDialog();
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            //update selection
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            //delete selection
         }
 
 

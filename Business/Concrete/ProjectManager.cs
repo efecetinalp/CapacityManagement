@@ -74,5 +74,20 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<ProjectDetailDto>>(_projectDal.GetProjectDetails(), Messages.ProjectListed);
         }
+
+        public IDataResult<List<ProjectDetailDto>> GetProjectDetails(int managementId)
+        {
+            return new SuccessDataResult<List<ProjectDetailDto>>(_projectDal.GetProjectDetails(p => p.ManagementId == managementId), Messages.ProjectListed);
+        }
+
+        public IDataResult<List<ProjectDetailDto>> GetProjectDetails(int managementId, int departmentId)
+        {
+            return new SuccessDataResult<List<ProjectDetailDto>>(_projectDal.GetProjectDetails(p => p.ManagementId == managementId && p.DepartmentId == departmentId), Messages.ProjectListed);
+        }
+
+        public IDataResult<List<ProjectDetailDto>> GetProjectDetails(int managementId,int departmentId, int categoryId)
+        {
+            return new SuccessDataResult<List<ProjectDetailDto>>(_projectDal.GetProjectDetails(p=> p. ManagementId == managementId && p.DepartmentId == departmentId && p.CategoryId == categoryId), Messages.ProjectListed);
+        }
     }
 }

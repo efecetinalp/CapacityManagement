@@ -10,6 +10,7 @@ namespace Entities.Concrete
     public class Project : IEntity
     {
         public int ProjectId { get; set; }
+        public int ManagementId { get; set; }
         public int DepartmentId { get; set; }
         public int CategoryId { get; set; }
         public string ProjectName { get; set; }

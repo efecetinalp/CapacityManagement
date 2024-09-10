@@ -21,7 +21,8 @@ namespace Business.Concrete
 
         public IResult Add(Management management)
         {
-            throw new NotImplementedException();
+            _managementDal.Add(management);
+            return new SuccessResult();
         }
 
         public IResult Update(Management management)
@@ -39,6 +40,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Management>>(_managementDal.GetAll());
         }
 
-        
+        public IDataResult<List<Management>> GetAllById(int id)
+        {
+            return new SuccessDataResult<List<Management>>(_managementDal.GetAll(m => m.ManagementId == id));
+        }
     }
 }

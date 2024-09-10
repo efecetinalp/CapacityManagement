@@ -11,6 +11,7 @@ namespace Business.Abstract
     public interface IManagementService
     {
         IDataResult<List<Management>> GetAll();
+        IDataResult<List<Management>> GetAllById(int id);
 
         IResult Add(Management management);
         IResult Update(Management management);
