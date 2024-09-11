@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -34,6 +35,16 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<ProjectCapacityDetailDto>>
                 (_projectCapacityDal.GetProjectCapacityDetails(p=> p.PDate == date && p.DepartmentId == id));
+        }
+
+        public IDataResult<List<ProjectCapacityDetailDto>> GetProjectCapacityDetailsByDateAndProjectName(DateTime date, string projectName)
+        {
+            var result =_projectCapacityDal.GetProjectCapacityDetails(p => p.PDate == date && p.ProjectName == projectName);
+
+            if (result.Count == 0)
+                return new ErrorDataResult<List<ProjectCapacityDetailDto>>(result, Messages.EmptyData);
+            else
+                return new SuccessDataResult<List<ProjectCapacityDetailDto>>(result, Messages.ProjectListed);
         }
     }
 }

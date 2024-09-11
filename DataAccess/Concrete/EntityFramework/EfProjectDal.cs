@@ -37,9 +37,9 @@ namespace DataAccess.Concrete.EntityFramework
                              };
 
                 if (filter == null)
-                    return result.ToList();
+                    return result.OrderBy(x => x.ManagementId).ToList();
                 else
-                    return result.Where(filter).OrderBy(x => x.CategoryId).OrderBy(x => x.DepartmentId).OrderBy(x => x.ManagementId).ToList();
+                    return result.Where(filter).OrderBy(x => x.DepartmentId).ToList();
             }
         }
     }

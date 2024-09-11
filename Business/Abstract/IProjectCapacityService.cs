@@ -14,6 +14,7 @@ namespace Business.Abstract
         IDataResult<List<ProjectCapacityDetailDto>> GetProjectCapacityDetails();
 
         IDataResult<List<ProjectCapacityDetailDto>> GetProjectCapacityDetailsByDateAndDepartmentId(DateTime date, int id);
+        IDataResult<List<ProjectCapacityDetailDto>> GetProjectCapacityDetailsByDateAndProjectName(DateTime date, string projectName);
 
         IDataResult<List<ProjectCapacity>> GetAllByProjectId(int id);
     }

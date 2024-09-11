@@ -1,5 +1,7 @@
 using Business.Concrete;
+using Core.Utilities.Results;
 using DataAccess.Concrete.EntityFramework;
+using Entities.DTOs;
 using Microsoft.Data.SqlClient.Server;
 using Microsoft.VisualBasic;
 using System;
@@ -19,6 +21,7 @@ namespace DashboardUI
         CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
         ProjectManager projectManager = new ProjectManager(new EfProjectDal());
         ProjectCapacityManager projectCapacityManager = new ProjectCapacityManager(new EfProjectCapacityDal());
+        DepartmentCapacityManager departmentCapacityManager = new DepartmentCapacityManager(new EfDepartmentCapacityDal());
         //grid view source table
         DataTable dataTable = new();
 
@@ -102,8 +105,90 @@ namespace DashboardUI
             uiRequest.StartDate = dateTimePickerStart.Value;
             uiRequest.EndDate = dateTimePickerEnd.Value;
 
+            DatabaseRows(uiRequest);
             //DateColumns(uiRequest);
-            FetchData(uiRequest);
+            DatabaseColumns();
+            //GetRowNames();
+        }
+
+        private void GetRowNames()
+        {
+            for (int i = 0; i < dbGrid.Rows.Count -1; i++)
+            {
+                Debug.Print(dbGrid.Rows[i].Cells[0].Value.ToString());
+            }
+        }
+
+        private void DatabaseColumns()
+        {
+            int monthCalulate = (dateTimePickerEnd.Value.Year - dateTimePickerStart.Value.Year) * 12
+                + (dateTimePickerEnd.Value.Month - dateTimePickerStart.Value.Month);
+
+            //month columns
+            DateTime tempMonth;
+            for (int i = 0; i <= monthCalulate; i++)
+            {
+                //empty column
+                dbGrid.Columns.Add("", "");
+
+                DataGridViewColumn column = dbGrid.Columns[i + 1];
+
+                tempMonth = dateTimePickerStart.Value.AddMonths(i);
+                column.HeaderText = tempMonth.ToString("MMM-yy");
+
+                //check project and department names from each row
+                for (int j = 0; j < dbGrid.Rows.Count - 1; j++)
+                {
+                    string tempCellName;
+                    tempCellName = dbGrid.Rows[j].Cells[0].Value.ToString();
+
+                    //get department capacity detail by date and department name
+                    var departmentResult = departmentCapacityManager.GetAllByDateAndDepartmentName(tempMonth, tempCellName);
+                    if (departmentResult.Success)
+                    {
+                        for (int k = 0; k < departmentResult.Data.Count; k++)
+                        {
+                            column.DataGridView.Rows[j].Cells[i + 1].Value = departmentResult.Data[k].DTotalCapacity;
+                            //column.DataGridView.Rows[j].Cells[i + 1].Style.BackColor = Color.FromArgb(255, 230, 153);
+                        }
+                    }
+
+                    //get project capacity detail by date and project name
+                    var projectResult = projectCapacityManager.GetProjectCapacityDetailsByDateAndProjectName(tempMonth, tempCellName);
+                    if (projectResult.Success)
+                    {
+                        for (int k = 0; k < projectResult.Data.Count; k++)
+                        {
+                            column.DataGridView.Rows[j].Cells[i + 1].Value = projectResult.Data[k].PTotalCapacity;
+                            column.DataGridView.Rows[j].Cells[i + 1].Style.BackColor = Color.LightGreen;
+                        }
+                    }
+
+
+                }
+
+
+
+                //if (projectCapacityManager.GetProjectCapacityDetailsByDateAndDepartmentId(tempMonth, 1).Data.Count != 0)
+                //{
+                //    for (int j = 0; j < projectCapacityManager.GetProjectCapacityDetailsByDateAndDepartmentId(tempMonth, 1).Data.Count; j++)
+                //    {
+                //        column.DataGridView.Rows[j].Cells[i + 1].Value = projectCapacityManager.GetProjectCapacityDetailsByDateAndDepartmentId(tempMonth, 1).Data[j].PTotalCapacity;
+                //        column.DataGridView.Rows[j].Cells[i + 1].Style.BackColor = Color.LightGreen;
+                //        //column.DefaultCellStyle.BackColor = Color.Green;
+                //    }
+
+                //}
+
+            }
+            #region "DELETE LATER"
+            //DELETE LATER
+            dbGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dbGrid.ColumnHeadersHeight = 50;
+            dbGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+            // Here we attach an event handler to the cell painting event
+            dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
+            #endregion
         }
 
         private void DateColumns(UIRequest uiRequest)
@@ -128,6 +213,8 @@ namespace DashboardUI
             #region "DELETE LATER"
             //DELETE LATER
             dbGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            //dbGrid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(51, 63, 79);
+            //dbGrid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dbGrid.ColumnHeadersHeight = 50;
             dbGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
             // Here we attach an event handler to the cell painting event
@@ -135,44 +222,113 @@ namespace DashboardUI
             #endregion
         }
 
-        private void FetchData(UIRequest uiRequest)
+        private void DatabaseRows(UIRequest uiRequest)
         {
             if (uiRequest.ManagementIndex == 0)
             {
-                dbGrid.DataSource = projectManager.GetProjectDetails().Data;
+                var resultWOManagement = projectManager.GetProjectDetails();
+                FetchData(resultWOManagement);
                 return;
             }
 
             if (uiRequest.DepartmentIndex == 0)
             {
-                dbGrid.DataSource = projectManager.GetProjectDetails(uiRequest.ManagementIndex).Data;
+                var resultWODepartment = projectManager.GetProjectDetails(uiRequest.ManagementIndex);
+                FetchData(resultWODepartment);
                 return;
             }
 
             if (uiRequest.CategotryIndex == 0)
             {
-                dbGrid.DataSource = projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex).Data;
+                var resultWOCategory = projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex);
+                FetchData(resultWOCategory);
                 return;
             }
 
-            dbGrid.DataSource = projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex, uiRequest.CategotryIndex).Data;
+            //DELETE LATER
+            //dbGrid.DataSource = projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex, uiRequest.CategotryIndex).Data;
 
-            //string managementTitle, departmentTitle;
+            var result = projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex, uiRequest.CategotryIndex);
+            FetchData(result);
 
-            //managementTitle = projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex, uiRequest.CategotryIndex).Data[0].ManagementName;
-            //departmentTitle = projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex, uiRequest.CategotryIndex).Data[0].DepartmentName;
-
-            //AddRow(managementTitle, Color.LightBlue);
-            //AddRow(departmentTitle, Color.LightGreen);
-
-            //for (int i = 0; i < projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex, uiRequest.CategotryIndex).Data.Count; i++)
-            //{
-            //    string tempData;
-            //    tempData = projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex, uiRequest.CategotryIndex).Data[i].ProjectName;
-            //    AddRow(tempData, Color.LightSkyBlue);
-
-            //}
         }
+
+        private void FetchData(IDataResult<List<ProjectDetailDto>> result)
+        {
+            //DELETE THIS LATER
+            dbGrid.Columns.Add("", "");
+
+            if (result.Success)
+            {
+                List<string> managementNames = new();
+                List<string> departmentNames = new();
+                List<string> projectNames = new();
+
+                for (int i = 0; i < result.Data.Count; i++)
+                {
+                    managementNames.Add(result.Data[i].ManagementName);
+                    departmentNames.Add(result.Data[i].DepartmentName + "," + result.Data[i].ManagementName);
+                    projectNames.Add(result.Data[i].ProjectName + "," + result.Data[i].DepartmentName);
+                }
+
+                //unique values
+                managementNames = managementNames.Distinct().ToList();
+                departmentNames = departmentNames.Distinct().ToList();
+                projectNames = projectNames.Distinct().ToList();
+
+
+                //if management count > 0
+                for (int i = 0; i < managementNames.Count; i++)
+                {
+                    AddRow(managementNames[i], Color.FromArgb(51, 63, 79));
+
+                    // if department count >0
+                    for (int j = 0; j < departmentNames.Count; j++)
+                    {
+                        if (managementNames[i] == departmentNames[j].Split(",")[1])
+                        {
+
+                            AddRow(departmentNames[j].Split(",")[0], Color.FromArgb(255, 230, 153));
+
+                            for (int k = 0; k < projectNames.Count; k++)
+                            {
+                                if (departmentNames[j].Split(",")[0] == projectNames[k].Split(",")[1])
+                                    AddRow(projectNames[k].Split(",")[0], Color.FromArgb(210, 238, 255));
+
+                                //string tempData;
+                                //tempData = result.Data[k].ProjectName;
+                                //AddRow(tempData, Color.FromArgb(210, 238, 255));
+                            }
+                            //seperator
+                            AddRow("",Color.White);
+                        }
+                    }
+                }
+
+                //string managementTitle, departmentTitle;
+
+                //managementTitle = result.Data[0].ManagementName;
+                //departmentTitle = result.Data[0].DepartmentName;
+
+                //for (int k = 0; k < result.Data.Count; k++)
+                //{
+                //    string tempData;
+                //    tempData = result.Data[k].ProjectName;
+                //    AddRow(tempData, Color.LightSkyBlue);
+                //}
+
+                Debug.Print(result.Massage);
+            }
+            else
+            {
+                ResetGridView();
+                dbGrid.Columns.Add("", "");
+                Debug.Print(result.Massage);
+            }
+        }
+
+
+        //OLD FETCHES
 
         private void FetchDatav2(UIRequest uiRequest)
         {
@@ -221,20 +377,8 @@ namespace DashboardUI
             }
         }
 
-        private int AddRow(string data, Color color)
-        {
-            DataGridViewRow dataRow = new();
-            DataGridViewTextBoxCell dataCell = new();
-            dataCell.Value = data;
-            dataRow.DefaultCellStyle.BackColor = color;
-            dataRow.Cells.Add(dataCell);
-            dbGrid.Rows.Add(dataRow);
-            return dbGrid.Rows.IndexOf(dataRow);
-        }
-
         private void FetchDatav1()
         {
-            ResetGridView();
 
             //first column on data table
             dbGrid.Columns.Add("Projects", "Projects");
@@ -313,6 +457,19 @@ namespace DashboardUI
 
             // Here we attach an event handler to the cell painting event
             dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
+        }
+
+
+
+        private int AddRow(string data, Color color)
+        {
+            DataGridViewRow dataRow = new();
+            DataGridViewTextBoxCell dataCell = new();
+            dataCell.Value = data;
+            dataRow.DefaultCellStyle.BackColor = color;
+            dataRow.Cells.Add(dataCell);
+            dbGrid.Rows.Add(dataRow);
+            return dbGrid.Rows.IndexOf(dataRow);
         }
 
         private void buttonReset_Click(object sender, EventArgs e)

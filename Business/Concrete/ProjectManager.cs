@@ -72,22 +72,42 @@ namespace Business.Concrete
 
         public IDataResult<List<ProjectDetailDto>> GetProjectDetails()
         {
-            return new SuccessDataResult<List<ProjectDetailDto>>(_projectDal.GetProjectDetails(), Messages.ProjectListed);
+            List<ProjectDetailDto> result = _projectDal.GetProjectDetails();
+
+            if (result.Count == 0)
+                return new ErrorDataResult<List<ProjectDetailDto>>(result, Messages.EmptyData);
+            else
+                return new SuccessDataResult<List<ProjectDetailDto>>(result, Messages.ProjectListed);
         }
 
         public IDataResult<List<ProjectDetailDto>> GetProjectDetails(int managementId)
         {
-            return new SuccessDataResult<List<ProjectDetailDto>>(_projectDal.GetProjectDetails(p => p.ManagementId == managementId), Messages.ProjectListed);
+            List<ProjectDetailDto> result = _projectDal.GetProjectDetails(p => p.ManagementId == managementId);
+
+            if (result.Count == 0)
+                return new ErrorDataResult<List<ProjectDetailDto>>(result, Messages.EmptyData);
+            else
+                return new SuccessDataResult<List<ProjectDetailDto>>(result, Messages.ProjectListed);
         }
 
         public IDataResult<List<ProjectDetailDto>> GetProjectDetails(int managementId, int departmentId)
         {
-            return new SuccessDataResult<List<ProjectDetailDto>>(_projectDal.GetProjectDetails(p => p.ManagementId == managementId && p.DepartmentId == departmentId), Messages.ProjectListed);
+            List<ProjectDetailDto> result = _projectDal.GetProjectDetails(p => p.ManagementId == managementId && p.DepartmentId == departmentId);
+
+            if (result.Count == 0)
+                return new ErrorDataResult<List<ProjectDetailDto>>(result, Messages.EmptyData);
+            else
+                return new SuccessDataResult<List<ProjectDetailDto>>(result, Messages.ProjectListed);
         }
 
-        public IDataResult<List<ProjectDetailDto>> GetProjectDetails(int managementId,int departmentId, int categoryId)
+        public IDataResult<List<ProjectDetailDto>> GetProjectDetails(int managementId, int departmentId, int categoryId)
         {
-            return new SuccessDataResult<List<ProjectDetailDto>>(_projectDal.GetProjectDetails(p=> p. ManagementId == managementId && p.DepartmentId == departmentId && p.CategoryId == categoryId), Messages.ProjectListed);
+            List<ProjectDetailDto> result = _projectDal.GetProjectDetails(p => p.ManagementId == managementId && p.DepartmentId == departmentId && p.CategoryId == categoryId);
+            
+            if (result.Count == 0)
+                return new ErrorDataResult<List<ProjectDetailDto>>(result, Messages.EmptyData);
+            else
+                return new SuccessDataResult<List<ProjectDetailDto>>(result, Messages.ProjectListed);
         }
     }
 }

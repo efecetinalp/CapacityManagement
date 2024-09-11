@@ -13,6 +13,7 @@ namespace Business.Constants
         public static string ProjectDeleted = "Project data is deleted successfuly!";
         public static string ProjectListed = "Project data is listed successfuly!";
         public static string ProjectNameInvalid = "Project name is invalid!";
+        public static string EmptyData = "No data available for this query";
 
     }
 }
