@@ -12,6 +12,6 @@ namespace Entities.Concrete
         public int ProjectCapacityId { get; set; }
         public int ProjectId { get; set; }
         public int PTotalCapacity { get; set; }
-        public int DCapacityId { get; set; }
+        public DateTime Date { get; set; }
     }
 }

@@ -22,6 +22,7 @@ namespace Business.Abstract
         IDataResult<List<ProjectDetailDto>> GetProjectDetails(int managementId, int departmentId, int categoryId);
 
         IDataResult<Project> GetById(int id);
+        IDataResult<Project> GetByName(string projectName);
 
         IResult Add(Project project);
         IResult Update(Project project);

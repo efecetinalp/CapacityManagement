@@ -18,16 +18,14 @@ namespace DataAccess.Concrete.EntityFramework
             using (CapacityDBContext context = new CapacityDBContext())
             {
                 var result = from p in context.ProjectCapacities
-                             join d in context.DepartmentCapacities on p.DCapacityId equals d.DCapacityId
                              join pt in context.Projects on p.ProjectId equals pt.ProjectId
                              select new ProjectCapacityDetailDto
                              {
                                  PCapacityId = p.ProjectCapacityId,
-                                 DepartmentId = d.DepartmentId,
+                                 ProjectId = pt.DepartmentId,
                                  ProjectName = pt.ProjectName,
                                  PTotalCapacity = p.PTotalCapacity,
-                                 DCapacityId = d.DCapacityId,
-                                 PDate = d.Date
+                                 Date = p.Date
                              };
                 return result.Where(filter).ToList();
             }

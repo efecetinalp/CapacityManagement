@@ -1,6 +1,7 @@
 using Business.Concrete;
 using Core.Utilities.Results;
 using DataAccess.Concrete.EntityFramework;
+using Entities.Concrete;
 using Entities.DTOs;
 using Microsoft.Data.SqlClient.Server;
 using Microsoft.VisualBasic;
@@ -22,8 +23,8 @@ namespace DashboardUI
         ProjectManager projectManager = new ProjectManager(new EfProjectDal());
         ProjectCapacityManager projectCapacityManager = new ProjectCapacityManager(new EfProjectCapacityDal());
         DepartmentCapacityManager departmentCapacityManager = new DepartmentCapacityManager(new EfDepartmentCapacityDal());
-        //grid view source table
-        DataTable dataTable = new();
+        //temp cell value
+        object _tempCellValue;
 
         public Dashboard()
         {
@@ -51,43 +52,7 @@ namespace DashboardUI
 
             dateTimePickerStart.Value = new DateTime(2024, 01, 01);
             dateTimePickerEnd.Value = dateTimePickerStart.Value.AddMonths(11);
-
-            #region "Delete Later"
-
-            //DataTable table = new DataTable();
-            ////first column
-            //table.Columns.Add("Cabin Structure Projects", typeof(string));
-
-            //foreach (var item in projectCapacityManager.GetProjectCapacityDetails())
-            //{
-            //    table.Columns.Add(item.Date.ToString(), typeof(int));
-            //}
-
-            //foreach (var project in projectManager.GetProjectDetails().Data)
-            //{
-            //    table.Rows.Add(project.ProjectName);
-
-            //}
-
-            //for (int i = 0; i < table.Columns.Count; i++)
-            //{
-            //    if (table.Columns[i].ColumnName == projectCapacityManager.GetAllByProjectId(1).)
-            //    {
-
-            //    }
-            //}
-
-            //dbGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            //dbGrid.DataSource = table;
-
-
-            //dbGrid.DataSource = projectManager.GetProjectDetails().Data;
-            //dbGrid.DataSource = projectCapacityManager.GetProjectCapacityDetails();
-
-            #endregion
-
         }
-
 
         private void buttonList_Click(object sender, EventArgs e)
         {
@@ -106,14 +71,14 @@ namespace DashboardUI
             uiRequest.EndDate = dateTimePickerEnd.Value;
 
             DatabaseRows(uiRequest);
-            //DateColumns(uiRequest);
             DatabaseColumns();
             //GetRowNames();
         }
 
+        //for test purpose
         private void GetRowNames()
         {
-            for (int i = 0; i < dbGrid.Rows.Count -1; i++)
+            for (int i = 0; i < dbGrid.Rows.Count - 1; i++)
             {
                 Debug.Print(dbGrid.Rows[i].Cells[0].Value.ToString());
             }
@@ -163,58 +128,11 @@ namespace DashboardUI
                             column.DataGridView.Rows[j].Cells[i + 1].Style.BackColor = Color.LightGreen;
                         }
                     }
-
-
                 }
-
-
-
-                //if (projectCapacityManager.GetProjectCapacityDetailsByDateAndDepartmentId(tempMonth, 1).Data.Count != 0)
-                //{
-                //    for (int j = 0; j < projectCapacityManager.GetProjectCapacityDetailsByDateAndDepartmentId(tempMonth, 1).Data.Count; j++)
-                //    {
-                //        column.DataGridView.Rows[j].Cells[i + 1].Value = projectCapacityManager.GetProjectCapacityDetailsByDateAndDepartmentId(tempMonth, 1).Data[j].PTotalCapacity;
-                //        column.DataGridView.Rows[j].Cells[i + 1].Style.BackColor = Color.LightGreen;
-                //        //column.DefaultCellStyle.BackColor = Color.Green;
-                //    }
-
-                //}
-
             }
             #region "DELETE LATER"
             //DELETE LATER
             dbGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dbGrid.ColumnHeadersHeight = 50;
-            dbGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
-            // Here we attach an event handler to the cell painting event
-            dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
-            #endregion
-        }
-
-        private void DateColumns(UIRequest uiRequest)
-        {
-            dbGrid.Columns.Add("", "");
-
-            int monthCalulate = (uiRequest.EndDate.Year - uiRequest.StartDate.Year) * 12
-                + (uiRequest.EndDate.Month - uiRequest.StartDate.Month);
-
-            //month columns
-            DateTime tempMonth;
-            for (int i = 0; i <= monthCalulate; i++)
-            {
-                //empty column
-                dbGrid.Columns.Add("", "");
-
-                DataGridViewColumn column = dbGrid.Columns[i + 1];
-
-                tempMonth = dateTimePickerStart.Value.AddMonths(i);
-                column.HeaderText = tempMonth.ToString("MMM-yy");
-            }
-            #region "DELETE LATER"
-            //DELETE LATER
-            dbGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            //dbGrid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(51, 63, 79);
-            //dbGrid.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dbGrid.ColumnHeadersHeight = 50;
             dbGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
             // Here we attach an event handler to the cell painting event
@@ -300,7 +218,7 @@ namespace DashboardUI
                                 //AddRow(tempData, Color.FromArgb(210, 238, 255));
                             }
                             //seperator
-                            AddRow("",Color.White);
+                            AddRow("", Color.White);
                         }
                     }
                 }
@@ -326,140 +244,6 @@ namespace DashboardUI
                 Debug.Print(result.Massage);
             }
         }
-
-
-        //OLD FETCHES
-
-        private void FetchDatav2(UIRequest uiRequest)
-        {
-
-            if (uiRequest.ManagementIndex == 0)
-            {
-                for (int i = 0; i < managementManager.GetAll().Data.Count; i++)
-                {
-                    string tempData = managementManager.GetAll().Data[i].ManagementName;
-                    AddRow(tempData, Color.LightBlue);
-
-                    FetchDepartmant(uiRequest, i + 1);
-                }
-
-            }
-            else
-            {
-                string tempData = managementManager.GetAllById(uiRequest.ManagementIndex).Data[0].ManagementName;
-                AddRow(tempData, Color.LightBlue);
-
-                FetchDepartmant(uiRequest);
-            }
-
-        }
-
-        private void FetchDepartmant(UIRequest uiRequest, [Optional] int i)
-        {
-            if (uiRequest.DepartmentIndex == 0)
-            {
-                for (int j = 0; j < departmentManager.GetAllByManagementId(i).Data.Count; j++)
-                {
-                    string tempData = departmentManager.GetAllByManagementId(i).Data[j].DepartmentName;
-                    AddRow(tempData, Color.LightSeaGreen);
-
-                    //DataGridViewRow dataRow = new();
-                    //DataGridViewTextBoxCell dataCell = new();
-                    //dataCell.Value = departmentManager.GetAllByManagementId(i).Data[j].DepartmentName;
-                    //dataRow.DefaultCellStyle.BackColor = Color.LightSalmon;
-                    //dataRow.Cells.Add(dataCell);
-                    //dbGrid.Rows.Add(dataRow);
-                }
-            }
-            else
-            {
-                dbGrid.Rows.Add(departmentManager.GetAllById(uiRequest.DepartmentIndex).Data[0].DepartmentName);
-            }
-        }
-
-        private void FetchDatav1()
-        {
-
-            //first column on data table
-            dbGrid.Columns.Add("Projects", "Projects");
-            foreach (var data in projectCapacityManager.GetProjectCapacityDetailsByDateAndDepartmentId(new DateTime(2024, 03, 01), 1).Data)
-            {
-                dbGrid.Rows.Add(data.ProjectName);
-            }
-
-
-            int monthCalulate = (dateTimePickerEnd.Value.Year - dateTimePickerStart.Value.Year) * 12
-                + (dateTimePickerEnd.Value.Month - dateTimePickerStart.Value.Month);
-
-            //month columns
-            DateTime tempMonth;
-            for (int i = 0; i <= monthCalulate; i++)
-            {
-                //empty column
-                dbGrid.Columns.Add("", "");
-
-                DataGridViewColumn column = dbGrid.Columns[i + 1];
-
-                tempMonth = dateTimePickerStart.Value.AddMonths(i);
-                column.HeaderText = tempMonth.ToString("MMM-yy");
-
-                if (projectCapacityManager.GetProjectCapacityDetailsByDateAndDepartmentId(tempMonth, 1).Data.Count != 0)
-                {
-                    for (int j = 0; j < projectCapacityManager.GetProjectCapacityDetailsByDateAndDepartmentId(tempMonth, 1).Data.Count; j++)
-                    {
-                        column.DataGridView.Rows[j].Cells[i + 1].Value = projectCapacityManager.GetProjectCapacityDetailsByDateAndDepartmentId(tempMonth, 1).Data[j].PTotalCapacity;
-                        column.DataGridView.Rows[j].Cells[i + 1].Style.BackColor = Color.LightGreen;
-                        //column.DefaultCellStyle.BackColor = Color.Green;
-                    }
-
-                }
-
-            }
-            #region "DELETE LATER"
-            //DELETE LATER
-            dbGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dbGrid.ColumnHeadersHeight = 50;
-            dbGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
-            // Here we attach an event handler to the cell painting event
-            dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
-            #endregion
-        }
-
-        //DELETE THIS LATER
-        private void FetchDataLater()
-        {
-            //fetch row datas
-            for (int i = 0; i < projectManager.GetAll().Data.Count; i++)
-            {
-                dataTable.Rows.Add(projectManager.GetAll().Data[i].ProjectName);
-            }
-
-            dbGrid.DataSource = dataTable;
-
-            for (int i = 0; i < projectCapacityManager.GetProjectCapacityDetails().Data.Count; i++)
-            {
-                int result = 0;
-                if (dataTable.Columns.Contains(projectCapacityManager.GetProjectCapacityDetails().Data[i].PDate.ToString()))
-                {
-
-                    result = dataTable.Columns.IndexOf(projectCapacityManager.GetProjectCapacityDetails().Data[i].PDate.ToString());
-                }
-
-                dbGrid[i, result].Value = projectCapacityManager.GetProjectCapacityDetails().Data[i].PTotalCapacity;
-            }
-
-
-
-            dbGrid.DataSource = dataTable;
-            dbGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dbGrid.ColumnHeadersHeight = 50;
-            dbGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
-
-            // Here we attach an event handler to the cell painting event
-            dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
-        }
-
-
 
         private int AddRow(string data, Color color)
         {
@@ -491,7 +275,6 @@ namespace DashboardUI
         private void ResetGridView()
         {
             //reset gridview
-            dataTable = new();
             dbGrid.DataSource = null;
             dbGrid.Rows.Clear();
             dbGrid.Columns.Clear();
@@ -548,23 +331,95 @@ namespace DashboardUI
         //CRUD OPERTAIONS
         private void btnCreate_Click(object sender, EventArgs e)
         {
+            //create new project
             CreateForm createForm = new(managementManager, departmentManager, categoryManager, projectManager);
             createForm.ShowDialog();
-            //create new project
-            //CreateMenu createMenu = new();
-            //createMenu.ShowDialog();
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void btnEdit_Click(object sender, EventArgs e)
         {
-            //update selection
+            //able to edit data grid view
+            DataGridViewButtonColumn buttonDeleteRow = new();
+            buttonDeleteRow.Name = "Delete";
+            buttonDeleteRow.Text = "X";
+            dbGrid.Columns.Add(buttonDeleteRow);
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void dbGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //delete selection
+            //delete project and project capacities
+            if (dbGrid.Columns[e.ColumnIndex].Name == "Delete")
+            {
+                DialogResult dialogResult = MessageBox.Show("Are you sure to delete selected project? Project index: " + e.RowIndex, "Delete Project", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    Project projectToDelete = projectManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).Data;
+
+                    var projectCapacitiesToDelete = projectCapacityManager.GetAllByProjectId(projectToDelete.ProjectId);
+                    if (projectCapacitiesToDelete.Success)
+                    {
+                        foreach (var projectCapacity in projectCapacitiesToDelete.Data)
+                        {
+                            projectCapacityManager.Delete(projectCapacity);
+                        }
+                    }
+
+                    projectManager.Delete(projectToDelete);
+
+                    MessageBox.Show("Project deleted successfully", "Delete Project", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    ResetGridView();
+                }
+            }
         }
 
+        private void dbGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            var cellValue = dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+            var cellDate = dbGrid.Columns[e.ColumnIndex].HeaderText;
+            //check if cell value is changed
+            if (_tempCellValue != cellValue)
+            {
+                Project cellProject = projectManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).Data;
+                //check if cell value was empty before
+                if (_tempCellValue == null)
+                {
+                    ProjectCapacity projectCapacityToAdd = new ProjectCapacity();
 
+                    projectCapacityToAdd.ProjectId = cellProject.ProjectId;
+                    projectCapacityToAdd.PTotalCapacity = Convert.ToInt32(cellValue);
+                    projectCapacityToAdd.Date = Convert.ToDateTime(cellDate);
+                    projectCapacityManager.Add(projectCapacityToAdd);
+
+                    Debug.Print("cell value added");
+                }
+                else
+                {
+                    //if cell value is deleted or 0
+                    ProjectCapacity projectCapacityToUpdate = projectCapacityManager.GetProjectCapacityByDateAndProjectId(Convert.ToDateTime(cellDate), cellProject.ProjectId).Data;
+                    if (cellValue == null || Convert.ToInt32(cellValue) == 0)
+                    {
+                        projectCapacityManager.Delete(projectCapacityToUpdate);
+                        Debug.Print("cell value deleted");
+
+                    }
+                    else
+                    {
+                        projectCapacityToUpdate.PTotalCapacity = Convert.ToInt32(cellValue);
+                        projectCapacityManager.Update(projectCapacityToUpdate);
+                        Debug.Print("cell value updated");
+                    }
+                }
+            }
+            else
+                Debug.Print("cell is the same");
+        }
+
+        private void dbGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            _tempCellValue = dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+        }
     }
 }

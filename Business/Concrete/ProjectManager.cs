@@ -109,5 +109,15 @@ namespace Business.Concrete
             else
                 return new SuccessDataResult<List<ProjectDetailDto>>(result, Messages.ProjectListed);
         }
+
+        public IDataResult<Project> GetByName(string projectName)
+        {
+            Project result = _projectDal.Get(p => p.ProjectName == projectName);
+
+            if (result != null)
+                return new SuccessDataResult<Project>(result, Messages.ProjectListed);
+            else
+                return new ErrorDataResult<Project>(result, Messages.EmptyData);
+        }
     }
 }
