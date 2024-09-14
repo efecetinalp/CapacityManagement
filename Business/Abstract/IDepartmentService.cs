@@ -15,7 +15,7 @@ namespace Business.Abstract
         IDataResult<List<Department>> GetAllByManagementId(int id);
         IDataResult<List<Department>> GetAllById(int id);
 
-        IDataResult<Department> GetIdByDepartmentName(string name);
+        IDataResult<Department> GetByDepartmentName(string departmentName);
 
         IResult Add(Department department);
         IResult Update(Department department);

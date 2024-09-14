@@ -40,6 +40,8 @@
             this.buttonReset = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnEdit = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dbGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -47,9 +49,9 @@
             // btnCreate
             // 
             this.btnCreate.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.btnCreate.Location = new System.Drawing.Point(127, 198);
+            this.btnCreate.Location = new System.Drawing.Point(23, 144);
             this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(149, 37);
+            this.btnCreate.Size = new System.Drawing.Size(238, 37);
             this.btnCreate.TabIndex = 2;
             this.btnCreate.Text = "Create";
             this.btnCreate.UseVisualStyleBackColor = false;
@@ -150,7 +152,7 @@
             // btnEdit
             // 
             this.btnEdit.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.btnEdit.Location = new System.Drawing.Point(127, 144);
+            this.btnEdit.Location = new System.Drawing.Point(1216, 30);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(149, 37);
             this.btnEdit.TabIndex = 14;
@@ -158,12 +160,36 @@
             this.btnEdit.UseVisualStyleBackColor = false;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
+            // btnUpdate
+            // 
+            this.btnUpdate.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.btnUpdate.Location = new System.Drawing.Point(23, 202);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(238, 37);
+            this.btnUpdate.TabIndex = 15;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.btnDelete.Location = new System.Drawing.Point(23, 259);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(238, 37);
+            this.btnDelete.TabIndex = 16;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(1416, 710);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.buttonReset);
@@ -197,5 +223,7 @@
         private Button buttonReset;
         private PictureBox pictureBox1;
         private Button btnEdit;
+        private Button btnUpdate;
+        private Button btnDelete;
     }
 }

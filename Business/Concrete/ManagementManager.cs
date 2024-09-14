@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -22,17 +23,19 @@ namespace Business.Concrete
         public IResult Add(Management management)
         {
             _managementDal.Add(management);
-            return new SuccessResult();
+            return new SuccessResult(Messages.ManagementAdded);
         }
 
         public IResult Update(Management management)
         {
-            throw new NotImplementedException();
+            _managementDal.Update(management);
+            return new SuccessResult(Messages.ManagementUpdated);
         }
 
         public IResult Delete(Management management)
         {
-            throw new NotImplementedException();
+            _managementDal.Delete(management);
+            return new SuccessResult(Messages.ManagementDeleted);
         }
 
         public IDataResult<List<Management>> GetAll()

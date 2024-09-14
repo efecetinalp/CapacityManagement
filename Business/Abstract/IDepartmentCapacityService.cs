@@ -12,5 +12,10 @@ namespace Business.Abstract
     public interface IDepartmentCapacityService
     {
         IDataResult<List<DepartmentCapacityDetailDto>> GetAllByDateAndDepartmentName(DateTime date, string departmentName);
+        IDataResult<DepartmentCapacity> GetDepartmentCapacityByDateAndDepartmentId(DateTime date, int departmentId);
+
+        IResult Add(DepartmentCapacity departmentCapacity);
+        IResult Update(DepartmentCapacity departmentCapacity);
+        IResult Delete(DepartmentCapacity departmentCapacity);
     }
 }

@@ -60,14 +60,51 @@ namespace DashboardUI
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
+            //create Project
             Project newProject = new();
 
             newProject.ManagementId = comboBoxManagement.SelectedIndex + 1;
-            newProject.DepartmentId = _departmentManager.GetIdByDepartmentName(comboBoxDepartment.Text).Data.DepartmentId;
+            newProject.DepartmentId = _departmentManager.GetByDepartmentName(comboBoxDepartment.Text).Data.DepartmentId;
             newProject.CategoryId = comboBoxCategory.SelectedIndex + 1;
             newProject.ProjectName = textBoxProject.Text;
 
-            _projectManager.Add(newProject);
+            if (_projectManager.Add(newProject).Success)
+            {
+                MessageBox.Show("Created");
+            }
+
+            this.Close();
+        }
+
+        private void buttonCreate2_Click(object sender, EventArgs e)
+        {
+            //create Project
+            Department departmantToCreate = new();
+
+            departmantToCreate.ManagementId = comboBoxManagement.SelectedIndex + 1;
+            departmantToCreate.DepartmentName = textBoxDepartment.Text;
+
+            if (_departmentManager.Add(departmantToCreate).Success)
+            {
+                MessageBox.Show("Created");
+            }
+
+            this.Close();
+        }
+
+        private void buttonCreate3_Click(object sender, EventArgs e)
+        {
+            //create Project
+            Management managementToCreate = new();
+
+            managementToCreate.ManagementName = textBoxManagement.Text;
+
+            if (_managementManager.Add(managementToCreate).Success)
+            {
+                MessageBox.Show("Created");
+            }
+
+            this.Close();
         }
     }
 }
