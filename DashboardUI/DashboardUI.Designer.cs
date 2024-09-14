@@ -29,201 +29,296 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard));
-            this.btnCreate = new System.Windows.Forms.Button();
-            this.dbGrid = new System.Windows.Forms.DataGridView();
-            this.dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
-            this.comboBoxManagement = new System.Windows.Forms.ComboBox();
-            this.comboBoxDepartment = new System.Windows.Forms.ComboBox();
-            this.comboBoxCategory = new System.Windows.Forms.ComboBox();
-            this.dateTimePickerEnd = new System.Windows.Forms.DateTimePicker();
-            this.buttonList = new System.Windows.Forms.Button();
-            this.buttonReset = new System.Windows.Forms.Button();
+            this.buttonDashboard = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dbGrid)).BeginInit();
+            this.panelMenu = new System.Windows.Forms.Panel();
+            this.panelAdminUpdate = new System.Windows.Forms.Panel();
+            this.buttonAdminUpdate = new System.Windows.Forms.Button();
+            this.panelSideBar = new System.Windows.Forms.Panel();
+            this.panelDataGrid = new System.Windows.Forms.Panel();
+            this.buttonDataGrid = new System.Windows.Forms.Button();
+            this.panelAdminDelete = new System.Windows.Forms.Panel();
+            this.buttonAdminDelete = new System.Windows.Forms.Button();
+            this.panelAdminCreate = new System.Windows.Forms.Panel();
+            this.buttonAdminCreate = new System.Windows.Forms.Button();
+            this.panelAdmin = new System.Windows.Forms.Panel();
+            this.buttonAdmin = new System.Windows.Forms.Button();
+            this.panelChart = new System.Windows.Forms.Panel();
+            this.buttonChart = new System.Windows.Forms.Button();
+            this.panelDashboard = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panelMenu.SuspendLayout();
+            this.panelAdminUpdate.SuspendLayout();
+            this.panelDataGrid.SuspendLayout();
+            this.panelAdminDelete.SuspendLayout();
+            this.panelAdminCreate.SuspendLayout();
+            this.panelAdmin.SuspendLayout();
+            this.panelChart.SuspendLayout();
+            this.panelDashboard.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnCreate
+            // buttonDashboard
             // 
-            this.btnCreate.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.btnCreate.Location = new System.Drawing.Point(23, 144);
-            this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(238, 37);
-            this.btnCreate.TabIndex = 2;
-            this.btnCreate.Text = "Create";
-            this.btnCreate.UseVisualStyleBackColor = false;
-            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
-            // 
-            // dbGrid
-            // 
-            this.dbGrid.AllowDrop = true;
-            this.dbGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dbGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dbGrid.Location = new System.Drawing.Point(282, 144);
-            this.dbGrid.Name = "dbGrid";
-            this.dbGrid.RowHeadersWidth = 62;
-            this.dbGrid.RowTemplate.Height = 33;
-            this.dbGrid.Size = new System.Drawing.Size(1108, 543);
-            this.dbGrid.TabIndex = 1;
-            this.dbGrid.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dbGrid_CellBeginEdit);
-            this.dbGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dbGrid_CellContentClick);
-            this.dbGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dbGrid_CellEndEdit);
-            // 
-            // dateTimePickerStart
-            // 
-            this.dateTimePickerStart.CustomFormat = "MMM-yy";
-            this.dateTimePickerStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerStart.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dateTimePickerStart.Location = new System.Drawing.Point(824, 36);
-            this.dateTimePickerStart.Name = "dateTimePickerStart";
-            this.dateTimePickerStart.Size = new System.Drawing.Size(134, 31);
-            this.dateTimePickerStart.TabIndex = 5;
-            // 
-            // comboBoxManagement
-            // 
-            this.comboBoxManagement.FormattingEnabled = true;
-            this.comboBoxManagement.Location = new System.Drawing.Point(282, 34);
-            this.comboBoxManagement.Name = "comboBoxManagement";
-            this.comboBoxManagement.Size = new System.Drawing.Size(336, 33);
-            this.comboBoxManagement.TabIndex = 7;
-            this.comboBoxManagement.SelectedIndexChanged += new System.EventHandler(this.comboBoxManagement_SelectedIndexChanged);
-            // 
-            // comboBoxDepartment
-            // 
-            this.comboBoxDepartment.FormattingEnabled = true;
-            this.comboBoxDepartment.Location = new System.Drawing.Point(282, 82);
-            this.comboBoxDepartment.Name = "comboBoxDepartment";
-            this.comboBoxDepartment.Size = new System.Drawing.Size(336, 33);
-            this.comboBoxDepartment.TabIndex = 8;
-            // 
-            // comboBoxCategory
-            // 
-            this.comboBoxCategory.FormattingEnabled = true;
-            this.comboBoxCategory.Location = new System.Drawing.Point(637, 82);
-            this.comboBoxCategory.Name = "comboBoxCategory";
-            this.comboBoxCategory.Size = new System.Drawing.Size(161, 33);
-            this.comboBoxCategory.TabIndex = 9;
-            // 
-            // dateTimePickerEnd
-            // 
-            this.dateTimePickerEnd.CustomFormat = "MMM-yy";
-            this.dateTimePickerEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerEnd.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dateTimePickerEnd.Location = new System.Drawing.Point(824, 84);
-            this.dateTimePickerEnd.Name = "dateTimePickerEnd";
-            this.dateTimePickerEnd.Size = new System.Drawing.Size(134, 31);
-            this.dateTimePickerEnd.TabIndex = 10;
-            // 
-            // buttonList
-            // 
-            this.buttonList.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.buttonList.Location = new System.Drawing.Point(1111, 81);
-            this.buttonList.Name = "buttonList";
-            this.buttonList.Size = new System.Drawing.Size(115, 33);
-            this.buttonList.TabIndex = 11;
-            this.buttonList.Text = "List";
-            this.buttonList.UseVisualStyleBackColor = false;
-            this.buttonList.Click += new System.EventHandler(this.buttonList_Click);
-            // 
-            // buttonReset
-            // 
-            this.buttonReset.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.buttonReset.Location = new System.Drawing.Point(1250, 81);
-            this.buttonReset.Name = "buttonReset";
-            this.buttonReset.Size = new System.Drawing.Size(115, 33);
-            this.buttonReset.TabIndex = 12;
-            this.buttonReset.Text = "Reset";
-            this.buttonReset.UseVisualStyleBackColor = false;
-            this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
+            this.buttonDashboard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
+            this.buttonDashboard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDashboard.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonDashboard.ForeColor = System.Drawing.Color.White;
+            this.buttonDashboard.Image = ((System.Drawing.Image)(resources.GetObject("buttonDashboard.Image")));
+            this.buttonDashboard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonDashboard.Location = new System.Drawing.Point(-19, -25);
+            this.buttonDashboard.Name = "buttonDashboard";
+            this.buttonDashboard.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
+            this.buttonDashboard.Size = new System.Drawing.Size(308, 109);
+            this.buttonDashboard.TabIndex = 18;
+            this.buttonDashboard.Text = "          Dashboard";
+            this.buttonDashboard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonDashboard.UseVisualStyleBackColor = false;
+            this.buttonDashboard.Click += new System.EventHandler(this.buttonDashboard_Click);
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(23, 513);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 21);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(238, 174);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.Size = new System.Drawing.Size(241, 108);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             // 
-            // btnEdit
+            // panelMenu
             // 
-            this.btnEdit.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.btnEdit.Location = new System.Drawing.Point(1216, 30);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(149, 37);
-            this.btnEdit.TabIndex = 14;
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.UseVisualStyleBackColor = false;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
+            this.panelMenu.Controls.Add(this.panelAdminUpdate);
+            this.panelMenu.Controls.Add(this.panelSideBar);
+            this.panelMenu.Controls.Add(this.panelDataGrid);
+            this.panelMenu.Controls.Add(this.panelAdminDelete);
+            this.panelMenu.Controls.Add(this.pictureBox1);
+            this.panelMenu.Controls.Add(this.panelAdminCreate);
+            this.panelMenu.Controls.Add(this.panelAdmin);
+            this.panelMenu.Controls.Add(this.panelChart);
+            this.panelMenu.Controls.Add(this.panelDashboard);
+            this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelMenu.Location = new System.Drawing.Point(0, 0);
+            this.panelMenu.Name = "panelMenu";
+            this.panelMenu.Size = new System.Drawing.Size(244, 944);
+            this.panelMenu.TabIndex = 19;
             // 
-            // btnUpdate
+            // panelAdminUpdate
             // 
-            this.btnUpdate.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.btnUpdate.Location = new System.Drawing.Point(23, 202);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(238, 37);
-            this.btnUpdate.TabIndex = 15;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = false;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.panelAdminUpdate.Controls.Add(this.buttonAdminUpdate);
+            this.panelAdminUpdate.Location = new System.Drawing.Point(12, 560);
+            this.panelAdminUpdate.Name = "panelAdminUpdate";
+            this.panelAdminUpdate.Size = new System.Drawing.Size(232, 40);
+            this.panelAdminUpdate.TabIndex = 24;
             // 
-            // btnDelete
+            // buttonAdminUpdate
             // 
-            this.btnDelete.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.btnDelete.Location = new System.Drawing.Point(23, 259);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(238, 37);
-            this.btnDelete.TabIndex = 16;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.buttonAdminUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
+            this.buttonAdminUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAdminUpdate.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonAdminUpdate.ForeColor = System.Drawing.Color.White;
+            this.buttonAdminUpdate.Image = ((System.Drawing.Image)(resources.GetObject("buttonAdminUpdate.Image")));
+            this.buttonAdminUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonAdminUpdate.Location = new System.Drawing.Point(-21, -11);
+            this.buttonAdminUpdate.Name = "buttonAdminUpdate";
+            this.buttonAdminUpdate.Padding = new System.Windows.Forms.Padding(70, 0, 0, 0);
+            this.buttonAdminUpdate.Size = new System.Drawing.Size(308, 60);
+            this.buttonAdminUpdate.TabIndex = 18;
+            this.buttonAdminUpdate.Text = "      Update";
+            this.buttonAdminUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonAdminUpdate.UseVisualStyleBackColor = false;
+            this.buttonAdminUpdate.Click += new System.EventHandler(this.buttonAdminUpdate_Click);
+            // 
+            // panelSideBar
+            // 
+            this.panelSideBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(154)))), ((int)(((byte)(193)))));
+            this.panelSideBar.Location = new System.Drawing.Point(0, 190);
+            this.panelSideBar.Name = "panelSideBar";
+            this.panelSideBar.Size = new System.Drawing.Size(6, 60);
+            this.panelSideBar.TabIndex = 20;
+            // 
+            // panelDataGrid
+            // 
+            this.panelDataGrid.Controls.Add(this.buttonDataGrid);
+            this.panelDataGrid.Location = new System.Drawing.Point(3, 277);
+            this.panelDataGrid.Name = "panelDataGrid";
+            this.panelDataGrid.Size = new System.Drawing.Size(241, 60);
+            this.panelDataGrid.TabIndex = 21;
+            // 
+            // buttonDataGrid
+            // 
+            this.buttonDataGrid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
+            this.buttonDataGrid.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDataGrid.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonDataGrid.ForeColor = System.Drawing.Color.White;
+            this.buttonDataGrid.Image = ((System.Drawing.Image)(resources.GetObject("buttonDataGrid.Image")));
+            this.buttonDataGrid.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonDataGrid.Location = new System.Drawing.Point(-19, -25);
+            this.buttonDataGrid.Name = "buttonDataGrid";
+            this.buttonDataGrid.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
+            this.buttonDataGrid.Size = new System.Drawing.Size(308, 109);
+            this.buttonDataGrid.TabIndex = 18;
+            this.buttonDataGrid.Text = "          Data Grid";
+            this.buttonDataGrid.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonDataGrid.UseVisualStyleBackColor = false;
+            this.buttonDataGrid.Click += new System.EventHandler(this.buttonDataGrid_Click);
+            // 
+            // panelAdminDelete
+            // 
+            this.panelAdminDelete.Controls.Add(this.buttonAdminDelete);
+            this.panelAdminDelete.Location = new System.Drawing.Point(12, 606);
+            this.panelAdminDelete.Name = "panelAdminDelete";
+            this.panelAdminDelete.Size = new System.Drawing.Size(232, 40);
+            this.panelAdminDelete.TabIndex = 24;
+            // 
+            // buttonAdminDelete
+            // 
+            this.buttonAdminDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
+            this.buttonAdminDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAdminDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonAdminDelete.ForeColor = System.Drawing.Color.White;
+            this.buttonAdminDelete.Image = ((System.Drawing.Image)(resources.GetObject("buttonAdminDelete.Image")));
+            this.buttonAdminDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonAdminDelete.Location = new System.Drawing.Point(-18, -11);
+            this.buttonAdminDelete.Name = "buttonAdminDelete";
+            this.buttonAdminDelete.Padding = new System.Windows.Forms.Padding(70, 0, 0, 0);
+            this.buttonAdminDelete.Size = new System.Drawing.Size(308, 60);
+            this.buttonAdminDelete.TabIndex = 18;
+            this.buttonAdminDelete.Text = "      Delete";
+            this.buttonAdminDelete.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonAdminDelete.UseVisualStyleBackColor = false;
+            this.buttonAdminDelete.Click += new System.EventHandler(this.buttonAdminDelete_Click);
+            // 
+            // panelAdminCreate
+            // 
+            this.panelAdminCreate.Controls.Add(this.buttonAdminCreate);
+            this.panelAdminCreate.Location = new System.Drawing.Point(12, 514);
+            this.panelAdminCreate.Name = "panelAdminCreate";
+            this.panelAdminCreate.Size = new System.Drawing.Size(232, 40);
+            this.panelAdminCreate.TabIndex = 23;
+            // 
+            // buttonAdminCreate
+            // 
+            this.buttonAdminCreate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
+            this.buttonAdminCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAdminCreate.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonAdminCreate.ForeColor = System.Drawing.Color.White;
+            this.buttonAdminCreate.Image = ((System.Drawing.Image)(resources.GetObject("buttonAdminCreate.Image")));
+            this.buttonAdminCreate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonAdminCreate.Location = new System.Drawing.Point(-19, -10);
+            this.buttonAdminCreate.Name = "buttonAdminCreate";
+            this.buttonAdminCreate.Padding = new System.Windows.Forms.Padding(70, 0, 0, 0);
+            this.buttonAdminCreate.Size = new System.Drawing.Size(308, 60);
+            this.buttonAdminCreate.TabIndex = 18;
+            this.buttonAdminCreate.Text = "      Create";
+            this.buttonAdminCreate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonAdminCreate.UseVisualStyleBackColor = false;
+            this.buttonAdminCreate.Click += new System.EventHandler(this.buttonAdminCreate_Click);
+            // 
+            // panelAdmin
+            // 
+            this.panelAdmin.Controls.Add(this.buttonAdmin);
+            this.panelAdmin.Location = new System.Drawing.Point(3, 457);
+            this.panelAdmin.Name = "panelAdmin";
+            this.panelAdmin.Size = new System.Drawing.Size(241, 60);
+            this.panelAdmin.TabIndex = 23;
+            // 
+            // buttonAdmin
+            // 
+            this.buttonAdmin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
+            this.buttonAdmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAdmin.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonAdmin.ForeColor = System.Drawing.Color.White;
+            this.buttonAdmin.Image = ((System.Drawing.Image)(resources.GetObject("buttonAdmin.Image")));
+            this.buttonAdmin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonAdmin.Location = new System.Drawing.Point(-19, -25);
+            this.buttonAdmin.Name = "buttonAdmin";
+            this.buttonAdmin.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
+            this.buttonAdmin.Size = new System.Drawing.Size(308, 109);
+            this.buttonAdmin.TabIndex = 18;
+            this.buttonAdmin.Text = "          Data Edit";
+            this.buttonAdmin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonAdmin.UseVisualStyleBackColor = false;
+            this.buttonAdmin.Click += new System.EventHandler(this.buttonAdmin_Click);
+            // 
+            // panelChart
+            // 
+            this.panelChart.Controls.Add(this.buttonChart);
+            this.panelChart.Location = new System.Drawing.Point(3, 367);
+            this.panelChart.Name = "panelChart";
+            this.panelChart.Size = new System.Drawing.Size(241, 60);
+            this.panelChart.TabIndex = 22;
+            // 
+            // buttonChart
+            // 
+            this.buttonChart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
+            this.buttonChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonChart.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.buttonChart.ForeColor = System.Drawing.Color.White;
+            this.buttonChart.Image = ((System.Drawing.Image)(resources.GetObject("buttonChart.Image")));
+            this.buttonChart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonChart.Location = new System.Drawing.Point(-19, -25);
+            this.buttonChart.Name = "buttonChart";
+            this.buttonChart.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
+            this.buttonChart.Size = new System.Drawing.Size(308, 109);
+            this.buttonChart.TabIndex = 18;
+            this.buttonChart.Text = "          Chart";
+            this.buttonChart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonChart.UseVisualStyleBackColor = false;
+            this.buttonChart.Click += new System.EventHandler(this.buttonChart_Click);
+            // 
+            // panelDashboard
+            // 
+            this.panelDashboard.Controls.Add(this.buttonDashboard);
+            this.panelDashboard.Location = new System.Drawing.Point(3, 187);
+            this.panelDashboard.Name = "panelDashboard";
+            this.panelDashboard.Size = new System.Drawing.Size(241, 60);
+            this.panelDashboard.TabIndex = 20;
             // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(1416, 710);
-            this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnUpdate);
-            this.Controls.Add(this.btnEdit);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.buttonReset);
-            this.Controls.Add(this.buttonList);
-            this.Controls.Add(this.dateTimePickerEnd);
-            this.Controls.Add(this.comboBoxCategory);
-            this.Controls.Add(this.comboBoxDepartment);
-            this.Controls.Add(this.comboBoxManagement);
-            this.Controls.Add(this.dateTimePickerStart);
-            this.Controls.Add(this.btnCreate);
-            this.Controls.Add(this.dbGrid);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.ClientSize = new System.Drawing.Size(1478, 944);
+            this.Controls.Add(this.panelMenu);
+            this.IsMdiContainer = true;
+            this.MinimumSize = new System.Drawing.Size(1400, 780);
             this.Name = "Dashboard";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Capacity Management Dashboard";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dbGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panelMenu.ResumeLayout(false);
+            this.panelAdminUpdate.ResumeLayout(false);
+            this.panelDataGrid.ResumeLayout(false);
+            this.panelAdminDelete.ResumeLayout(false);
+            this.panelAdminCreate.ResumeLayout(false);
+            this.panelAdmin.ResumeLayout(false);
+            this.panelChart.ResumeLayout(false);
+            this.panelDashboard.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private Button btnCreate;
-        private DataGridView dbGrid;
-        private DateTimePicker dateTimePickerStart;
-        private ComboBox comboBoxManagement;
-        private ComboBox comboBoxDepartment;
-        private ComboBox comboBoxCategory;
-        private DateTimePicker dateTimePickerEnd;
-        private Button buttonList;
-        private Button buttonReset;
+        private Button buttonDashboard;
         private PictureBox pictureBox1;
-        private Button btnEdit;
-        private Button btnUpdate;
-        private Button btnDelete;
+        private Panel panelMenu;
+        private Panel panelDashboard;
+        private Panel panelDataGrid;
+        private Button buttonDataGrid;
+        private Panel panelChart;
+        private Button buttonChart;
+        private Panel panelAdminDelete;
+        private Button buttonAdminDelete;
+        private Panel panelAdminUpdate;
+        private Button buttonAdminUpdate;
+        private Panel panelAdminCreate;
+        private Button buttonAdminCreate;
+        private Panel panelAdmin;
+        private Button buttonAdmin;
+        private Panel panelSideBar;
     }
 }
