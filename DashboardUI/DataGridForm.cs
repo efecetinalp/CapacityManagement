@@ -530,6 +530,5 @@ namespace DashboardUI
         {
             _tempCellValue = dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
         }
-
     }
 }

@@ -244,6 +244,7 @@
             this.Controls.Add(this.comboBoxDepartment);
             this.Controls.Add(this.comboBoxManagement);
             this.Name = "CreateForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CreateForm";
             this.Load += new System.EventHandler(this.CreateForm_Load);
             this.ResumeLayout(false);

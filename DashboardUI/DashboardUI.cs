@@ -18,6 +18,8 @@ namespace DashboardUI
     public partial class Dashboard : Form
     {
         DataGridForm dataGridForm;
+        DashboardForm dashboardForm;
+        ChartForm chartForm;
 
         //database manager referances
         ManagementManager managementManager;
@@ -44,7 +46,7 @@ namespace DashboardUI
             //Delete later
             //Start with datagrid form
             MoveSlideBar(panelDataGrid);
-            dataGridForm = new(projectManager, departmentManager, managementManager,categoryManager, departmentCapacityManager, projectCapacityManager);
+            dataGridForm = new(projectManager, departmentManager, managementManager, categoryManager, departmentCapacityManager, projectCapacityManager);
             dataGridForm.FormClosed += DataGridForm_FormClosed;
             dataGridForm.MdiParent = this;
             dataGridForm.Dock = DockStyle.Fill;
@@ -62,6 +64,22 @@ namespace DashboardUI
         private void buttonDashboard_Click(object sender, EventArgs e)
         {
             MoveSlideBar(panelDashboard);
+
+            if (dashboardForm == null)
+            {
+                dashboardForm = new();
+                dashboardForm.FormClosed += DashboardForm_FormClosed;
+                dashboardForm.MdiParent = this;
+                dashboardForm.Dock = DockStyle.Fill;
+                dashboardForm.Show();
+            }
+            else
+                dashboardForm.Activate();
+        }
+
+        private void DashboardForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            dashboardForm = null;
         }
 
         private void buttonDataGrid_Click(object sender, EventArgs e)
@@ -70,7 +88,7 @@ namespace DashboardUI
 
             if (dataGridForm == null)
             {
-                dataGridForm = new(projectManager, departmentManager, managementManager,categoryManager, departmentCapacityManager, projectCapacityManager);
+                dataGridForm = new(projectManager, departmentManager, managementManager, categoryManager, departmentCapacityManager, projectCapacityManager);
                 dataGridForm.FormClosed += DataGridForm_FormClosed;
                 dataGridForm.MdiParent = this;
                 dataGridForm.Dock = DockStyle.Fill;
@@ -89,6 +107,21 @@ namespace DashboardUI
         {
             MoveSlideBar(panelChart);
 
+            if (chartForm == null)
+            {
+                chartForm = new();
+                chartForm.FormClosed += ChartForm_FormClosed;
+                chartForm.MdiParent = this;
+                chartForm.Dock = DockStyle.Fill;
+                chartForm.Show();
+            }
+            else
+                chartForm.Activate();
+        }
+
+        private void ChartForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            chartForm = null;
         }
 
         private void buttonAdmin_Click(object sender, EventArgs e)
