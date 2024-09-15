@@ -59,8 +59,10 @@ namespace DashboardUI
                 comboBoxCategory.Items.Add(category.CategoryName);
             }
 
-            dateTimePickerStart.Value = new DateTime(2024, 01, 01);
-            dateTimePickerEnd.Value = dateTimePickerStart.Value.AddMonths(11);
+            dateTimePickerStart.Value = new DateTime(2023, 01, 01);
+            dateTimePickerEnd.Value = dateTimePickerStart.Value.AddMonths(23);
+
+            dbGrid.ReadOnly = true;
         }
 
         private void buttonList_Click(object sender, EventArgs e)
@@ -108,6 +110,7 @@ namespace DashboardUI
                 DataGridViewColumn column = dbGrid.Columns[i + 1];
 
                 tempMonth = dateTimePickerStart.Value.AddMonths(i);
+                column.HeaderCell.Style.BackColor = Color.FromArgb(46, 52, 63);
                 column.HeaderText = tempMonth.ToString("MMM-yy");
 
                 //check project and department names from each row
@@ -142,7 +145,7 @@ namespace DashboardUI
             #region "DELETE LATER"
             //DELETE LATER
             dbGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dbGrid.ColumnHeadersHeight = 50;
+            dbGrid.ColumnHeadersHeight = 80;
             dbGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
             // Here we attach an event handler to the cell painting event
             dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
@@ -174,16 +177,20 @@ namespace DashboardUI
 
             //DELETE LATER
             //dbGrid.DataSource = projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex, uiRequest.CategotryIndex).Data;
-
-            var result = projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex, uiRequest.CategotryIndex);
-            FetchData(result);
-
+            else
+            {
+                var result = projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex, uiRequest.CategotryIndex);
+                FetchData(result);
+            }
         }
 
         private void FetchData(IDataResult<List<ProjectDetailDto>> result)
         {
             //DELETE THIS LATER
-            dbGrid.Columns.Add("", "");
+
+            int columnIndex = dbGrid.Columns.Add("", "");
+            DataGridViewColumn column = dbGrid.Columns[columnIndex];
+            column.HeaderCell.Style.BackColor = Color.FromArgb(46, 52, 63);
 
             if (result.Success)
             {
@@ -207,27 +214,31 @@ namespace DashboardUI
                 //if management count > 0
                 for (int i = 0; i < managementNames.Count; i++)
                 {
-                    AddRow(managementNames[i], Color.FromArgb(51, 63, 79), "Management");
+                    Font managementFont = new("Calibri", 11, FontStyle.Italic);
+                    //managementFont.Style = FontStyle.Italic;
+                    AddRow(managementNames[i], Color.FromArgb(46, 52, 63), Color.White, "Management", managementFont);
 
                     // if department count >0
                     for (int j = 0; j < departmentNames.Count; j++)
                     {
                         if (managementNames[i] == departmentNames[j].Split(",")[1])
                         {
-
-                            AddRow(departmentNames[j].Split(",")[0], Color.FromArgb(255, 230, 153), "Department");
+                            Font departmentFont = new("Segoe UI", 8, FontStyle.Italic);
+                            AddRow(departmentNames[j].Split(",")[0], Color.FromArgb(255, 230, 153), Color.Black, "Department", departmentFont);
 
                             for (int k = 0; k < projectNames.Count; k++)
                             {
+                                Font projectFont = new("Segoe UI", 8, FontStyle.Italic);
                                 if (departmentNames[j].Split(",")[0] == projectNames[k].Split(",")[1])
-                                    AddRow(projectNames[k].Split(",")[0], Color.FromArgb(210, 238, 255), "Project");
+                                    AddRow(projectNames[k].Split(",")[0], Color.FromArgb(210, 238, 255), Color.Black, "Project", projectFont);
 
                                 //string tempData;
                                 //tempData = result.Data[k].ProjectName;
                                 //AddRow(tempData, Color.FromArgb(210, 238, 255));
                             }
                             //seperator
-                            AddRow("", Color.White, "Empty");
+                            AddRow("", Color.FromArgb(242, 242, 242), Color.White, "Empty", new Font("Segui", 8), 15);
+
                         }
                     }
                 }
@@ -254,16 +265,18 @@ namespace DashboardUI
             }
         }
 
-        private void AddRow(string data, Color color, string tag)
+        private void AddRow(string data, Color color, Color foreColor, string tag, Font font, int height = 33)
         {
             DataGridViewRow dataRow = new();
             DataGridViewTextBoxCell dataCell = new();
 
             //seperate rows and cells accordingly
             dataRow.Tag = tag;
-
             dataCell.Value = data;
+            dataRow.DefaultCellStyle.Font = font;
             dataRow.DefaultCellStyle.BackColor = color;
+            dataRow.DefaultCellStyle.ForeColor = foreColor;
+            dataRow.Height = height;
             dataRow.Cells.Add(dataCell);
             dbGrid.Rows.Add(dataRow);
             //return dbGrid.Rows.IndexOf(dataRow);
@@ -329,8 +342,7 @@ namespace DashboardUI
                 // ColumnHeadersHeight minus the current text width. ColumnHeadersHeight is the
                 // maximum of all the columns since we paint cells twice - though this fact
                 // may not be true in all usages!   
-                e.Graphics.DrawString(e.Value.ToString(), this.Font, Brushes.Black, new PointF(rect.Y - (dbGrid.ColumnHeadersHeight - titleSize.Width), rect.X));
-
+                e.Graphics.DrawString(e.Value.ToString(), this.Font, Brushes.White, new PointF(rect.Y - (dbGrid.ColumnHeadersHeight - titleSize.Width), rect.X));
                 // The old line for comparison
                 //e.Graphics.DrawString(e.Value.ToString(), this.Font, Brushes.Black, new PointF(rect.Y, rect.X));
 
@@ -365,45 +377,45 @@ namespace DashboardUI
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            //able to edit data grid view
-            //DataGridViewButtonColumn buttonDeleteRow = new();
-            //buttonDeleteRow.Name = "Delete";
-            //buttonDeleteRow.Text = "Delete";
-            //buttonDeleteRow.UseColumnTextForButtonValue = true;
-
-
-            //DataGridViewImageColumn iconColumn = new DataGridViewImageColumn();
-            //iconColumn.
-            //iconColumn.Image = deleteIcon.ToBitmap();
-            ////iconColumn.Image = treeIcon.ToBitmap();
-            ////iconColumn.Name = "Tree";
-            ////iconColumn.HeaderText = "Nice tree";
-
-            DataGridViewImageColumn imageColumn = new();
-
-            dbGrid.Columns.Add(imageColumn);
-            //dbGrid.Columns.Add("Delete", "Delete", Properties.Resources.DeleteIcon);
-
-
-            int lastColumnIndex = dbGrid.Columns.Count - 1;
-            dbGrid.Columns[lastColumnIndex].Name = "Delete";
-
-            for (int i = 0; i < dbGrid.Rows.Count; i++)
+            if (btnEdit.Text == "Edit")
             {
-                if (dbGrid.Rows[i].Tag != "Project")
-                {
-                    dbGrid.Rows[i].Cells[lastColumnIndex].Style.NullValue = null;
-                    //dbGrid.Rows[i].Cells[lastColumnIndex].Value = "Delete";
-                    //dbGrid.Rows[i].Cells[lastColumnIndex].Value = iconColumn;
-                }
-                else
-                {
-                    dbGrid.Rows[i].Cells[lastColumnIndex].Value = Properties.Resources.DeleteIcon;
-                }
+
+                DataGridViewImageColumn imageColumn = new();
+                dbGrid.Columns.Add(imageColumn);
+                //dbGrid.Columns.Add("Delete", "Delete", Properties.Resources.DeleteIcon);
 
 
+                int lastColumnIndex = dbGrid.Columns.Count - 1;
+                dbGrid.Columns[lastColumnIndex].Name = "Delete";
+
+
+                for (int i = 0; i < dbGrid.Rows.Count; i++)
+                {
+                    if (dbGrid.Rows[i].Tag != "Project")
+                    {
+                        dbGrid.Rows[i].Cells[lastColumnIndex].Style.NullValue = null;
+                        //dbGrid.Rows[i].Cells[lastColumnIndex].Value = "Delete";
+                        //dbGrid.Rows[i].Cells[lastColumnIndex].Value = iconColumn;
+                    }
+                    else
+                    {
+                        dbGrid.Rows[i].Cells[lastColumnIndex].Value = Properties.Resources.Remove;
+                    }
+                }
+
+                dbGrid.ReadOnly = false;
+
+                btnEdit.Text = "Exit Edit";
             }
 
+            else if (btnEdit.Text == "Exit Edit")
+            {
+                dbGrid.Columns.Remove("Delete");
+
+                dbGrid.ReadOnly = true;
+
+                btnEdit.Text = "Edit";
+            }
         }
 
         private void dbGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -428,10 +440,6 @@ namespace DashboardUI
                     projectManager.Delete(projectToDelete);
 
                     MessageBox.Show("Project deleted successfully", "Delete Project", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    ResetGridView();
                 }
             }
         }
@@ -529,6 +537,11 @@ namespace DashboardUI
         private void dbGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             _tempCellValue = dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+        }
+
+        private void dbGrid_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        {
+            e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
         }
     }
 }
