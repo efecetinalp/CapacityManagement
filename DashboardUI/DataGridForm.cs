@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -82,17 +83,31 @@ namespace DashboardUI
             uiRequest.EndDate = dateTimePickerEnd.Value;
 
             DatabaseRows(uiRequest);
+            DatabaseColumnCategory();
             DatabaseColumns();
-            //GetRowNames();
         }
 
-        //for test purpose
-        private void GetRowNames()
+        private void DatabaseColumnCategory()
         {
+
+            int columnIndex = dbGrid.Columns.Add("", "");
+            DataGridViewColumn column = dbGrid.Columns[columnIndex];
+            column.HeaderText = "Category";
+            column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+
             for (int i = 0; i < dbGrid.Rows.Count - 1; i++)
             {
-                Debug.Print(dbGrid.Rows[i].Cells[0].Value.ToString());
+                if (dbGrid.Rows[i].Tag == "Project")
+                {
+                    var result = projectManager.GetCategoryByProjectName(dbGrid.Rows[i].Cells[0].Value.ToString());
+                    string categoryName = result.Data[0].CategoryName;
+                    dbGrid.Rows[i].Cells[columnIndex].Value = categoryName;
+                    dbGrid.Rows[i].Cells[columnIndex].Tag = "Category";
+
+                }
             }
+
         }
 
         private void DatabaseColumns()
@@ -107,11 +122,12 @@ namespace DashboardUI
                 //empty column
                 dbGrid.Columns.Add("", "");
 
-                DataGridViewColumn column = dbGrid.Columns[i + 1];
+                DataGridViewColumn column = dbGrid.Columns[i + 2];
 
                 tempMonth = dateTimePickerStart.Value.AddMonths(i);
                 column.HeaderCell.Style.BackColor = Color.FromArgb(46, 52, 63);
                 column.HeaderText = tempMonth.ToString("MMM-yy");
+                column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
                 //check project and department names from each row
                 for (int j = 0; j < dbGrid.Rows.Count - 1; j++)
@@ -125,7 +141,7 @@ namespace DashboardUI
                     {
                         for (int k = 0; k < departmentResult.Data.Count; k++)
                         {
-                            column.DataGridView.Rows[j].Cells[i + 1].Value = departmentResult.Data[k].DTotalCapacity;
+                            column.DataGridView.Rows[j].Cells[i + 2].Value = departmentResult.Data[k].DTotalCapacity;
                             //column.DataGridView.Rows[j].Cells[i + 1].Style.BackColor = Color.FromArgb(255, 230, 153);
                         }
                     }
@@ -136,16 +152,18 @@ namespace DashboardUI
                     {
                         for (int k = 0; k < projectResult.Data.Count; k++)
                         {
-                            column.DataGridView.Rows[j].Cells[i + 1].Value = projectResult.Data[k].PTotalCapacity;
-                            column.DataGridView.Rows[j].Cells[i + 1].Style.BackColor = Color.LightGreen;
+                            column.DataGridView.Rows[j].Cells[i + 2].Value = projectResult.Data[k].PTotalCapacity;
+                            column.DataGridView.Rows[j].Cells[i + 2].Style.BackColor = Color.FromArgb(198, 224, 180);
                         }
                     }
+                    else if (dbGrid.Rows[j].Tag == "Project")
+                        column.DataGridView.Rows[j].Cells[i + 2].Style.BackColor = Color.FromArgb(226,239, 218);
                 }
             }
             #region "DELETE LATER"
             //DELETE LATER
             dbGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dbGrid.ColumnHeadersHeight = 80;
+            dbGrid.ColumnHeadersHeight = 100;
             dbGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
             // Here we attach an event handler to the cell painting event
             dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
@@ -186,11 +204,7 @@ namespace DashboardUI
 
         private void FetchData(IDataResult<List<ProjectDetailDto>> result)
         {
-            //DELETE THIS LATER
-
             int columnIndex = dbGrid.Columns.Add("", "");
-            DataGridViewColumn column = dbGrid.Columns[columnIndex];
-            column.HeaderCell.Style.BackColor = Color.FromArgb(46, 52, 63);
 
             if (result.Success)
             {
@@ -214,27 +228,27 @@ namespace DashboardUI
                 //if management count > 0
                 for (int i = 0; i < managementNames.Count; i++)
                 {
-                    Font managementFont = new("Calibri", 11, FontStyle.Italic);
+                    Font managementFont = new("Calibri", 12, FontStyle.Italic);
                     //managementFont.Style = FontStyle.Italic;
                     AddRow(managementNames[i], Color.FromArgb(46, 52, 63), Color.White, "Management", managementFont);
+                    dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
 
                     // if department count >0
                     for (int j = 0; j < departmentNames.Count; j++)
                     {
                         if (managementNames[i] == departmentNames[j].Split(",")[1])
                         {
-                            Font departmentFont = new("Segoe UI", 8, FontStyle.Italic);
+                            Font departmentFont = new("Segoe UI", 9, FontStyle.Italic);
                             AddRow(departmentNames[j].Split(",")[0], Color.FromArgb(255, 230, 153), Color.Black, "Department", departmentFont);
 
                             for (int k = 0; k < projectNames.Count; k++)
                             {
-                                Font projectFont = new("Segoe UI", 8, FontStyle.Italic);
+                                Font projectFont = new("Segoe UI", 9, FontStyle.Italic);
                                 if (departmentNames[j].Split(",")[0] == projectNames[k].Split(",")[1])
+                                {
                                     AddRow(projectNames[k].Split(",")[0], Color.FromArgb(210, 238, 255), Color.Black, "Project", projectFont);
+                                }
 
-                                //string tempData;
-                                //tempData = result.Data[k].ProjectName;
-                                //AddRow(tempData, Color.FromArgb(210, 238, 255));
                             }
                             //seperator
                             AddRow("", Color.FromArgb(242, 242, 242), Color.White, "Empty", new Font("Segui", 8), 15);
@@ -242,18 +256,6 @@ namespace DashboardUI
                         }
                     }
                 }
-
-                //string managementTitle, departmentTitle;
-
-                //managementTitle = result.Data[0].ManagementName;
-                //departmentTitle = result.Data[0].DepartmentName;
-
-                //for (int k = 0; k < result.Data.Count; k++)
-                //{
-                //    string tempData;
-                //    tempData = result.Data[k].ProjectName;
-                //    AddRow(tempData, Color.LightSkyBlue);
-                //}
 
                 Debug.Print(result.Massage);
             }
@@ -265,14 +267,14 @@ namespace DashboardUI
             }
         }
 
-        private void AddRow(string data, Color color, Color foreColor, string tag, Font font, int height = 33)
+        private void AddRow(string mainData, Color color, Color foreColor, string tag, Font font, int height = 33)
         {
             DataGridViewRow dataRow = new();
             DataGridViewTextBoxCell dataCell = new();
 
             //seperate rows and cells accordingly
             dataRow.Tag = tag;
-            dataCell.Value = data;
+            dataCell.Value = mainData;
             dataRow.DefaultCellStyle.Font = font;
             dataRow.DefaultCellStyle.BackColor = color;
             dataRow.DefaultCellStyle.ForeColor = foreColor;
@@ -350,6 +352,11 @@ namespace DashboardUI
                 e.Graphics.RotateTransform(90.0F);
                 e.Graphics.TranslateTransform(0, -titleSize.Width);
                 e.Handled = true;
+            }
+
+            if (e.RowIndex > -1 && e.ColumnIndex > -1 && dbGrid.Rows[e.RowIndex].Tag == "Management")
+            {
+                e.AdvancedBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.None;
             }
         }
 
@@ -456,10 +463,36 @@ namespace DashboardUI
                 //check if cell value is changed
                 if (_tempCellValue != cellValue)
                 {
+                    if (e.ColumnIndex == 0)
+                    {
+                        if (cellValue != null)
+                        {
+                            Project projectToUpdate = projectManager.GetByName(_tempCellValue.ToString()).Data;
+                            projectToUpdate.ProjectName = cellValue.ToString();
+                            projectManager.Update(projectToUpdate);
+                            Debug.Print("project name is updated");
+                            return;
+                        }
+                        else
+                        {
+                            dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _tempCellValue;
+                            Debug.Print("Project name cannot be empty");
+                            return;
+                        }
+                    }
+
+                    else if (e.ColumnIndex == 1)
+                    {
+                        //Category columns should change to combobox , and values should store there
+                        Debug.Print("category is not changed but it works anyway");
+                        return;
+
+                    }
+
                     Project cellProject = projectManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).Data;
 
                     //check if cell value was empty before
-                    if (_tempCellValue == null)
+                    if (_tempCellValue == null && e.ColumnIndex > 1)
                     {
                         ProjectCapacity projectCapacityToAdd = new ProjectCapacity();
 
@@ -468,23 +501,23 @@ namespace DashboardUI
                         projectCapacityToAdd.Date = Convert.ToDateTime(cellDate);
                         projectCapacityManager.Add(projectCapacityToAdd);
 
-                        Debug.Print("project cell value added");
+                        Debug.Print("project capacity cell value added");
                     }
                     else
                     {
                         //if cell value is deleted or 0
                         ProjectCapacity projectCapacityToUpdate = projectCapacityManager.GetProjectCapacityByDateAndProjectId(Convert.ToDateTime(cellDate), cellProject.ProjectId).Data;
-                        if (cellValue == null || Convert.ToInt32(cellValue) == 0)
+                        if (cellValue == null || Convert.ToInt32(cellValue) == 0 && e.ColumnIndex > 1)
                         {
                             projectCapacityManager.Delete(projectCapacityToUpdate);
-                            Debug.Print("project cell value deleted");
+                            Debug.Print("project capacity cell value deleted");
 
                         }
                         else
                         {
                             projectCapacityToUpdate.PTotalCapacity = Convert.ToInt32(cellValue);
                             projectCapacityManager.Update(projectCapacityToUpdate);
-                            Debug.Print("project cell value updated");
+                            Debug.Print("project capacity cell value updated");
                         }
                     }
                 }
