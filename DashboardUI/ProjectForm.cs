@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace DashboardUI
 {
-    public partial class DeleteForm : Form
+    public partial class ProjectForm : Form
     {
         ManagementManager _managementManager;
         DepartmentManager _departmentManager;
         CategoryManager _categoryManager;
         ProjectManager _projectManager;
 
-        public DeleteForm(ManagementManager managementManager, DepartmentManager departmentManager, CategoryManager categoryManager, ProjectManager projectManager)
+        public ProjectForm(ManagementManager managementManager, DepartmentManager departmentManager, CategoryManager categoryManager, ProjectManager projectManager)
         {
             _managementManager = managementManager;
             _departmentManager = departmentManager;

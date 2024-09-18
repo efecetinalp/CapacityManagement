@@ -2,6 +2,7 @@
 using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -46,6 +47,16 @@ namespace Business.Concrete
         public IDataResult<List<Management>> GetAllById(int id)
         {
             return new SuccessDataResult<List<Management>>(_managementDal.GetAll(m => m.ManagementId == id));
+        }
+
+        public IDataResult<Management> GetByName(string managementName)
+        {
+            Management result = _managementDal.Get(m => m.ManagementName == managementName);
+
+            if (result != null)
+                return new SuccessDataResult<Management>(result, Messages.ProjectListed);
+            else
+                return new ErrorDataResult<Management>(result, Messages.EmptyData);
         }
     }
 }

@@ -132,29 +132,5 @@ namespace DashboardUI
             loginForm.Show();
 
         }
-
-        private void buttonAdminCreate_Click(object sender, EventArgs e)
-        {
-            MoveSlideBar(panelAdminCreate);
-
-            CreateForm createForm = new CreateForm(managementManager, departmentManager, categoryManager, projectManager);
-            createForm.Show();
-        }
-
-        private void buttonAdminUpdate_Click(object sender, EventArgs e)
-        {
-            MoveSlideBar(panelAdminUpdate);
-
-            UpdateForm updateForm = new UpdateForm(managementManager, departmentManager, categoryManager, projectManager);
-            updateForm.Show();
-        }
-
-        private void buttonAdminDelete_Click(object sender, EventArgs e)
-        {
-            MoveSlideBar(panelAdminDelete);
-
-            DeleteForm deleteForm = new DeleteForm(managementManager, departmentManager, categoryManager, projectManager);
-            deleteForm.Show();
-        }
     }
 }

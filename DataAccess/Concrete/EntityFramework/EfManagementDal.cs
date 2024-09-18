@@ -12,6 +12,6 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfManagementDal : EfEntityRepositoryBase<Management, CapacityDBContext>, IManagementDal
     {
-       
+
     }
 }

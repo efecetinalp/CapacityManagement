@@ -3,6 +3,7 @@ using Core.Utilities.Results;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Entities.DTOs;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -157,7 +158,7 @@ namespace DashboardUI
                         }
                     }
                     else if (dbGrid.Rows[j].Tag == "Project")
-                        column.DataGridView.Rows[j].Cells[i + 2].Style.BackColor = Color.FromArgb(226,239, 218);
+                        column.DataGridView.Rows[j].Cells[i + 2].Style.BackColor = Color.FromArgb(226, 239, 218);
                 }
             }
             #region "DELETE LATER"
@@ -327,7 +328,7 @@ namespace DashboardUI
         {
             // check that we are in a header cell!
             //column index = 1 is for project names
-            if (e.RowIndex == -1 && e.ColumnIndex >= 1)
+            if (e.RowIndex == -1 && e.ColumnIndex >= 2)
             {
                 e.PaintBackground(e.ClipBounds, true);
                 Rectangle rect = this.dbGrid.GetColumnDisplayRectangle(e.ColumnIndex, true);
@@ -361,24 +362,11 @@ namespace DashboardUI
         }
 
         //CRUD OPERTAIONS
-        private void btnCreate_Click(object sender, EventArgs e)
-        {
-            //create entity
-            CreateForm createForm = new(managementManager, departmentManager, categoryManager, projectManager);
-            createForm.ShowDialog();
-        }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            //update entity
-            UpdateForm updateForm = new(managementManager, departmentManager, categoryManager, projectManager);
-            updateForm.ShowDialog();
-        }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
             //delete entity
-            DeleteForm deleteForm = new(managementManager, departmentManager, categoryManager, projectManager);
+            ProjectForm deleteForm = new(managementManager, departmentManager, categoryManager, projectManager);
             deleteForm.ShowDialog();
         }
 
@@ -387,26 +375,31 @@ namespace DashboardUI
             if (btnEdit.Text == "Edit")
             {
 
-                DataGridViewImageColumn imageColumn = new();
-                dbGrid.Columns.Add(imageColumn);
-                //dbGrid.Columns.Add("Delete", "Delete", Properties.Resources.DeleteIcon);
+                DataGridViewImageColumn imageColumnUpdate = new();
+                DataGridViewImageColumn imageColumnDelete = new();
 
+                dbGrid.Columns.Add(imageColumnUpdate);
+                dbGrid.Columns.Add(imageColumnDelete);
 
                 int lastColumnIndex = dbGrid.Columns.Count - 1;
+                dbGrid.Columns[lastColumnIndex - 1].Name = "Update";
                 dbGrid.Columns[lastColumnIndex].Name = "Delete";
 
 
                 for (int i = 0; i < dbGrid.Rows.Count; i++)
                 {
-                    if (dbGrid.Rows[i].Tag != "Project")
+                    if (dbGrid.Rows[i].Tag == "Empty")
                     {
                         dbGrid.Rows[i].Cells[lastColumnIndex].Style.NullValue = null;
-                        //dbGrid.Rows[i].Cells[lastColumnIndex].Value = "Delete";
-                        //dbGrid.Rows[i].Cells[lastColumnIndex].Value = iconColumn;
+                        dbGrid.Rows[i].Cells[lastColumnIndex - 1].Style.NullValue = null;
                     }
                     else
                     {
                         dbGrid.Rows[i].Cells[lastColumnIndex].Value = Properties.Resources.Remove;
+                        dbGrid.Rows[i].Cells[lastColumnIndex].Style.BackColor = Color.FromArgb(242, 242, 242);
+
+                        dbGrid.Rows[i].Cells[lastColumnIndex - 1].Value = Properties.Resources.DeleteIcon;
+                        dbGrid.Rows[i].Cells[lastColumnIndex - 1].Style.BackColor = Color.FromArgb(242, 242, 242);
                     }
                 }
 
@@ -417,12 +410,41 @@ namespace DashboardUI
 
             else if (btnEdit.Text == "Exit Edit")
             {
+
+                //OnEditMode(false);
                 dbGrid.Columns.Remove("Delete");
+                dbGrid.Columns.Remove("Update");
 
                 dbGrid.ReadOnly = true;
 
                 btnEdit.Text = "Edit";
             }
+        }
+
+        private void OnEditMode(bool edit)
+        {
+            if (edit)
+            {
+                dbGrid.Columns.Remove(dbGrid.Columns[1]);
+                DataGridViewComboBoxColumn cmbCol = new DataGridViewComboBoxColumn();
+                cmbCol.HeaderText = "Edit Category";
+                List<string> categoryNames = new();
+                foreach (var name in categoryManager.GetAll().Data)
+                {
+                    categoryNames.Add(name.CategoryName);
+                }
+                cmbCol.DataSource = categoryNames;
+                int index = dbGrid.Columns.Add(cmbCol);
+                dbGrid.Columns[index].DisplayIndex = 1;
+            }
+            else
+            {
+                dbGrid.Columns.Remove(dbGrid.Columns[1]);
+                DatabaseColumnCategory();
+                dbGrid.Columns[dbGrid.Columns.Count - 1].DisplayIndex = 1;
+
+            }
+
         }
 
         private void dbGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -448,6 +470,43 @@ namespace DashboardUI
 
                     MessageBox.Show("Project deleted successfully", "Delete Project", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+            else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Project")
+            {
+                UpdateProjectForm updateForm = new(managementManager, departmentManager, categoryManager, projectManager, dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString());
+                updateForm.ShowDialog();
+                Debug.Print("Project is not updated but function works");
+
+            }
+            else if (dbGrid.Columns[e.ColumnIndex].Name == "Delete" && dbGrid.Rows[e.RowIndex].Tag == "Department")
+            {
+                DialogResult dialogResult = MessageBox.Show("Are you sure to delete selected department? Department index: " + e.RowIndex, "Delete Department", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    Debug.Print("Department not deleted but function works");
+                    MessageBox.Show("Department deleted successfully", "Delete Department", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Department")
+            {
+                UpdateDepartmentForm updateForm = new(managementManager,departmentManager, dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString());
+                updateForm.ShowDialog();
+                Debug.Print("Department is not updated but function works");
+
+            }
+            else if (dbGrid.Columns[e.ColumnIndex].Name == "Delete" && dbGrid.Rows[e.RowIndex].Tag == "Management")
+            {
+                DialogResult dialogResult = MessageBox.Show("Are you sure to delete selected Management? Management index: " + e.RowIndex, "Delete Management", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    Debug.Print("Management not deleted but function works");
+                    MessageBox.Show("Management deleted successfully", "Delete Management", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Management")
+            {
+                UpdateManagementForm updateForm = new(managementManager, dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()); ;
+                updateForm.ShowDialog();
             }
         }
 

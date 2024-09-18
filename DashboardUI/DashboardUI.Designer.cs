@@ -32,15 +32,17 @@
             this.buttonDashboard = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelMenu = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonCategory = new System.Windows.Forms.Button();
             this.panelSideBar = new System.Windows.Forms.Panel();
             this.panelAdminUpdate = new System.Windows.Forms.Panel();
-            this.buttonAdminUpdate = new System.Windows.Forms.Button();
+            this.buttonDepartment = new System.Windows.Forms.Button();
             this.panelDataGrid = new System.Windows.Forms.Panel();
             this.buttonDataGrid = new System.Windows.Forms.Button();
             this.panelAdminCreate = new System.Windows.Forms.Panel();
-            this.buttonAdminCreate = new System.Windows.Forms.Button();
+            this.buttonManagement = new System.Windows.Forms.Button();
             this.panelAdminDelete = new System.Windows.Forms.Panel();
-            this.buttonAdminDelete = new System.Windows.Forms.Button();
+            this.buttonProject = new System.Windows.Forms.Button();
             this.panelChart = new System.Windows.Forms.Panel();
             this.buttonChart = new System.Windows.Forms.Button();
             this.panelDashboard = new System.Windows.Forms.Panel();
@@ -48,6 +50,7 @@
             this.buttonAdmin = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelMenu.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.panelAdminUpdate.SuspendLayout();
             this.panelDataGrid.SuspendLayout();
             this.panelAdminCreate.SuspendLayout();
@@ -65,11 +68,10 @@
             this.buttonDashboard.ForeColor = System.Drawing.Color.White;
             this.buttonDashboard.Image = ((System.Drawing.Image)(resources.GetObject("buttonDashboard.Image")));
             this.buttonDashboard.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonDashboard.Location = new System.Drawing.Point(-12, -8);
-            this.buttonDashboard.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonDashboard.Location = new System.Drawing.Point(-17, -13);
             this.buttonDashboard.Name = "buttonDashboard";
-            this.buttonDashboard.Padding = new System.Windows.Forms.Padding(28, 0, 0, 0);
-            this.buttonDashboard.Size = new System.Drawing.Size(241, 65);
+            this.buttonDashboard.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
+            this.buttonDashboard.Size = new System.Drawing.Size(344, 108);
             this.buttonDashboard.TabIndex = 18;
             this.buttonDashboard.Text = "             Dashboard";
             this.buttonDashboard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -80,10 +82,9 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(2, 13);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 22);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(226, 132);
+            this.pictureBox1.Size = new System.Drawing.Size(323, 220);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
@@ -91,6 +92,7 @@
             // panelMenu
             // 
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
+            this.panelMenu.Controls.Add(this.panel1);
             this.panelMenu.Controls.Add(this.panelSideBar);
             this.panelMenu.Controls.Add(this.panelAdminUpdate);
             this.panelMenu.Controls.Add(this.panelDataGrid);
@@ -102,55 +104,74 @@
             this.panelMenu.Controls.Add(this.panelAdmin);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMenu.Location = new System.Drawing.Point(0, 0);
-            this.panelMenu.Margin = new System.Windows.Forms.Padding(2);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(230, 681);
+            this.panelMenu.Size = new System.Drawing.Size(329, 1135);
             this.panelMenu.TabIndex = 19;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.buttonCategory);
+            this.panel1.Location = new System.Drawing.Point(1, 1019);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(329, 58);
+            this.panel1.TabIndex = 25;
+            // 
+            // buttonCategory
+            // 
+            this.buttonCategory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
+            this.buttonCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCategory.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.buttonCategory.ForeColor = System.Drawing.Color.White;
+            this.buttonCategory.Image = ((System.Drawing.Image)(resources.GetObject("buttonCategory.Image")));
+            this.buttonCategory.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonCategory.Location = new System.Drawing.Point(-34, -12);
+            this.buttonCategory.Name = "buttonCategory";
+            this.buttonCategory.Padding = new System.Windows.Forms.Padding(143, 0, 0, 0);
+            this.buttonCategory.Size = new System.Drawing.Size(376, 83);
+            this.buttonCategory.TabIndex = 18;
+            this.buttonCategory.Text = "      Category";
+            this.buttonCategory.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonCategory.UseVisualStyleBackColor = false;
             // 
             // panelSideBar
             // 
             this.panelSideBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(154)))), ((int)(((byte)(193)))));
-            this.panelSideBar.Location = new System.Drawing.Point(0, 187);
-            this.panelSideBar.Margin = new System.Windows.Forms.Padding(2);
+            this.panelSideBar.Location = new System.Drawing.Point(0, 312);
             this.panelSideBar.Name = "panelSideBar";
-            this.panelSideBar.Size = new System.Drawing.Size(6, 50);
+            this.panelSideBar.Size = new System.Drawing.Size(9, 83);
             this.panelSideBar.TabIndex = 20;
             // 
             // panelAdminUpdate
             // 
-            this.panelAdminUpdate.Controls.Add(this.buttonAdminUpdate);
-            this.panelAdminUpdate.Location = new System.Drawing.Point(2, 519);
-            this.panelAdminUpdate.Margin = new System.Windows.Forms.Padding(2);
+            this.panelAdminUpdate.Controls.Add(this.buttonDepartment);
+            this.panelAdminUpdate.Location = new System.Drawing.Point(3, 865);
             this.panelAdminUpdate.Name = "panelAdminUpdate";
-            this.panelAdminUpdate.Size = new System.Drawing.Size(230, 35);
+            this.panelAdminUpdate.Size = new System.Drawing.Size(329, 58);
             this.panelAdminUpdate.TabIndex = 24;
             // 
-            // buttonAdminUpdate
+            // buttonDepartment
             // 
-            this.buttonAdminUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
-            this.buttonAdminUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAdminUpdate.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.buttonAdminUpdate.ForeColor = System.Drawing.Color.White;
-            this.buttonAdminUpdate.Image = ((System.Drawing.Image)(resources.GetObject("buttonAdminUpdate.Image")));
-            this.buttonAdminUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAdminUpdate.Location = new System.Drawing.Point(-24, -7);
-            this.buttonAdminUpdate.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonAdminUpdate.Name = "buttonAdminUpdate";
-            this.buttonAdminUpdate.Padding = new System.Windows.Forms.Padding(100, 0, 0, 0);
-            this.buttonAdminUpdate.Size = new System.Drawing.Size(263, 49);
-            this.buttonAdminUpdate.TabIndex = 18;
-            this.buttonAdminUpdate.Text = "      Update";
-            this.buttonAdminUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAdminUpdate.UseVisualStyleBackColor = false;
-            this.buttonAdminUpdate.Click += new System.EventHandler(this.buttonAdminUpdate_Click);
+            this.buttonDepartment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
+            this.buttonDepartment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDepartment.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.buttonDepartment.ForeColor = System.Drawing.Color.White;
+            this.buttonDepartment.Image = ((System.Drawing.Image)(resources.GetObject("buttonDepartment.Image")));
+            this.buttonDepartment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonDepartment.Location = new System.Drawing.Point(-34, -12);
+            this.buttonDepartment.Name = "buttonDepartment";
+            this.buttonDepartment.Padding = new System.Windows.Forms.Padding(143, 0, 0, 0);
+            this.buttonDepartment.Size = new System.Drawing.Size(376, 82);
+            this.buttonDepartment.TabIndex = 18;
+            this.buttonDepartment.Text = "      Department";
+            this.buttonDepartment.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonDepartment.UseVisualStyleBackColor = false;
             // 
             // panelDataGrid
             // 
             this.panelDataGrid.Controls.Add(this.buttonDataGrid);
-            this.panelDataGrid.Location = new System.Drawing.Point(0, 261);
-            this.panelDataGrid.Margin = new System.Windows.Forms.Padding(2);
+            this.panelDataGrid.Location = new System.Drawing.Point(0, 435);
             this.panelDataGrid.Name = "panelDataGrid";
-            this.panelDataGrid.Size = new System.Drawing.Size(231, 50);
+            this.panelDataGrid.Size = new System.Drawing.Size(330, 83);
             this.panelDataGrid.TabIndex = 21;
             // 
             // buttonDataGrid
@@ -161,11 +182,10 @@
             this.buttonDataGrid.ForeColor = System.Drawing.Color.White;
             this.buttonDataGrid.Image = ((System.Drawing.Image)(resources.GetObject("buttonDataGrid.Image")));
             this.buttonDataGrid.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonDataGrid.Location = new System.Drawing.Point(-10, -8);
-            this.buttonDataGrid.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonDataGrid.Location = new System.Drawing.Point(-14, -13);
             this.buttonDataGrid.Name = "buttonDataGrid";
-            this.buttonDataGrid.Padding = new System.Windows.Forms.Padding(28, 0, 0, 0);
-            this.buttonDataGrid.Size = new System.Drawing.Size(251, 65);
+            this.buttonDataGrid.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
+            this.buttonDataGrid.Size = new System.Drawing.Size(359, 108);
             this.buttonDataGrid.TabIndex = 18;
             this.buttonDataGrid.Text = "             Data Grid";
             this.buttonDataGrid.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -174,67 +194,60 @@
             // 
             // panelAdminCreate
             // 
-            this.panelAdminCreate.Controls.Add(this.buttonAdminCreate);
-            this.panelAdminCreate.Location = new System.Drawing.Point(2, 474);
-            this.panelAdminCreate.Margin = new System.Windows.Forms.Padding(2);
+            this.panelAdminCreate.Controls.Add(this.buttonManagement);
+            this.panelAdminCreate.Location = new System.Drawing.Point(3, 790);
             this.panelAdminCreate.Name = "panelAdminCreate";
-            this.panelAdminCreate.Size = new System.Drawing.Size(230, 35);
+            this.panelAdminCreate.Size = new System.Drawing.Size(329, 58);
             this.panelAdminCreate.TabIndex = 23;
             // 
-            // buttonAdminCreate
+            // buttonManagement
             // 
-            this.buttonAdminCreate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
-            this.buttonAdminCreate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAdminCreate.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.buttonAdminCreate.ForeColor = System.Drawing.Color.White;
-            this.buttonAdminCreate.Image = ((System.Drawing.Image)(resources.GetObject("buttonAdminCreate.Image")));
-            this.buttonAdminCreate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAdminCreate.Location = new System.Drawing.Point(-24, -8);
-            this.buttonAdminCreate.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonAdminCreate.Name = "buttonAdminCreate";
-            this.buttonAdminCreate.Padding = new System.Windows.Forms.Padding(100, 0, 0, 0);
-            this.buttonAdminCreate.Size = new System.Drawing.Size(254, 49);
-            this.buttonAdminCreate.TabIndex = 18;
-            this.buttonAdminCreate.Text = "      Create";
-            this.buttonAdminCreate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAdminCreate.UseVisualStyleBackColor = false;
-            this.buttonAdminCreate.Click += new System.EventHandler(this.buttonAdminCreate_Click);
+            this.buttonManagement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
+            this.buttonManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonManagement.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.buttonManagement.ForeColor = System.Drawing.Color.White;
+            this.buttonManagement.Image = ((System.Drawing.Image)(resources.GetObject("buttonManagement.Image")));
+            this.buttonManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonManagement.Location = new System.Drawing.Point(-34, -13);
+            this.buttonManagement.Name = "buttonManagement";
+            this.buttonManagement.Padding = new System.Windows.Forms.Padding(143, 0, 0, 0);
+            this.buttonManagement.Size = new System.Drawing.Size(363, 82);
+            this.buttonManagement.TabIndex = 18;
+            this.buttonManagement.Text = "      Management";
+            this.buttonManagement.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonManagement.UseVisualStyleBackColor = false;
             // 
             // panelAdminDelete
             // 
-            this.panelAdminDelete.Controls.Add(this.buttonAdminDelete);
-            this.panelAdminDelete.Location = new System.Drawing.Point(2, 565);
-            this.panelAdminDelete.Margin = new System.Windows.Forms.Padding(2);
+            this.panelAdminDelete.Controls.Add(this.buttonProject);
+            this.panelAdminDelete.Location = new System.Drawing.Point(3, 942);
             this.panelAdminDelete.Name = "panelAdminDelete";
-            this.panelAdminDelete.Size = new System.Drawing.Size(230, 35);
+            this.panelAdminDelete.Size = new System.Drawing.Size(329, 58);
             this.panelAdminDelete.TabIndex = 24;
             // 
-            // buttonAdminDelete
+            // buttonProject
             // 
-            this.buttonAdminDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
-            this.buttonAdminDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAdminDelete.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.buttonAdminDelete.ForeColor = System.Drawing.Color.White;
-            this.buttonAdminDelete.Image = ((System.Drawing.Image)(resources.GetObject("buttonAdminDelete.Image")));
-            this.buttonAdminDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAdminDelete.Location = new System.Drawing.Point(-24, -7);
-            this.buttonAdminDelete.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonAdminDelete.Name = "buttonAdminDelete";
-            this.buttonAdminDelete.Padding = new System.Windows.Forms.Padding(100, 0, 0, 0);
-            this.buttonAdminDelete.Size = new System.Drawing.Size(263, 50);
-            this.buttonAdminDelete.TabIndex = 18;
-            this.buttonAdminDelete.Text = "      Delete";
-            this.buttonAdminDelete.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAdminDelete.UseVisualStyleBackColor = false;
-            this.buttonAdminDelete.Click += new System.EventHandler(this.buttonAdminDelete_Click);
+            this.buttonProject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
+            this.buttonProject.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonProject.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.buttonProject.ForeColor = System.Drawing.Color.White;
+            this.buttonProject.Image = ((System.Drawing.Image)(resources.GetObject("buttonProject.Image")));
+            this.buttonProject.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonProject.Location = new System.Drawing.Point(-34, -12);
+            this.buttonProject.Name = "buttonProject";
+            this.buttonProject.Padding = new System.Windows.Forms.Padding(143, 0, 0, 0);
+            this.buttonProject.Size = new System.Drawing.Size(376, 83);
+            this.buttonProject.TabIndex = 18;
+            this.buttonProject.Text = "      Project";
+            this.buttonProject.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonProject.UseVisualStyleBackColor = false;
             // 
             // panelChart
             // 
             this.panelChart.Controls.Add(this.buttonChart);
-            this.panelChart.Location = new System.Drawing.Point(2, 337);
-            this.panelChart.Margin = new System.Windows.Forms.Padding(2);
+            this.panelChart.Location = new System.Drawing.Point(3, 562);
             this.panelChart.Name = "panelChart";
-            this.panelChart.Size = new System.Drawing.Size(228, 50);
+            this.panelChart.Size = new System.Drawing.Size(326, 83);
             this.panelChart.TabIndex = 22;
             // 
             // buttonChart
@@ -245,11 +258,10 @@
             this.buttonChart.ForeColor = System.Drawing.Color.White;
             this.buttonChart.Image = ((System.Drawing.Image)(resources.GetObject("buttonChart.Image")));
             this.buttonChart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonChart.Location = new System.Drawing.Point(-12, -9);
-            this.buttonChart.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonChart.Location = new System.Drawing.Point(-17, -15);
             this.buttonChart.Name = "buttonChart";
-            this.buttonChart.Padding = new System.Windows.Forms.Padding(28, 0, 0, 0);
-            this.buttonChart.Size = new System.Drawing.Size(242, 65);
+            this.buttonChart.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
+            this.buttonChart.Size = new System.Drawing.Size(346, 108);
             this.buttonChart.TabIndex = 18;
             this.buttonChart.Text = "              Chart";
             this.buttonChart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -259,19 +271,17 @@
             // panelDashboard
             // 
             this.panelDashboard.Controls.Add(this.buttonDashboard);
-            this.panelDashboard.Location = new System.Drawing.Point(2, 188);
-            this.panelDashboard.Margin = new System.Windows.Forms.Padding(2);
+            this.panelDashboard.Location = new System.Drawing.Point(3, 313);
             this.panelDashboard.Name = "panelDashboard";
-            this.panelDashboard.Size = new System.Drawing.Size(228, 50);
+            this.panelDashboard.Size = new System.Drawing.Size(326, 83);
             this.panelDashboard.TabIndex = 20;
             // 
             // panelAdmin
             // 
             this.panelAdmin.Controls.Add(this.buttonAdmin);
-            this.panelAdmin.Location = new System.Drawing.Point(0, 413);
-            this.panelAdmin.Margin = new System.Windows.Forms.Padding(2);
+            this.panelAdmin.Location = new System.Drawing.Point(0, 688);
             this.panelAdmin.Name = "panelAdmin";
-            this.panelAdmin.Size = new System.Drawing.Size(232, 50);
+            this.panelAdmin.Size = new System.Drawing.Size(331, 83);
             this.panelAdmin.TabIndex = 23;
             // 
             // buttonAdmin
@@ -282,11 +292,10 @@
             this.buttonAdmin.ForeColor = System.Drawing.Color.White;
             this.buttonAdmin.Image = ((System.Drawing.Image)(resources.GetObject("buttonAdmin.Image")));
             this.buttonAdmin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonAdmin.Location = new System.Drawing.Point(-10, -8);
-            this.buttonAdmin.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonAdmin.Location = new System.Drawing.Point(-14, -13);
             this.buttonAdmin.Name = "buttonAdmin";
-            this.buttonAdmin.Padding = new System.Windows.Forms.Padding(28, 0, 0, 0);
-            this.buttonAdmin.Size = new System.Drawing.Size(251, 65);
+            this.buttonAdmin.Padding = new System.Windows.Forms.Padding(40, 0, 0, 0);
+            this.buttonAdmin.Size = new System.Drawing.Size(359, 108);
             this.buttonAdmin.TabIndex = 18;
             this.buttonAdmin.Text = "              Data Edit";
             this.buttonAdmin.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -295,20 +304,20 @@
             // 
             // Dashboard
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.ClientSize = new System.Drawing.Size(1806, 1135);
             this.Controls.Add(this.panelMenu);
             this.IsMdiContainer = true;
-            this.Margin = new System.Windows.Forms.Padding(2);
-            this.MinimumSize = new System.Drawing.Size(1280, 720);
+            this.MinimumSize = new System.Drawing.Size(1819, 1163);
             this.Name = "Dashboard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Capacity Management Dashboard";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelMenu.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.panelAdminUpdate.ResumeLayout(false);
             this.panelDataGrid.ResumeLayout(false);
             this.panelAdminCreate.ResumeLayout(false);
@@ -330,13 +339,15 @@
         private Panel panelChart;
         private Button buttonChart;
         private Panel panelAdminDelete;
-        private Button buttonAdminDelete;
+        private Button buttonProject;
         private Panel panelAdminUpdate;
-        private Button buttonAdminUpdate;
+        private Button buttonDepartment;
         private Panel panelAdminCreate;
-        private Button buttonAdminCreate;
+        private Button buttonManagement;
         private Panel panelAdmin;
         private Button buttonAdmin;
         private Panel panelSideBar;
+        private Panel panel1;
+        private Button buttonCategory;
     }
 }

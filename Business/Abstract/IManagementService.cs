@@ -12,6 +12,7 @@ namespace Business.Abstract
     {
         IDataResult<List<Management>> GetAll();
         IDataResult<List<Management>> GetAllById(int id);
+        IDataResult<Management> GetByName(string managementName);
 
         IResult Add(Management management);
         IResult Update(Management management);

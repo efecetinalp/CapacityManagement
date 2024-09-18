@@ -57,23 +57,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnEdit.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DgAACw4BQL7hQQAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAACnSURBVDhPzdPB
-        DYIwGMXxjsAGOIFhACYgDuGBJbw5AiM4ADcWcARH8WS8kPp/BJPStHyEE01+DWn7XuGA897vcUGPU2rT
-        UuMLjTZ1YM0DHSqopNDiG0+DQgpLgRfOcCrQgfCWlDh8xbSnySrIhkXTWkEqvDivKVeQu3lTwR0K6zl+
-        bbOgwYgSKll8M8yCARofxGExC/7ffgvWQmaB5YAFW/6F2Fzg3Q9JJTl6OaQYsQAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        DQAACw0B7QfALAAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAACnSURBVDhPzdPB
-        DYIwGMXxjsAGOIFhACYgDuGBJbw5AiM4ADcWcARH8WS8kPp/BJPStHyEE01+DWn7XuGA897vcUGPU2rT
-        UuMLjTZ1YM0DHSqopNDiG0+DQgpLgRfOcCrQgfCWlDh8xbSnySrIhkXTWkEqvDivKVeQu3lTwR0K6zl+
-        bbOgwYgSKll8M8yCARofxGExC/7ffgvWQmaB5YAFW/6F2Fzg3Q9JJTl6OaQYsQAAAABJRU5ErkJggg==
-</value>
-  </data>
 </root>
