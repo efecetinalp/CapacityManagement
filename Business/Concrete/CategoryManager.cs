@@ -23,17 +23,20 @@ namespace Business.Concrete
 
         public IResult Add(Category category)
         {
-            throw new NotImplementedException();
+            _categoryDal.Add(category);
+            return new SuccessResult(Messages.CategoryAdded);
         }
 
         public IResult Update(Category category)
         {
-            throw new NotImplementedException();
+            _categoryDal.Update(category);
+            return new SuccessResult(Messages.CategoryUpdated);
         }
 
         public IResult Delete(Category category)
         {
-            throw new NotImplementedException();
+            _categoryDal.Delete(category);
+            return new SuccessResult(Messages.CategoryDeleted);
         }
 
         public IDataResult<List<Category>> GetAll()

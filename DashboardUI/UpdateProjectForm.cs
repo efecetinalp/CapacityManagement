@@ -57,7 +57,7 @@ namespace DashboardUI
                 Project projectToUpdate = _projectManager.GetByName(_projectName).Data;
                 projectToUpdate.ProjectName = textBoxProject.Text;
                 projectToUpdate.ManagementId = _managementManager.GetByName(comboBoxManagement.SelectedItem.ToString()).Data.ManagementId;
-                projectToUpdate.DepartmentId = _departmentManager.GetByDepartmentName(comboBoxDepartment.SelectedItem.ToString()).Data.DepartmentId;
+                projectToUpdate.DepartmentId = _departmentManager.GetByName(comboBoxDepartment.SelectedItem.ToString()).Data.DepartmentId;
                 projectToUpdate.CategoryId = _categoryManager.GetByName(comboBoxCategory.SelectedItem.ToString()).Data.CategoryId;
                 _projectManager.Update(projectToUpdate);
                 Debug.Print("Project updated");

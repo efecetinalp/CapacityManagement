@@ -27,6 +27,8 @@ namespace DashboardUI
         ProjectCapacityManager projectCapacityManager;
         DepartmentCapacityManager departmentCapacityManager;
 
+        CreateForm createForm;
+
         //temp cell value
         object _tempCellValue;
 
@@ -75,7 +77,7 @@ namespace DashboardUI
             uiRequest.ManagementIndex = comboBoxManagement.SelectedIndex + 1; //+1 because sql table starts with -1
 
             if (comboBoxDepartment.Text != "")
-                uiRequest.DepartmentIndex = departmentManager.GetByDepartmentName(comboBoxDepartment.Text).Data.DepartmentId;
+                uiRequest.DepartmentIndex = departmentManager.GetByName(comboBoxDepartment.Text).Data.DepartmentId;
             else
                 uiRequest.DepartmentIndex = 0;
 
@@ -366,7 +368,7 @@ namespace DashboardUI
         private void btnDelete_Click(object sender, EventArgs e)
         {
             //delete entity
-            ProjectForm deleteForm = new(managementManager, departmentManager, categoryManager, projectManager);
+            CreateProjectForm deleteForm = new(managementManager, departmentManager, categoryManager, projectManager);
             deleteForm.ShowDialog();
         }
 
@@ -475,7 +477,6 @@ namespace DashboardUI
             {
                 UpdateProjectForm updateForm = new(managementManager, departmentManager, categoryManager, projectManager, dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString());
                 updateForm.ShowDialog();
-                Debug.Print("Project is not updated but function works");
 
             }
             else if (dbGrid.Columns[e.ColumnIndex].Name == "Delete" && dbGrid.Rows[e.RowIndex].Tag == "Department")
@@ -489,9 +490,8 @@ namespace DashboardUI
             }
             else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Department")
             {
-                UpdateDepartmentForm updateForm = new(managementManager,departmentManager, dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString());
+                UpdateDepartmentForm updateForm = new(managementManager, departmentManager, dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString());
                 updateForm.ShowDialog();
-                Debug.Print("Department is not updated but function works");
 
             }
             else if (dbGrid.Columns[e.ColumnIndex].Name == "Delete" && dbGrid.Rows[e.RowIndex].Tag == "Management")
@@ -589,7 +589,7 @@ namespace DashboardUI
                 //check if cell value is changed
                 if (_tempCellValue != cellValue)
                 {
-                    Department cellDepartment = departmentManager.GetByDepartmentName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).Data;
+                    Department cellDepartment = departmentManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).Data;
 
                     //check if cell value was empty before
                     if (_tempCellValue == null)
@@ -634,6 +634,25 @@ namespace DashboardUI
         private void dbGrid_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
             e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
+        }
+
+        private void buttonNew_Click(object sender, EventArgs e)
+        {
+            if (createForm == null)
+            {
+                createForm = new CreateForm(managementManager, departmentManager, categoryManager, projectManager);
+                createForm.FormClosed += CreateForm_FormClosed;
+                createForm.ShowDialog();
+            }
+            else
+            {
+                createForm.Activate();
+            }
+        }
+
+        private void CreateForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            createForm = null;
         }
     }
 }

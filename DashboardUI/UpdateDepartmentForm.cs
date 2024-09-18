@@ -44,7 +44,7 @@ namespace DashboardUI
         {
             if (comboBoxManagement.SelectedItem.ToString() != "")
             {
-                Department departmentToUpdate = _departmentManager.GetByDepartmentName(_departmentName).Data;
+                Department departmentToUpdate = _departmentManager.GetByName(_departmentName).Data;
 
                 departmentToUpdate.DepartmentName = textBoxDepartment.Text;
                 departmentToUpdate.ManagementId = _managementManager.GetByName(comboBoxManagement.SelectedItem.ToString()).Data.ManagementId;

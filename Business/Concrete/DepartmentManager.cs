@@ -54,7 +54,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Department>>(_departmentDal.GetAll(d => d.DepartmentId == id));
         }
 
-        public IDataResult<Department> GetByDepartmentName(string departmentName)
+        public IDataResult<Department> GetByName(string departmentName)
         {
             Department result = _departmentDal.Get(d => d.DepartmentName == departmentName);
 
