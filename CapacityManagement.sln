@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestConsole", "TestConsole\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DashboardUI", "DashboardUI\DashboardUI.csproj", "{A5D44442-D6AB-485E-B6A3-4D30326667F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{FE884274-8B37-4293-874A-A5116E268334}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{FE884274-8B37-4293-874A-A5116E268334}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
