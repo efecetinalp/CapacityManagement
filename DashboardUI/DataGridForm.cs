@@ -14,6 +14,7 @@ using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using System.Windows.Forms;
 
 namespace DashboardUI
@@ -88,6 +89,56 @@ namespace DashboardUI
             DatabaseRows(uiRequest);
             DatabaseColumnCategory();
             DatabaseColumns();
+        }
+
+        public ChartRequest GenerateChartData()
+        {
+            ChartRequest chartRequest = new();
+            List<string> legends = new();
+            List<List<int>> series = new();
+            List<double> months = new();
+
+
+            #region list of months
+            int monthCalulate = (dateTimePickerEnd.Value.Year - dateTimePickerStart.Value.Year) * 12
+                + (dateTimePickerEnd.Value.Month - dateTimePickerStart.Value.Month);
+            for (int i = 0; i <= monthCalulate; i++)
+            {
+                months.Add(dateTimePickerStart.Value.AddMonths(i).ToOADate());
+            }
+            #endregion
+
+            #region list of legends and series
+            for (int i = 0; i < dbGrid.Rows.Count; i++)
+            {
+                if (dbGrid.Rows[i].Tag == "Empty")
+                {
+                    break;
+                }
+
+                if (dbGrid.Rows[i].Tag == "Management")
+                {
+                    continue;
+                }
+
+                legends.Add(dbGrid.Rows[i].Cells[0].Value.ToString());
+
+                //string serieName = "series" + i.ToString();
+                //list of series
+                List<int> templist = new();
+                for (int j = 2; j < dbGrid.Columns.Count; j++)
+                {
+                    templist.Add(Convert.ToInt32(dbGrid.Rows[i].Cells[j].Value));
+                }
+                series.Add(templist);
+            }
+            #endregion
+
+            chartRequest.Months = months;
+            chartRequest.Series = series;
+            chartRequest.Legends = legends;
+
+            return chartRequest;
         }
 
         private void DatabaseColumnCategory()

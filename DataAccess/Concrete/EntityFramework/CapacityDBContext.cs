@@ -28,12 +28,15 @@ namespace DataAccess.Concrete.EntityFramework
             //var path = System.AppDomain.CurrentDomain.BaseDirectory;
             //path = path.Substring(0, path.Length - 56);
             //path += "CapacityDB.accdb";
-            var exePath = Path.GetDirectoryName(
-               new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath);
-            Debug.Print(exePath);
-            optionsBuilder.UseJet(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source =" + exePath + "\\CapacityDB.accdb;Persist Security Info = False;");
 
-            //optionsBuilder.UseJet(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source = C:\Users\Efe\source\repos\CapacityManagement\CapacityDB.accdb;Persist Security Info = False;");
+            //USE WHEN PUBLISHING
+            //var exePath = Path.GetDirectoryName(
+            //   new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath);
+            //Debug.Print(exePath);
+            //optionsBuilder.UseJet(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source =" + exePath + "\\CapacityDB.accdb;Persist Security Info = False;");
+            //USE WHEN PUBLISHING
+
+            optionsBuilder.UseJet(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source = C:\Users\Efe\source\repos\CapacityManagement\CapacityDB.accdb;Persist Security Info = False;");
             //optionsBuilder.UseJet(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source = " + path + ";Persist Security Info = False;");
 
         }

@@ -109,7 +109,9 @@ namespace DashboardUI
 
             if (chartForm == null)
             {
-                chartForm = new();
+                ChartRequest chartRequest = new();
+
+                chartForm = new(dataGridForm);
                 chartForm.FormClosed += ChartForm_FormClosed;
                 chartForm.MdiParent = this;
                 chartForm.Dock = DockStyle.Fill;
