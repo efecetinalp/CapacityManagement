@@ -14,7 +14,6 @@ using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Documents;
 using System.Windows.Forms;
 
 namespace DashboardUI
@@ -64,7 +63,7 @@ namespace DashboardUI
                 comboBoxCategory.Items.Add(category.CategoryName);
             }
 
-            dateTimePickerStart.Value = new DateTime(2023, 01, 01);
+            dateTimePickerStart.Value = new DateTime(2024, 01, 01);
             dateTimePickerEnd.Value = dateTimePickerStart.Value.AddMonths(23);
 
             dbGrid.ReadOnly = true;
@@ -89,6 +88,9 @@ namespace DashboardUI
             DatabaseRows(uiRequest);
             DatabaseColumnCategory();
             DatabaseColumns();
+
+            dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
+
         }
 
         public ChartRequest GenerateChartData()
@@ -146,6 +148,8 @@ namespace DashboardUI
 
             int columnIndex = dbGrid.Columns.Add("", "");
             DataGridViewColumn column = dbGrid.Columns[columnIndex];
+            column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            column.Width = 100;
             column.HeaderText = "Category";
             column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
@@ -158,7 +162,6 @@ namespace DashboardUI
                     string categoryName = result.Data[0].CategoryName;
                     dbGrid.Rows[i].Cells[columnIndex].Value = categoryName;
                     dbGrid.Rows[i].Cells[columnIndex].Tag = "Category";
-
                 }
             }
 
@@ -219,8 +222,17 @@ namespace DashboardUI
             dbGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dbGrid.ColumnHeadersHeight = 100;
             dbGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+           
+            //Change this later for category column
+            foreach (DataGridViewColumn col in dbGrid.Columns)
+            {
+                col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.BottomCenter;
+                col.HeaderCell.Style.ForeColor = Color.White;
+                //col.HeaderCell.Style.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Pixel);
+            }
+
             // Here we attach an event handler to the cell painting event
-            dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
+            //dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
             #endregion
         }
 
@@ -269,8 +281,8 @@ namespace DashboardUI
                 for (int i = 0; i < result.Data.Count; i++)
                 {
                     managementNames.Add(result.Data[i].ManagementName);
-                    departmentNames.Add(result.Data[i].DepartmentName + "," + result.Data[i].ManagementName);
-                    projectNames.Add(result.Data[i].ProjectName + "," + result.Data[i].DepartmentName);
+                    departmentNames.Add(result.Data[i].DepartmentName + "<ß>" + result.Data[i].ManagementName);
+                    projectNames.Add(result.Data[i].ProjectName + "<ß>" + result.Data[i].DepartmentName);
                 }
 
                 //unique values
@@ -285,22 +297,22 @@ namespace DashboardUI
                     Font managementFont = new("Calibri", 12, FontStyle.Italic);
                     //managementFont.Style = FontStyle.Italic;
                     AddRow(managementNames[i], Color.FromArgb(46, 52, 63), Color.White, "Management", managementFont);
-                    dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
+                    //dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
 
                     // if department count >0
                     for (int j = 0; j < departmentNames.Count; j++)
                     {
-                        if (managementNames[i] == departmentNames[j].Split(",")[1])
+                        if (managementNames[i] == departmentNames[j].Split("<ß>")[1])
                         {
                             Font departmentFont = new("Segoe UI", 9, FontStyle.Italic);
-                            AddRow(departmentNames[j].Split(",")[0], Color.FromArgb(255, 230, 153), Color.Black, "Department", departmentFont);
+                            AddRow(departmentNames[j].Split("<ß>")[0], Color.FromArgb(255, 230, 153), Color.Black, "Department", departmentFont);
 
                             for (int k = 0; k < projectNames.Count; k++)
                             {
                                 Font projectFont = new("Segoe UI", 9, FontStyle.Italic);
-                                if (departmentNames[j].Split(",")[0] == projectNames[k].Split(",")[1])
+                                if (departmentNames[j].Split("<ß>")[0] == projectNames[k].Split("<ß>")[1])
                                 {
-                                    AddRow(projectNames[k].Split(",")[0], Color.FromArgb(210, 238, 255), Color.Black, "Project", projectFont);
+                                    AddRow(projectNames[k].Split("<ß>")[0], Color.FromArgb(210, 238, 255), Color.Black, "Project", projectFont);
                                 }
 
                             }
@@ -509,19 +521,7 @@ namespace DashboardUI
                 if (dialogResult == DialogResult.Yes)
                 {
                     Project projectToDelete = projectManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).Data;
-
-                    var projectCapacitiesToDelete = projectCapacityManager.GetAllByProjectId(projectToDelete.ProjectId);
-                    if (projectCapacitiesToDelete.Success)
-                    {
-                        foreach (var projectCapacity in projectCapacitiesToDelete.Data)
-                        {
-                            projectCapacityManager.Delete(projectCapacity);
-                        }
-                    }
-
-                    projectManager.Delete(projectToDelete);
-
-                    MessageBox.Show("Project deleted successfully", "Delete Project", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    DeleteProject(projectToDelete);
                 }
             }
             else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Project")
@@ -535,8 +535,8 @@ namespace DashboardUI
                 DialogResult dialogResult = MessageBox.Show("Are you sure to delete selected department? Department index: " + e.RowIndex, "Delete Department", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    Debug.Print("Department not deleted but function works");
-                    MessageBox.Show("Department deleted successfully", "Delete Department", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Department departmentToDelete = departmentManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).Data;
+                    DeleteDepartment(departmentToDelete);
                 }
             }
             else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Department")
@@ -550,8 +550,8 @@ namespace DashboardUI
                 DialogResult dialogResult = MessageBox.Show("Are you sure to delete selected Management? Management index: " + e.RowIndex, "Delete Management", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    Debug.Print("Management not deleted but function works");
-                    MessageBox.Show("Management deleted successfully", "Delete Management", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Management managementToDelete = managementManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).Data;
+                    DeleteManagement(managementToDelete);
                 }
             }
             else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Management")
@@ -559,6 +559,41 @@ namespace DashboardUI
                 UpdateManagementForm updateForm = new(managementManager, dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()); ;
                 updateForm.ShowDialog();
             }
+        }
+
+        private void DeleteManagement(Management managementToDelete)
+        {
+            //delete all projects
+            //delete all departments
+            //delete management
+            Debug.Print("Management not deleted but function works");
+            MessageBox.Show("Management deleted successfully", "Delete Management", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void DeleteDepartment(Department departmentToDelete)
+        {
+            //delete all projects
+            //delete department capacity
+            //delete department
+
+            Debug.Print("Department not deleted but function works");
+            MessageBox.Show("Department deleted successfully", "Delete Department", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void DeleteProject(Project projectToDelete)
+        {
+            var projectCapacitiesToDelete = projectCapacityManager.GetAllByProjectId(projectToDelete.ProjectId);
+            if (projectCapacitiesToDelete.Success)
+            {
+                foreach (var projectCapacity in projectCapacitiesToDelete.Data)
+                {
+                    projectCapacityManager.Delete(projectCapacity);
+                }
+            }
+
+            projectManager.Delete(projectToDelete);
+
+            MessageBox.Show("Project deleted successfully", "Delete Project", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void dbGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)

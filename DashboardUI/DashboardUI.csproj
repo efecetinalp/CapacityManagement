@@ -8,7 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <NoWin32Manifest>true</NoWin32Manifest>
     <ApplicationIcon>Assets\windows_icon-icons.com_65549.ico</ApplicationIcon>
-    <UseWPF>True</UseWPF>
+    <UseWPF>False</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>

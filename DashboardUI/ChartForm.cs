@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace DashboardUI
 {
@@ -24,8 +27,6 @@ namespace DashboardUI
 
         private void ChartForm_Load(object sender, EventArgs e)
         {
-
-
         }
 
         private void buttonUpdate_Click(object sender, EventArgs e)
@@ -65,11 +66,18 @@ namespace DashboardUI
             }
         }
 
-        private void buttonPrint_Click(object sender, EventArgs e)
+        private void buttonSave_Click(object sender, EventArgs e)
         {
-
+            int width = Convert.ToInt32(areaChart.Width);
+            int height = Convert.ToInt32(areaChart.Height);
+            using (Bitmap bmp = new Bitmap(width, height))
+            {
+                areaChart.DrawToBitmap(bmp, new Rectangle(0, 0, width, height));
+                bmp.Save(areaChart.Name + ".jpg", ImageFormat.Jpeg);
+                FileInfo image = new FileInfo(areaChart.Name + ".jpg");
+                string userName = Environment.UserName;
+                image.MoveTo(@"C:\Users\" + userName + @"\Desktop\" + areaChart.Name + ".jpg");
+            }
         }
-
-
     }
 }
