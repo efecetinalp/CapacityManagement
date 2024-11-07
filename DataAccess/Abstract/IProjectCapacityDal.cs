@@ -13,5 +13,6 @@ namespace DataAccess.Abstract
     public interface IProjectCapacityDal : IEntityRepository<ProjectCapacity>
     {
         List<ProjectCapacityDetailDto> GetProjectCapacityDetails(Expression<Func<ProjectCapacityDetailDto, bool>> filter = null);
+        List<ProjectCapacityDetailDto> GetProjectCapacityDetails();
     }
 }

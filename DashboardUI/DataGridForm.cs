@@ -87,7 +87,8 @@ namespace DashboardUI
 
             DatabaseRows(uiRequest);
             DatabaseColumnCategory();
-            DatabaseColumns();
+            //DatabaseColumns(); <- that works
+            DatabaseColumnsTest();
 
             dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
 
@@ -234,6 +235,16 @@ namespace DashboardUI
             // Here we attach an event handler to the cell painting event
             //dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
             #endregion
+        }
+
+        private void DatabaseColumnsTest()
+        {
+            var listCapacity = projectCapacityManager.GetProjectCapacityDetails().Data;
+
+            foreach (var item in listCapacity)
+            {
+                Debug.Print(item.ProjectName);
+            }
         }
 
         private void DatabaseRows(UIRequest uiRequest)

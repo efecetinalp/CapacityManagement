@@ -30,5 +30,23 @@ namespace DataAccess.Concrete.EntityFramework
                 return result.Where(filter).ToList();
             }
         }
+
+        public List<ProjectCapacityDetailDto> GetProjectCapacityDetails()
+        {
+            using (CapacityDBContext context = new CapacityDBContext())
+            {
+                var result = from p in context.ProjectCapacities
+                             join pt in context.Projects on p.ProjectId equals pt.ProjectId
+                             select new ProjectCapacityDetailDto
+                             {
+                                 PCapacityId = p.ProjectCapacityId,
+                                 ProjectId = pt.DepartmentId,
+                                 ProjectName = pt.ProjectName,
+                                 PTotalCapacity = p.PTotalCapacity,
+                                 Date = p.Date
+                             };
+                return result.ToList();
+            }
+        }
     }
 }
