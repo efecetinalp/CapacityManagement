@@ -87,7 +87,7 @@ namespace DashboardUI
 
             DatabaseRows(uiRequest);
             DatabaseColumnCategory();
-            //DatabaseColumns(); <- that works
+            //DatabaseColumns(); //<- that works
             DatabaseColumnsTest();
 
             dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
@@ -223,7 +223,7 @@ namespace DashboardUI
             dbGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dbGrid.ColumnHeadersHeight = 100;
             dbGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
-           
+
             //Change this later for category column
             foreach (DataGridViewColumn col in dbGrid.Columns)
             {
@@ -241,10 +241,62 @@ namespace DashboardUI
         {
             var listCapacity = projectCapacityManager.GetProjectCapacityDetails().Data;
 
-            foreach (var item in listCapacity)
+            int monthCalulate = (dateTimePickerEnd.Value.Year - dateTimePickerStart.Value.Year) * 12
+                + (dateTimePickerEnd.Value.Month - dateTimePickerStart.Value.Month);
+
+            //month columns
+            DateTime tempMonth;
+            for (int i = 0; i <= monthCalulate; i++)
             {
-                Debug.Print(item.ProjectName);
+                //empty column
+                dbGrid.Columns.Add("", "");
+
+                DataGridViewColumn column = dbGrid.Columns[i + 2];
+
+                tempMonth = dateTimePickerStart.Value.AddMonths(i);
+                column.HeaderCell.Style.BackColor = Color.FromArgb(46, 52, 63);
+                column.HeaderText = tempMonth.ToString("MMM-yy");
+                column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+
+                foreach (var item in listCapacity)
+                {
+                    if (item.Date == tempMonth)
+                    {
+                        for (int j = 0; j < dbGrid.Rows.Count; j++)
+                        {
+                            if (item.ProjectName == dbGrid.Rows[j].Cells[0].Value.ToString())
+                            {
+                                column.DataGridView.Rows[j].Cells[i + 2].Value = item.PTotalCapacity;
+                                column.DataGridView.Rows[j].Cells[i + 2].Style.BackColor = Color.FromArgb(198, 224, 180);
+
+                            }
+                            else if (dbGrid.Rows[j].Tag == "Project")
+                                column.DataGridView.Rows[j].Cells[i + 2].Style.BackColor = Color.FromArgb(226, 239, 218);
+                        }
+
+                    }
+                }
+
             }
+
+            #region "DELETE LATER"
+            //DELETE LATER
+            dbGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dbGrid.ColumnHeadersHeight = 100;
+            dbGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+
+            //Change this later for category column
+            foreach (DataGridViewColumn col in dbGrid.Columns)
+            {
+                col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.BottomCenter;
+                col.HeaderCell.Style.ForeColor = Color.White;
+                //col.HeaderCell.Style.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Pixel);
+            }
+
+            // Here we attach an event handler to the cell painting event
+            //dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
+            #endregion
         }
 
         private void DatabaseRows(UIRequest uiRequest)
@@ -612,6 +664,8 @@ namespace DashboardUI
 
             var cellValue = dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
             var cellDate = dbGrid.Columns[e.ColumnIndex].HeaderText;
+            var tempDate = Convert.ToDateTime(cellDate);
+            cellDate = new DateTime(tempDate.Year, tempDate.Month, 01).ToString();
 
             //If editing Project Capacities
             if (dbGrid.Rows[e.RowIndex].Tag == "Project")

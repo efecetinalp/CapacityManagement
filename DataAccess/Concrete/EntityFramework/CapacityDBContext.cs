@@ -35,8 +35,10 @@ namespace DataAccess.Concrete.EntityFramework
             //Debug.Print(exePath);
             //optionsBuilder.UseJet(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source =" + exePath + "\\CapacityDB.accdb;Persist Security Info = False;");
             //USE WHEN PUBLISHING
-
-            optionsBuilder.UseJet(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source = C:\Users\Efe\source\repos\CapacityManagement\CapacityDB.accdb;Persist Security Info = False;");
+            
+            optionsBuilder.UseJet(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source = C:\Users\ECETINALP\Desktop\Tools\Capacity Management\CapacityDB.accdb;Persist Security Info = False;");
+            //optionsBuilder.UseJet(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source = C:\Users\Efe\source\repos\CapacityManagement\CapacityDB.accdb;Persist Security Info = False;");
+            
             //optionsBuilder.UseJet(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source = " + path + ";Persist Security Info = False;");
 
         }
