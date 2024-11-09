@@ -28,71 +28,76 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBoxManagement = new System.Windows.Forms.TextBox();
-            this.buttonCreate = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            label3 = new Label();
+            textBoxManagement = new TextBox();
+            buttonCreate = new Button();
+            label2 = new Label();
+            SuspendLayout();
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(49, 140);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(117, 25);
-            this.label3.TabIndex = 39;
-            this.label3.Text = "Management";
+            label3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label3.Location = new Point(39, 91);
+            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(79, 15);
+            label3.TabIndex = 39;
+            label3.Text = "Management";
             // 
             // textBoxManagement
             // 
-            this.textBoxManagement.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxManagement.Location = new System.Drawing.Point(45, 168);
-            this.textBoxManagement.Name = "textBoxManagement";
-            this.textBoxManagement.Size = new System.Drawing.Size(427, 31);
-            this.textBoxManagement.TabIndex = 38;
+            textBoxManagement.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            textBoxManagement.Location = new Point(40, 110);
+            textBoxManagement.Margin = new Padding(2);
+            textBoxManagement.Name = "textBoxManagement";
+            textBoxManagement.Size = new Size(260, 23);
+            textBoxManagement.TabIndex = 38;
             // 
             // buttonCreate
             // 
-            this.buttonCreate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCreate.Location = new System.Drawing.Point(49, 540);
-            this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(427, 41);
-            this.buttonCreate.TabIndex = 37;
-            this.buttonCreate.Text = "Create Management";
-            this.buttonCreate.UseVisualStyleBackColor = true;
-            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
+            buttonCreate.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            buttonCreate.BackColor = Color.FromArgb(58, 154, 193);
+            buttonCreate.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
+            buttonCreate.FlatStyle = FlatStyle.Flat;
+            buttonCreate.ForeColor = SystemColors.ControlLightLight;
+            buttonCreate.Location = new Point(70, 350);
+            buttonCreate.Margin = new Padding(2);
+            buttonCreate.Name = "buttonCreate";
+            buttonCreate.Size = new Size(200, 32);
+            buttonCreate.TabIndex = 37;
+            buttonCreate.Text = "Create Management";
+            buttonCreate.UseVisualStyleBackColor = false;
+            buttonCreate.Click += buttonCreate_Click;
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(122, 90);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(185, 25);
-            this.label2.TabIndex = 36;
-            this.label2.Text = "Create Management";
+            label2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(122, 50);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(101, 17);
+            label2.TabIndex = 36;
+            label2.Text = "MANAGEMENT";
             // 
             // CreateManagementForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(520, 800);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBoxManagement);
-            this.Controls.Add(this.buttonCreate);
-            this.Controls.Add(this.label2);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "CreateManagementForm";
-            this.Text = "CreateManagement";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(340, 450);
+            Controls.Add(label3);
+            Controls.Add(textBoxManagement);
+            Controls.Add(buttonCreate);
+            Controls.Add(label2);
+            FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(2);
+            Name = "CreateManagementForm";
+            Text = "CreateManagement";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

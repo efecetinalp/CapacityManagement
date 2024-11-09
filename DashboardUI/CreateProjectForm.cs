@@ -65,5 +65,10 @@ namespace DashboardUI
             _projectManager.Add(projectToCreate);
             Debug.Print("Project created");
         }
+
+        private void lblProjectCreate_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

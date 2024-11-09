@@ -28,97 +28,103 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBoxDepartment = new System.Windows.Forms.TextBox();
-            this.buttonCreate = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblManagement = new System.Windows.Forms.Label();
-            this.comboBoxManagement = new System.Windows.Forms.ComboBox();
-            this.SuspendLayout();
+            label4 = new Label();
+            textBoxDepartment = new TextBox();
+            buttonCreate = new Button();
+            label1 = new Label();
+            lblManagement = new Label();
+            comboBoxManagement = new ComboBox();
+            SuspendLayout();
             // 
             // label4
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(57, 222);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(107, 25);
-            this.label4.TabIndex = 43;
-            this.label4.Text = "Department";
+            label4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label4.Location = new Point(42, 142);
+            label4.Margin = new Padding(2, 0, 2, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(73, 15);
+            label4.TabIndex = 43;
+            label4.Text = "Department";
             // 
             // textBoxDepartment
             // 
-            this.textBoxDepartment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxDepartment.Location = new System.Drawing.Point(53, 250);
-            this.textBoxDepartment.Name = "textBoxDepartment";
-            this.textBoxDepartment.Size = new System.Drawing.Size(400, 31);
-            this.textBoxDepartment.TabIndex = 42;
+            textBoxDepartment.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            textBoxDepartment.Location = new Point(40, 160);
+            textBoxDepartment.Margin = new Padding(2);
+            textBoxDepartment.Name = "textBoxDepartment";
+            textBoxDepartment.Size = new Size(260, 23);
+            textBoxDepartment.TabIndex = 42;
             // 
             // buttonCreate
             // 
-            this.buttonCreate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCreate.Location = new System.Drawing.Point(53, 332);
-            this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(400, 41);
-            this.buttonCreate.TabIndex = 41;
-            this.buttonCreate.Text = "Create Department";
-            this.buttonCreate.UseVisualStyleBackColor = true;
-            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
+            buttonCreate.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            buttonCreate.BackColor = Color.FromArgb(58, 154, 193);
+            buttonCreate.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
+            buttonCreate.FlatStyle = FlatStyle.Flat;
+            buttonCreate.ForeColor = SystemColors.ControlLightLight;
+            buttonCreate.Location = new Point(70, 350);
+            buttonCreate.Margin = new Padding(2);
+            buttonCreate.Name = "buttonCreate";
+            buttonCreate.Size = new Size(200, 32);
+            buttonCreate.TabIndex = 41;
+            buttonCreate.Text = "Create Department";
+            buttonCreate.UseVisualStyleBackColor = false;
+            buttonCreate.Click += buttonCreate_Click;
             // 
             // label1
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(122, 71);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(175, 25);
-            this.label1.TabIndex = 40;
-            this.label1.Text = "Create Department";
+            label1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(122, 50);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(100, 19);
+            label1.TabIndex = 40;
+            label1.Text = "DEPARTMENT";
             // 
             // lblManagement
             // 
-            this.lblManagement.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblManagement.AutoSize = true;
-            this.lblManagement.Location = new System.Drawing.Point(53, 128);
-            this.lblManagement.Name = "lblManagement";
-            this.lblManagement.Size = new System.Drawing.Size(117, 25);
-            this.lblManagement.TabIndex = 39;
-            this.lblManagement.Text = "Management";
+            lblManagement.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblManagement.AutoSize = true;
+            lblManagement.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            lblManagement.Location = new Point(39, 91);
+            lblManagement.Margin = new Padding(2, 0, 2, 0);
+            lblManagement.Name = "lblManagement";
+            lblManagement.Size = new Size(79, 15);
+            lblManagement.TabIndex = 39;
+            lblManagement.Text = "Management";
             // 
             // comboBoxManagement
             // 
-            this.comboBoxManagement.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxManagement.FormattingEnabled = true;
-            this.comboBoxManagement.Location = new System.Drawing.Point(53, 156);
-            this.comboBoxManagement.Name = "comboBoxManagement";
-            this.comboBoxManagement.Size = new System.Drawing.Size(400, 33);
-            this.comboBoxManagement.TabIndex = 38;
+            comboBoxManagement.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            comboBoxManagement.FormattingEnabled = true;
+            comboBoxManagement.Location = new Point(40, 110);
+            comboBoxManagement.Margin = new Padding(2);
+            comboBoxManagement.Name = "comboBoxManagement";
+            comboBoxManagement.Size = new Size(260, 23);
+            comboBoxManagement.TabIndex = 38;
             // 
             // CreateDepartmentForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(520, 800);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBoxDepartment);
-            this.Controls.Add(this.buttonCreate);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.lblManagement);
-            this.Controls.Add(this.comboBoxManagement);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "CreateDepartmentForm";
-            this.Text = "CreateDepartmentForm";
-            this.Load += new System.EventHandler(this.CreateDepartmentForm_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(340, 450);
+            Controls.Add(label4);
+            Controls.Add(textBoxDepartment);
+            Controls.Add(buttonCreate);
+            Controls.Add(label1);
+            Controls.Add(lblManagement);
+            Controls.Add(comboBoxManagement);
+            FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(2);
+            Name = "CreateDepartmentForm";
+            Text = "CreateDepartmentForm";
+            Load += CreateDepartmentForm_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

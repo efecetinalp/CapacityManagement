@@ -29,6 +29,8 @@ namespace DashboardUI
 
         CreateForm createForm;
 
+        private bool isEditing = false;
+
         //temp cell value
         object _tempCellValue;
 
@@ -442,7 +444,7 @@ namespace DashboardUI
             dateTimePickerStart.Value = new DateTime(2024, 01, 01);
             dateTimePickerEnd.Value = dateTimePickerStart.Value.AddMonths(23);
 
-            btnEdit.Text = "Edit";
+            isEditing = false;
         }
 
         private void ResetGridView()
@@ -516,7 +518,7 @@ namespace DashboardUI
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (btnEdit.Text == "Edit")
+            if (isEditing == false)
             {
 
                 DataGridViewImageColumn imageColumnUpdate = new();
@@ -549,10 +551,10 @@ namespace DashboardUI
 
                 dbGrid.ReadOnly = false;
 
-                btnEdit.Text = "Exit Edit";
+                isEditing = true;
             }
 
-            else if (btnEdit.Text == "Exit Edit")
+            else if (isEditing == true)
             {
 
                 //OnEditMode(false);
@@ -561,7 +563,7 @@ namespace DashboardUI
 
                 dbGrid.ReadOnly = true;
 
-                btnEdit.Text = "Edit";
+                isEditing = false;
             }
         }
 

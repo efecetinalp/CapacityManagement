@@ -28,149 +28,159 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lblProjectCreate = new System.Windows.Forms.Label();
-            this.lblProject = new System.Windows.Forms.Label();
-            this.lblCategory = new System.Windows.Forms.Label();
-            this.lblDepartment = new System.Windows.Forms.Label();
-            this.lblManagement = new System.Windows.Forms.Label();
-            this.buttonCreate = new System.Windows.Forms.Button();
-            this.textBoxProject = new System.Windows.Forms.TextBox();
-            this.comboBoxCategory = new System.Windows.Forms.ComboBox();
-            this.comboBoxDepartment = new System.Windows.Forms.ComboBox();
-            this.comboBoxManagement = new System.Windows.Forms.ComboBox();
-            this.SuspendLayout();
+            lblProjectCreate = new Label();
+            lblProject = new Label();
+            lblCategory = new Label();
+            lblDepartment = new Label();
+            lblManagement = new Label();
+            buttonCreate = new Button();
+            textBoxProject = new TextBox();
+            comboBoxCategory = new ComboBox();
+            comboBoxDepartment = new ComboBox();
+            comboBoxManagement = new ComboBox();
+            SuspendLayout();
             // 
             // lblProjectCreate
             // 
-            this.lblProjectCreate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblProjectCreate.AutoSize = true;
-            this.lblProjectCreate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblProjectCreate.Location = new System.Drawing.Point(192, 84);
-            this.lblProjectCreate.Name = "lblProjectCreate";
-            this.lblProjectCreate.Size = new System.Drawing.Size(132, 25);
-            this.lblProjectCreate.TabIndex = 29;
-            this.lblProjectCreate.Text = "Create Project";
+            lblProjectCreate.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblProjectCreate.AutoSize = true;
+            lblProjectCreate.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            lblProjectCreate.Location = new Point(140, 50);
+            lblProjectCreate.Margin = new Padding(2, 0, 2, 0);
+            lblProjectCreate.Name = "lblProjectCreate";
+            lblProjectCreate.Size = new Size(68, 19);
+            lblProjectCreate.TabIndex = 29;
+            lblProjectCreate.Text = "PROJECT";
+            lblProjectCreate.TextAlign = ContentAlignment.MiddleCenter;
+            lblProjectCreate.Click += lblProjectCreate_Click;
             // 
             // lblProject
             // 
-            this.lblProject.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblProject.AutoSize = true;
-            this.lblProject.Location = new System.Drawing.Point(60, 414);
-            this.lblProject.Name = "lblProject";
-            this.lblProject.Size = new System.Drawing.Size(66, 25);
-            this.lblProject.TabIndex = 28;
-            this.lblProject.Text = "Project";
+            lblProject.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblProject.AutoSize = true;
+            lblProject.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            lblProject.Location = new Point(39, 243);
+            lblProject.Margin = new Padding(2, 0, 2, 0);
+            lblProject.Name = "lblProject";
+            lblProject.Size = new Size(44, 15);
+            lblProject.TabIndex = 28;
+            lblProject.Text = "Project";
             // 
             // lblCategory
             // 
-            this.lblCategory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCategory.AutoSize = true;
-            this.lblCategory.Location = new System.Drawing.Point(56, 328);
-            this.lblCategory.Name = "lblCategory";
-            this.lblCategory.Size = new System.Drawing.Size(84, 25);
-            this.lblCategory.TabIndex = 27;
-            this.lblCategory.Text = "Category";
+            lblCategory.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblCategory.AutoSize = true;
+            lblCategory.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            lblCategory.Location = new Point(39, 194);
+            lblCategory.Margin = new Padding(2, 0, 2, 0);
+            lblCategory.Name = "lblCategory";
+            lblCategory.Size = new Size(57, 15);
+            lblCategory.TabIndex = 27;
+            lblCategory.Text = "Category";
             // 
             // lblDepartment
             // 
-            this.lblDepartment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblDepartment.AutoSize = true;
-            this.lblDepartment.Location = new System.Drawing.Point(56, 242);
-            this.lblDepartment.Name = "lblDepartment";
-            this.lblDepartment.Size = new System.Drawing.Size(107, 25);
-            this.lblDepartment.TabIndex = 26;
-            this.lblDepartment.Text = "Department";
+            lblDepartment.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblDepartment.AutoSize = true;
+            lblDepartment.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            lblDepartment.Location = new Point(39, 144);
+            lblDepartment.Margin = new Padding(2, 0, 2, 0);
+            lblDepartment.Name = "lblDepartment";
+            lblDepartment.Size = new Size(73, 15);
+            lblDepartment.TabIndex = 26;
+            lblDepartment.Text = "Department";
             // 
             // lblManagement
             // 
-            this.lblManagement.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblManagement.AutoSize = true;
-            this.lblManagement.Location = new System.Drawing.Point(56, 151);
-            this.lblManagement.Name = "lblManagement";
-            this.lblManagement.Size = new System.Drawing.Size(117, 25);
-            this.lblManagement.TabIndex = 25;
-            this.lblManagement.Text = "Management";
+            lblManagement.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblManagement.AutoSize = true;
+            lblManagement.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            lblManagement.Location = new Point(39, 91);
+            lblManagement.Margin = new Padding(2, 0, 2, 0);
+            lblManagement.Name = "lblManagement";
+            lblManagement.Size = new Size(79, 15);
+            lblManagement.TabIndex = 25;
+            lblManagement.Text = "Management";
             // 
             // buttonCreate
             // 
-            this.buttonCreate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCreate.Location = new System.Drawing.Point(56, 542);
-            this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(405, 41);
-            this.buttonCreate.TabIndex = 23;
-            this.buttonCreate.Text = "Create Project";
-            this.buttonCreate.UseVisualStyleBackColor = true;
-            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
+            buttonCreate.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            buttonCreate.BackColor = Color.FromArgb(58, 154, 193);
+            buttonCreate.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
+            buttonCreate.FlatStyle = FlatStyle.Flat;
+            buttonCreate.ForeColor = SystemColors.ButtonHighlight;
+            buttonCreate.Location = new Point(70, 350);
+            buttonCreate.Margin = new Padding(2);
+            buttonCreate.Name = "buttonCreate";
+            buttonCreate.Size = new Size(200, 32);
+            buttonCreate.TabIndex = 23;
+            buttonCreate.Text = "Create Project";
+            buttonCreate.UseVisualStyleBackColor = false;
+            buttonCreate.Click += buttonCreate_Click;
             // 
             // textBoxProject
             // 
-            this.textBoxProject.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxProject.Location = new System.Drawing.Point(56, 442);
-            this.textBoxProject.Name = "textBoxProject";
-            this.textBoxProject.Size = new System.Drawing.Size(405, 31);
-            this.textBoxProject.TabIndex = 22;
+            textBoxProject.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            textBoxProject.Location = new Point(40, 260);
+            textBoxProject.Margin = new Padding(2);
+            textBoxProject.Name = "textBoxProject";
+            textBoxProject.Size = new Size(260, 23);
+            textBoxProject.TabIndex = 22;
             // 
             // comboBoxCategory
             // 
-            this.comboBoxCategory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxCategory.FormattingEnabled = true;
-            this.comboBoxCategory.Location = new System.Drawing.Point(56, 356);
-            this.comboBoxCategory.Name = "comboBoxCategory";
-            this.comboBoxCategory.Size = new System.Drawing.Size(405, 33);
-            this.comboBoxCategory.TabIndex = 21;
+            comboBoxCategory.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            comboBoxCategory.FormattingEnabled = true;
+            comboBoxCategory.Location = new Point(40, 210);
+            comboBoxCategory.Margin = new Padding(2);
+            comboBoxCategory.Name = "comboBoxCategory";
+            comboBoxCategory.Size = new Size(260, 23);
+            comboBoxCategory.TabIndex = 21;
             // 
             // comboBoxDepartment
             // 
-            this.comboBoxDepartment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxDepartment.FormattingEnabled = true;
-            this.comboBoxDepartment.Location = new System.Drawing.Point(56, 270);
-            this.comboBoxDepartment.Name = "comboBoxDepartment";
-            this.comboBoxDepartment.Size = new System.Drawing.Size(405, 33);
-            this.comboBoxDepartment.TabIndex = 20;
+            comboBoxDepartment.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            comboBoxDepartment.FormattingEnabled = true;
+            comboBoxDepartment.Location = new Point(40, 160);
+            comboBoxDepartment.Margin = new Padding(2);
+            comboBoxDepartment.Name = "comboBoxDepartment";
+            comboBoxDepartment.Size = new Size(260, 23);
+            comboBoxDepartment.TabIndex = 20;
             // 
             // comboBoxManagement
             // 
-            this.comboBoxManagement.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBoxManagement.FormattingEnabled = true;
-            this.comboBoxManagement.Location = new System.Drawing.Point(56, 179);
-            this.comboBoxManagement.Name = "comboBoxManagement";
-            this.comboBoxManagement.Size = new System.Drawing.Size(405, 33);
-            this.comboBoxManagement.TabIndex = 19;
-            this.comboBoxManagement.SelectedIndexChanged += new System.EventHandler(this.comboBoxManagement_SelectedIndexChanged);
+            comboBoxManagement.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            comboBoxManagement.FormattingEnabled = true;
+            comboBoxManagement.Location = new Point(40, 110);
+            comboBoxManagement.Margin = new Padding(2);
+            comboBoxManagement.Name = "comboBoxManagement";
+            comboBoxManagement.Size = new Size(260, 23);
+            comboBoxManagement.TabIndex = 19;
+            comboBoxManagement.SelectedIndexChanged += comboBoxManagement_SelectedIndexChanged;
             // 
             // CreateProjectForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(520, 800);
-            this.Controls.Add(this.lblProjectCreate);
-            this.Controls.Add(this.lblProject);
-            this.Controls.Add(this.lblCategory);
-            this.Controls.Add(this.lblDepartment);
-            this.Controls.Add(this.lblManagement);
-            this.Controls.Add(this.buttonCreate);
-            this.Controls.Add(this.textBoxProject);
-            this.Controls.Add(this.comboBoxCategory);
-            this.Controls.Add(this.comboBoxDepartment);
-            this.Controls.Add(this.comboBoxManagement);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "CreateProjectForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DeleteForm";
-            this.Load += new System.EventHandler(this.CreateProjectForm_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(340, 450);
+            Controls.Add(lblProjectCreate);
+            Controls.Add(lblProject);
+            Controls.Add(lblCategory);
+            Controls.Add(lblDepartment);
+            Controls.Add(lblManagement);
+            Controls.Add(buttonCreate);
+            Controls.Add(textBoxProject);
+            Controls.Add(comboBoxCategory);
+            Controls.Add(comboBoxDepartment);
+            Controls.Add(comboBoxManagement);
+            FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(2);
+            Name = "CreateProjectForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "DeleteForm";
+            Load += CreateProjectForm_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

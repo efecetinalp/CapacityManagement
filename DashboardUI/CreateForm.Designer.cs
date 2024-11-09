@@ -28,156 +28,166 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.buttonManagement = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.buttonProject = new System.Windows.Forms.Button();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.buttonCategory = new System.Windows.Forms.Button();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.buttonDepartment = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.panel1.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.SuspendLayout();
+            panel1 = new Panel();
+            panel4 = new Panel();
+            buttonManagement = new Button();
+            panel2 = new Panel();
+            buttonProject = new Button();
+            panel3 = new Panel();
+            buttonCategory = new Button();
+            panel5 = new Panel();
+            buttonDepartment = new Button();
+            buttonCancel = new Button();
+            panel1.SuspendLayout();
+            panel4.SuspendLayout();
+            panel2.SuspendLayout();
+            panel3.SuspendLayout();
+            panel5.SuspendLayout();
+            SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
-            this.panel1.Controls.Add(this.panel4);
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Controls.Add(this.panel3);
-            this.panel1.Controls.Add(this.panel5);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(280, 744);
-            this.panel1.TabIndex = 0;
+            panel1.BackColor = Color.FromArgb(46, 52, 63);
+            panel1.Controls.Add(panel4);
+            panel1.Controls.Add(panel2);
+            panel1.Controls.Add(panel3);
+            panel1.Controls.Add(panel5);
+            panel1.Dock = DockStyle.Left;
+            panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(2, 2, 2, 2);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(160, 450);
+            panel1.TabIndex = 0;
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.buttonManagement);
-            this.panel4.Location = new System.Drawing.Point(0, 557);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(293, 149);
-            this.panel4.TabIndex = 5;
+            panel4.Controls.Add(buttonManagement);
+            panel4.Location = new Point(0, 334);
+            panel4.Margin = new Padding(2, 2, 2, 2);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(205, 89);
+            panel4.TabIndex = 5;
             // 
             // buttonManagement
             // 
-            this.buttonManagement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
-            this.buttonManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonManagement.Font = new System.Drawing.Font("Segoe UI", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.buttonManagement.ForeColor = System.Drawing.Color.White;
-            this.buttonManagement.Location = new System.Drawing.Point(-34, -18);
-            this.buttonManagement.Name = "buttonManagement";
-            this.buttonManagement.Size = new System.Drawing.Size(362, 184);
-            this.buttonManagement.TabIndex = 1;
-            this.buttonManagement.Text = "New Management";
-            this.buttonManagement.UseVisualStyleBackColor = false;
-            this.buttonManagement.Click += new System.EventHandler(this.buttonManagement_Click);
+            buttonManagement.BackColor = Color.FromArgb(46, 52, 63);
+            buttonManagement.FlatStyle = FlatStyle.Flat;
+            buttonManagement.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            buttonManagement.ForeColor = Color.White;
+            buttonManagement.Location = new Point(-10, -10);
+            buttonManagement.Margin = new Padding(2, 2, 2, 2);
+            buttonManagement.Name = "buttonManagement";
+            buttonManagement.Size = new Size(171, 110);
+            buttonManagement.TabIndex = 1;
+            buttonManagement.Text = "New Management";
+            buttonManagement.UseVisualStyleBackColor = false;
+            buttonManagement.Click += buttonManagement_Click;
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.buttonProject);
-            this.panel2.Location = new System.Drawing.Point(0, 41);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(293, 149);
-            this.panel2.TabIndex = 2;
+            panel2.Controls.Add(buttonProject);
+            panel2.Location = new Point(0, 25);
+            panel2.Margin = new Padding(2, 2, 2, 2);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(205, 89);
+            panel2.TabIndex = 2;
             // 
             // buttonProject
             // 
-            this.buttonProject.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
-            this.buttonProject.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonProject.Font = new System.Drawing.Font("Segoe UI", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.buttonProject.ForeColor = System.Drawing.Color.White;
-            this.buttonProject.Location = new System.Drawing.Point(-34, -18);
-            this.buttonProject.Name = "buttonProject";
-            this.buttonProject.Size = new System.Drawing.Size(362, 184);
-            this.buttonProject.TabIndex = 1;
-            this.buttonProject.Text = "New Project";
-            this.buttonProject.UseVisualStyleBackColor = false;
-            this.buttonProject.Click += new System.EventHandler(this.buttonProject_Click);
+            buttonProject.BackColor = Color.FromArgb(46, 52, 63);
+            buttonProject.FlatStyle = FlatStyle.Flat;
+            buttonProject.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            buttonProject.ForeColor = Color.White;
+            buttonProject.Location = new Point(-10, -11);
+            buttonProject.Margin = new Padding(2, 2, 2, 2);
+            buttonProject.Name = "buttonProject";
+            buttonProject.Size = new Size(171, 110);
+            buttonProject.TabIndex = 1;
+            buttonProject.Text = "New Project";
+            buttonProject.UseVisualStyleBackColor = false;
+            buttonProject.Click += buttonProject_Click;
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.buttonCategory);
-            this.panel3.Location = new System.Drawing.Point(0, 213);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(293, 149);
-            this.panel3.TabIndex = 3;
+            panel3.Controls.Add(buttonCategory);
+            panel3.Location = new Point(0, 128);
+            panel3.Margin = new Padding(2, 2, 2, 2);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(205, 89);
+            panel3.TabIndex = 3;
             // 
             // buttonCategory
             // 
-            this.buttonCategory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
-            this.buttonCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCategory.Font = new System.Drawing.Font("Segoe UI", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.buttonCategory.ForeColor = System.Drawing.Color.White;
-            this.buttonCategory.Location = new System.Drawing.Point(-34, -18);
-            this.buttonCategory.Name = "buttonCategory";
-            this.buttonCategory.Size = new System.Drawing.Size(362, 184);
-            this.buttonCategory.TabIndex = 1;
-            this.buttonCategory.Text = "New Category";
-            this.buttonCategory.UseVisualStyleBackColor = false;
-            this.buttonCategory.Click += new System.EventHandler(this.buttonCategory_Click);
+            buttonCategory.BackColor = Color.FromArgb(46, 52, 63);
+            buttonCategory.FlatStyle = FlatStyle.Flat;
+            buttonCategory.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            buttonCategory.ForeColor = Color.White;
+            buttonCategory.Location = new Point(-10, -11);
+            buttonCategory.Margin = new Padding(2, 2, 2, 2);
+            buttonCategory.Name = "buttonCategory";
+            buttonCategory.Size = new Size(171, 110);
+            buttonCategory.TabIndex = 1;
+            buttonCategory.Text = "New Category";
+            buttonCategory.UseVisualStyleBackColor = false;
+            buttonCategory.Click += buttonCategory_Click;
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.buttonDepartment);
-            this.panel5.Location = new System.Drawing.Point(0, 385);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(293, 149);
-            this.panel5.TabIndex = 4;
+            panel5.Controls.Add(buttonDepartment);
+            panel5.Location = new Point(0, 231);
+            panel5.Margin = new Padding(2, 2, 2, 2);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(205, 89);
+            panel5.TabIndex = 4;
             // 
             // buttonDepartment
             // 
-            this.buttonDepartment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
-            this.buttonDepartment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDepartment.Font = new System.Drawing.Font("Segoe UI", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.buttonDepartment.ForeColor = System.Drawing.Color.White;
-            this.buttonDepartment.Location = new System.Drawing.Point(-34, -18);
-            this.buttonDepartment.Name = "buttonDepartment";
-            this.buttonDepartment.Size = new System.Drawing.Size(362, 184);
-            this.buttonDepartment.TabIndex = 1;
-            this.buttonDepartment.Text = "New Department";
-            this.buttonDepartment.UseVisualStyleBackColor = false;
-            this.buttonDepartment.Click += new System.EventHandler(this.buttonDepartment_Click);
+            buttonDepartment.BackColor = Color.FromArgb(46, 52, 63);
+            buttonDepartment.FlatStyle = FlatStyle.Flat;
+            buttonDepartment.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            buttonDepartment.ForeColor = Color.White;
+            buttonDepartment.Location = new Point(-10, -10);
+            buttonDepartment.Margin = new Padding(2, 2, 2, 2);
+            buttonDepartment.Name = "buttonDepartment";
+            buttonDepartment.Size = new Size(171, 110);
+            buttonDepartment.TabIndex = 1;
+            buttonDepartment.Text = "New Department";
+            buttonDepartment.UseVisualStyleBackColor = false;
+            buttonDepartment.Click += buttonDepartment_Click;
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.Location = new System.Drawing.Point(400, 612);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(252, 62);
-            this.buttonCancel.TabIndex = 2;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            buttonCancel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            buttonCancel.Location = new Point(230, 400);
+            buttonCancel.Margin = new Padding(2, 2, 2, 2);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new Size(200, 32);
+            buttonCancel.TabIndex = 2;
+            buttonCancel.Text = "Cancel";
+            buttonCancel.UseVisualStyleBackColor = true;
+            buttonCancel.Click += buttonCancel_Click;
             // 
             // CreateForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(778, 744);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.panel1);
-            this.IsMdiContainer = true;
-            this.MinimumSize = new System.Drawing.Size(800, 800);
-            this.Name = "CreateForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CreateForm";
-            this.Load += new System.EventHandler(this.CreateForm_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(500, 450);
+            Controls.Add(buttonCancel);
+            Controls.Add(panel1);
+            FormBorderStyle = FormBorderStyle.None;
+            IsMdiContainer = true;
+            Margin = new Padding(2, 2, 2, 2);
+            MinimumSize = new Size(500, 450);
+            Name = "CreateForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "CreateForm";
+            Load += CreateForm_Load;
+            panel1.ResumeLayout(false);
+            panel4.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            panel5.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion

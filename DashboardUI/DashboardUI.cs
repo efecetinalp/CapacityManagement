@@ -51,13 +51,12 @@ namespace DashboardUI
         {
             //Delete later
             //Start with datagrid form
-            //MoveSlideBar(panelDataGrid);
-            //dataGridForm = new(projectManager, departmentManager, managementManager, categoryManager, departmentCapacityManager, projectCapacityManager);
-            //dataGridForm.FormClosed += DataGridForm_FormClosed;
-            //dataGridForm.MdiParent = this;
-            //dataGridForm.Dock = DockStyle.Fill;
-            //dataGridForm.Show();
-            this.Shown += buttonDataGrid_Click;
+            MoveSlideBar(panelDataGrid);
+            dataGridForm = new(projectManager, departmentManager, managementManager, categoryManager, departmentCapacityManager, projectCapacityManager);
+            dataGridForm.FormClosed += DataGridForm_FormClosed;
+            dataGridForm.MdiParent = this;
+            dataGridForm.Dock = DockStyle.Fill;
+            dataGridForm.Show();
         }
 
         //MENU OPERATIONS
@@ -109,7 +108,7 @@ namespace DashboardUI
                     {
                         foreach (Control control in dataGridForm.Controls)
                         {
-                            if (control.Name == "btnEdit")
+                            if (control.Name == "btnEdit" || control.Name == "buttonNew")
                             {
                                 control.Enabled = true;
                             }
@@ -150,7 +149,6 @@ namespace DashboardUI
 
         private void buttonUser_Click(object sender, EventArgs e)
         {
-            MoveSlideBar(panelAdmin);
 
             if (loginForm == null)
             {
@@ -165,7 +163,15 @@ namespace DashboardUI
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             activeUser = loginForm.currentUser;
+            buttonUser.Visible = false;
+            labelActiveUser.Text = labelActiveUser.Text.Replace("test", activeUser.UserName.ToUpper());
+            labelActiveUser.Visible = true;
             loginForm = null;
+        }
+
+        private void buttonAdmin_Click(object sender, EventArgs e)
+        {
+            MoveSlideBar(panelAdmin);
         }
     }
 }

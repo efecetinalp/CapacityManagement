@@ -47,54 +47,58 @@
             label4 = new Label();
             label5 = new Label();
             buttonNew = new Button();
+            buttonRefresh = new Button();
             ((System.ComponentModel.ISupportInitialize)dbGrid).BeginInit();
             SuspendLayout();
             // 
             // btnEdit
             // 
             btnEdit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnEdit.BackColor = Color.FromArgb(46, 52, 63);
+            btnEdit.BackColor = Color.Transparent;
+            btnEdit.Cursor = Cursors.Hand;
             btnEdit.Enabled = false;
+            btnEdit.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
             btnEdit.FlatStyle = FlatStyle.Flat;
             btnEdit.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             btnEdit.ForeColor = Color.White;
             btnEdit.Image = (Image)resources.GetObject("btnEdit.Image");
-            btnEdit.ImageAlign = ContentAlignment.MiddleLeft;
-            btnEdit.Location = new Point(1144, 79);
+            btnEdit.Location = new Point(1226, 59);
             btnEdit.Margin = new Padding(2);
             btnEdit.Name = "btnEdit";
-            btnEdit.Padding = new Padding(7, 0, 0, 0);
-            btnEdit.Size = new Size(113, 38);
+            btnEdit.Size = new Size(32, 32);
             btnEdit.TabIndex = 26;
-            btnEdit.Text = "Edit";
             btnEdit.UseVisualStyleBackColor = false;
             btnEdit.Click += btnEdit_Click;
             // 
             // buttonReset
             // 
-            buttonReset.BackColor = SystemColors.HighlightText;
+            buttonReset.BackColor = Color.Transparent;
+            buttonReset.Cursor = Cursors.Hand;
+            buttonReset.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
             buttonReset.FlatStyle = FlatStyle.Flat;
             buttonReset.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonReset.Location = new Point(607, 47);
+            buttonReset.Image = (Image)resources.GetObject("buttonReset.Image");
+            buttonReset.Location = new Point(770, 60);
             buttonReset.Margin = new Padding(2);
             buttonReset.Name = "buttonReset";
-            buttonReset.Size = new Size(108, 25);
+            buttonReset.Size = new Size(32, 32);
             buttonReset.TabIndex = 25;
-            buttonReset.Text = "Reset";
             buttonReset.UseVisualStyleBackColor = false;
             buttonReset.Click += buttonReset_Click;
             // 
             // buttonList
             // 
-            buttonList.BackColor = SystemColors.HighlightText;
+            buttonList.BackColor = Color.Transparent;
+            buttonList.Cursor = Cursors.Hand;
+            buttonList.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
             buttonList.FlatStyle = FlatStyle.Flat;
             buttonList.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonList.Location = new Point(607, 93);
+            buttonList.Image = (Image)resources.GetObject("buttonList.Image");
+            buttonList.Location = new Point(698, 59);
             buttonList.Margin = new Padding(2);
             buttonList.Name = "buttonList";
-            buttonList.Size = new Size(108, 25);
+            buttonList.Size = new Size(32, 32);
             buttonList.TabIndex = 24;
-            buttonList.Text = "List";
             buttonList.UseVisualStyleBackColor = false;
             buttonList.Click += buttonList_Click;
             // 
@@ -103,7 +107,7 @@
             dateTimePickerEnd.CustomFormat = "MMM-yy";
             dateTimePickerEnd.Format = DateTimePickerFormat.Custom;
             dateTimePickerEnd.ImeMode = ImeMode.NoControl;
-            dateTimePickerEnd.Location = new Point(460, 93);
+            dateTimePickerEnd.Location = new Point(574, 68);
             dateTimePickerEnd.Margin = new Padding(2);
             dateTimePickerEnd.Name = "dateTimePickerEnd";
             dateTimePickerEnd.Size = new Size(106, 23);
@@ -112,28 +116,28 @@
             // comboBoxCategory
             // 
             comboBoxCategory.FormattingEnabled = true;
-            comboBoxCategory.Location = new Point(284, 94);
+            comboBoxCategory.Location = new Point(353, 68);
             comboBoxCategory.Margin = new Padding(2);
             comboBoxCategory.Name = "comboBoxCategory";
-            comboBoxCategory.Size = new Size(147, 23);
+            comboBoxCategory.Size = new Size(77, 23);
             comboBoxCategory.TabIndex = 22;
             // 
             // comboBoxDepartment
             // 
             comboBoxDepartment.FormattingEnabled = true;
-            comboBoxDepartment.Location = new Point(21, 94);
+            comboBoxDepartment.Location = new Point(188, 68);
             comboBoxDepartment.Margin = new Padding(2);
             comboBoxDepartment.Name = "comboBoxDepartment";
-            comboBoxDepartment.Size = new Size(236, 23);
+            comboBoxDepartment.Size = new Size(150, 23);
             comboBoxDepartment.TabIndex = 21;
             // 
             // comboBoxManagement
             // 
             comboBoxManagement.FormattingEnabled = true;
-            comboBoxManagement.Location = new Point(21, 45);
+            comboBoxManagement.Location = new Point(21, 68);
             comboBoxManagement.Margin = new Padding(2);
             comboBoxManagement.Name = "comboBoxManagement";
-            comboBoxManagement.Size = new Size(236, 23);
+            comboBoxManagement.Size = new Size(150, 23);
             comboBoxManagement.TabIndex = 20;
             comboBoxManagement.SelectedIndexChanged += comboBoxManagement_SelectedIndexChanged;
             // 
@@ -142,7 +146,7 @@
             dateTimePickerStart.CustomFormat = "MMM-yy";
             dateTimePickerStart.Format = DateTimePickerFormat.Custom;
             dateTimePickerStart.ImeMode = ImeMode.NoControl;
-            dateTimePickerStart.Location = new Point(460, 45);
+            dateTimePickerStart.Location = new Point(448, 68);
             dateTimePickerStart.Margin = new Padding(2);
             dateTimePickerStart.Name = "dateTimePickerStart";
             dateTimePickerStart.Size = new Size(106, 23);
@@ -176,7 +180,7 @@
             dbGrid.DefaultCellStyle = dataGridViewCellStyle2;
             dbGrid.EnableHeadersVisualStyles = false;
             dbGrid.GridColor = SystemColors.ActiveCaption;
-            dbGrid.Location = new Point(21, 146);
+            dbGrid.Location = new Point(21, 105);
             dbGrid.Margin = new Padding(2);
             dbGrid.Name = "dbGrid";
             dbGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
@@ -190,7 +194,7 @@
             dbGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             dbGrid.RowHeadersWidth = 62;
             dbGrid.RowTemplate.Height = 33;
-            dbGrid.Size = new Size(1236, 491);
+            dbGrid.Size = new Size(1236, 532);
             dbGrid.TabIndex = 17;
             dbGrid.CellBeginEdit += dbGrid_CellBeginEdit;
             dbGrid.CellContentClick += dbGrid_CellContentClick;
@@ -200,8 +204,8 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label1.Location = new Point(21, 26);
+            label1.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label1.Location = new Point(21, 49);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(86, 17);
@@ -211,30 +215,30 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label2.Location = new Point(21, 75);
+            label2.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label2.Location = new Point(188, 49);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(84, 19);
+            label2.Size = new Size(80, 17);
             label2.TabIndex = 28;
             label2.Text = "Department";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label3.Location = new Point(284, 75);
+            label3.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label3.Location = new Point(353, 49);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(57, 15);
+            label3.Size = new Size(61, 17);
             label3.TabIndex = 29;
             label3.Text = "Category";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label4.Location = new Point(460, 26);
+            label4.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label4.Location = new Point(446, 49);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
             label4.Size = new Size(70, 17);
@@ -244,8 +248,8 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label5.Location = new Point(460, 74);
+            label5.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label5.Location = new Point(571, 50);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
             label5.Size = new Size(63, 17);
@@ -255,21 +259,36 @@
             // buttonNew
             // 
             buttonNew.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonNew.BackColor = Color.FromArgb(58, 154, 193);
+            buttonNew.BackColor = Color.Transparent;
+            buttonNew.Cursor = Cursors.Hand;
+            buttonNew.Enabled = false;
+            buttonNew.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
             buttonNew.FlatStyle = FlatStyle.Flat;
             buttonNew.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             buttonNew.ForeColor = Color.White;
             buttonNew.Image = (Image)resources.GetObject("buttonNew.Image");
-            buttonNew.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonNew.Location = new Point(1012, 79);
+            buttonNew.Location = new Point(1181, 59);
             buttonNew.Margin = new Padding(2);
             buttonNew.Name = "buttonNew";
-            buttonNew.Padding = new Padding(7, 0, 0, 0);
-            buttonNew.Size = new Size(113, 38);
+            buttonNew.Size = new Size(32, 32);
             buttonNew.TabIndex = 32;
-            buttonNew.Text = "New";
             buttonNew.UseVisualStyleBackColor = false;
             buttonNew.Click += buttonNew_Click;
+            // 
+            // buttonRefresh
+            // 
+            buttonRefresh.BackColor = Color.Transparent;
+            buttonRefresh.Cursor = Cursors.Hand;
+            buttonRefresh.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
+            buttonRefresh.FlatStyle = FlatStyle.Flat;
+            buttonRefresh.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonRefresh.Image = (Image)resources.GetObject("buttonRefresh.Image");
+            buttonRefresh.Location = new Point(734, 60);
+            buttonRefresh.Margin = new Padding(2);
+            buttonRefresh.Name = "buttonRefresh";
+            buttonRefresh.Size = new Size(32, 32);
+            buttonRefresh.TabIndex = 33;
+            buttonRefresh.UseVisualStyleBackColor = false;
             // 
             // DataGridForm
             // 
@@ -277,6 +296,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(242, 242, 242);
             ClientSize = new Size(1280, 660);
+            Controls.Add(buttonRefresh);
             Controls.Add(buttonNew);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -319,5 +339,6 @@
         private Label label4;
         private Label label5;
         private Button buttonNew;
+        private Button buttonRefresh;
     }
 }

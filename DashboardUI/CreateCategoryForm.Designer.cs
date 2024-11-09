@@ -28,71 +28,76 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBoxCategory = new System.Windows.Forms.TextBox();
-            this.buttonCreate = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            label3 = new Label();
+            textBoxCategory = new TextBox();
+            buttonCreate = new Button();
+            label2 = new Label();
+            SuspendLayout();
             // 
             // label3
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(55, 169);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(136, 25);
-            this.label3.TabIndex = 43;
-            this.label3.Text = "Category Name";
+            label3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label3.Location = new Point(38, 92);
+            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(93, 15);
+            label3.TabIndex = 43;
+            label3.Text = "Category Name";
             // 
             // textBoxCategory
             // 
-            this.textBoxCategory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCategory.Location = new System.Drawing.Point(51, 197);
-            this.textBoxCategory.Name = "textBoxCategory";
-            this.textBoxCategory.Size = new System.Drawing.Size(396, 31);
-            this.textBoxCategory.TabIndex = 42;
+            textBoxCategory.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            textBoxCategory.Location = new Point(40, 110);
+            textBoxCategory.Margin = new Padding(2);
+            textBoxCategory.Name = "textBoxCategory";
+            textBoxCategory.Size = new Size(260, 23);
+            textBoxCategory.TabIndex = 42;
             // 
             // buttonCreate
             // 
-            this.buttonCreate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCreate.Location = new System.Drawing.Point(51, 281);
-            this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(396, 41);
-            this.buttonCreate.TabIndex = 41;
-            this.buttonCreate.Text = "Create";
-            this.buttonCreate.UseVisualStyleBackColor = true;
-            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
+            buttonCreate.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            buttonCreate.BackColor = Color.FromArgb(58, 154, 193);
+            buttonCreate.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
+            buttonCreate.FlatStyle = FlatStyle.Flat;
+            buttonCreate.ForeColor = SystemColors.ButtonHighlight;
+            buttonCreate.Location = new Point(70, 350);
+            buttonCreate.Margin = new Padding(2);
+            buttonCreate.Name = "buttonCreate";
+            buttonCreate.Size = new Size(200, 32);
+            buttonCreate.TabIndex = 41;
+            buttonCreate.Text = "Create Category";
+            buttonCreate.UseVisualStyleBackColor = false;
+            buttonCreate.Click += buttonCreate_Click;
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(166, 112);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(150, 25);
-            this.label2.TabIndex = 40;
-            this.label2.Text = "Create Category";
+            label2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(126, 50);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(81, 19);
+            label2.TabIndex = 40;
+            label2.Text = "CATEGORY";
             // 
             // CreateCategoryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(520, 800);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBoxCategory);
-            this.Controls.Add(this.buttonCreate);
-            this.Controls.Add(this.label2);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "CreateCategoryForm";
-            this.Text = "CreateCategoryForm";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(340, 450);
+            Controls.Add(label3);
+            Controls.Add(textBoxCategory);
+            Controls.Add(buttonCreate);
+            Controls.Add(label2);
+            FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(2);
+            Name = "CreateCategoryForm";
+            Text = "CreateCategoryForm";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

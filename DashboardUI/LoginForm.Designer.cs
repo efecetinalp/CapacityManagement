@@ -38,70 +38,86 @@
             // 
             // textBoxUserName
             // 
-            textBoxUserName.Location = new Point(41, 44);
+            textBoxUserName.BackColor = Color.FromArgb(46, 52, 63);
+            textBoxUserName.BorderStyle = BorderStyle.FixedSingle;
+            textBoxUserName.ForeColor = SystemColors.Window;
+            textBoxUserName.Location = new Point(41, 52);
             textBoxUserName.Name = "textBoxUserName";
-            textBoxUserName.Size = new Size(326, 23);
+            textBoxUserName.Size = new Size(175, 23);
             textBoxUserName.TabIndex = 0;
+            textBoxUserName.TextAlign = HorizontalAlignment.Center;
             // 
             // textBoxPassword
             // 
-            textBoxPassword.Location = new Point(41, 102);
+            textBoxPassword.BackColor = Color.FromArgb(46, 52, 63);
+            textBoxPassword.BorderStyle = BorderStyle.FixedSingle;
+            textBoxPassword.ForeColor = SystemColors.Window;
+            textBoxPassword.Location = new Point(41, 110);
             textBoxPassword.Name = "textBoxPassword";
-            textBoxPassword.Size = new Size(326, 23);
+            textBoxPassword.Size = new Size(175, 23);
             textBoxPassword.TabIndex = 1;
+            textBoxPassword.TextAlign = HorizontalAlignment.Center;
             textBoxPassword.UseSystemPasswordChar = true;
             // 
             // labelUserName
             // 
             labelUserName.AutoSize = true;
-            labelUserName.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            labelUserName.Location = new Point(41, 24);
+            labelUserName.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelUserName.ForeColor = SystemColors.Window;
+            labelUserName.Location = new Point(41, 32);
             labelUserName.Margin = new Padding(2, 0, 2, 0);
             labelUserName.Name = "labelUserName";
-            labelUserName.Size = new Size(73, 17);
+            labelUserName.Size = new Size(67, 15);
             labelUserName.TabIndex = 28;
             labelUserName.Text = "User Name";
             // 
             // labelPassword
             // 
             labelPassword.AutoSize = true;
-            labelPassword.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            labelPassword.Location = new Point(41, 82);
+            labelPassword.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelPassword.ForeColor = SystemColors.Window;
+            labelPassword.Location = new Point(41, 90);
             labelPassword.Margin = new Padding(2, 0, 2, 0);
             labelPassword.Name = "labelPassword";
-            labelPassword.Size = new Size(62, 17);
+            labelPassword.Size = new Size(59, 15);
             labelPassword.TabIndex = 29;
             labelPassword.Text = "Password";
             // 
             // buttonLogin
             // 
-            buttonLogin.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            buttonLogin.Location = new Point(41, 148);
+            buttonLogin.BackColor = Color.FromArgb(58, 154, 193);
+            buttonLogin.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
+            buttonLogin.FlatStyle = FlatStyle.Flat;
+            buttonLogin.ForeColor = SystemColors.ButtonHighlight;
+            buttonLogin.Location = new Point(41, 170);
             buttonLogin.Margin = new Padding(2);
             buttonLogin.Name = "buttonLogin";
-            buttonLogin.Size = new Size(143, 29);
+            buttonLogin.Size = new Size(88, 29);
             buttonLogin.TabIndex = 30;
             buttonLogin.Text = "Log In";
-            buttonLogin.UseVisualStyleBackColor = true;
+            buttonLogin.UseVisualStyleBackColor = false;
             buttonLogin.Click += buttonLogin_Click;
             // 
             // buttonCancel
             // 
-            buttonCancel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            buttonCancel.Location = new Point(224, 148);
+            buttonCancel.BackColor = Color.Silver;
+            buttonCancel.FlatStyle = FlatStyle.Flat;
+            buttonCancel.ForeColor = SystemColors.ActiveCaptionText;
+            buttonCancel.Location = new Point(147, 170);
             buttonCancel.Margin = new Padding(2);
             buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(143, 29);
+            buttonCancel.Size = new Size(69, 29);
             buttonCancel.TabIndex = 31;
             buttonCancel.Text = "Cancel";
-            buttonCancel.UseVisualStyleBackColor = true;
+            buttonCancel.UseVisualStyleBackColor = false;
             buttonCancel.Click += buttonCancel_Click;
             // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(412, 202);
+            BackColor = Color.FromArgb(46, 52, 63);
+            ClientSize = new Size(266, 227);
             Controls.Add(buttonCancel);
             Controls.Add(buttonLogin);
             Controls.Add(labelPassword);
