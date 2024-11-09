@@ -29,263 +29,277 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataGridForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.buttonReset = new System.Windows.Forms.Button();
-            this.buttonList = new System.Windows.Forms.Button();
-            this.dateTimePickerEnd = new System.Windows.Forms.DateTimePicker();
-            this.comboBoxCategory = new System.Windows.Forms.ComboBox();
-            this.comboBoxDepartment = new System.Windows.Forms.ComboBox();
-            this.comboBoxManagement = new System.Windows.Forms.ComboBox();
-            this.dateTimePickerStart = new System.Windows.Forms.DateTimePicker();
-            this.dbGrid = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.buttonNew = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dbGrid)).BeginInit();
-            this.SuspendLayout();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            btnEdit = new Button();
+            buttonReset = new Button();
+            buttonList = new Button();
+            dateTimePickerEnd = new DateTimePicker();
+            comboBoxCategory = new ComboBox();
+            comboBoxDepartment = new ComboBox();
+            comboBoxManagement = new ComboBox();
+            dateTimePickerStart = new DateTimePicker();
+            dbGrid = new DataGridView();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
+            buttonNew = new Button();
+            ((System.ComponentModel.ISupportInitialize)dbGrid).BeginInit();
+            SuspendLayout();
             // 
             // btnEdit
             // 
-            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEdit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
-            this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEdit.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnEdit.ForeColor = System.Drawing.Color.White;
-            this.btnEdit.Image = ((System.Drawing.Image)(resources.GetObject("btnEdit.Image")));
-            this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEdit.Location = new System.Drawing.Point(1634, 132);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btnEdit.Size = new System.Drawing.Size(161, 63);
-            this.btnEdit.TabIndex = 26;
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.UseVisualStyleBackColor = false;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            btnEdit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnEdit.BackColor = Color.FromArgb(46, 52, 63);
+            btnEdit.Enabled = false;
+            btnEdit.FlatStyle = FlatStyle.Flat;
+            btnEdit.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnEdit.ForeColor = Color.White;
+            btnEdit.Image = (Image)resources.GetObject("btnEdit.Image");
+            btnEdit.ImageAlign = ContentAlignment.MiddleLeft;
+            btnEdit.Location = new Point(1144, 79);
+            btnEdit.Margin = new Padding(2);
+            btnEdit.Name = "btnEdit";
+            btnEdit.Padding = new Padding(7, 0, 0, 0);
+            btnEdit.Size = new Size(113, 38);
+            btnEdit.TabIndex = 26;
+            btnEdit.Text = "Edit";
+            btnEdit.UseVisualStyleBackColor = false;
+            btnEdit.Click += btnEdit_Click;
             // 
             // buttonReset
             // 
-            this.buttonReset.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.buttonReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonReset.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonReset.Location = new System.Drawing.Point(867, 78);
-            this.buttonReset.Name = "buttonReset";
-            this.buttonReset.Size = new System.Drawing.Size(154, 42);
-            this.buttonReset.TabIndex = 25;
-            this.buttonReset.Text = "Reset";
-            this.buttonReset.UseVisualStyleBackColor = false;
-            this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
+            buttonReset.BackColor = SystemColors.HighlightText;
+            buttonReset.FlatStyle = FlatStyle.Flat;
+            buttonReset.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonReset.Location = new Point(607, 47);
+            buttonReset.Margin = new Padding(2);
+            buttonReset.Name = "buttonReset";
+            buttonReset.Size = new Size(108, 25);
+            buttonReset.TabIndex = 25;
+            buttonReset.Text = "Reset";
+            buttonReset.UseVisualStyleBackColor = false;
+            buttonReset.Click += buttonReset_Click;
             // 
             // buttonList
             // 
-            this.buttonList.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.buttonList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonList.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonList.Location = new System.Drawing.Point(867, 155);
-            this.buttonList.Name = "buttonList";
-            this.buttonList.Size = new System.Drawing.Size(154, 42);
-            this.buttonList.TabIndex = 24;
-            this.buttonList.Text = "List";
-            this.buttonList.UseVisualStyleBackColor = false;
-            this.buttonList.Click += new System.EventHandler(this.buttonList_Click);
+            buttonList.BackColor = SystemColors.HighlightText;
+            buttonList.FlatStyle = FlatStyle.Flat;
+            buttonList.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonList.Location = new Point(607, 93);
+            buttonList.Margin = new Padding(2);
+            buttonList.Name = "buttonList";
+            buttonList.Size = new Size(108, 25);
+            buttonList.TabIndex = 24;
+            buttonList.Text = "List";
+            buttonList.UseVisualStyleBackColor = false;
+            buttonList.Click += buttonList_Click;
             // 
             // dateTimePickerEnd
             // 
-            this.dateTimePickerEnd.CustomFormat = "MMM-yy";
-            this.dateTimePickerEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerEnd.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dateTimePickerEnd.Location = new System.Drawing.Point(657, 155);
-            this.dateTimePickerEnd.Name = "dateTimePickerEnd";
-            this.dateTimePickerEnd.Size = new System.Drawing.Size(134, 31);
-            this.dateTimePickerEnd.TabIndex = 23;
+            dateTimePickerEnd.CustomFormat = "MMM-yy";
+            dateTimePickerEnd.Format = DateTimePickerFormat.Custom;
+            dateTimePickerEnd.ImeMode = ImeMode.NoControl;
+            dateTimePickerEnd.Location = new Point(460, 93);
+            dateTimePickerEnd.Margin = new Padding(2);
+            dateTimePickerEnd.Name = "dateTimePickerEnd";
+            dateTimePickerEnd.Size = new Size(106, 23);
+            dateTimePickerEnd.TabIndex = 23;
             // 
             // comboBoxCategory
             // 
-            this.comboBoxCategory.FormattingEnabled = true;
-            this.comboBoxCategory.Location = new System.Drawing.Point(406, 157);
-            this.comboBoxCategory.Name = "comboBoxCategory";
-            this.comboBoxCategory.Size = new System.Drawing.Size(208, 33);
-            this.comboBoxCategory.TabIndex = 22;
+            comboBoxCategory.FormattingEnabled = true;
+            comboBoxCategory.Location = new Point(284, 94);
+            comboBoxCategory.Margin = new Padding(2);
+            comboBoxCategory.Name = "comboBoxCategory";
+            comboBoxCategory.Size = new Size(147, 23);
+            comboBoxCategory.TabIndex = 22;
             // 
             // comboBoxDepartment
             // 
-            this.comboBoxDepartment.FormattingEnabled = true;
-            this.comboBoxDepartment.Location = new System.Drawing.Point(30, 157);
-            this.comboBoxDepartment.Name = "comboBoxDepartment";
-            this.comboBoxDepartment.Size = new System.Drawing.Size(335, 33);
-            this.comboBoxDepartment.TabIndex = 21;
+            comboBoxDepartment.FormattingEnabled = true;
+            comboBoxDepartment.Location = new Point(21, 94);
+            comboBoxDepartment.Margin = new Padding(2);
+            comboBoxDepartment.Name = "comboBoxDepartment";
+            comboBoxDepartment.Size = new Size(236, 23);
+            comboBoxDepartment.TabIndex = 21;
             // 
             // comboBoxManagement
             // 
-            this.comboBoxManagement.FormattingEnabled = true;
-            this.comboBoxManagement.Location = new System.Drawing.Point(30, 75);
-            this.comboBoxManagement.Name = "comboBoxManagement";
-            this.comboBoxManagement.Size = new System.Drawing.Size(335, 33);
-            this.comboBoxManagement.TabIndex = 20;
-            this.comboBoxManagement.SelectedIndexChanged += new System.EventHandler(this.comboBoxManagement_SelectedIndexChanged);
+            comboBoxManagement.FormattingEnabled = true;
+            comboBoxManagement.Location = new Point(21, 45);
+            comboBoxManagement.Margin = new Padding(2);
+            comboBoxManagement.Name = "comboBoxManagement";
+            comboBoxManagement.Size = new Size(236, 23);
+            comboBoxManagement.TabIndex = 20;
+            comboBoxManagement.SelectedIndexChanged += comboBoxManagement_SelectedIndexChanged;
             // 
             // dateTimePickerStart
             // 
-            this.dateTimePickerStart.CustomFormat = "MMM-yy";
-            this.dateTimePickerStart.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerStart.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dateTimePickerStart.Location = new System.Drawing.Point(657, 75);
-            this.dateTimePickerStart.Name = "dateTimePickerStart";
-            this.dateTimePickerStart.Size = new System.Drawing.Size(134, 31);
-            this.dateTimePickerStart.TabIndex = 19;
+            dateTimePickerStart.CustomFormat = "MMM-yy";
+            dateTimePickerStart.Format = DateTimePickerFormat.Custom;
+            dateTimePickerStart.ImeMode = ImeMode.NoControl;
+            dateTimePickerStart.Location = new Point(460, 45);
+            dateTimePickerStart.Margin = new Padding(2);
+            dateTimePickerStart.Name = "dateTimePickerStart";
+            dateTimePickerStart.Size = new Size(106, 23);
+            dateTimePickerStart.TabIndex = 19;
             // 
             // dbGrid
             // 
-            this.dbGrid.AllowDrop = true;
-            this.dbGrid.AllowUserToAddRows = false;
-            this.dbGrid.AllowUserToDeleteRows = false;
-            this.dbGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dbGrid.BackgroundColor = System.Drawing.Color.White;
-            this.dbGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dbGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(183)))), ((int)(((byte)(213)))));
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dbGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dbGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(183)))), ((int)(((byte)(213)))));
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dbGrid.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dbGrid.EnableHeadersVisualStyles = false;
-            this.dbGrid.GridColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dbGrid.Location = new System.Drawing.Point(30, 225);
-            this.dbGrid.Name = "dbGrid";
-            this.dbGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(52)))), ((int)(((byte)(63)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(183)))), ((int)(((byte)(213)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dbGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dbGrid.RowHeadersWidth = 62;
-            this.dbGrid.RowTemplate.Height = 33;
-            this.dbGrid.Size = new System.Drawing.Size(1766, 938);
-            this.dbGrid.TabIndex = 17;
-            this.dbGrid.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dbGrid_CellBeginEdit);
-            this.dbGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dbGrid_CellContentClick);
-            this.dbGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dbGrid_CellEndEdit);
-            this.dbGrid.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dbGrid_ColumnAdded);
+            dbGrid.AllowDrop = true;
+            dbGrid.AllowUserToAddRows = false;
+            dbGrid.AllowUserToDeleteRows = false;
+            dbGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dbGrid.BackgroundColor = Color.White;
+            dbGrid.BorderStyle = BorderStyle.None;
+            dbGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(46, 52, 63);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(88, 183, 213);
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dbGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dbGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(88, 183, 213);
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dbGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            dbGrid.EnableHeadersVisualStyles = false;
+            dbGrid.GridColor = SystemColors.ActiveCaption;
+            dbGrid.Location = new Point(21, 146);
+            dbGrid.Margin = new Padding(2);
+            dbGrid.Name = "dbGrid";
+            dbGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(46, 52, 63);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(88, 183, 213);
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dbGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dbGrid.RowHeadersWidth = 62;
+            dbGrid.RowTemplate.Height = 33;
+            dbGrid.Size = new Size(1236, 491);
+            dbGrid.TabIndex = 17;
+            dbGrid.CellBeginEdit += dbGrid_CellBeginEdit;
+            dbGrid.CellContentClick += dbGrid_CellContentClick;
+            dbGrid.CellEndEdit += dbGrid_CellEndEdit;
+            dbGrid.ColumnAdded += dbGrid_ColumnAdded;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(30, 43);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(131, 28);
-            this.label1.TabIndex = 27;
-            this.label1.Text = "Management";
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label1.Location = new Point(21, 26);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(86, 17);
+            label1.TabIndex = 27;
+            label1.Text = "Management";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(30, 125);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(121, 28);
-            this.label2.TabIndex = 28;
-            this.label2.Text = "Department";
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label2.Location = new Point(21, 75);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(84, 19);
+            label2.TabIndex = 28;
+            label2.Text = "Department";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(406, 125);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(93, 28);
-            this.label3.TabIndex = 29;
-            this.label3.Text = "Category";
+            label3.AutoSize = true;
+            label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label3.Location = new Point(284, 75);
+            label3.Margin = new Padding(2, 0, 2, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(57, 15);
+            label3.TabIndex = 29;
+            label3.Text = "Category";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(657, 43);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(103, 28);
-            this.label4.TabIndex = 30;
-            this.label4.Text = "Start Date";
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label4.Location = new Point(460, 26);
+            label4.Margin = new Padding(2, 0, 2, 0);
+            label4.Name = "label4";
+            label4.Size = new Size(70, 17);
+            label4.TabIndex = 30;
+            label4.Text = "Start Date";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(657, 123);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(93, 28);
-            this.label5.TabIndex = 31;
-            this.label5.Text = "End Date";
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label5.Location = new Point(460, 74);
+            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(63, 17);
+            label5.TabIndex = 31;
+            label5.Text = "End Date";
             // 
             // buttonNew
             // 
-            this.buttonNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(58)))), ((int)(((byte)(154)))), ((int)(((byte)(193)))));
-            this.buttonNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonNew.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonNew.ForeColor = System.Drawing.Color.White;
-            this.buttonNew.Image = ((System.Drawing.Image)(resources.GetObject("buttonNew.Image")));
-            this.buttonNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonNew.Location = new System.Drawing.Point(1446, 132);
-            this.buttonNew.Name = "buttonNew";
-            this.buttonNew.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.buttonNew.Size = new System.Drawing.Size(161, 63);
-            this.buttonNew.TabIndex = 32;
-            this.buttonNew.Text = "New";
-            this.buttonNew.UseVisualStyleBackColor = false;
-            this.buttonNew.Click += new System.EventHandler(this.buttonNew_Click);
+            buttonNew.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonNew.BackColor = Color.FromArgb(58, 154, 193);
+            buttonNew.FlatStyle = FlatStyle.Flat;
+            buttonNew.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonNew.ForeColor = Color.White;
+            buttonNew.Image = (Image)resources.GetObject("buttonNew.Image");
+            buttonNew.ImageAlign = ContentAlignment.MiddleLeft;
+            buttonNew.Location = new Point(1012, 79);
+            buttonNew.Margin = new Padding(2);
+            buttonNew.Name = "buttonNew";
+            buttonNew.Padding = new Padding(7, 0, 0, 0);
+            buttonNew.Size = new Size(113, 38);
+            buttonNew.TabIndex = 32;
+            buttonNew.Text = "New";
+            buttonNew.UseVisualStyleBackColor = false;
+            buttonNew.Click += buttonNew_Click;
             // 
             // DataGridForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.ClientSize = new System.Drawing.Size(1829, 1200);
-            this.Controls.Add(this.buttonNew);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBoxManagement);
-            this.Controls.Add(this.comboBoxDepartment);
-            this.Controls.Add(this.dateTimePickerStart);
-            this.Controls.Add(this.btnEdit);
-            this.Controls.Add(this.comboBoxCategory);
-            this.Controls.Add(this.dateTimePickerEnd);
-            this.Controls.Add(this.buttonList);
-            this.Controls.Add(this.dbGrid);
-            this.Controls.Add(this.buttonReset);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "DataGridForm";
-            this.Text = "DataGridForm";
-            this.Load += new System.EventHandler(this.DataGridForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dbGrid)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(242, 242, 242);
+            ClientSize = new Size(1280, 660);
+            Controls.Add(buttonNew);
+            Controls.Add(label5);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(comboBoxManagement);
+            Controls.Add(comboBoxDepartment);
+            Controls.Add(dateTimePickerStart);
+            Controls.Add(btnEdit);
+            Controls.Add(comboBoxCategory);
+            Controls.Add(dateTimePickerEnd);
+            Controls.Add(buttonList);
+            Controls.Add(dbGrid);
+            Controls.Add(buttonReset);
+            FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(2);
+            Name = "DataGridForm";
+            Text = "DataGridForm";
+            Load += DataGridForm_Load;
+            ((System.ComponentModel.ISupportInitialize)dbGrid).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

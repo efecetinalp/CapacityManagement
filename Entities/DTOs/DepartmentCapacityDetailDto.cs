@@ -12,7 +12,7 @@ namespace Entities.DTOs
         public int DCapacityId { get; set; }
         public int DepartmentId { get; set; }
         public string DepartmentName { get; set; }
-        public int DTotalCapacity { get; set; }
+        public double DTotalCapacity { get; set; }
         public DateTime Date { get; set; }
     }
 }

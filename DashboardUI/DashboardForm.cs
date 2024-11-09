@@ -16,5 +16,10 @@ namespace DashboardUI
         {
             InitializeComponent();
         }
+
+        private void DashboardForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -13,6 +13,6 @@ namespace DataAccess.Abstract
     public interface IDepartmentCapacityDal : IEntityRepository<DepartmentCapacity>
     {
         List<DepartmentCapacityDetailDto> GetDepartmentCapacityDetails(Expression<Func<DepartmentCapacityDetailDto, bool>> filter = null);
-
+        List<DepartmentCapacityDetailDto> GetDepartmentCapacityDetails();
     }
 }

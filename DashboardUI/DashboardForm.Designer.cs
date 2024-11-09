@@ -28,18 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            SuspendLayout();
             // 
             // DashboardForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1400, 780);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "DashboardForm";
-            this.Text = "DashboardForm";
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(980, 468);
+            FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(2, 2, 2, 2);
+            Name = "DashboardForm";
+            Text = "DashboardForm";
+            Load += DashboardForm_Load;
+            ResumeLayout(false);
         }
 
         #endregion

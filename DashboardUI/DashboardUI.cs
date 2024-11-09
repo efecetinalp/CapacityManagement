@@ -20,6 +20,7 @@ namespace DashboardUI
         DataGridForm dataGridForm;
         DashboardForm dashboardForm;
         ChartForm chartForm;
+        LoginForm loginForm;
 
         //database manager referances
         ManagementManager managementManager;
@@ -28,6 +29,10 @@ namespace DashboardUI
         ProjectManager projectManager;
         ProjectCapacityManager projectCapacityManager;
         DepartmentCapacityManager departmentCapacityManager;
+        UserManager userManager;
+
+        //user credentials
+        User activeUser;
 
         public Dashboard()
         {
@@ -37,6 +42,7 @@ namespace DashboardUI
             projectManager = new ProjectManager(new EfProjectDal());
             projectCapacityManager = new ProjectCapacityManager(new EfProjectCapacityDal());
             departmentCapacityManager = new DepartmentCapacityManager(new EfDepartmentCapacityDal());
+            userManager = new UserManager(new EfUserDal());
 
             InitializeComponent();
         }
@@ -45,12 +51,13 @@ namespace DashboardUI
         {
             //Delete later
             //Start with datagrid form
-            MoveSlideBar(panelDataGrid);
-            dataGridForm = new(projectManager, departmentManager, managementManager, categoryManager, departmentCapacityManager, projectCapacityManager);
-            dataGridForm.FormClosed += DataGridForm_FormClosed;
-            dataGridForm.MdiParent = this;
-            dataGridForm.Dock = DockStyle.Fill;
-            dataGridForm.Show();
+            //MoveSlideBar(panelDataGrid);
+            //dataGridForm = new(projectManager, departmentManager, managementManager, categoryManager, departmentCapacityManager, projectCapacityManager);
+            //dataGridForm.FormClosed += DataGridForm_FormClosed;
+            //dataGridForm.MdiParent = this;
+            //dataGridForm.Dock = DockStyle.Fill;
+            //dataGridForm.Show();
+            this.Shown += buttonDataGrid_Click;
         }
 
         //MENU OPERATIONS
@@ -95,7 +102,22 @@ namespace DashboardUI
                 dataGridForm.Show();
             }
             else
+            {
+                if (activeUser != null)
+                {
+                    if (activeUser.Author || activeUser.Admin)
+                    {
+                        foreach (Control control in dataGridForm.Controls)
+                        {
+                            if (control.Name == "btnEdit")
+                            {
+                                control.Enabled = true;
+                            }
+                        }
+                    }
+                }
                 dataGridForm.Activate();
+            }
         }
 
         private void DataGridForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -126,13 +148,24 @@ namespace DashboardUI
             chartForm = null;
         }
 
-        private void buttonAdmin_Click(object sender, EventArgs e)
+        private void buttonUser_Click(object sender, EventArgs e)
         {
             MoveSlideBar(panelAdmin);
 
-            LoginForm loginForm = new();
-            loginForm.Show();
+            if (loginForm == null)
+            {
+                loginForm = new(userManager);
+                loginForm.FormClosed += LoginForm_FormClosed;
+                loginForm.Show();
+            }
+            else
+                loginForm.Activate();
+        }
 
+        private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            activeUser = loginForm.currentUser;
+            loginForm = null;
         }
     }
 }

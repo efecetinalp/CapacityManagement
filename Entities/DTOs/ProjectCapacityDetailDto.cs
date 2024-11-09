@@ -12,7 +12,7 @@ namespace Entities.DTOs
         public int PCapacityId { get; set; }
         public int ProjectId { get; set; }
         public string ProjectName { get; set; }
-        public int PTotalCapacity { get; set; }
+        public double PTotalCapacity { get; set; }
         public DateTime Date { get; set; }
     }
 }

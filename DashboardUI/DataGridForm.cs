@@ -98,7 +98,7 @@ namespace DashboardUI
         {
             ChartRequest chartRequest = new();
             List<string> legends = new();
-            List<List<int>> series = new();
+            List<List<double>> series = new();
             List<double> months = new();
 
 
@@ -128,10 +128,10 @@ namespace DashboardUI
 
                 //string serieName = "series" + i.ToString();
                 //list of series
-                List<int> templist = new();
+                List<double> templist = new();
                 for (int j = 2; j < dbGrid.Columns.Count; j++)
                 {
-                    templist.Add(Convert.ToInt32(dbGrid.Rows[i].Cells[j].Value));
+                    templist.Add(Convert.ToDouble(dbGrid.Rows[i].Cells[j].Value));
                 }
                 series.Add(templist);
             }
@@ -240,6 +240,7 @@ namespace DashboardUI
         private void DatabaseColumnsTest()
         {
             var listCapacity = projectCapacityManager.GetProjectCapacityDetails().Data;
+            var listDepartmentCapacity = departmentCapacityManager.GetDepartmentCapacityDetails().Data;
 
             int monthCalulate = (dateTimePickerEnd.Value.Year - dateTimePickerStart.Value.Year) * 12
                 + (dateTimePickerEnd.Value.Month - dateTimePickerStart.Value.Month);
@@ -255,9 +256,23 @@ namespace DashboardUI
 
                 tempMonth = dateTimePickerStart.Value.AddMonths(i);
                 column.HeaderCell.Style.BackColor = Color.FromArgb(46, 52, 63);
+                column.Tag = tempMonth;
                 column.HeaderText = tempMonth.ToString("MMM-yy");
                 column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
+                foreach (var departmentItem in listDepartmentCapacity)
+                {
+                    if (departmentItem.Date == tempMonth)
+                    {
+                        for (int k = 0; k < dbGrid.Rows.Count; k++)
+                        {
+                            if (departmentItem.DepartmentName == dbGrid.Rows[k].Cells[0].Value.ToString() && dbGrid.Rows[k].Tag == "Department")
+                            {
+                                column.DataGridView.Rows[k].Cells[i + 2].Value = departmentItem.DTotalCapacity;
+                            }
+                        }
+                    }
+                }
 
                 foreach (var item in listCapacity)
                 {
@@ -271,10 +286,9 @@ namespace DashboardUI
                                 column.DataGridView.Rows[j].Cells[i + 2].Style.BackColor = Color.FromArgb(198, 224, 180);
 
                             }
-                            else if (dbGrid.Rows[j].Tag == "Project")
+                            else if (dbGrid.Rows[j].Tag == "Project" && dbGrid.Rows[j].Cells[i + 2].Value == null)
                                 column.DataGridView.Rows[j].Cells[i + 2].Style.BackColor = Color.FromArgb(226, 239, 218);
                         }
-
                     }
                 }
 
@@ -426,7 +440,9 @@ namespace DashboardUI
             comboBoxCategory.SelectedIndex = -1;
 
             dateTimePickerStart.Value = new DateTime(2024, 01, 01);
-            dateTimePickerEnd.Value = dateTimePickerStart.Value.AddMonths(11);
+            dateTimePickerEnd.Value = dateTimePickerStart.Value.AddMonths(23);
+
+            btnEdit.Text = "Edit";
         }
 
         private void ResetGridView()
@@ -663,10 +679,10 @@ namespace DashboardUI
         {
 
             var cellValue = dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-            var cellDate = dbGrid.Columns[e.ColumnIndex].HeaderText;
+            var cellDate = dbGrid.Columns[e.ColumnIndex].Tag;
             var tempDate = Convert.ToDateTime(cellDate);
             cellDate = new DateTime(tempDate.Year, tempDate.Month, 01).ToString();
-
+            Debug.Print(cellDate.ToString());
             //If editing Project Capacities
             if (dbGrid.Rows[e.RowIndex].Tag == "Project")
             {
@@ -707,7 +723,7 @@ namespace DashboardUI
                         ProjectCapacity projectCapacityToAdd = new ProjectCapacity();
 
                         projectCapacityToAdd.ProjectId = cellProject.ProjectId;
-                        projectCapacityToAdd.PTotalCapacity = Convert.ToInt32(cellValue);
+                        projectCapacityToAdd.PTotalCapacity = Convert.ToDouble(cellValue);
                         projectCapacityToAdd.Date = Convert.ToDateTime(cellDate);
                         projectCapacityManager.Add(projectCapacityToAdd);
 
@@ -717,7 +733,7 @@ namespace DashboardUI
                     {
                         //if cell value is deleted or 0
                         ProjectCapacity projectCapacityToUpdate = projectCapacityManager.GetProjectCapacityByDateAndProjectId(Convert.ToDateTime(cellDate), cellProject.ProjectId).Data;
-                        if (cellValue == null || Convert.ToInt32(cellValue) == 0 && e.ColumnIndex > 1)
+                        if (cellValue == null || Convert.ToDouble(cellValue) == 0 && e.ColumnIndex > 1)
                         {
                             projectCapacityManager.Delete(projectCapacityToUpdate);
                             Debug.Print("project capacity cell value deleted");
@@ -725,7 +741,7 @@ namespace DashboardUI
                         }
                         else
                         {
-                            projectCapacityToUpdate.PTotalCapacity = Convert.ToInt32(cellValue);
+                            projectCapacityToUpdate.PTotalCapacity = Convert.ToDouble(cellValue);
                             projectCapacityManager.Update(projectCapacityToUpdate);
                             Debug.Print("project capacity cell value updated");
                         }
@@ -748,7 +764,7 @@ namespace DashboardUI
                         DepartmentCapacity departmentCapacityToAdd = new DepartmentCapacity();
 
                         departmentCapacityToAdd.DepartmentId = cellDepartment.DepartmentId;
-                        departmentCapacityToAdd.DTotalCapacity = Convert.ToInt32(cellValue);
+                        departmentCapacityToAdd.DTotalCapacity = Convert.ToDouble(cellValue);
                         departmentCapacityToAdd.Date = Convert.ToDateTime(cellDate);
                         departmentCapacityManager.Add(departmentCapacityToAdd);
 
@@ -758,7 +774,7 @@ namespace DashboardUI
                     {
                         //if cell value is deleted or 0
                         DepartmentCapacity departmentCapacityToUpdate = departmentCapacityManager.GetDepartmentCapacityByDateAndDepartmentId(Convert.ToDateTime(cellDate), cellDepartment.DepartmentId).Data;
-                        if (cellValue == null || Convert.ToInt32(cellValue) == 0)
+                        if (cellValue == null || Convert.ToDouble(cellValue) == 0)
                         {
                             departmentCapacityManager.Delete(departmentCapacityToUpdate);
                             Debug.Print("department cell value deleted");
@@ -766,7 +782,7 @@ namespace DashboardUI
                         }
                         else
                         {
-                            departmentCapacityToUpdate.DTotalCapacity = Convert.ToInt32(cellValue);
+                            departmentCapacityToUpdate.DTotalCapacity = Convert.ToDouble(cellValue);
                             departmentCapacityManager.Update(departmentCapacityToUpdate);
                             Debug.Print("department cell value updated");
                         }

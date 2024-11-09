@@ -30,5 +30,23 @@ namespace DataAccess.Concrete.EntityFramework
                 return result.Where(filter).ToList();
             }
         }
+
+        public List<DepartmentCapacityDetailDto> GetDepartmentCapacityDetails()
+        {
+            using (CapacityDBContext context = new CapacityDBContext())
+            {
+                var result = from dc in context.DepartmentCapacities
+                             join d in context.Departments on dc.DepartmentId equals d.DepartmentId
+                             select new DepartmentCapacityDetailDto
+                             {
+                                 DCapacityId = dc.DCapacityId,
+                                 DepartmentId = dc.DepartmentId,
+                                 DepartmentName = d.DepartmentName,
+                                 DTotalCapacity = dc.DTotalCapacity,
+                                 Date = dc.Date
+                             };
+                return result.ToList();
+            }
+        }
     }
 }

@@ -59,5 +59,10 @@ namespace Business.Concrete
             else
                 return new SuccessDataResult<DepartmentCapacity>(result, Messages.DepartmentListed);
         }
+
+        public IDataResult<List<DepartmentCapacityDetailDto>> GetDepartmentCapacityDetails()
+        {
+            return new SuccessDataResult<List<DepartmentCapacityDetailDto>>(_departmentCapactiyDal.GetDepartmentCapacityDetails());
+        }
     }
 }

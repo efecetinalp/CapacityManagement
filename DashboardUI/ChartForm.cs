@@ -51,7 +51,7 @@ namespace DashboardUI
             AddSeriaToChart(chartRequest.Legends[0], chartRequest.Series[0], chartRequest.Months, SeriesChartType.Line, 5);
         }
 
-        private void AddSeriaToChart(string serieName, List<int> data, List<double> months, SeriesChartType type, int borderWidth = 1)
+        private void AddSeriaToChart(string serieName, List<double> data, List<double> months, SeriesChartType type, int borderWidth = 1)
         {
             areaChart.Series.Add(serieName);
             areaChart.Series[serieName].XValueType = ChartValueType.DateTime;
