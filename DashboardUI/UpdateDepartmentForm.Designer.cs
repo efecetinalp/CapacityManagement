@@ -28,99 +28,111 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label7 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonUpdate = new System.Windows.Forms.Button();
-            this.comboBoxManagement = new System.Windows.Forms.ComboBox();
-            this.textBoxDepartment = new System.Windows.Forms.TextBox();
-            this.SuspendLayout();
+            label7 = new Label();
+            label2 = new Label();
+            label1 = new Label();
+            buttonCancel = new Button();
+            buttonUpdate = new Button();
+            comboBoxManagement = new ComboBox();
+            textBoxDepartment = new TextBox();
+            SuspendLayout();
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 11F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(171, 104);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(216, 30);
-            this.label7.TabIndex = 29;
-            this.label7.Text = "Update Department";
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label7.Location = new Point(100, 50);
+            label7.Margin = new Padding(2, 0, 2, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(160, 19);
+            label7.TabIndex = 29;
+            label7.Text = "UPDATE DEPARTMENT";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(122, 259);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(162, 25);
-            this.label2.TabIndex = 24;
-            this.label2.Text = "Department Name";
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label2.Location = new Point(50, 143);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(109, 15);
+            label2.TabIndex = 24;
+            label2.Text = "Department Name";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(122, 180);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(117, 25);
-            this.label1.TabIndex = 23;
-            this.label1.Text = "Management";
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label1.Location = new Point(50, 93);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(79, 15);
+            label1.TabIndex = 23;
+            label1.Text = "Management";
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(299, 393);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(161, 54);
-            this.buttonCancel.TabIndex = 22;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            buttonCancel.Location = new Point(197, 224);
+            buttonCancel.Margin = new Padding(2, 2, 2, 2);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new Size(113, 32);
+            buttonCancel.TabIndex = 22;
+            buttonCancel.Text = "Cancel";
+            buttonCancel.UseVisualStyleBackColor = true;
+            buttonCancel.Click += buttonCancel_Click;
             // 
             // buttonUpdate
             // 
-            this.buttonUpdate.Location = new System.Drawing.Point(78, 393);
-            this.buttonUpdate.Name = "buttonUpdate";
-            this.buttonUpdate.Size = new System.Drawing.Size(161, 54);
-            this.buttonUpdate.TabIndex = 21;
-            this.buttonUpdate.Text = "Update";
-            this.buttonUpdate.UseVisualStyleBackColor = true;
-            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            buttonUpdate.BackColor = Color.FromArgb(58, 154, 193);
+            buttonUpdate.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
+            buttonUpdate.FlatStyle = FlatStyle.Flat;
+            buttonUpdate.ForeColor = SystemColors.ButtonHighlight;
+            buttonUpdate.Location = new Point(50, 224);
+            buttonUpdate.Margin = new Padding(2, 2, 2, 2);
+            buttonUpdate.Name = "buttonUpdate";
+            buttonUpdate.Size = new Size(113, 32);
+            buttonUpdate.TabIndex = 21;
+            buttonUpdate.Text = "Update";
+            buttonUpdate.UseVisualStyleBackColor = false;
+            buttonUpdate.Click += buttonUpdate_Click;
             // 
             // comboBoxManagement
             // 
-            this.comboBoxManagement.FormattingEnabled = true;
-            this.comboBoxManagement.Location = new System.Drawing.Point(122, 208);
-            this.comboBoxManagement.Name = "comboBoxManagement";
-            this.comboBoxManagement.Size = new System.Drawing.Size(302, 33);
-            this.comboBoxManagement.TabIndex = 16;
+            comboBoxManagement.FormattingEnabled = true;
+            comboBoxManagement.Location = new Point(50, 110);
+            comboBoxManagement.Margin = new Padding(2, 2, 2, 2);
+            comboBoxManagement.Name = "comboBoxManagement";
+            comboBoxManagement.Size = new Size(260, 23);
+            comboBoxManagement.TabIndex = 16;
             // 
             // textBoxDepartment
             // 
-            this.textBoxDepartment.Location = new System.Drawing.Point(122, 287);
-            this.textBoxDepartment.Name = "textBoxDepartment";
-            this.textBoxDepartment.Size = new System.Drawing.Size(302, 31);
-            this.textBoxDepartment.TabIndex = 15;
+            textBoxDepartment.Location = new Point(50, 160);
+            textBoxDepartment.Margin = new Padding(2, 2, 2, 2);
+            textBoxDepartment.Name = "textBoxDepartment";
+            textBoxDepartment.Size = new Size(260, 23);
+            textBoxDepartment.TabIndex = 15;
             // 
             // UpdateDepartmentForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(546, 571);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonUpdate);
-            this.Controls.Add(this.comboBoxManagement);
-            this.Controls.Add(this.textBoxDepartment);
-            this.Name = "UpdateDepartmentForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Update Department";
-            this.Load += new System.EventHandler(this.UpdateDepartmentForm_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(360, 300);
+            Controls.Add(label7);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(buttonCancel);
+            Controls.Add(buttonUpdate);
+            Controls.Add(comboBoxManagement);
+            Controls.Add(textBoxDepartment);
+            FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(2, 2, 2, 2);
+            Name = "UpdateDepartmentForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Update Department";
+            Load += UpdateDepartmentForm_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

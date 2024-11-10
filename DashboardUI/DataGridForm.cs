@@ -299,7 +299,7 @@ namespace DashboardUI
             #region "DELETE LATER"
             //DELETE LATER
             dbGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dbGrid.ColumnHeadersHeight = 100;
+            dbGrid.ColumnHeadersHeight = 60;
             dbGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
 
             //Change this later for category column

@@ -28,77 +28,87 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonUpdate = new System.Windows.Forms.Button();
-            this.textBoxManagement = new System.Windows.Forms.TextBox();
-            this.SuspendLayout();
+            label7 = new Label();
+            label6 = new Label();
+            buttonCancel = new Button();
+            buttonUpdate = new Button();
+            textBoxManagement = new TextBox();
+            SuspendLayout();
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 11F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(171, 133);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(227, 30);
-            this.label7.TabIndex = 29;
-            this.label7.Text = "Update Management";
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label7.Location = new Point(100, 50);
+            label7.Margin = new Padding(2, 0, 2, 0);
+            label7.Name = "label7";
+            label7.Size = new Size(166, 19);
+            label7.TabIndex = 29;
+            label7.Text = "UPDATE MANAGEMENT";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label6.Location = new System.Drawing.Point(123, 199);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(171, 25);
-            this.label6.TabIndex = 28;
-            this.label6.Text = "Management Name";
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label6.Location = new Point(50, 93);
+            label6.Margin = new Padding(2, 0, 2, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(115, 15);
+            label6.TabIndex = 28;
+            label6.Text = "Management Name";
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(304, 309);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(161, 54);
-            this.buttonCancel.TabIndex = 22;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            buttonCancel.Location = new Point(197, 170);
+            buttonCancel.Margin = new Padding(2, 2, 2, 2);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new Size(113, 32);
+            buttonCancel.TabIndex = 22;
+            buttonCancel.Text = "Cancel";
+            buttonCancel.UseVisualStyleBackColor = true;
+            buttonCancel.Click += buttonCancel_Click;
             // 
             // buttonUpdate
             // 
-            this.buttonUpdate.Location = new System.Drawing.Point(83, 309);
-            this.buttonUpdate.Name = "buttonUpdate";
-            this.buttonUpdate.Size = new System.Drawing.Size(161, 54);
-            this.buttonUpdate.TabIndex = 21;
-            this.buttonUpdate.Text = "Update";
-            this.buttonUpdate.UseVisualStyleBackColor = true;
-            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
+            buttonUpdate.BackColor = Color.FromArgb(58, 154, 193);
+            buttonUpdate.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
+            buttonUpdate.FlatStyle = FlatStyle.Flat;
+            buttonUpdate.ForeColor = SystemColors.ButtonHighlight;
+            buttonUpdate.Location = new Point(50, 170);
+            buttonUpdate.Margin = new Padding(2, 2, 2, 2);
+            buttonUpdate.Name = "buttonUpdate";
+            buttonUpdate.Size = new Size(113, 32);
+            buttonUpdate.TabIndex = 21;
+            buttonUpdate.Text = "Update";
+            buttonUpdate.UseVisualStyleBackColor = false;
+            buttonUpdate.Click += buttonUpdate_Click;
             // 
             // textBoxManagement
             // 
-            this.textBoxManagement.Location = new System.Drawing.Point(123, 227);
-            this.textBoxManagement.Name = "textBoxManagement";
-            this.textBoxManagement.Size = new System.Drawing.Size(302, 31);
-            this.textBoxManagement.TabIndex = 15;
+            textBoxManagement.Location = new Point(50, 110);
+            textBoxManagement.Margin = new Padding(2, 2, 2, 2);
+            textBoxManagement.Name = "textBoxManagement";
+            textBoxManagement.Size = new Size(260, 23);
+            textBoxManagement.TabIndex = 15;
             // 
             // UpdateManagementForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(547, 465);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonUpdate);
-            this.Controls.Add(this.textBoxManagement);
-            this.Name = "UpdateManagementForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Update Management";
-            this.Load += new System.EventHandler(this.UpdateManagementForm_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(360, 250);
+            Controls.Add(label7);
+            Controls.Add(label6);
+            Controls.Add(buttonCancel);
+            Controls.Add(buttonUpdate);
+            Controls.Add(textBoxManagement);
+            FormBorderStyle = FormBorderStyle.None;
+            Margin = new Padding(2, 2, 2, 2);
+            Name = "UpdateManagementForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Update Management";
+            Load += UpdateManagementForm_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion

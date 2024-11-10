@@ -55,16 +55,17 @@
             legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             legend1.Name = "Legend1";
             areaChart.Legends.Add(legend1);
-            areaChart.Location = new Point(21, 105);
+            areaChart.Location = new Point(21, 79);
             areaChart.Margin = new Padding(2);
             areaChart.Name = "areaChart";
+            areaChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Italic, GraphicsUnit.Point);
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             areaChart.Series.Add(series1);
-            areaChart.Size = new Size(1236, 532);
+            areaChart.Size = new Size(1236, 558);
             areaChart.TabIndex = 0;
             areaChart.Text = "Capacity";
             // 
@@ -75,7 +76,7 @@
             buttonSave.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
             buttonSave.FlatStyle = FlatStyle.Flat;
             buttonSave.Image = (Image)resources.GetObject("buttonSave.Image");
-            buttonSave.Location = new Point(1226, 59);
+            buttonSave.Location = new Point(1226, 25);
             buttonSave.Margin = new Padding(2);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(32, 32);
@@ -90,7 +91,7 @@
             buttonUpdate.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
             buttonUpdate.FlatStyle = FlatStyle.Flat;
             buttonUpdate.Image = (Image)resources.GetObject("buttonUpdate.Image");
-            buttonUpdate.Location = new Point(1181, 59);
+            buttonUpdate.Location = new Point(1181, 25);
             buttonUpdate.Margin = new Padding(2);
             buttonUpdate.Name = "buttonUpdate";
             buttonUpdate.Size = new Size(32, 32);

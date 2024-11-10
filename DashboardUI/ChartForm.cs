@@ -27,6 +27,7 @@ namespace DashboardUI
 
         private void ChartForm_Load(object sender, EventArgs e)
         {
+            areaChart.Series.Clear();
         }
 
         private void buttonUpdate_Click(object sender, EventArgs e)
@@ -37,10 +38,23 @@ namespace DashboardUI
             areaChart.Series.Clear();
 
             var chartArea = areaChart.ChartAreas[0];
+            chartArea.AxisX.Interval = 1;
+            chartArea.AxisX.MajorGrid.LineWidth = 0;
             chartArea.AxisX.IntervalType = DateTimeIntervalType.Months;
             chartArea.AxisX.LabelStyle.Format = "MMM-yy";
+            chartArea.AxisX.LabelStyle.Angle = 90;
+            chartArea.AxisX.LabelStyle.ForeColor = Color.DarkGray;
+
             chartArea.AxisX.Minimum = chartRequest.Months[0];
             chartArea.AxisX.Maximum = chartRequest.Months[chartRequest.Months.Count - 1];
+
+            chartArea.AxisY.MinorGrid.Enabled = true;
+            chartArea.AxisY.MajorGrid.LineColor = Color.DarkGray;
+            chartArea.AxisY.MinorGrid.LineColor = Color.LightGray;
+            chartArea.AxisY.MinorGrid.LineDashStyle = ChartDashStyle.Dash;
+            chartArea.AxisY.LabelStyle.ForeColor = Color.DarkGray;
+
+            areaChart.Titles.Add("CABIN STRUCTURE");
 
             for (int i = 1; i < chartRequest.Legends.Count; i++)
             {
