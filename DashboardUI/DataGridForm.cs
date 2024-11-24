@@ -28,13 +28,16 @@ namespace DashboardUI
         DepartmentCapacityManager departmentCapacityManager;
 
         CreateForm createForm;
+        Dashboard _dashboardForm;
+
+        AlertBox alertBox;
 
         private bool isEditing = false;
 
         //temp cell value
         object _tempCellValue;
 
-        public DataGridForm(ProjectManager projectManager, DepartmentManager departmentManager, ManagementManager managementManager, CategoryManager categoryManager, DepartmentCapacityManager departmentCapacityManager, ProjectCapacityManager projectCapacityManager)
+        public DataGridForm(ProjectManager projectManager, DepartmentManager departmentManager, ManagementManager managementManager, CategoryManager categoryManager, DepartmentCapacityManager departmentCapacityManager, ProjectCapacityManager projectCapacityManager, Dashboard dashboardForm)
         {
             this.projectManager = projectManager;
             this.departmentManager = departmentManager;
@@ -43,6 +46,7 @@ namespace DashboardUI
             this.projectCapacityManager = projectCapacityManager;
             this.departmentCapacityManager = departmentCapacityManager;
 
+            _dashboardForm = dashboardForm;
             InitializeComponent();
         }
 
@@ -69,6 +73,12 @@ namespace DashboardUI
             dateTimePickerEnd.Value = dateTimePickerStart.Value.AddMonths(23);
 
             dbGrid.ReadOnly = true;
+
+            if (_dashboardForm.activeUser.Admin || _dashboardForm.activeUser.Author)
+            {
+                buttonNew.Enabled = true;
+                btnEdit.Enabled = true;
+            }
         }
 
         private void buttonList_Click(object sender, EventArgs e)
@@ -94,6 +104,8 @@ namespace DashboardUI
 
             dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
 
+            alertBox = new AlertBox(_dashboardForm.Left + _dashboardForm.Width - 270, _dashboardForm.Top + _dashboardForm.Height - 70);
+            alertBox.SuccessAlert("Datas Successfuly Listed!");
         }
 
         public ChartRequest GenerateChartData()

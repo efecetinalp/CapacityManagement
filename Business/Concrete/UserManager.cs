@@ -23,7 +23,7 @@ namespace Business.Concrete
 
         public List<User> GetAll()
         {
-            throw new NotImplementedException();
+            return new List<User>(_userDal.GetAll());
         }
 
         public User GetById(int id)

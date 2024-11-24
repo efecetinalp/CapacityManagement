@@ -30,30 +30,30 @@ namespace DashboardUI
             this.Close();
         }
 
-        private void buttonLogin_Click(object sender, EventArgs e)
-        {
-            if (textBoxUserName.Text != "" && textBoxPassword.Text != "")
-            {
-                var userDataResult = _userManager.GetByUserName(textBoxUserName.Text.ToUpper());
-                if (userDataResult.Success)
-                {
+        //private void buttonLogin_Click(object sender, EventArgs e)
+        //{
+        //    if (textBoxUserName.Text != "" && textBoxPassword.Text != "")
+        //    {
+        //        var userDataResult = _userManager.GetByUserName(textBoxUserName.Text.ToUpper());
+        //        if (userDataResult.Success)
+        //        {
 
-                    if (userDataResult.Data.Password == textBoxPassword.Text)
-                    {
-                        Debug.Print("login success");
-                        currentUser = userDataResult.Data;
-                        this.Close();
-                    }
-                    else
-                        Debug.Print("incorrect");
-                }
-                else
-                    Debug.Print("not avaiable");
-            }
-            else
-            {
-                Debug.Print("empty fields");
-            }
-        }
+        //            if (userDataResult.Data.Password == textBoxPassword.Text)
+        //            {
+        //                Debug.Print("login success");
+        //                currentUser = userDataResult.Data;
+        //                this.Close();
+        //            }
+        //            else
+        //                Debug.Print("incorrect");
+        //        }
+        //        else
+        //            Debug.Print("not avaiable");
+        //    }
+        //    else
+        //    {
+        //        Debug.Print("empty fields");
+        //    }
+        //}
     }
 }

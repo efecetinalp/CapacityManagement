@@ -34,7 +34,7 @@
             panelMenu = new Panel();
             panelSideBar = new Panel();
             panelAdmin2 = new Panel();
-            buttonUser = new Button();
+            labelActiveUser = new Label();
             panelAdmin = new Panel();
             buttonAdmin = new Button();
             panelDataGrid = new Panel();
@@ -42,7 +42,6 @@
             panelChart = new Panel();
             buttonChart = new Button();
             panelDashboard = new Panel();
-            labelActiveUser = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelMenu.SuspendLayout();
             panelAdmin2.SuspendLayout();
@@ -111,7 +110,6 @@
             // 
             // panelAdmin2
             // 
-            panelAdmin2.Controls.Add(buttonUser);
             panelAdmin2.Controls.Add(labelActiveUser);
             panelAdmin2.Location = new Point(58, 168);
             panelAdmin2.Margin = new Padding(2);
@@ -119,23 +117,20 @@
             panelAdmin2.Size = new Size(105, 35);
             panelAdmin2.TabIndex = 23;
             // 
-            // buttonUser
+            // labelActiveUser
             // 
-            buttonUser.BackColor = Color.FromArgb(58, 154, 193);
-            buttonUser.FlatStyle = FlatStyle.Flat;
-            buttonUser.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            buttonUser.ForeColor = Color.White;
-            buttonUser.Image = (Image)resources.GetObject("buttonUser.Image");
-            buttonUser.ImageAlign = ContentAlignment.MiddleLeft;
-            buttonUser.Location = new Point(-7, -12);
-            buttonUser.Margin = new Padding(2);
-            buttonUser.Name = "buttonUser";
-            buttonUser.Padding = new Padding(10, 0, 0, 0);
-            buttonUser.Size = new Size(132, 58);
-            buttonUser.TabIndex = 18;
-            buttonUser.Text = "Sign-in";
-            buttonUser.UseVisualStyleBackColor = false;
-            buttonUser.Click += buttonUser_Click;
+            labelActiveUser.AutoSize = true;
+            labelActiveUser.BackColor = Color.Transparent;
+            labelActiveUser.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelActiveUser.ForeColor = SystemColors.ButtonHighlight;
+            labelActiveUser.Image = (Image)resources.GetObject("labelActiveUser.Image");
+            labelActiveUser.ImageAlign = ContentAlignment.MiddleLeft;
+            labelActiveUser.Location = new Point(7, 10);
+            labelActiveUser.Name = "labelActiveUser";
+            labelActiveUser.Size = new Size(83, 15);
+            labelActiveUser.TabIndex = 21;
+            labelActiveUser.Text = "         Signing...";
+            labelActiveUser.TextAlign = ContentAlignment.MiddleRight;
             // 
             // panelAdmin
             // 
@@ -163,6 +158,7 @@
             buttonAdmin.Text = "              Admin";
             buttonAdmin.TextAlign = ContentAlignment.MiddleLeft;
             buttonAdmin.UseVisualStyleBackColor = false;
+            buttonAdmin.Visible = false;
             buttonAdmin.Click += buttonAdmin_Click;
             // 
             // panelDataGrid
@@ -230,22 +226,6 @@
             panelDashboard.Size = new Size(228, 32);
             panelDashboard.TabIndex = 20;
             // 
-            // labelActiveUser
-            // 
-            labelActiveUser.AutoSize = true;
-            labelActiveUser.BackColor = Color.Transparent;
-            labelActiveUser.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            labelActiveUser.ForeColor = SystemColors.ButtonHighlight;
-            labelActiveUser.Image = (Image)resources.GetObject("labelActiveUser.Image");
-            labelActiveUser.ImageAlign = ContentAlignment.MiddleLeft;
-            labelActiveUser.Location = new Point(7, 10);
-            labelActiveUser.Name = "labelActiveUser";
-            labelActiveUser.Size = new Size(53, 15);
-            labelActiveUser.TabIndex = 21;
-            labelActiveUser.Text = "         test";
-            labelActiveUser.TextAlign = ContentAlignment.MiddleRight;
-            labelActiveUser.Visible = false;
-            // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -281,7 +261,6 @@
         private Panel panelChart;
         private Button buttonChart;
         private Panel panelAdmin2;
-        private Button buttonUser;
         private Panel panelSideBar;
         private Panel panelAdmin;
         private Button buttonAdmin;

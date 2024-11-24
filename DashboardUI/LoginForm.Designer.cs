@@ -96,7 +96,6 @@
             buttonLogin.TabIndex = 30;
             buttonLogin.Text = "Log In";
             buttonLogin.UseVisualStyleBackColor = false;
-            buttonLogin.Click += buttonLogin_Click;
             // 
             // buttonCancel
             // 

@@ -21,6 +21,7 @@ namespace DashboardUI
         DashboardForm dashboardForm;
         ChartForm chartForm;
         LoginForm loginForm;
+        AdminForm adminForm;
 
         //database manager referances
         ManagementManager managementManager;
@@ -32,7 +33,7 @@ namespace DashboardUI
         UserManager userManager;
 
         //user credentials
-        User activeUser;
+        public User activeUser;
 
         public Dashboard()
         {
@@ -51,8 +52,9 @@ namespace DashboardUI
         {
             //Delete later
             //Start with datagrid form
+            UserLogin();
             MoveSlideBar(panelDataGrid);
-            dataGridForm = new(projectManager, departmentManager, managementManager, categoryManager, departmentCapacityManager, projectCapacityManager);
+            dataGridForm = new(projectManager, departmentManager, managementManager, categoryManager, departmentCapacityManager, projectCapacityManager, this);
             dataGridForm.FormClosed += DataGridForm_FormClosed;
             dataGridForm.MdiParent = this;
             dataGridForm.Dock = DockStyle.Fill;
@@ -94,7 +96,7 @@ namespace DashboardUI
 
             if (dataGridForm == null)
             {
-                dataGridForm = new(projectManager, departmentManager, managementManager, categoryManager, departmentCapacityManager, projectCapacityManager);
+                dataGridForm = new(projectManager, departmentManager, managementManager, categoryManager, departmentCapacityManager, projectCapacityManager, this);
                 dataGridForm.FormClosed += DataGridForm_FormClosed;
                 dataGridForm.MdiParent = this;
                 dataGridForm.Dock = DockStyle.Fill;
@@ -147,31 +149,48 @@ namespace DashboardUI
             chartForm = null;
         }
 
+        //DELETE THIS LATER
         private void buttonUser_Click(object sender, EventArgs e)
         {
 
             if (loginForm == null)
             {
                 loginForm = new(userManager);
-                loginForm.FormClosed += LoginForm_FormClosed;
+                //loginForm.FormClosed += LoginForm_FormClosed;
                 loginForm.Show();
             }
             else
                 loginForm.Activate();
         }
 
-        private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void UserLogin()
         {
-            activeUser = loginForm.currentUser;
-            buttonUser.Visible = false;
-            labelActiveUser.Text = labelActiveUser.Text.Replace("test", activeUser.UserName.ToUpper());
+            activeUser = userManager.GetByUserName(Environment.UserName.ToUpper()).Data;
+            labelActiveUser.Text = labelActiveUser.Text.Replace("Signing...", activeUser.UserName.ToUpper());
             labelActiveUser.Visible = true;
             loginForm = null;
+
+            if (activeUser.Admin)
+            {
+                buttonAdmin.Visible = true;
+            }
         }
 
         private void buttonAdmin_Click(object sender, EventArgs e)
         {
             MoveSlideBar(panelAdmin);
+
+            if (adminForm == null)
+            {
+                adminForm = new();
+                adminForm.FormClosed += ChartForm_FormClosed;
+                adminForm.MdiParent = this;
+                adminForm.Dock = DockStyle.Fill;
+                adminForm.Show();
+            }
+            else
+                adminForm.Activate();
         }
+      
     }
 }
