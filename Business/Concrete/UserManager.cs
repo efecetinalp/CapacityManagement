@@ -21,12 +21,35 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
-        public List<User> GetAll()
+        public IResult Add(User user)
         {
-            return new List<User>(_userDal.GetAll());
+            if (user.UserName.Length <= 2)
+            {
+                return new ErrorResult(Messages.ProjectNameInvalid);
+            }
+
+            _userDal.Add(user);
+            return new SuccessResult(Messages.ProjectAdded);
         }
 
-        public User GetById(int id)
+        public IResult Update(User user)
+        {
+            _userDal.Update(user);
+            return new SuccessResult(Messages.ProjectUpdated);
+        }
+
+        public IResult Delete(User user)
+        {
+            _userDal.Delete(user);
+            return new SuccessResult(Messages.ProjectDeleted);
+        }
+
+        public IDataResult<List<User>> GetAll()
+        {
+            return new SuccessDataResult<List<User>>(_userDal.GetAll());
+        }
+
+        public IDataResult<User> GetById(int id)
         {
             throw new NotImplementedException();
         }

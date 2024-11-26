@@ -28,13 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminForm));
             userDataGrid = new DataGridView();
+            buttonCreate = new Button();
             ((System.ComponentModel.ISupportInitialize)userDataGrid).BeginInit();
             SuspendLayout();
             // 
             // userDataGrid
             // 
             userDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            userDataGrid.BackgroundColor = SystemColors.ButtonHighlight;
+            userDataGrid.BorderStyle = BorderStyle.None;
             userDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             userDataGrid.Location = new Point(22, 80);
             userDataGrid.Name = "userDataGrid";
@@ -42,11 +46,30 @@
             userDataGrid.Size = new Size(1236, 558);
             userDataGrid.TabIndex = 0;
             // 
+            // buttonCreate
+            // 
+            buttonCreate.BackColor = Color.Transparent;
+            buttonCreate.Cursor = Cursors.Hand;
+            buttonCreate.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
+            buttonCreate.FlatStyle = FlatStyle.Flat;
+            buttonCreate.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonCreate.ForeColor = Color.White;
+            buttonCreate.Image = (Image)resources.GetObject("buttonCreate.Image");
+            buttonCreate.Location = new Point(22, 34);
+            buttonCreate.Margin = new Padding(2);
+            buttonCreate.Name = "buttonCreate";
+            buttonCreate.Size = new Size(32, 32);
+            buttonCreate.TabIndex = 33;
+            buttonCreate.UseVisualStyleBackColor = false;
+            buttonCreate.Click += buttonCreate_Click;
+            // 
             // AdminForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(242, 242, 242);
             ClientSize = new Size(1280, 660);
+            Controls.Add(buttonCreate);
             Controls.Add(userDataGrid);
             FormBorderStyle = FormBorderStyle.None;
             Name = "AdminForm";
@@ -59,5 +82,6 @@
         #endregion
 
         private DataGridView userDataGrid;
+        private Button buttonCreate;
     }
 }

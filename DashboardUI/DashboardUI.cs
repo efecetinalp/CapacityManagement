@@ -20,7 +20,7 @@ namespace DashboardUI
         DataGridForm dataGridForm;
         DashboardForm dashboardForm;
         ChartForm chartForm;
-        LoginForm loginForm;
+        CreateUser loginForm;
         AdminForm adminForm;
 
         //database manager referances
@@ -147,20 +147,6 @@ namespace DashboardUI
         private void ChartForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             chartForm = null;
-        }
-
-        //DELETE THIS LATER
-        private void buttonUser_Click(object sender, EventArgs e)
-        {
-
-            if (loginForm == null)
-            {
-                loginForm = new(userManager);
-                //loginForm.FormClosed += LoginForm_FormClosed;
-                loginForm.Show();
-            }
-            else
-                loginForm.Activate();
         }
 
         private void UserLogin()

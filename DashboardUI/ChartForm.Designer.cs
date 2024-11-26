@@ -35,6 +35,7 @@
             areaChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             buttonSave = new Button();
             buttonUpdate = new Button();
+            comboBoxPalette = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)areaChart).BeginInit();
             SuspendLayout();
             // 
@@ -58,7 +59,7 @@
             areaChart.Location = new Point(21, 79);
             areaChart.Margin = new Padding(2);
             areaChart.Name = "areaChart";
-            areaChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
+            areaChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Italic, GraphicsUnit.Point);
@@ -99,11 +100,20 @@
             buttonUpdate.UseVisualStyleBackColor = true;
             buttonUpdate.Click += buttonUpdate_Click;
             // 
+            // comboBoxPalette
+            // 
+            comboBoxPalette.FormattingEnabled = true;
+            comboBoxPalette.Location = new Point(41, 34);
+            comboBoxPalette.Name = "comboBoxPalette";
+            comboBoxPalette.Size = new Size(160, 23);
+            comboBoxPalette.TabIndex = 4;
+            // 
             // ChartForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1280, 660);
+            Controls.Add(comboBoxPalette);
             Controls.Add(buttonUpdate);
             Controls.Add(buttonSave);
             Controls.Add(areaChart);
@@ -121,5 +131,6 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart areaChart;
         private Button buttonSave;
         private Button buttonUpdate;
+        private ComboBox comboBoxPalette;
     }
 }

@@ -105,7 +105,7 @@ namespace DashboardUI
             dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
 
             alertBox = new AlertBox(_dashboardForm.Left + _dashboardForm.Width - 270, _dashboardForm.Top + _dashboardForm.Height - 70);
-            alertBox.SuccessAlert("Datas Successfuly Listed!");
+            alertBox.SuccessAlert("Datas listed successfuly!");
         }
 
         public ChartRequest GenerateChartData()
