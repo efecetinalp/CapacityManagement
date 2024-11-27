@@ -233,6 +233,7 @@
             BackColor = Color.FromArgb(242, 242, 242);
             ClientSize = new Size(1264, 666);
             Controls.Add(panelMenu);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             IsMdiContainer = true;
             Margin = new Padding(2);
             MinimumSize = new Size(1278, 644);

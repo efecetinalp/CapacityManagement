@@ -60,7 +60,8 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             userDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
-            userDataGrid.Location = new Point(22, 80);
+            userDataGrid.Location = new Point(21, 79);
+            userDataGrid.Margin = new Padding(2);
             userDataGrid.Name = "userDataGrid";
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = SystemColors.Control;
@@ -86,7 +87,7 @@
             buttonCreate.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             buttonCreate.ForeColor = Color.White;
             buttonCreate.Image = (Image)resources.GetObject("buttonCreate.Image");
-            buttonCreate.Location = new Point(22, 34);
+            buttonCreate.Location = new Point(36, 25);
             buttonCreate.Margin = new Padding(2);
             buttonCreate.Name = "buttonCreate";
             buttonCreate.Size = new Size(32, 32);
@@ -103,7 +104,7 @@
             buttonDelete.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             buttonDelete.ForeColor = Color.White;
             buttonDelete.Image = (Image)resources.GetObject("buttonDelete.Image");
-            buttonDelete.Location = new Point(70, 34);
+            buttonDelete.Location = new Point(85, 25);
             buttonDelete.Margin = new Padding(2);
             buttonDelete.Name = "buttonDelete";
             buttonDelete.Size = new Size(32, 32);
