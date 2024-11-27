@@ -31,7 +31,7 @@ namespace DashboardUI
         Dashboard _dashboardForm;
 
         AlertBox alertBox;
-
+        ToolTip _toolTip;
         private bool isEditing = false;
 
         //temp cell value
@@ -53,6 +53,12 @@ namespace DashboardUI
         private void DataGridForm_Load(object sender, EventArgs e)
         {
             //form initialize options
+            _toolTip = new ToolTip();
+            _toolTip.SetToolTip(this.buttonList, "List");
+            _toolTip.SetToolTip(this.buttonRefresh, "Refresh");
+            _toolTip.SetToolTip(this.buttonReset, "Reset");
+            _toolTip.SetToolTip(this.buttonNew, "Create");
+            _toolTip.SetToolTip(this.buttonEdit, "Edit");
 
             foreach (var management in managementManager.GetAll().Data)
             {
@@ -77,7 +83,7 @@ namespace DashboardUI
             if (_dashboardForm.activeUser.Admin || _dashboardForm.activeUser.Author)
             {
                 buttonNew.Enabled = true;
-                btnEdit.Enabled = true;
+                buttonEdit.Enabled = true;
             }
         }
 

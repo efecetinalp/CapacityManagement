@@ -168,7 +168,7 @@ namespace DashboardUI
 
             if (adminForm == null)
             {
-                adminForm = new();
+                adminForm = new(this);
                 adminForm.FormClosed += ChartForm_FormClosed;
                 adminForm.MdiParent = this;
                 adminForm.Dock = DockStyle.Fill;

@@ -51,7 +51,7 @@ namespace Business.Concrete
 
         public IDataResult<User> GetById(int id)
         {
-            throw new NotImplementedException();
+            return new SuccessDataResult<User>(_userDal.Get(u => u.UserId == id), Messages.ProjectListed);
         }
 
         public IDataResult<User> GetByUserName(string username)

@@ -10,14 +10,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace DashboardUI
 {
     public partial class ChartForm : Form
     {
         DataGridForm _dataGridForm;
+        ToolTip _tooltip;
 
         public ChartForm(DataGridForm dataGridForm) : base()
         {
@@ -27,6 +26,10 @@ namespace DashboardUI
 
         private void ChartForm_Load(object sender, EventArgs e)
         {
+            _tooltip = new ToolTip();
+            _tooltip.SetToolTip(this.buttonSave, "Save");
+            _tooltip.SetToolTip(this.buttonUpdate, "Update Chart");
+
             areaChart.Series.Clear();
         }
 

@@ -81,7 +81,7 @@ namespace DashboardUI
             txtAlertBox.ForeColor = Color.DarkRed;
             AlertDuration.BackColor = Color.DarkRed;
             pictureAlertBox.Image = Image.FromFile(@"C:\Users\ECETINALP\Desktop\Tools\Capacity Management\Icons\error_alert.png");
-            this.ShowDialog();
+            this.Show();
         }
 
         public void WarningAlert(string alertText)
@@ -92,7 +92,7 @@ namespace DashboardUI
             txtAlertBox.ForeColor = Color.Goldenrod;
             AlertDuration.BackColor = Color.Goldenrod;
             pictureAlertBox.Image = Image.FromFile(@"C:\Users\ECETINALP\Desktop\Tools\Capacity Management\Icons\warning_alert.png");
-            this.ShowDialog();
+            this.Show();
         }
 
         public void InformationAlert(string alertText)
@@ -103,7 +103,7 @@ namespace DashboardUI
             txtAlertBox.ForeColor = Color.DodgerBlue;
             AlertDuration.BackColor = Color.DodgerBlue;
             pictureAlertBox.Image = Image.FromFile(@"C:\Users\ECETINALP\Desktop\Tools\Capacity Management\Icons\info_alert.png");
-            this.ShowDialog();
+            this.Show();
         }
     }
 }
