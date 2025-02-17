@@ -86,16 +86,8 @@ namespace DashboardUI
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            int width = Convert.ToInt32(areaChart.Width);
-            int height = Convert.ToInt32(areaChart.Height);
-            using (Bitmap bmp = new Bitmap(width, height))
-            {
-                areaChart.DrawToBitmap(bmp, new Rectangle(0, 0, width, height));
-                bmp.Save(areaChart.Name + ".jpg", ImageFormat.Jpeg);
-                FileInfo image = new FileInfo(areaChart.Name + ".jpg");
-                string userName = Environment.UserName;
-                image.MoveTo(@"C:\Users\" + userName + @"\Desktop\" + areaChart.Name + ".jpg");
-            }
+            ExportImage exportImage = new ExportImage(areaChart);
+            exportImage.Show();
         }
     }
 }

@@ -35,6 +35,9 @@
             userDataGrid = new DataGridView();
             buttonCreate = new Button();
             buttonDelete = new Button();
+            textBoxPath = new TextBox();
+            buttonBrowse = new Button();
+            labelDatabase = new Label();
             ((System.ComponentModel.ISupportInitialize)userDataGrid).BeginInit();
             SuspendLayout();
             // 
@@ -112,12 +115,51 @@
             buttonDelete.UseVisualStyleBackColor = false;
             buttonDelete.Click += buttonDelete_Click;
             // 
+            // textBoxPath
+            // 
+            textBoxPath.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            textBoxPath.Location = new Point(693, 34);
+            textBoxPath.Name = "textBoxPath";
+            textBoxPath.Size = new Size(492, 23);
+            textBoxPath.TabIndex = 35;
+            // 
+            // buttonBrowse
+            // 
+            buttonBrowse.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonBrowse.BackColor = Color.FromArgb(58, 154, 193);
+            buttonBrowse.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
+            buttonBrowse.FlatStyle = FlatStyle.Flat;
+            buttonBrowse.ForeColor = SystemColors.ControlLightLight;
+            buttonBrowse.Location = new Point(1190, 34);
+            buttonBrowse.Margin = new Padding(2);
+            buttonBrowse.Name = "buttonBrowse";
+            buttonBrowse.Size = new Size(67, 23);
+            buttonBrowse.TabIndex = 38;
+            buttonBrowse.Text = "Browse";
+            buttonBrowse.UseVisualStyleBackColor = false;
+            buttonBrowse.Click += buttonBrowse_Click;
+            // 
+            // labelDatabase
+            // 
+            labelDatabase.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            labelDatabase.AutoSize = true;
+            labelDatabase.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelDatabase.Location = new Point(693, 16);
+            labelDatabase.Margin = new Padding(2, 0, 2, 0);
+            labelDatabase.Name = "labelDatabase";
+            labelDatabase.Size = new Size(87, 15);
+            labelDatabase.TabIndex = 40;
+            labelDatabase.Text = "Database Path";
+            // 
             // AdminForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(242, 242, 242);
             ClientSize = new Size(1280, 660);
+            Controls.Add(labelDatabase);
+            Controls.Add(buttonBrowse);
+            Controls.Add(textBoxPath);
             Controls.Add(buttonDelete);
             Controls.Add(buttonCreate);
             Controls.Add(userDataGrid);
@@ -127,6 +169,7 @@
             Load += AdminForm_Load;
             ((System.ComponentModel.ISupportInitialize)userDataGrid).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -134,5 +177,8 @@
         private DataGridView userDataGrid;
         private Button buttonCreate;
         private Button buttonDelete;
+        private TextBox textBoxPath;
+        private Button buttonBrowse;
+        private Label labelDatabase;
     }
 }

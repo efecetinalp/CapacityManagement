@@ -1,5 +1,7 @@
 ﻿using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
+using System.Diagnostics;
 
 namespace DataAccess.Concrete.EntityFramework
 {
@@ -11,7 +13,22 @@ namespace DataAccess.Concrete.EntityFramework
             //USE WHEN PUBLISHING
             var exePath = Path.GetDirectoryName(
                new Uri(System.Reflection.Assembly.GetExecutingAssembly().Location).LocalPath);
-            optionsBuilder.UseJet(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source =" + exePath + "\\CapacityDB.accdb;Persist Security Info = False;");
+
+            var dbLocation = exePath + "\\database_path.txt";
+
+            StreamReader streamReader = new StreamReader(dbLocation);
+
+            if (streamReader == null)
+            {
+                //HANDLE ERROR
+            }
+
+            var dbLocationStr = streamReader.ReadLine();
+            streamReader.Close();
+
+            optionsBuilder.UseJet(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source =" + dbLocationStr + "; Persist Security Info = False;");
+            //optionsBuilder.UseJet(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source =" + exePath + "\\CapacityDB.accdb;Persist Security Info = False;");
+
         }
 
         public DbSet<Category> Categories { get; set; }

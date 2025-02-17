@@ -1,17 +1,8 @@
 ﻿using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 
 namespace DashboardUI
 {
@@ -29,6 +20,21 @@ namespace DashboardUI
             InitializeComponent();
             _dashboardForm = dashboardForm;
             userManager = new UserManager(new EfUserDal());
+
+            var exePath = Path.GetDirectoryName(
+               new Uri(System.Reflection.Assembly.GetExecutingAssembly().Location).LocalPath);
+
+            var dbLocation = exePath + "\\database_path.txt";
+
+            StreamReader streamReader = new StreamReader(dbLocation);
+
+            if (streamReader == null)
+            {
+                // ERROR HANDLE
+            }
+
+            textBoxPath.Text = streamReader.ReadLine();
+            streamReader.Close();
         }
 
         private void AdminForm_Load(object sender, EventArgs e)
@@ -170,6 +176,26 @@ namespace DashboardUI
         private void userDataGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
             _tempCellValue = userDataGrid.Rows[e.RowIndex].Cells[1].Value;
+        }
+
+        private void buttonBrowse_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Select database location";
+            openFileDialog.DefaultExt = "accdb";
+            openFileDialog.Filter = "Access database (*.accdb)|*.accdb";
+            openFileDialog.ShowDialog();
+
+            textBoxPath.Text = openFileDialog.FileName;
+
+            var exePath = Path.GetDirectoryName(
+               new Uri(System.Reflection.Assembly.GetExecutingAssembly().Location).LocalPath);
+
+            var dbLocation = exePath + "\\database_path.txt";
+
+            StreamWriter streamWriter = new StreamWriter(dbLocation);
+            streamWriter.Write(textBoxPath.Text);
+            streamWriter.Close();
         }
     }
 }
