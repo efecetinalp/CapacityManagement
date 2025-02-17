@@ -37,10 +37,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="WinForms.DataVisualization" Version="1.9.2" />
   </ItemGroup>
 

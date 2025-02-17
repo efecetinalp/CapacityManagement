@@ -58,7 +58,7 @@ namespace DashboardUI
             chartArea.AxisY.MinorGrid.LineDashStyle = ChartDashStyle.Dash;
             chartArea.AxisY.LabelStyle.ForeColor = Color.DarkGray;
 
-            areaChart.Titles.Add("CABIN STRUCTURE");
+            //areaChart.Titles.Add("CABIN STRUCTURE");
 
             for (int i = 1; i < chartRequest.Legends.Count; i++)
             {

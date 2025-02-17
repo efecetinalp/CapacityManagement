@@ -80,7 +80,11 @@ namespace DashboardUI
 
             dbGrid.ReadOnly = true;
 
-            if (_dashboardForm.activeUser.Admin || _dashboardForm.activeUser.Author)
+            if (_dashboardForm.activeUser == null)
+            {
+                return;
+            }
+            else if (_dashboardForm.activeUser.Admin || _dashboardForm.activeUser.Author)
             {
                 buttonNew.Enabled = true;
                 buttonEdit.Enabled = true;

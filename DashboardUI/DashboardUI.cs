@@ -152,7 +152,13 @@ namespace DashboardUI
         private void UserLogin()
         {
             activeUser = userManager.GetByUserName(Environment.UserName.ToUpper()).Data;
-            labelActiveUser.Text = labelActiveUser.Text.Replace("Signing...", activeUser.UserName.ToUpper());
+            labelActiveUser.Text = labelActiveUser.Text.Replace("Signing...", Environment.UserName.ToUpper());
+
+            if (activeUser == null)
+            {
+                return;
+            }
+            
             labelActiveUser.Visible = true;
             loginForm = null;
 
