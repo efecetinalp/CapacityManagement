@@ -143,6 +143,7 @@
             Controls.Add(textBoxFileName);
             FormBorderStyle = FormBorderStyle.None;
             Name = "ExportImage";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             ResumeLayout(false);
             PerformLayout();
