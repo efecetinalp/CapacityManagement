@@ -23,6 +23,7 @@ namespace DataAccess.Concrete.EntityFramework
                              {
                                  PCapacityId = p.ProjectCapacityId,
                                  ProjectId = pt.DepartmentId,
+                                 DepartmentId = pt.DepartmentId,
                                  ProjectName = pt.ProjectName,
                                  PTotalCapacity = p.PTotalCapacity,
                                  Date = p.Date
@@ -41,6 +42,7 @@ namespace DataAccess.Concrete.EntityFramework
                              {
                                  PCapacityId = p.ProjectCapacityId,
                                  ProjectId = pt.DepartmentId,
+                                 DepartmentId = pt.DepartmentId,
                                  ProjectName = pt.ProjectName,
                                  PTotalCapacity = p.PTotalCapacity,
                                  Date = p.Date

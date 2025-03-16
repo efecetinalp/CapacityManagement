@@ -29,25 +29,24 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataGridForm));
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             buttonEdit = new Button();
             buttonReset = new Button();
-            buttonList = new Button();
             dateTimePickerEnd = new DateTimePicker();
-            comboBoxCategory = new ComboBox();
             comboBoxDepartment = new ComboBox();
             comboBoxManagement = new ComboBox();
             dateTimePickerStart = new DateTimePicker();
             dbGrid = new DataGridView();
             label1 = new Label();
             label2 = new Label();
-            label3 = new Label();
             label4 = new Label();
             label5 = new Label();
             buttonNew = new Button();
             buttonRefresh = new Button();
+            buttonExportToExcel = new Button();
+            buttonList = new Button();
             ((System.ComponentModel.ISupportInitialize)dbGrid).BeginInit();
             SuspendLayout();
             // 
@@ -86,41 +85,16 @@
             buttonReset.UseVisualStyleBackColor = false;
             buttonReset.Click += buttonReset_Click;
             // 
-            // buttonList
-            // 
-            buttonList.BackColor = Color.Transparent;
-            buttonList.Cursor = Cursors.Hand;
-            buttonList.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
-            buttonList.FlatStyle = FlatStyle.Flat;
-            buttonList.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonList.Image = (Image)resources.GetObject("buttonList.Image");
-            buttonList.Location = new Point(700, 24);
-            buttonList.Margin = new Padding(2);
-            buttonList.Name = "buttonList";
-            buttonList.Size = new Size(32, 32);
-            buttonList.TabIndex = 24;
-            buttonList.UseVisualStyleBackColor = false;
-            buttonList.Click += buttonList_Click;
-            // 
             // dateTimePickerEnd
             // 
             dateTimePickerEnd.CustomFormat = "MMM-yy";
             dateTimePickerEnd.Format = DateTimePickerFormat.Custom;
             dateTimePickerEnd.ImeMode = ImeMode.NoControl;
-            dateTimePickerEnd.Location = new Point(576, 33);
+            dateTimePickerEnd.Location = new Point(488, 33);
             dateTimePickerEnd.Margin = new Padding(2);
             dateTimePickerEnd.Name = "dateTimePickerEnd";
             dateTimePickerEnd.Size = new Size(106, 23);
             dateTimePickerEnd.TabIndex = 23;
-            // 
-            // comboBoxCategory
-            // 
-            comboBoxCategory.FormattingEnabled = true;
-            comboBoxCategory.Location = new Point(355, 33);
-            comboBoxCategory.Margin = new Padding(2);
-            comboBoxCategory.Name = "comboBoxCategory";
-            comboBoxCategory.Size = new Size(77, 23);
-            comboBoxCategory.TabIndex = 22;
             // 
             // comboBoxDepartment
             // 
@@ -146,7 +120,7 @@
             dateTimePickerStart.CustomFormat = "MMM-yy";
             dateTimePickerStart.Format = DateTimePickerFormat.Custom;
             dateTimePickerStart.ImeMode = ImeMode.NoControl;
-            dateTimePickerStart.Location = new Point(450, 33);
+            dateTimePickerStart.Location = new Point(362, 33);
             dateTimePickerStart.Margin = new Padding(2);
             dateTimePickerStart.Name = "dateTimePickerStart";
             dateTimePickerStart.Size = new Size(106, 23);
@@ -161,39 +135,42 @@
             dbGrid.BackgroundColor = Color.White;
             dbGrid.BorderStyle = BorderStyle.None;
             dbGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(46, 52, 63);
-            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(88, 183, 213);
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dbGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(46, 52, 63);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(88, 183, 213);
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dbGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dbGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = SystemColors.Window;
-            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(88, 183, 213);
-            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
-            dbGrid.DefaultCellStyle = dataGridViewCellStyle5;
+            dbGrid.ColumnHeadersVisible = false;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Window;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(88, 183, 213);
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dbGrid.DefaultCellStyle = dataGridViewCellStyle2;
             dbGrid.EnableHeadersVisualStyles = false;
             dbGrid.GridColor = SystemColors.ActiveCaption;
             dbGrid.Location = new Point(21, 79);
             dbGrid.Margin = new Padding(2);
             dbGrid.Name = "dbGrid";
             dbGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = Color.FromArgb(46, 52, 63);
-            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(88, 183, 213);
-            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
-            dbGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(46, 52, 63);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(88, 183, 213);
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dbGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dbGrid.RowHeadersVisible = false;
             dbGrid.RowHeadersWidth = 62;
             dbGrid.RowTemplate.Height = 33;
+            dbGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
             dbGrid.Size = new Size(1236, 558);
             dbGrid.TabIndex = 17;
             dbGrid.CellBeginEdit += dbGrid_CellBeginEdit;
@@ -223,22 +200,11 @@
             label2.TabIndex = 28;
             label2.Text = "Department";
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label3.Location = new Point(355, 14);
-            label3.Margin = new Padding(2, 0, 2, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(61, 17);
-            label3.TabIndex = 29;
-            label3.Text = "Category";
-            // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label4.Location = new Point(448, 14);
+            label4.Location = new Point(360, 14);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
             label4.Size = new Size(70, 17);
@@ -249,7 +215,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semibold", 9.5F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label5.Location = new Point(573, 15);
+            label5.Location = new Point(485, 15);
             label5.Margin = new Padding(2, 0, 2, 0);
             label5.Name = "label5";
             label5.Size = new Size(63, 17);
@@ -290,26 +256,57 @@
             buttonRefresh.TabIndex = 33;
             buttonRefresh.UseVisualStyleBackColor = false;
             // 
+            // buttonExportToExcel
+            // 
+            buttonExportToExcel.BackColor = Color.Transparent;
+            buttonExportToExcel.Cursor = Cursors.Hand;
+            buttonExportToExcel.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
+            buttonExportToExcel.FlatStyle = FlatStyle.Flat;
+            buttonExportToExcel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonExportToExcel.Image = (Image)resources.GetObject("buttonExportToExcel.Image");
+            buttonExportToExcel.Location = new Point(817, 25);
+            buttonExportToExcel.Margin = new Padding(2);
+            buttonExportToExcel.Name = "buttonExportToExcel";
+            buttonExportToExcel.Size = new Size(32, 32);
+            buttonExportToExcel.TabIndex = 35;
+            buttonExportToExcel.UseVisualStyleBackColor = false;
+            buttonExportToExcel.Click += buttonExportToExcel_Click;
+            // 
+            // buttonList
+            // 
+            buttonList.BackColor = Color.Transparent;
+            buttonList.Cursor = Cursors.Hand;
+            buttonList.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
+            buttonList.FlatStyle = FlatStyle.Flat;
+            buttonList.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonList.Image = (Image)resources.GetObject("buttonList.Image");
+            buttonList.Location = new Point(608, 30);
+            buttonList.Margin = new Padding(2);
+            buttonList.Name = "buttonList";
+            buttonList.Size = new Size(32, 32);
+            buttonList.TabIndex = 36;
+            buttonList.UseVisualStyleBackColor = false;
+            buttonList.Click += buttonList_Click;
+            // 
             // DataGridForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(242, 242, 242);
             ClientSize = new Size(1280, 660);
+            Controls.Add(buttonList);
+            Controls.Add(buttonExportToExcel);
             Controls.Add(buttonRefresh);
             Controls.Add(buttonNew);
             Controls.Add(label5);
             Controls.Add(label4);
-            Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(comboBoxManagement);
             Controls.Add(comboBoxDepartment);
             Controls.Add(dateTimePickerStart);
             Controls.Add(buttonEdit);
-            Controls.Add(comboBoxCategory);
             Controls.Add(dateTimePickerEnd);
-            Controls.Add(buttonList);
             Controls.Add(dbGrid);
             Controls.Add(buttonReset);
             FormBorderStyle = FormBorderStyle.None;
@@ -326,19 +323,18 @@
 
         private Button buttonEdit;
         private Button buttonReset;
-        private Button buttonList;
         private DateTimePicker dateTimePickerEnd;
-        private ComboBox comboBoxCategory;
         private ComboBox comboBoxDepartment;
         private ComboBox comboBoxManagement;
         private DateTimePicker dateTimePickerStart;
         private DataGridView dbGrid;
         private Label label1;
         private Label label2;
-        private Label label3;
         private Label label4;
         private Label label5;
         private Button buttonNew;
         private Button buttonRefresh;
+        private Button buttonExportToExcel;
+        private Button buttonList;
     }
 }

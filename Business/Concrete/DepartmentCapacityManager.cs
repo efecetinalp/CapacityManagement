@@ -50,6 +50,16 @@ namespace Business.Concrete
                 return new SuccessDataResult<List<DepartmentCapacityDetailDto>>(result, Messages.ProjectListed);
         }
 
+        public IDataResult<List<DepartmentCapacityDetailDto>> GetAllByDateBetweenAndDepartmentName(DateTime dateStart, DateTime dateEnd, string departmentName)
+        {
+            var result = _departmentCapactiyDal.GetDepartmentCapacityDetails(d => d.Date >= dateStart && d.Date <= dateEnd && d.DepartmentName == departmentName);
+
+            if (result.Count == 0)
+                return new ErrorDataResult<List<DepartmentCapacityDetailDto>>(result, Messages.EmptyData);
+            else
+                return new SuccessDataResult<List<DepartmentCapacityDetailDto>>(result, Messages.ProjectListed);
+        }
+
         public IDataResult<DepartmentCapacity> GetDepartmentCapacityByDateAndDepartmentId(DateTime date, int departmentId)
         {
             var result = _departmentCapactiyDal.Get(d => d.Date == date && d.DepartmentId == departmentId);
@@ -64,5 +74,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<DepartmentCapacityDetailDto>>(_departmentCapactiyDal.GetDepartmentCapacityDetails());
         }
+
+        
     }
 }

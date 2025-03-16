@@ -43,6 +43,7 @@ namespace DashboardUI
             toolTip = new ToolTip();
             toolTip.SetToolTip(this.buttonCreate, "Create New User");
             toolTip.SetToolTip(this.buttonDelete, "Delete User");
+            alertBox = new AlertBox();
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
@@ -76,8 +77,8 @@ namespace DashboardUI
                 userManager.Delete(userToDelete);
 
                 //notification
-                alertBox = new AlertBox(_dashboardForm.Left + _dashboardForm.Width - 270, _dashboardForm.Top + _dashboardForm.Height - 70);
-                alertBox.SuccessAlert("User deleted!");
+
+                alertBox.SuccessAlert("User deleted!", _dashboardForm.Left + _dashboardForm.Width, _dashboardForm.Top + _dashboardForm.Height);
             }
 
             RefreshUserList();
@@ -99,8 +100,7 @@ namespace DashboardUI
                     userManager.Update(userToUpdate);
 
                     //notification
-                    alertBox = new AlertBox(_dashboardForm.Left + _dashboardForm.Width - 270, _dashboardForm.Top + _dashboardForm.Height - 70);
-                    alertBox.InformationAlert("User set as Admin Role!");
+                    alertBox.InformationAlert("User set as Admin Role!", _dashboardForm.Left + _dashboardForm.Width, _dashboardForm.Top + _dashboardForm.Height);
                 }
                 else if (e.ColumnIndex == 3)
                 {
@@ -110,8 +110,7 @@ namespace DashboardUI
                     userManager.Update(userToUpdate);
 
                     //notification
-                    alertBox = new AlertBox(_dashboardForm.Left + _dashboardForm.Width - 270, _dashboardForm.Top + _dashboardForm.Height - 70);
-                    alertBox.InformationAlert("User set as Author Role!");
+                    alertBox.InformationAlert("User set as Author Role!", _dashboardForm.Left + _dashboardForm.Width, _dashboardForm.Top + _dashboardForm.Height);
                 }
                 else if (e.ColumnIndex == 4)
                 {
@@ -121,8 +120,7 @@ namespace DashboardUI
                     userManager.Update(userToUpdate);
 
                     //notification
-                    alertBox = new AlertBox(_dashboardForm.Left + _dashboardForm.Width - 270, _dashboardForm.Top + _dashboardForm.Height - 70);
-                    alertBox.InformationAlert("User set as Reader Role!");
+                    alertBox.InformationAlert("User set as Reader Role!", _dashboardForm.Left + _dashboardForm.Width, _dashboardForm.Top + _dashboardForm.Height);
                 }
             }
             else if (e.ColumnIndex == 1)
@@ -154,23 +152,20 @@ namespace DashboardUI
                     userManager.Update(userToUpdate);
 
                     //notification
-                    alertBox = new AlertBox(_dashboardForm.Left + _dashboardForm.Width - 270, _dashboardForm.Top + _dashboardForm.Height - 70);
-                    alertBox.SuccessAlert("User name is updated!");
+                    alertBox.SuccessAlert("User name is updated!", _dashboardForm.Left + _dashboardForm.Width, _dashboardForm.Top + _dashboardForm.Height);
                 }
                 else
                 {
                     userDataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _tempCellValue;
 
                     //notification
-                    alertBox = new AlertBox(_dashboardForm.Left + _dashboardForm.Width - 270, _dashboardForm.Top + _dashboardForm.Height - 70);
-                    alertBox.ErrorAlert("User name cannot be empty!");
+                    alertBox.ErrorAlert("User name cannot be empty!", _dashboardForm.Left + _dashboardForm.Width, _dashboardForm.Top + _dashboardForm.Height);
                 }
             }
             else
             {
                 //notification
-                alertBox = new AlertBox(_dashboardForm.Left + _dashboardForm.Width - 270, _dashboardForm.Top + _dashboardForm.Height - 70);
-                alertBox.WarningAlert("The value is not changed!");
+                alertBox.WarningAlert("The value is not changed!", _dashboardForm.Left + _dashboardForm.Width, _dashboardForm.Top + _dashboardForm.Height);
             }
         }
         private void userDataGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)

@@ -55,6 +55,16 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Project>>(_projectDal.GetAll(p => p.ProjectId == categoryId), Messages.ProjectListed);
         }
 
+        public IDataResult<List<Project>> GetAllByDepartmentId(int departmentId)
+        {
+            List<Project> result = _projectDal.GetAll(p => p.DepartmentId == departmentId);
+
+            if (result.Count == 0)
+                return new ErrorDataResult<List<Project>>(result, Messages.EmptyData);
+            else
+                return new SuccessDataResult<List<Project>>(result, Messages.ProjectListed);
+        }
+
         public IDataResult<List<Project>> GetByDate(DateTime date)
         {
             throw new NotImplementedException();
@@ -103,7 +113,7 @@ namespace Business.Concrete
         public IDataResult<List<ProjectDetailDto>> GetProjectDetails(int managementId, int departmentId, int categoryId)
         {
             List<ProjectDetailDto> result = _projectDal.GetProjectDetails(p => p.ManagementId == managementId && p.DepartmentId == departmentId && p.CategoryId == categoryId);
-            
+
             if (result.Count == 0)
                 return new ErrorDataResult<List<ProjectDetailDto>>(result, Messages.EmptyData);
             else
@@ -129,5 +139,7 @@ namespace Business.Concrete
             else
                 return new SuccessDataResult<List<ProjectDetailDto>>(result, Messages.ProjectListed);
         }
+
+        
     }
 }

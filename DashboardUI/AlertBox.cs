@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,18 +20,11 @@ namespace DashboardUI
         // public Image AlertImage { get; set; }
         // public string AlertText { get; set; }
         public int _xPos, _yPos;
+        private int _alertWidth;
 
-
-        public AlertBox(int xPos, int yPos)
+        public AlertBox()
         {
-            _xPos = xPos;
-            _yPos = yPos;
             InitializeComponent();
-        }
-
-        private void PositionAlert()
-        {
-            this.Location = new Point(_xPos, _yPos);
         }
 
         private void AlertBox_Load(object sender, EventArgs e)
@@ -40,10 +34,12 @@ namespace DashboardUI
 
         private void DialogAction()
         {
+            //for the first initialize
+            this.Location = new Point(_xPos - _alertWidth - 20, _yPos - 70);
+
             AlertDuration.Width = 0;
 
-            PositionAlert();
-            for (int i = 0; i < 250; i++)
+            for (int i = 0; i < _alertWidth; i++)
             {
                 timerAnimation.Start();
             }
@@ -52,59 +48,110 @@ namespace DashboardUI
         private void timerAnimation_Tick(object sender, EventArgs e)
         {
             AlertDuration.Width = AlertDuration.Width + 2;
-            if (AlertDuration.Width >= 250)
+            if (AlertDuration.Width >= _alertWidth)
             {
-                this.Close();
+                this.Hide();
             }
         }
 
-        private void AlertBox_Click(object sender, EventArgs e)
+        public void SuccessAlert(string alertText, int xPos, int yPos)
         {
-            this.Close();
-        }
+            if (this.Visible)
+                this.Hide();
 
-        public void SuccessAlert(string alertText)
-        {
-            AlertDuration.Width = 0;
+            _xPos = xPos;
+            _yPos = yPos;
             txtAlertBox.Text = alertText;
+            this.Width = txtAlertBox.Width + 70;
+            _alertWidth = this.Width;
+            this.Location = new Point(_xPos - _alertWidth - 20, _yPos - 70);
+            AlertDuration.Width = 0;
             this.BackColor = Color.LightGreen;
             txtAlertBox.ForeColor = Color.SeaGreen;
+            lblCloseIcon.ForeColor = Color.SeaGreen;
             AlertDuration.BackColor = Color.SeaGreen;
             pictureAlertBox.Image = Properties.Resources.success_alert;
             this.Show();
         }
 
-        public void ErrorAlert(string alertText)
+        public void ErrorAlert(string alertText, int xPos, int yPos)
         {
-            AlertDuration.Width = 0;
+            if (this.Visible)
+                this.Hide();
+
+            _xPos = xPos;
+            _yPos = yPos;
             txtAlertBox.Text = alertText;
+            this.Width = txtAlertBox.Width + 70;
+            _alertWidth = this.Width;
+            this.Location = new Point(_xPos - _alertWidth - 20, _yPos - 70);
+            AlertDuration.Width = 0;
             this.BackColor = Color.LightPink;
             txtAlertBox.ForeColor = Color.DarkRed;
+            lblCloseIcon.ForeColor = Color.DarkRed;
             AlertDuration.BackColor = Color.DarkRed;
             pictureAlertBox.Image = Properties.Resources.error_alert;
             this.Show();
         }
 
-        public void WarningAlert(string alertText)
+        public void WarningAlert(string alertText, int xPos, int yPos)
         {
-            AlertDuration.Width = 0;
+            if (this.Visible)
+                this.Hide();
+
+            _xPos = xPos;
+            _yPos = yPos;
             txtAlertBox.Text = alertText;
+            this.Width = txtAlertBox.Width + 70;
+            _alertWidth = this.Width;
+            AlertDuration.Width = 0;
+            this.Location = new Point(_xPos - _alertWidth - 20, _yPos - 70);
             this.BackColor = Color.LightGoldenrodYellow;
             txtAlertBox.ForeColor = Color.Goldenrod;
+            lblCloseIcon.ForeColor = Color.Goldenrod;
             AlertDuration.BackColor = Color.Goldenrod;
             pictureAlertBox.Image = Properties.Resources.warning_alert;
             this.Show();
         }
 
-        public void InformationAlert(string alertText)
+        public void InformationAlert(string alertText, int xPos, int yPos)
         {
-            AlertDuration.Width = 0;
+            if (this.Visible)
+                this.Hide();
+
+            _xPos = xPos;
+            _yPos = yPos;
             txtAlertBox.Text = alertText;
+            this.Width = txtAlertBox.Width + 70;
+            _alertWidth = this.Width;
+            this.Location = new Point(_xPos - _alertWidth - 20, _yPos - 70);
+            AlertDuration.Width = 0;
             this.BackColor = Color.LightSteelBlue;
             txtAlertBox.ForeColor = Color.DodgerBlue;
+            lblCloseIcon.ForeColor = Color.DodgerBlue;
             AlertDuration.BackColor = Color.DodgerBlue;
             pictureAlertBox.Image = Properties.Resources.info_alert;
             this.Show();
+        }
+
+        private void lblCloseIcon_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void txtAlertBox_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void pictureAlertBox_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void AlertBox_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

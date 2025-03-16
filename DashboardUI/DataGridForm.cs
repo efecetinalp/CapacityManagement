@@ -1,25 +1,34 @@
 ﻿using Business.Concrete;
 using Core.Utilities.Results;
+using DashboardUI.Properties;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Entities.DTOs;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using DataTable = System.Data.DataTable;
 using System.Diagnostics;
 using System.Drawing;
+using Font = System.Drawing.Font;
+using Rectangle = System.Drawing.Rectangle;
 using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using System.Windows.Forms.DataVisualization.Charting;
+using Microsoft.VisualBasic.Devices;
 
 namespace DashboardUI
 {
     public partial class DataGridForm : Form
     {
+        //Database Referances
         ManagementManager managementManager;
         DepartmentManager departmentManager;
         CategoryManager categoryManager;
@@ -27,15 +36,19 @@ namespace DashboardUI
         ProjectCapacityManager projectCapacityManager;
         DepartmentCapacityManager departmentCapacityManager;
 
+        //UI Form Referances
         CreateForm createForm;
         Dashboard _dashboardForm;
 
+        //Class Referances
         AlertBox alertBox;
         ToolTip _toolTip;
-        private bool isEditing = false;
 
-        //temp cell value
-        object _tempCellValue;
+        //Properties
+        private object _tempCellValue;
+        private bool isEditing = false;
+        private int _alertPosX;
+        private int _alertPosY;
 
         public DataGridForm(ProjectManager projectManager, DepartmentManager departmentManager, ManagementManager managementManager, CategoryManager categoryManager, DepartmentCapacityManager departmentCapacityManager, ProjectCapacityManager projectCapacityManager, Dashboard dashboardForm)
         {
@@ -47,12 +60,16 @@ namespace DashboardUI
             this.departmentCapacityManager = departmentCapacityManager;
 
             _dashboardForm = dashboardForm;
+            _alertPosX = _dashboardForm.Left + _dashboardForm.Width;
+            _alertPosY = _dashboardForm.Top + _dashboardForm.Height;
             InitializeComponent();
         }
 
         private void DataGridForm_Load(object sender, EventArgs e)
         {
             //form initialize options
+            alertBox = new AlertBox();
+
             _toolTip = new ToolTip();
             _toolTip.SetToolTip(this.buttonList, "List");
             _toolTip.SetToolTip(this.buttonRefresh, "Refresh");
@@ -70,10 +87,12 @@ namespace DashboardUI
                 comboBoxDepartment.Items.Add(department.DepartmentName);
             }
 
-            foreach (var category in categoryManager.GetAll().Data)
-            {
-                comboBoxCategory.Items.Add(category.CategoryName);
-            }
+            dateTimePickerStart.Format = DateTimePickerFormat.Custom;
+            dateTimePickerStart.CustomFormat = "MM/yyyy";
+            dateTimePickerStart.ShowUpDown = true;
+            dateTimePickerEnd.Format = DateTimePickerFormat.Custom;
+            dateTimePickerEnd.CustomFormat = "MM/yyyy";
+            dateTimePickerEnd.ShowUpDown = true;
 
             dateTimePickerStart.Value = new DateTime(2024, 01, 01);
             dateTimePickerEnd.Value = dateTimePickerStart.Value.AddMonths(23);
@@ -89,414 +108,189 @@ namespace DashboardUI
                 buttonNew.Enabled = true;
                 buttonEdit.Enabled = true;
             }
+
+            //DELETE LATER
+            comboBoxManagement.SelectedIndex = 0;
+            comboBoxDepartment.SelectedIndex = 0;
         }
+
+        #region Button List Function
 
         private void buttonList_Click(object sender, EventArgs e)
         {
             ResetGridView();
 
-            UIRequest uiRequest = new();
-            uiRequest.ManagementIndex = comboBoxManagement.SelectedIndex + 1; //+1 because sql table starts with -1
+            if (comboBoxManagement.Text == "" || comboBoxDepartment.Text == "")
+            {
+                alertBox.WarningAlert("Please select a Department", _dashboardForm.Left + _dashboardForm.Width, _dashboardForm.Top + _dashboardForm.Height);
+                return;
+            }
 
-            if (comboBoxDepartment.Text != "")
-                uiRequest.DepartmentIndex = departmentManager.GetByName(comboBoxDepartment.Text).Data.DepartmentId;
+            //fetches data and format into data grid view
+            FetchData();
+
+            alertBox.SuccessAlert("Success", _alertPosX, _alertPosY);
+        }
+
+        private async void FetchData()
+        {
+            DataTable dataTable = new DataTable();
+
+            //Columns placement
+            //this column for management / department / project names
+            DataColumn initialColumn = dataTable.Columns.Add("Initial");
+
+            //date columns will add to data table
+            int monthCalulate = (dateTimePickerEnd.Value.Year - dateTimePickerStart.Value.Year) * 12
+                + (dateTimePickerEnd.Value.Month - dateTimePickerStart.Value.Month);
+
+            for (int i = 0; i <= monthCalulate; i++)
+            {
+                DateTime tempMonth;
+                tempMonth = dateTimePickerStart.Value.AddMonths(i);
+                DataColumn dateColumn = dataTable.Columns.Add(tempMonth.ToString("MMM-yy"));
+            }
+
+            //Rows placement
+            //dates placed into row
+            DataRow dateRow = dataTable.Rows.Add();
+            for (int i = 0; i <= monthCalulate; i++)
+            {
+                DateTime tempMonth;
+                tempMonth = dateTimePickerStart.Value.AddMonths(i);
+                dateRow[i + 1] = (tempMonth.ToString("MMM-yy"));
+            }
+
+            //management name placed into row
+            DataRow managementRow = dataTable.Rows.Add();
+            managementRow[0] = comboBoxManagement.Text;
+
+            //management name placed into row
+            DataRow departmentRow = dataTable.Rows.Add();
+            departmentRow[0] = comboBoxDepartment.Text;
+
+            var departmentDatas = departmentCapacityManager.GetAllByDateBetweenAndDepartmentName(dateTimePickerStart.Value, dateTimePickerEnd.Value, comboBoxDepartment.Text);
+
+            if (departmentDatas.Success)
+            {
+                foreach (var departmentData in departmentDatas.Data)
+                {
+                    for (int i = 0; i <= monthCalulate; i++)
+                    {
+                        if (dateRow[i + 1].ToString() == departmentData.Date.ToString("MMM-yy"))
+                        {
+                            departmentRow[i + 1] = departmentData.DTotalCapacity;
+                        }
+                    }
+                }
+            }
             else
-                uiRequest.DepartmentIndex = 0;
+            {
+                alertBox.ErrorAlert(departmentDatas.Massage, _alertPosX, _alertPosY);
+                return;
+            }
 
-            uiRequest.CategotryIndex = comboBoxCategory.SelectedIndex + 1;
-            uiRequest.StartDate = dateTimePickerStart.Value;
-            uiRequest.EndDate = dateTimePickerEnd.Value;
+            //project name and capacity placed into row
+            int departmentId = departmentManager.GetByName(comboBoxDepartment.Text).Data.DepartmentId;
+            var projectNames = projectManager.GetAllByDepartmentId(departmentId);
+            var projectDatas = projectCapacityManager.GetProjectCapacityDetailsByDateBetweenAndDepartmentId(dateTimePickerStart.Value, dateTimePickerEnd.Value, departmentId);
 
-            DatabaseRows(uiRequest);
-            DatabaseColumnCategory();
-            //DatabaseColumns(); //<- that works
-            DatabaseColumnsTest();
+            if (projectNames.Success && projectDatas.Success)
+            {
+                foreach (var projectName in projectNames.Data)
+                {
+                    DataRow projectRow = dataTable.Rows.Add();
+                    projectRow[0] = projectName.ProjectName;
 
+                    foreach (var projectData in projectDatas.Data)
+                    {
+                        for (int i = 0; i <= monthCalulate; i++)
+                        {
+                            if (dateRow[i + 1].ToString() == projectData.Date.ToString("MMM-yy"))
+                            {
+                                for (int j = 0; j < dataTable.Rows.Count; j++)
+                                {
+                                    if (projectName.ProjectName == projectData.ProjectName)
+                                    {
+                                        projectRow[i + 1] = projectData.PTotalCapacity;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
+            else
+            {
+                alertBox.ErrorAlert(projectNames.Massage, _alertPosX, _alertPosY);
+                return;
+            }
+
+            //place data table into data grid view
+            dbGrid.DataSource = dataTable;
+
+            //data grid view style
+            FormatDataGridView();
+        }
+
+        private void FormatDataGridView()
+        {
+            //format data grid view style
+            dbGrid.Columns[0].Width = 250;
+
+            //data grid view font styles
+            Font managementFont = new("Calibri", 12, FontStyle.Italic);
+            Font projectFont = new("Segoe UI", 9, FontStyle.Italic);
+
+            //capacity and dates placed middle center into data grid view
+            for (int i = 1; i < dbGrid.Columns.Count; i++)
+            {
+                dbGrid.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dbGrid.Columns[i].Width = 30;
+            }
+
+            // date row backcolor
+            dbGrid.Rows[0].DefaultCellStyle.BackColor = Color.FromArgb(46, 52, 63);
+            dbGrid.Rows[0].DefaultCellStyle.ForeColor = Color.White;
+            dbGrid.Rows[0].DefaultCellStyle.Font = projectFont;
+            dbGrid.Rows[0].Height = 60;
+
+            //formating 90° date text
             dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
 
-            alertBox = new AlertBox(_dashboardForm.Left + _dashboardForm.Width - 270, _dashboardForm.Top + _dashboardForm.Height - 70);
-            alertBox.SuccessAlert("Datas listed successfuly!");
-        }
+            //management row backcolor
+            dbGrid.Rows[1].DefaultCellStyle.BackColor = Color.FromArgb(46, 52, 63);
+            dbGrid.Rows[1].DefaultCellStyle.Font = managementFont;
 
-        public ChartRequest GenerateChartData()
-        {
-            ChartRequest chartRequest = new();
-            List<string> legends = new();
-            List<List<double>> series = new();
-            List<double> months = new();
+            //department row backcolor
+            dbGrid.Rows[2].DefaultCellStyle.BackColor = Color.FromArgb(255, 230, 153);
+            dbGrid.Rows[2].DefaultCellStyle.Font = projectFont;
 
-
-            #region list of months
-            int monthCalulate = (dateTimePickerEnd.Value.Year - dateTimePickerStart.Value.Year) * 12
-                + (dateTimePickerEnd.Value.Month - dateTimePickerStart.Value.Month);
-            for (int i = 0; i <= monthCalulate; i++)
+            //project rows backcolor
+            for (int i = 3; i < dbGrid.Rows.Count; i++)
             {
-                months.Add(dateTimePickerStart.Value.AddMonths(i).ToOADate());
+                dbGrid.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(210, 238, 255);
+                dbGrid.Rows[i].DefaultCellStyle.Font = projectFont;
             }
-            #endregion
 
-            #region list of legends and series
-            for (int i = 0; i < dbGrid.Rows.Count; i++)
+            //project capacity cells backcolor
+            for (int i = 3; i < dbGrid.Rows.Count; i++)
             {
-                if (dbGrid.Rows[i].Tag == "Empty")
+                for (int j = 1; j < dbGrid.Columns.Count; j++)
                 {
-                    break;
+                    if (dbGrid.Rows[i].Cells[j].Value.ToString() != "")
+                        dbGrid.Rows[i].Cells[j].Style.BackColor = Color.FromArgb(198, 224, 180);
+                    else
+                        dbGrid.Rows[i].Cells[j].Style.BackColor = Color.FromArgb(226, 239, 218);
                 }
-
-                if (dbGrid.Rows[i].Tag == "Management")
-                {
-                    continue;
-                }
-
-                legends.Add(dbGrid.Rows[i].Cells[0].Value.ToString());
-
-                //string serieName = "series" + i.ToString();
-                //list of series
-                List<double> templist = new();
-                for (int j = 2; j < dbGrid.Columns.Count; j++)
-                {
-                    templist.Add(Convert.ToDouble(dbGrid.Rows[i].Cells[j].Value));
-                }
-                series.Add(templist);
-            }
-            #endregion
-
-            chartRequest.Months = months;
-            chartRequest.Series = series;
-            chartRequest.Legends = legends;
-
-            return chartRequest;
-        }
-
-        private void DatabaseColumnCategory()
-        {
-
-            int columnIndex = dbGrid.Columns.Add("", "");
-            DataGridViewColumn column = dbGrid.Columns[columnIndex];
-            column.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-            column.Width = 100;
-            column.HeaderText = "Category";
-            column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-
-            for (int i = 0; i < dbGrid.Rows.Count - 1; i++)
-            {
-                if (dbGrid.Rows[i].Tag == "Project")
-                {
-                    var result = projectManager.GetCategoryByProjectName(dbGrid.Rows[i].Cells[0].Value.ToString());
-                    string categoryName = result.Data[0].CategoryName;
-                    dbGrid.Rows[i].Cells[columnIndex].Value = categoryName;
-                    dbGrid.Rows[i].Cells[columnIndex].Tag = "Category";
-                }
-            }
-
-        }
-
-        private void DatabaseColumns()
-        {
-            int monthCalulate = (dateTimePickerEnd.Value.Year - dateTimePickerStart.Value.Year) * 12
-                + (dateTimePickerEnd.Value.Month - dateTimePickerStart.Value.Month);
-
-            //month columns
-            DateTime tempMonth;
-            for (int i = 0; i <= monthCalulate; i++)
-            {
-                //empty column
-                dbGrid.Columns.Add("", "");
-
-                DataGridViewColumn column = dbGrid.Columns[i + 2];
-
-                tempMonth = dateTimePickerStart.Value.AddMonths(i);
-                column.HeaderCell.Style.BackColor = Color.FromArgb(46, 52, 63);
-                column.HeaderText = tempMonth.ToString("MMM-yy");
-                column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-                //check project and department names from each row
-                for (int j = 0; j < dbGrid.Rows.Count - 1; j++)
-                {
-                    string tempCellName;
-                    tempCellName = dbGrid.Rows[j].Cells[0].Value.ToString();
-
-                    //get department capacity detail by date and department name
-                    var departmentResult = departmentCapacityManager.GetAllByDateAndDepartmentName(tempMonth, tempCellName);
-                    if (departmentResult.Success)
-                    {
-                        for (int k = 0; k < departmentResult.Data.Count; k++)
-                        {
-                            column.DataGridView.Rows[j].Cells[i + 2].Value = departmentResult.Data[k].DTotalCapacity;
-                            //column.DataGridView.Rows[j].Cells[i + 1].Style.BackColor = Color.FromArgb(255, 230, 153);
-                        }
-                    }
-
-                    //get project capacity detail by date and project name
-                    var projectResult = projectCapacityManager.GetProjectCapacityDetailsByDateAndProjectName(tempMonth, tempCellName);
-                    if (projectResult.Success)
-                    {
-                        for (int k = 0; k < projectResult.Data.Count; k++)
-                        {
-                            column.DataGridView.Rows[j].Cells[i + 2].Value = projectResult.Data[k].PTotalCapacity;
-                            column.DataGridView.Rows[j].Cells[i + 2].Style.BackColor = Color.FromArgb(198, 224, 180);
-                        }
-                    }
-                    else if (dbGrid.Rows[j].Tag == "Project")
-                        column.DataGridView.Rows[j].Cells[i + 2].Style.BackColor = Color.FromArgb(226, 239, 218);
-                }
-            }
-            #region "DELETE LATER"
-            //DELETE LATER
-            dbGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dbGrid.ColumnHeadersHeight = 100;
-            dbGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
-
-            //Change this later for category column
-            foreach (DataGridViewColumn col in dbGrid.Columns)
-            {
-                col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.BottomCenter;
-                col.HeaderCell.Style.ForeColor = Color.White;
-                //col.HeaderCell.Style.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Pixel);
-            }
-
-            // Here we attach an event handler to the cell painting event
-            //dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
-            #endregion
-        }
-
-        private void DatabaseColumnsTest()
-        {
-            var listCapacity = projectCapacityManager.GetProjectCapacityDetails().Data;
-            var listDepartmentCapacity = departmentCapacityManager.GetDepartmentCapacityDetails().Data;
-
-            int monthCalulate = (dateTimePickerEnd.Value.Year - dateTimePickerStart.Value.Year) * 12
-                + (dateTimePickerEnd.Value.Month - dateTimePickerStart.Value.Month);
-
-            //month columns
-            DateTime tempMonth;
-            for (int i = 0; i <= monthCalulate; i++)
-            {
-                //empty column
-                dbGrid.Columns.Add("", "");
-
-                DataGridViewColumn column = dbGrid.Columns[i + 2];
-
-                tempMonth = dateTimePickerStart.Value.AddMonths(i);
-                column.HeaderCell.Style.BackColor = Color.FromArgb(46, 52, 63);
-                column.Tag = tempMonth;
-                column.HeaderText = tempMonth.ToString("MMM-yy");
-                column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-                foreach (var departmentItem in listDepartmentCapacity)
-                {
-                    if (departmentItem.Date == tempMonth)
-                    {
-                        for (int k = 0; k < dbGrid.Rows.Count; k++)
-                        {
-                            if (departmentItem.DepartmentName == dbGrid.Rows[k].Cells[0].Value.ToString() && dbGrid.Rows[k].Tag == "Department")
-                            {
-                                column.DataGridView.Rows[k].Cells[i + 2].Value = departmentItem.DTotalCapacity;
-                            }
-                        }
-                    }
-                }
-
-                foreach (var item in listCapacity)
-                {
-                    if (item.Date == tempMonth)
-                    {
-                        for (int j = 0; j < dbGrid.Rows.Count; j++)
-                        {
-                            if (item.ProjectName == dbGrid.Rows[j].Cells[0].Value.ToString())
-                            {
-                                column.DataGridView.Rows[j].Cells[i + 2].Value = item.PTotalCapacity;
-                                column.DataGridView.Rows[j].Cells[i + 2].Style.BackColor = Color.FromArgb(198, 224, 180);
-
-                            }
-                            else if (dbGrid.Rows[j].Tag == "Project" && dbGrid.Rows[j].Cells[i + 2].Value == null)
-                                column.DataGridView.Rows[j].Cells[i + 2].Style.BackColor = Color.FromArgb(226, 239, 218);
-                        }
-                    }
-                }
-
-            }
-
-            #region "DELETE LATER"
-            //DELETE LATER
-            dbGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dbGrid.ColumnHeadersHeight = 60;
-            dbGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
-
-            //Change this later for category column
-            foreach (DataGridViewColumn col in dbGrid.Columns)
-            {
-                col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.BottomCenter;
-                col.HeaderCell.Style.ForeColor = Color.White;
-                //col.HeaderCell.Style.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Pixel);
-            }
-
-            // Here we attach an event handler to the cell painting event
-            //dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
-            #endregion
-        }
-
-        private void DatabaseRows(UIRequest uiRequest)
-        {
-            if (uiRequest.ManagementIndex == 0)
-            {
-                var resultWOManagement = projectManager.GetProjectDetails();
-                FetchData(resultWOManagement);
-                return;
-            }
-
-            if (uiRequest.DepartmentIndex == 0)
-            {
-                var resultWODepartment = projectManager.GetProjectDetails(uiRequest.ManagementIndex);
-                FetchData(resultWODepartment);
-                return;
-            }
-
-            if (uiRequest.CategotryIndex == 0)
-            {
-                var resultWOCategory = projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex);
-                FetchData(resultWOCategory);
-                return;
-            }
-
-            //DELETE LATER
-            //dbGrid.DataSource = projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex, uiRequest.CategotryIndex).Data;
-            else
-            {
-                var result = projectManager.GetProjectDetails(uiRequest.ManagementIndex, uiRequest.DepartmentIndex, uiRequest.CategotryIndex);
-                FetchData(result);
-            }
-        }
-
-        private void FetchData(IDataResult<List<ProjectDetailDto>> result)
-        {
-            int columnIndex = dbGrid.Columns.Add("", "");
-
-            if (result.Success)
-            {
-                List<string> managementNames = new();
-                List<string> departmentNames = new();
-                List<string> projectNames = new();
-
-                for (int i = 0; i < result.Data.Count; i++)
-                {
-                    managementNames.Add(result.Data[i].ManagementName);
-                    departmentNames.Add(result.Data[i].DepartmentName + "<ß>" + result.Data[i].ManagementName);
-                    projectNames.Add(result.Data[i].ProjectName + "<ß>" + result.Data[i].DepartmentName);
-                }
-
-                //unique values
-                managementNames = managementNames.Distinct().ToList();
-                departmentNames = departmentNames.Distinct().ToList();
-                projectNames = projectNames.Distinct().ToList();
-
-
-                //if management count > 0
-                for (int i = 0; i < managementNames.Count; i++)
-                {
-                    Font managementFont = new("Calibri", 12, FontStyle.Italic);
-                    //managementFont.Style = FontStyle.Italic;
-                    AddRow(managementNames[i], Color.FromArgb(46, 52, 63), Color.White, "Management", managementFont);
-                    //dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
-
-                    // if department count >0
-                    for (int j = 0; j < departmentNames.Count; j++)
-                    {
-                        if (managementNames[i] == departmentNames[j].Split("<ß>")[1])
-                        {
-                            Font departmentFont = new("Segoe UI", 9, FontStyle.Italic);
-                            AddRow(departmentNames[j].Split("<ß>")[0], Color.FromArgb(255, 230, 153), Color.Black, "Department", departmentFont);
-
-                            for (int k = 0; k < projectNames.Count; k++)
-                            {
-                                Font projectFont = new("Segoe UI", 9, FontStyle.Italic);
-                                if (departmentNames[j].Split("<ß>")[0] == projectNames[k].Split("<ß>")[1])
-                                {
-                                    AddRow(projectNames[k].Split("<ß>")[0], Color.FromArgb(210, 238, 255), Color.Black, "Project", projectFont);
-                                }
-
-                            }
-                            //seperator
-                            AddRow("", Color.FromArgb(242, 242, 242), Color.White, "Empty", new Font("Segui", 8), 15);
-
-                        }
-                    }
-                }
-
-                Debug.Print(result.Massage);
-            }
-            else
-            {
-                ResetGridView();
-                dbGrid.Columns.Add("", "");
-                Debug.Print(result.Massage);
-            }
-        }
-
-        private void AddRow(string mainData, Color color, Color foreColor, string tag, Font font, int height = 33)
-        {
-            DataGridViewRow dataRow = new();
-            DataGridViewTextBoxCell dataCell = new();
-
-            //seperate rows and cells accordingly
-            dataRow.Tag = tag;
-            dataCell.Value = mainData;
-            dataRow.DefaultCellStyle.Font = font;
-            dataRow.DefaultCellStyle.BackColor = color;
-            dataRow.DefaultCellStyle.ForeColor = foreColor;
-            dataRow.Height = height;
-            dataRow.Cells.Add(dataCell);
-            dbGrid.Rows.Add(dataRow);
-            //return dbGrid.Rows.IndexOf(dataRow);
-        }
-
-        private void buttonReset_Click(object sender, EventArgs e)
-        {
-            ResetGridView();
-
-            //reset filters
-            comboBoxManagement.ResetText();
-            comboBoxManagement.SelectedIndex = -1;
-            comboBoxDepartment.ResetText();
-            comboBoxDepartment.SelectedIndex = -1;
-            comboBoxCategory.ResetText();
-            comboBoxCategory.SelectedIndex = -1;
-
-            dateTimePickerStart.Value = new DateTime(2024, 01, 01);
-            dateTimePickerEnd.Value = dateTimePickerStart.Value.AddMonths(23);
-
-            isEditing = false;
-        }
-
-        private void ResetGridView()
-        {
-            //reset gridview
-            dbGrid.DataSource = null;
-            dbGrid.Rows.Clear();
-            dbGrid.Columns.Clear();
-        }
-
-        private void comboBoxManagement_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //update department comboBox
-            comboBoxDepartment.Items.Clear();
-            comboBoxDepartment.ResetText();
-            comboBoxDepartment.SelectedIndex = -1;
-            comboBoxCategory.ResetText();
-            comboBoxCategory.SelectedIndex = -1;
-
-            foreach (var department in departmentManager.GetAllByManagementId(comboBoxManagement.SelectedIndex + 1).Data)
-            {
-                comboBoxDepartment.Items.Add(department.DepartmentName);
             }
         }
 
         private void dbGrid_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            // check that we are in a header cell!
-            //column index = 1 is for project names
-            if (e.RowIndex == -1 && e.ColumnIndex >= 2)
+            // dates row
+            if (e.RowIndex == 0 && e.ColumnIndex >= 1)
             {
                 e.PaintBackground(e.ClipBounds, true);
                 Rectangle rect = this.dbGrid.GetColumnDisplayRectangle(e.ColumnIndex, true);
@@ -513,30 +307,96 @@ namespace DashboardUI
                 // ColumnHeadersHeight minus the current text width. ColumnHeadersHeight is the
                 // maximum of all the columns since we paint cells twice - though this fact
                 // may not be true in all usages!   
-                e.Graphics.DrawString(e.Value.ToString(), this.Font, Brushes.White, new PointF(rect.Y - (dbGrid.ColumnHeadersHeight - titleSize.Width), rect.X));
+                e.Graphics.DrawString(e.Value.ToString(), this.Font, Brushes.White, new PointF(rect.Y - (dbGrid.Rows[0].Height - titleSize.Width), rect.X + 5));
                 // The old line for comparison
                 //e.Graphics.DrawString(e.Value.ToString(), this.Font, Brushes.Black, new PointF(rect.Y, rect.X));
-
 
                 e.Graphics.RotateTransform(90.0F);
                 e.Graphics.TranslateTransform(0, -titleSize.Width);
                 e.Handled = true;
             }
 
-            if (e.RowIndex > -1 && e.ColumnIndex > -1 && dbGrid.Rows[e.RowIndex].Tag == "Management")
+            //management row
+            if (e.RowIndex == 1 && e.ColumnIndex >= 0)
             {
                 e.AdvancedBorderStyle.Right = DataGridViewAdvancedCellBorderStyle.None;
             }
         }
 
-        //CRUD OPERTAIONS
-
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void dbGrid_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
         {
-            //delete entity
-            CreateProjectForm deleteForm = new(managementManager, departmentManager, categoryManager, projectManager);
-            deleteForm.ShowDialog();
+            e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
         }
+
+        #endregion
+
+        #region Button Reset Function
+
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            ResetGridView();
+
+            //reset filters
+            comboBoxManagement.ResetText();
+            comboBoxManagement.SelectedIndex = -1;
+            comboBoxDepartment.ResetText();
+            comboBoxDepartment.SelectedIndex = -1;
+
+            dateTimePickerStart.Value = new DateTime(2024, 01, 01);
+            dateTimePickerEnd.Value = dateTimePickerStart.Value.AddMonths(23);
+
+            isEditing = false;
+        }
+
+        private void ResetGridView()
+        {
+            //reset gridview
+            dbGrid.DataSource = null;
+            dbGrid.Rows.Clear();
+            dbGrid.Columns.Clear();
+        }
+
+        #endregion
+
+        //THIS IS EMPTY DELETE LATER
+        #region Button Refresh Function
+
+        #endregion
+
+        #region Button Export To Excel Function
+        
+        private void buttonExportToExcel_Click(object sender, EventArgs e)
+        {
+            ExportHandler.ExportDataToExcel(dbGrid);
+        }
+
+        #endregion
+
+        #region Button Create New Project Function
+
+        private void buttonNew_Click(object sender, EventArgs e)
+        {
+            if (createForm == null)
+            {
+                createForm = new CreateForm(managementManager, departmentManager, categoryManager, projectManager);
+                createForm.FormClosed += CreateForm_FormClosed;
+                createForm.ShowDialog();
+            }
+            else
+            {
+                createForm.Activate();
+            }
+        }
+
+        private void CreateForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            createForm = null;
+        }
+
+        #endregion
+
+        //TOTAL MESS INSIDE NEED TO REFACTOR
+        #region Button Edit Function
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
@@ -579,7 +439,6 @@ namespace DashboardUI
             else if (isEditing == true)
             {
 
-                //OnEditMode(false);
                 dbGrid.Columns.Remove("Delete");
                 dbGrid.Columns.Remove("Update");
 
@@ -589,115 +448,63 @@ namespace DashboardUI
             }
         }
 
-        private void OnEditMode(bool edit)
-        {
-            if (edit)
-            {
-                dbGrid.Columns.Remove(dbGrid.Columns[1]);
-                DataGridViewComboBoxColumn cmbCol = new DataGridViewComboBoxColumn();
-                cmbCol.HeaderText = "Edit Category";
-                List<string> categoryNames = new();
-                foreach (var name in categoryManager.GetAll().Data)
-                {
-                    categoryNames.Add(name.CategoryName);
-                }
-                cmbCol.DataSource = categoryNames;
-                int index = dbGrid.Columns.Add(cmbCol);
-                dbGrid.Columns[index].DisplayIndex = 1;
-            }
-            else
-            {
-                dbGrid.Columns.Remove(dbGrid.Columns[1]);
-                DatabaseColumnCategory();
-                dbGrid.Columns[dbGrid.Columns.Count - 1].DisplayIndex = 1;
-
-            }
-
-        }
-
         private void dbGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //delete project and project capacities
-            if (dbGrid.Columns[e.ColumnIndex].Name == "Delete" && dbGrid.Rows[e.RowIndex].Tag == "Project")
+            if (e.ColumnIndex > 0 && e.RowIndex > 0)
             {
-                DialogResult dialogResult = MessageBox.Show("Are you sure to delete selected project? Project index: " + e.RowIndex, "Delete Project", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dialogResult == DialogResult.Yes)
+                //delete project and project capacities
+                if (dbGrid.Columns[e.ColumnIndex].Name == "Delete" && dbGrid.Rows[e.RowIndex].Tag == "Project")
                 {
-                    Project projectToDelete = projectManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).Data;
-                    DeleteProject(projectToDelete);
+                    DialogResult dialogResult = MessageBox.Show("Are you sure to delete selected project? Project index: " + e.RowIndex, "Delete Project", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        Project projectToDelete = projectManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).Data;
+                        DeleteProject(projectToDelete);
+                    }
                 }
-            }
-            else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Project")
-            {
-                UpdateProjectForm updateForm = new(managementManager, departmentManager, categoryManager, projectManager, dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString());
-                updateForm.ShowDialog();
+                else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Project")
+                {
+                    UpdateProjectForm updateForm = new(managementManager, departmentManager, categoryManager, projectManager, dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    updateForm.ShowDialog();
 
-            }
-            else if (dbGrid.Columns[e.ColumnIndex].Name == "Delete" && dbGrid.Rows[e.RowIndex].Tag == "Department")
-            {
-                DialogResult dialogResult = MessageBox.Show("Are you sure to delete selected department? Department index: " + e.RowIndex, "Delete Department", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dialogResult == DialogResult.Yes)
-                {
-                    Department departmentToDelete = departmentManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).Data;
-                    DeleteDepartment(departmentToDelete);
                 }
-            }
-            else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Department")
-            {
-                UpdateDepartmentForm updateForm = new(managementManager, departmentManager, dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString());
-                updateForm.ShowDialog();
+                else if (dbGrid.Columns[e.ColumnIndex].Name == "Delete" && dbGrid.Rows[e.RowIndex].Tag == "Department")
+                {
+                    DialogResult dialogResult = MessageBox.Show("Are you sure to delete selected department? Department index: " + e.RowIndex, "Delete Department", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        Department departmentToDelete = departmentManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).Data;
+                        DeleteDepartment(departmentToDelete);
+                    }
+                }
+                else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Department")
+                {
+                    UpdateDepartmentForm updateForm = new(managementManager, departmentManager, dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    updateForm.ShowDialog();
 
-            }
-            else if (dbGrid.Columns[e.ColumnIndex].Name == "Delete" && dbGrid.Rows[e.RowIndex].Tag == "Management")
-            {
-                DialogResult dialogResult = MessageBox.Show("Are you sure to delete selected Management? Management index: " + e.RowIndex, "Delete Management", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dialogResult == DialogResult.Yes)
+                }
+                else if (dbGrid.Columns[e.ColumnIndex].Name == "Delete" && dbGrid.Rows[e.RowIndex].Tag == "Management")
                 {
-                    Management managementToDelete = managementManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).Data;
-                    DeleteManagement(managementToDelete);
+                    DialogResult dialogResult = MessageBox.Show("Are you sure to delete selected Management? Management index: " + e.RowIndex, "Delete Management", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        Management managementToDelete = managementManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).Data;
+                        DeleteManagement(managementToDelete);
+                    }
+                }
+                else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Management")
+                {
+                    UpdateManagementForm updateForm = new(managementManager, dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()); ;
+                    updateForm.ShowDialog();
                 }
             }
-            else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Management")
+            else if (e.ColumnIndex < 0)
             {
-                UpdateManagementForm updateForm = new(managementManager, dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()); ;
-                updateForm.ShowDialog();
+                Debug.Print("project card opened");
             }
         }
 
-        private void DeleteManagement(Management managementToDelete)
-        {
-            //delete all projects
-            //delete all departments
-            //delete management
-            Debug.Print("Management not deleted but function works");
-            MessageBox.Show("Management deleted successfully", "Delete Management", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void DeleteDepartment(Department departmentToDelete)
-        {
-            //delete all projects
-            //delete department capacity
-            //delete department
-
-            Debug.Print("Department not deleted but function works");
-            MessageBox.Show("Department deleted successfully", "Delete Department", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void DeleteProject(Project projectToDelete)
-        {
-            var projectCapacitiesToDelete = projectCapacityManager.GetAllByProjectId(projectToDelete.ProjectId);
-            if (projectCapacitiesToDelete.Success)
-            {
-                foreach (var projectCapacity in projectCapacitiesToDelete.Data)
-                {
-                    projectCapacityManager.Delete(projectCapacity);
-                }
-            }
-
-            projectManager.Delete(projectToDelete);
-
-            MessageBox.Show("Project deleted successfully", "Delete Project", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+        #region CRUD Operations
 
         private void dbGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
@@ -822,28 +629,136 @@ namespace DashboardUI
             _tempCellValue = dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
         }
 
-        private void dbGrid_ColumnAdded(object sender, DataGridViewColumnEventArgs e)
+        private void DeleteManagement(Management managementToDelete)
         {
-            e.Column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            //delete all projects
+            //delete all departments
+            //delete management
+            Debug.Print("Management not deleted but function works");
+            MessageBox.Show("Management deleted successfully", "Delete Management", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void buttonNew_Click(object sender, EventArgs e)
+        private void DeleteDepartment(Department departmentToDelete)
         {
-            if (createForm == null)
+            //delete all projects
+            //delete department capacity
+            //delete department
+
+            Debug.Print("Department not deleted but function works");
+            MessageBox.Show("Department deleted successfully", "Delete Department", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void DeleteProject(Project projectToDelete)
+        {
+            var projectCapacitiesToDelete = projectCapacityManager.GetAllByProjectId(projectToDelete.ProjectId);
+            if (projectCapacitiesToDelete.Success)
             {
-                createForm = new CreateForm(managementManager, departmentManager, categoryManager, projectManager);
-                createForm.FormClosed += CreateForm_FormClosed;
-                createForm.ShowDialog();
+                foreach (var projectCapacity in projectCapacitiesToDelete.Data)
+                {
+                    projectCapacityManager.Delete(projectCapacity);
+                }
             }
-            else
+
+            projectManager.Delete(projectToDelete);
+
+            MessageBox.Show("Project deleted successfully", "Delete Project", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Combobox Management Changed Event
+
+        private void comboBoxManagement_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //update department comboBox
+            comboBoxDepartment.Items.Clear();
+            comboBoxDepartment.ResetText();
+            comboBoxDepartment.SelectedIndex = -1;
+
+            foreach (var department in departmentManager.GetAllByManagementId(comboBoxManagement.SelectedIndex + 1).Data)
             {
-                createForm.Activate();
+                comboBoxDepartment.Items.Add(department.DepartmentName);
             }
         }
 
-        private void CreateForm_FormClosed(object sender, FormClosedEventArgs e)
+        #endregion
+
+        //NOT WORKED ON YET
+        #region Project Information Card
+        
+        private void dbGrid_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
-            createForm = null;
+            if (e.RowIndex > 0)
+            {
+                if (dbGrid.Rows[e.RowIndex].Tag == "Project")
+                {
+                    for (int i = 0; i < dbGrid.Rows.Count; i++)
+                    {
+                        dbGrid.Rows[i].HeaderCell.Value = "";
+                    }
+                    dbGrid.Rows[e.RowIndex].HeaderCell.Value = "x";
+                }
+            }
         }
+
+        #endregion
+
+        //NOT WORKED ON YET
+        #region Button Chart Function
+
+        public ChartRequest GenerateChartData()
+        {
+            ChartRequest chartRequest = new();
+            List<string> legends = new();
+            List<List<double>> series = new();
+            List<double> months = new();
+
+
+            #region list of months
+            int monthCalulate = (dateTimePickerEnd.Value.Year - dateTimePickerStart.Value.Year) * 12
+                + (dateTimePickerEnd.Value.Month - dateTimePickerStart.Value.Month);
+            for (int i = 0; i <= monthCalulate; i++)
+            {
+                months.Add(dateTimePickerStart.Value.AddMonths(i).ToOADate());
+            }
+            #endregion
+
+            #region list of legends and series
+            for (int i = 0; i < dbGrid.Rows.Count; i++)
+            {
+                if (dbGrid.Rows[i].Tag == "Empty")
+                {
+                    break;
+                }
+
+                if (dbGrid.Rows[i].Tag == "Management")
+                {
+                    continue;
+                }
+
+                legends.Add(dbGrid.Rows[i].Cells[0].Value.ToString());
+
+                //string serieName = "series" + i.ToString();
+                //list of series
+                List<double> templist = new();
+                for (int j = 2; j < dbGrid.Columns.Count; j++)
+                {
+                    templist.Add(Convert.ToDouble(dbGrid.Rows[i].Cells[j].Value));
+                }
+                series.Add(templist);
+            }
+            #endregion
+
+            chartRequest.Months = months;
+            chartRequest.Series = series;
+            chartRequest.Legends = legends;
+
+            return chartRequest;
+        }
+
+        #endregion
+
     }
 }

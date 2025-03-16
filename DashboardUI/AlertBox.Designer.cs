@@ -33,6 +33,7 @@
             txtAlertBox = new Label();
             timerAnimation = new System.Windows.Forms.Timer(components);
             AlertDuration = new Panel();
+            lblCloseIcon = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureAlertBox).BeginInit();
             SuspendLayout();
             // 
@@ -44,6 +45,7 @@
             pictureAlertBox.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureAlertBox.TabIndex = 0;
             pictureAlertBox.TabStop = false;
+            pictureAlertBox.Click += pictureAlertBox_Click;
             // 
             // txtAlertBox
             // 
@@ -54,6 +56,7 @@
             txtAlertBox.Size = new Size(114, 15);
             txtAlertBox.TabIndex = 1;
             txtAlertBox.Text = "Test Text Template";
+            txtAlertBox.Click += txtAlertBox_Click;
             // 
             // timerAnimation
             // 
@@ -65,20 +68,35 @@
             AlertDuration.BackColor = SystemColors.ActiveCaptionText;
             AlertDuration.Location = new Point(0, 37);
             AlertDuration.Name = "AlertDuration";
-            AlertDuration.Size = new Size(251, 10);
+            AlertDuration.Size = new Size(350, 10);
             AlertDuration.TabIndex = 2;
+            // 
+            // lblCloseIcon
+            // 
+            lblCloseIcon.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lblCloseIcon.AutoSize = true;
+            lblCloseIcon.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblCloseIcon.Location = new Point(332, 2);
+            lblCloseIcon.Name = "lblCloseIcon";
+            lblCloseIcon.Size = new Size(14, 15);
+            lblCloseIcon.TabIndex = 3;
+            lblCloseIcon.Text = "x";
+            lblCloseIcon.TextAlign = ContentAlignment.MiddleCenter;
+            lblCloseIcon.Click += lblCloseIcon_Click;
             // 
             // AlertBox
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(250, 43);
+            ClientSize = new Size(350, 43);
+            Controls.Add(lblCloseIcon);
             Controls.Add(AlertDuration);
             Controls.Add(txtAlertBox);
             Controls.Add(pictureAlertBox);
             FormBorderStyle = FormBorderStyle.None;
             Name = "AlertBox";
             Text = "AlertBox";
+            TopMost = true;
             Load += AlertBox_Load;
             Click += AlertBox_Click;
             ((System.ComponentModel.ISupportInitialize)pictureAlertBox).EndInit();
@@ -92,5 +110,6 @@
         private Label txtAlertBox;
         private System.Windows.Forms.Timer timerAnimation;
         private Panel AlertDuration;
+        private Label lblCloseIcon;
     }
 }

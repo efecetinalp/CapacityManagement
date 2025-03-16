@@ -74,5 +74,15 @@ namespace Business.Concrete
             else
                 return new SuccessDataResult<ProjectCapacity>(result, Messages.ProjectListed);
         }
+
+        public IDataResult<List<ProjectCapacityDetailDto>> GetProjectCapacityDetailsByDateBetweenAndDepartmentId(DateTime dateStart, DateTime dateEnd, int departmentId)
+        {
+            var result = _projectCapacityDal.GetProjectCapacityDetails(p => p.Date >= dateStart && p.Date <= dateEnd && p.DepartmentId == departmentId);
+
+            if (result.Count == 0)
+                return new ErrorDataResult<List<ProjectCapacityDetailDto>>(result, Messages.EmptyData);
+            else
+                return new SuccessDataResult<List<ProjectCapacityDetailDto>>(result, Messages.ProjectListed);
+        }
     }
 }

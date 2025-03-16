@@ -14,6 +14,7 @@ namespace Business.Abstract
         IDataResult<List<DepartmentCapacityDetailDto>> GetDepartmentCapacityDetails();
 
         IDataResult<List<DepartmentCapacityDetailDto>> GetAllByDateAndDepartmentName(DateTime date, string departmentName);
+        IDataResult<List<DepartmentCapacityDetailDto>> GetAllByDateBetweenAndDepartmentName(DateTime dateStart, DateTime dateEnd, string departmentName);
         IDataResult<DepartmentCapacity> GetDepartmentCapacityByDateAndDepartmentId(DateTime date, int departmentId);
 
         IResult Add(DepartmentCapacity departmentCapacity);
