@@ -23,6 +23,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Windows.Forms.DataVisualization.Charting;
 using Microsoft.VisualBasic.Devices;
+using System.Globalization;
 
 namespace DashboardUI
 {
@@ -45,10 +46,12 @@ namespace DashboardUI
         ToolTip _toolTip;
 
         //Properties
-        private object _tempCellValue;
+        private string _cellValueBegin;
         private bool isEditing = false;
         private int _alertPosX;
         private int _alertPosY;
+        private DateTime _startDate;
+        private DateTime _endDate;
 
         public DataGridForm(ProjectManager projectManager, DepartmentManager departmentManager, ManagementManager managementManager, CategoryManager categoryManager, DepartmentCapacityManager departmentCapacityManager, ProjectCapacityManager projectCapacityManager, Dashboard dashboardForm)
         {
@@ -135,19 +138,21 @@ namespace DashboardUI
         private async void FetchData()
         {
             DataTable dataTable = new DataTable();
+            _startDate = dateTimePickerStart.Value;
+            _endDate = dateTimePickerEnd.Value;
 
             //Columns placement
             //this column for management / department / project names
             DataColumn initialColumn = dataTable.Columns.Add("Initial");
 
             //date columns will add to data table
-            int monthCalulate = (dateTimePickerEnd.Value.Year - dateTimePickerStart.Value.Year) * 12
-                + (dateTimePickerEnd.Value.Month - dateTimePickerStart.Value.Month);
+            int monthCalulate = (_endDate.Year - _startDate.Year) * 12
+                + (_endDate.Month - _startDate.Month);
 
             for (int i = 0; i <= monthCalulate; i++)
             {
                 DateTime tempMonth;
-                tempMonth = dateTimePickerStart.Value.AddMonths(i);
+                tempMonth = _startDate.AddMonths(i);
                 DataColumn dateColumn = dataTable.Columns.Add(tempMonth.ToString("MMM-yy"));
             }
 
@@ -157,7 +162,7 @@ namespace DashboardUI
             for (int i = 0; i <= monthCalulate; i++)
             {
                 DateTime tempMonth;
-                tempMonth = dateTimePickerStart.Value.AddMonths(i);
+                tempMonth = _startDate.AddMonths(i);
                 dateRow[i + 1] = (tempMonth.ToString("MMM-yy"));
             }
 
@@ -169,7 +174,7 @@ namespace DashboardUI
             DataRow departmentRow = dataTable.Rows.Add();
             departmentRow[0] = comboBoxDepartment.Text;
 
-            var departmentDatas = departmentCapacityManager.GetAllByDateBetweenAndDepartmentName(dateTimePickerStart.Value, dateTimePickerEnd.Value, comboBoxDepartment.Text);
+            var departmentDatas = departmentCapacityManager.GetAllByDateBetweenAndDepartmentName(_startDate, _endDate, comboBoxDepartment.Text);
 
             if (departmentDatas.Success)
             {
@@ -193,7 +198,7 @@ namespace DashboardUI
             //project name and capacity placed into row
             int departmentId = departmentManager.GetByName(comboBoxDepartment.Text).Data.DepartmentId;
             var projectNames = projectManager.GetAllByDepartmentId(departmentId);
-            var projectDatas = projectCapacityManager.GetProjectCapacityDetailsByDateBetweenAndDepartmentId(dateTimePickerStart.Value, dateTimePickerEnd.Value, departmentId);
+            var projectDatas = projectCapacityManager.GetProjectCapacityDetailsByDateBetweenAndDepartmentId(_startDate, _endDate, departmentId);
 
             if (projectNames.Success && projectDatas.Success)
             {
@@ -260,16 +265,20 @@ namespace DashboardUI
             dbGrid.CellPainting += new DataGridViewCellPaintingEventHandler(dbGrid_CellPainting);
 
             //management row backcolor
+            dbGrid.Rows[1].Tag = "Management";
             dbGrid.Rows[1].DefaultCellStyle.BackColor = Color.FromArgb(46, 52, 63);
+            dbGrid.Rows[1].DefaultCellStyle.ForeColor = Color.White;
             dbGrid.Rows[1].DefaultCellStyle.Font = managementFont;
 
             //department row backcolor
+            dbGrid.Rows[2].Tag = "Department";
             dbGrid.Rows[2].DefaultCellStyle.BackColor = Color.FromArgb(255, 230, 153);
             dbGrid.Rows[2].DefaultCellStyle.Font = projectFont;
 
             //project rows backcolor
             for (int i = 3; i < dbGrid.Rows.Count; i++)
             {
+                dbGrid.Rows[i].Tag = "Project";
                 dbGrid.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(210, 238, 255);
                 dbGrid.Rows[i].DefaultCellStyle.Font = projectFont;
             }
@@ -280,9 +289,13 @@ namespace DashboardUI
                 for (int j = 1; j < dbGrid.Columns.Count; j++)
                 {
                     if (dbGrid.Rows[i].Cells[j].Value.ToString() != "")
+                    {
                         dbGrid.Rows[i].Cells[j].Style.BackColor = Color.FromArgb(198, 224, 180);
+                    }
                     else
+                    {
                         dbGrid.Rows[i].Cells[j].Style.BackColor = Color.FromArgb(226, 239, 218);
+                    }
                 }
             }
         }
@@ -354,6 +367,7 @@ namespace DashboardUI
             dbGrid.DataSource = null;
             dbGrid.Rows.Clear();
             dbGrid.Columns.Clear();
+            isEditing = false;
         }
 
         #endregion
@@ -364,7 +378,7 @@ namespace DashboardUI
         #endregion
 
         #region Button Export To Excel Function
-        
+
         private void buttonExportToExcel_Click(object sender, EventArgs e)
         {
             ExportHandler.ExportDataToExcel(dbGrid);
@@ -468,29 +482,11 @@ namespace DashboardUI
                     updateForm.ShowDialog();
 
                 }
-                else if (dbGrid.Columns[e.ColumnIndex].Name == "Delete" && dbGrid.Rows[e.RowIndex].Tag == "Department")
-                {
-                    DialogResult dialogResult = MessageBox.Show("Are you sure to delete selected department? Department index: " + e.RowIndex, "Delete Department", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        Department departmentToDelete = departmentManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).Data;
-                        DeleteDepartment(departmentToDelete);
-                    }
-                }
                 else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Department")
                 {
                     UpdateDepartmentForm updateForm = new(managementManager, departmentManager, dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString());
                     updateForm.ShowDialog();
 
-                }
-                else if (dbGrid.Columns[e.ColumnIndex].Name == "Delete" && dbGrid.Rows[e.RowIndex].Tag == "Management")
-                {
-                    DialogResult dialogResult = MessageBox.Show("Are you sure to delete selected Management? Management index: " + e.RowIndex, "Delete Management", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        Management managementToDelete = managementManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).Data;
-                        DeleteManagement(managementToDelete);
-                    }
                 }
                 else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Management")
                 {
@@ -502,150 +498,6 @@ namespace DashboardUI
             {
                 Debug.Print("project card opened");
             }
-        }
-
-        #region CRUD Operations
-
-        private void dbGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-
-            var cellValue = dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-            var cellDate = dbGrid.Columns[e.ColumnIndex].Tag;
-            var tempDate = Convert.ToDateTime(cellDate);
-            cellDate = new DateTime(tempDate.Year, tempDate.Month, 01).ToString();
-            Debug.Print(cellDate.ToString());
-            //If editing Project Capacities
-            if (dbGrid.Rows[e.RowIndex].Tag == "Project")
-            {
-                //check if cell value is changed
-                if (_tempCellValue != cellValue)
-                {
-                    if (e.ColumnIndex == 0)
-                    {
-                        if (cellValue != null)
-                        {
-                            Project projectToUpdate = projectManager.GetByName(_tempCellValue.ToString()).Data;
-                            projectToUpdate.ProjectName = cellValue.ToString();
-                            projectManager.Update(projectToUpdate);
-                            Debug.Print("project name is updated");
-                            return;
-                        }
-                        else
-                        {
-                            dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _tempCellValue;
-                            Debug.Print("Project name cannot be empty");
-                            return;
-                        }
-                    }
-
-                    else if (e.ColumnIndex == 1)
-                    {
-                        //Category columns should change to combobox , and values should store there
-                        Debug.Print("category is not changed but it works anyway");
-                        return;
-
-                    }
-
-                    Project cellProject = projectManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).Data;
-
-                    //check if cell value was empty before
-                    if (_tempCellValue == null && e.ColumnIndex > 1)
-                    {
-                        ProjectCapacity projectCapacityToAdd = new ProjectCapacity();
-
-                        projectCapacityToAdd.ProjectId = cellProject.ProjectId;
-                        projectCapacityToAdd.PTotalCapacity = Convert.ToDouble(cellValue);
-                        projectCapacityToAdd.Date = Convert.ToDateTime(cellDate);
-                        projectCapacityManager.Add(projectCapacityToAdd);
-
-                        Debug.Print("project capacity cell value added");
-                    }
-                    else
-                    {
-                        //if cell value is deleted or 0
-                        ProjectCapacity projectCapacityToUpdate = projectCapacityManager.GetProjectCapacityByDateAndProjectId(Convert.ToDateTime(cellDate), cellProject.ProjectId).Data;
-                        if (cellValue == null || Convert.ToDouble(cellValue) == 0 && e.ColumnIndex > 1)
-                        {
-                            projectCapacityManager.Delete(projectCapacityToUpdate);
-                            Debug.Print("project capacity cell value deleted");
-
-                        }
-                        else
-                        {
-                            projectCapacityToUpdate.PTotalCapacity = Convert.ToDouble(cellValue);
-                            projectCapacityManager.Update(projectCapacityToUpdate);
-                            Debug.Print("project capacity cell value updated");
-                        }
-                    }
-                }
-                else
-                    Debug.Print("project cell is the same");
-            }
-            //If editing Department Capacities
-            else if (dbGrid.Rows[e.RowIndex].Tag == "Department")
-            {
-                //check if cell value is changed
-                if (_tempCellValue != cellValue)
-                {
-                    Department cellDepartment = departmentManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).Data;
-
-                    //check if cell value was empty before
-                    if (_tempCellValue == null)
-                    {
-                        DepartmentCapacity departmentCapacityToAdd = new DepartmentCapacity();
-
-                        departmentCapacityToAdd.DepartmentId = cellDepartment.DepartmentId;
-                        departmentCapacityToAdd.DTotalCapacity = Convert.ToDouble(cellValue);
-                        departmentCapacityToAdd.Date = Convert.ToDateTime(cellDate);
-                        departmentCapacityManager.Add(departmentCapacityToAdd);
-
-                        Debug.Print("department cell value added");
-                    }
-                    else
-                    {
-                        //if cell value is deleted or 0
-                        DepartmentCapacity departmentCapacityToUpdate = departmentCapacityManager.GetDepartmentCapacityByDateAndDepartmentId(Convert.ToDateTime(cellDate), cellDepartment.DepartmentId).Data;
-                        if (cellValue == null || Convert.ToDouble(cellValue) == 0)
-                        {
-                            departmentCapacityManager.Delete(departmentCapacityToUpdate);
-                            Debug.Print("department cell value deleted");
-
-                        }
-                        else
-                        {
-                            departmentCapacityToUpdate.DTotalCapacity = Convert.ToDouble(cellValue);
-                            departmentCapacityManager.Update(departmentCapacityToUpdate);
-                            Debug.Print("department cell value updated");
-                        }
-                    }
-                }
-                else
-                    Debug.Print("department cell is the same");
-            }
-        }
-
-        private void dbGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        {
-            _tempCellValue = dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-        }
-
-        private void DeleteManagement(Management managementToDelete)
-        {
-            //delete all projects
-            //delete all departments
-            //delete management
-            Debug.Print("Management not deleted but function works");
-            MessageBox.Show("Management deleted successfully", "Delete Management", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void DeleteDepartment(Department departmentToDelete)
-        {
-            //delete all projects
-            //delete department capacity
-            //delete department
-
-            Debug.Print("Department not deleted but function works");
-            MessageBox.Show("Department deleted successfully", "Delete Department", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void DeleteProject(Project projectToDelete)
@@ -662,6 +514,311 @@ namespace DashboardUI
             projectManager.Delete(projectToDelete);
 
             MessageBox.Show("Project deleted successfully", "Delete Project", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        #region CRUD Operations On DataGridView
+
+        private string CheckDecimalSeperator(string cellValue)
+        {
+            string decimalSeparator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+
+            if (decimalSeparator == ",")
+                cellValue = cellValue.Replace(".", ",");
+            else
+                cellValue = cellValue.Replace(",", ".");
+
+            return cellValue;
+        }
+
+        public static bool IsNumeric(object Expression)
+        {
+            double retNum;
+
+            bool isNum = Double.TryParse(Convert.ToString(Expression), System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo, out retNum);
+            return isNum;
+        }
+
+        private void dbGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+
+            string cellValue = dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+
+            DateTime cellDate = _startDate.AddMonths(e.ColumnIndex - 1);
+            cellDate = new DateTime(cellDate.Year, cellDate.Month, 01);
+
+            //editting project rows
+            if (dbGrid.Rows[e.RowIndex].Tag == "Project")
+            {
+                //check if cell value is changed
+                if (_cellValueBegin != cellValue)
+                {
+                    //project name is editing
+                    if (e.ColumnIndex == 0)
+                    {
+                        //project name is updated
+                        if (cellValue != "")
+                        {
+                            var projectByName = projectManager.GetByName(_cellValueBegin);
+                            if (projectByName.Success)
+                            {
+                                Project projectToUpdate = projectByName.Data;
+                                projectToUpdate.ProjectName = cellValue;
+                                projectManager.Update(projectToUpdate);
+                                alertBox.SuccessAlert("Project name updated successfuly", _alertPosX, _alertPosY);
+                                return;
+                            }
+                            else
+                            {
+                                alertBox.ErrorAlert("Could not find project", _alertPosX, _alertPosY);
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
+                            alertBox.WarningAlert("Value cannot be empty", _alertPosX, _alertPosY);
+                            return;
+                        }
+                    }
+
+                    //editing project capacity data
+                    //check if cell value is numaric
+                    if (!IsNumeric(cellValue))
+                    {
+                        dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
+                        alertBox.WarningAlert("Non-numeric value", _alertPosX, _alertPosY);
+                        return;
+                    }
+
+                    //fetch current project data to edit
+                    var projectData = projectManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    if (!projectData.Success)
+                    {
+                        alertBox.ErrorAlert("Could not find project data", _alertPosX, _alertPosY);
+                        return;
+                    }
+
+                    //project on data grid view
+                    Project cellProject = projectData.Data;
+
+                    //new capacity value added
+                    if (_cellValueBegin == "" && e.ColumnIndex > 0)
+                    {
+                        //new capacity data
+                        ProjectCapacity projectCapacityToAdd = new ProjectCapacity();
+                        projectCapacityToAdd.ProjectId = cellProject.ProjectId;
+                        projectCapacityToAdd.PTotalCapacity = Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1);
+                        projectCapacityToAdd.Date = cellDate;
+
+                        if (projectCapacityManager.Add(projectCapacityToAdd).Success)
+                            Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "CREATE" + " - " + "Project Capacity" + " - " + projectCapacityToAdd.ProjectCapacityId + "Project capacity cell value added");
+                        else
+                        {
+                            Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + projectCapacityToAdd.ProjectCapacityId + "Error when adding data into database");
+                            alertBox.ErrorAlert("Error when adding data into database", _alertPosX, _alertPosY);
+                        }
+                    }
+                    //current capacity value editing
+                    else
+                    {
+                        //fetch project capacity data from data grid view
+                        var projectCapacityData = projectCapacityManager.GetProjectCapacityByDateAndProjectId(cellDate, cellProject.ProjectId);
+                        if (!projectCapacityData.Success)
+                        {
+                            Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Could not find project capacity data");
+                            alertBox.ErrorAlert("Could not find project capacity data", _alertPosX, _alertPosY);
+                            return;
+                        }
+
+                        //project capacity on data grid view
+                        ProjectCapacity projectCapacityToUpdate = projectCapacityData.Data;
+
+                        //new value is null or 0 incase delete data
+                        if (cellValue == "" || Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1) == 0 && e.ColumnIndex > 1)
+                        {
+                            if (projectCapacityManager.Delete(projectCapacityToUpdate).Success)
+                                Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "DELETE" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Project capacity data deleted");
+                            else
+                            {
+                                Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Error when deleting data from database");
+                                alertBox.ErrorAlert("Error when deleting data from database", _alertPosX, _alertPosY);
+                            }
+                        }
+                        //new value will update on current data
+                        else
+                        {
+                            projectCapacityToUpdate.PTotalCapacity = Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1);
+
+                            if (projectCapacityManager.Update(projectCapacityToUpdate).Success)
+                                Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "UPDATE" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Project capacity data updated");
+                            else
+                            {
+                                Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Error when updating data in database");
+                                alertBox.ErrorAlert("Error when updating data in database", _alertPosX, _alertPosY);
+                            }
+                        }
+                    }
+                }
+                else
+                    Debug.Print("No change action");
+            }
+            //editing department rows
+            else if (dbGrid.Rows[e.RowIndex].Tag == "Department")
+            {
+                //check if cell value is changed
+                if (_cellValueBegin != cellValue)
+                {
+                    //department name is editing
+                    if (e.ColumnIndex == 0)
+                    {
+                        //department name is updated
+                        if (cellValue != "")
+                        {
+                            var departmentByName = departmentManager.GetByName(_cellValueBegin);
+                            if (departmentByName.Success)
+                            {
+                                Department departmentToUpdate = departmentByName.Data;
+                                departmentToUpdate.DepartmentName = cellValue;
+                                departmentManager.Update(departmentToUpdate);
+                                alertBox.SuccessAlert("Department name updated successfuly", _alertPosX, _alertPosY);
+                                return;
+                            }
+                            else
+                            {
+                                alertBox.ErrorAlert("Could not find department", _alertPosX, _alertPosY);
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
+                            alertBox.WarningAlert("Value cannot be empty", _alertPosX, _alertPosY);
+                            return;
+                        }
+                    }
+
+                    //editing department capacity data
+                    //check if cell value is numeric
+                    if (!IsNumeric(cellValue))
+                    {
+                        dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
+                        alertBox.WarningAlert("Non-numeric value", _alertPosX, _alertPosY);
+                        return;
+                    }
+
+                    //fetch current departmet data to edit
+                    var departmentData = departmentManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    if (!departmentData.Success)
+                    {
+                        alertBox.ErrorAlert("Could not find department data", _alertPosX, _alertPosY);
+                        return;
+                    }
+
+                    //department data on data grid view
+                    Department cellDepartment = departmentData.Data;
+
+                    //new department capacity value added
+                    if (_cellValueBegin == "" && e.ColumnIndex > 0)
+                    {
+                        //new department capacity data
+                        DepartmentCapacity departmentCapacityToAdd = new DepartmentCapacity();
+                        departmentCapacityToAdd.DepartmentId = cellDepartment.DepartmentId;
+                        departmentCapacityToAdd.DTotalCapacity = Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1);
+                        departmentCapacityToAdd.Date = cellDate;
+
+                        if (departmentCapacityManager.Add(departmentCapacityToAdd).Success)
+                            Debug.Print("Department capacity cell value added");
+                        else
+                        {
+                            Debug.Print("Error when adding data into database");
+                            alertBox.ErrorAlert("Error when adding data into database", _alertPosX, _alertPosY);
+                        }
+                    }
+                    //current department capacity value editing
+                    else
+                    {
+                        //fetch department capacity data from data grid view
+                        var departmentCapacityData = departmentCapacityManager.GetDepartmentCapacityByDateAndDepartmentId(cellDate, cellDepartment.DepartmentId);
+                        if (!departmentCapacityData.Success)
+                        {
+                            Debug.Print("Could not find department capacity data");
+                            alertBox.ErrorAlert("Could not find department capacity data", _alertPosX, _alertPosY);
+                            return;
+                        }
+
+                        //department capacity on data grid view
+                        DepartmentCapacity departmentCapacityToUpdate = departmentCapacityData.Data;
+
+                        //new value is null or 0 incase delete data
+                        if (cellValue == "" || Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1) == 0 && e.ColumnIndex > 1)
+                        {
+                            if (departmentCapacityManager.Delete(departmentCapacityToUpdate).Success)
+                                Debug.Print("Department capacity data deleted");
+                            else
+                            {
+                                Debug.Print("Error when deleting data from database");
+                                alertBox.ErrorAlert("Error when deleting data from database", _alertPosX, _alertPosY);
+                            }
+                        }
+                        //new value will update on current data
+                        else
+                        {
+                            departmentCapacityToUpdate.DTotalCapacity = Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1);
+
+                            if (departmentCapacityManager.Update(departmentCapacityToUpdate).Success)
+                                Debug.Print("Department capacity data updated");
+                            else
+                            {
+                                Debug.Print("Error when updatig data in database");
+                                alertBox.ErrorAlert("Error when updatig data in database", _alertPosX, _alertPosY);
+                            }
+                        }
+                    }
+                }
+                else
+                    Debug.Print("No change action");
+            }
+            //editing management row
+            else if (dbGrid.Rows[e.RowIndex].Tag == "Management")
+            {
+                //check if cell value is changed
+                if (_cellValueBegin != cellValue)
+                {
+                    //management name is editing
+                    if (e.ColumnIndex == 0)
+                    {
+                        //management name is updated
+                        if (cellValue != "")
+                        {
+                            var managementByName = managementManager.GetByName(_cellValueBegin);
+                            if (managementByName.Success)
+                            {
+                                Management managementToUpdate = managementByName.Data;
+                                managementToUpdate.ManagementName = cellValue;
+                                managementManager.Update(managementToUpdate);
+                                alertBox.SuccessAlert("Management name updated successfuly", _alertPosX, _alertPosY);
+                                return;
+                            }
+                            else
+                            {
+                                alertBox.ErrorAlert("Could not find Management", _alertPosX, _alertPosY);
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
+                            alertBox.WarningAlert("Value cannot be empty", _alertPosX, _alertPosY);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void dbGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            _cellValueBegin = dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
         }
 
         #endregion
@@ -687,7 +844,7 @@ namespace DashboardUI
 
         //NOT WORKED ON YET
         #region Project Information Card
-        
+
         private void dbGrid_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex > 0)
@@ -726,26 +883,19 @@ namespace DashboardUI
             #endregion
 
             #region list of legends and series
-            for (int i = 0; i < dbGrid.Rows.Count; i++)
+            for (int i = 2; i < dbGrid.Rows.Count; i++)
             {
-                if (dbGrid.Rows[i].Tag == "Empty")
-                {
-                    break;
-                }
-
-                if (dbGrid.Rows[i].Tag == "Management")
-                {
-                    continue;
-                }
-
                 legends.Add(dbGrid.Rows[i].Cells[0].Value.ToString());
 
                 //string serieName = "series" + i.ToString();
                 //list of series
                 List<double> templist = new();
-                for (int j = 2; j < dbGrid.Columns.Count; j++)
+                for (int j = 1; j < dbGrid.Columns.Count; j++)
                 {
-                    templist.Add(Convert.ToDouble(dbGrid.Rows[i].Cells[j].Value));
+                    if (dbGrid.Rows[i].Cells[j].Value.ToString() != "")
+                        templist.Add(Convert.ToDouble(dbGrid.Rows[i].Cells[j].Value));
+                    else
+                        templist.Add(0);
                 }
                 series.Add(templist);
             }

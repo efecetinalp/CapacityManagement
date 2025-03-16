@@ -42,6 +42,7 @@
             // areaChart
             // 
             areaChart.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            areaChart.BackgroundImageLayout = ImageLayout.None;
             chartArea1.AxisX.IsLabelAutoFit = false;
             chartArea1.AxisX.LabelAutoFitMaxFontSize = 9;
             chartArea1.AxisX.LabelAutoFitMinFontSize = 8;
@@ -56,7 +57,7 @@
             legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             legend1.Name = "Legend1";
             areaChart.Legends.Add(legend1);
-            areaChart.Location = new Point(21, 79);
+            areaChart.Location = new Point(21, 78);
             areaChart.Margin = new Padding(2);
             areaChart.Name = "areaChart";
             areaChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
@@ -80,7 +81,7 @@
             buttonSave.Location = new Point(1226, 25);
             buttonSave.Margin = new Padding(2);
             buttonSave.Name = "buttonSave";
-            buttonSave.Size = new Size(32, 32);
+            buttonSave.Size = new Size(31, 32);
             buttonSave.TabIndex = 3;
             buttonSave.UseVisualStyleBackColor = true;
             buttonSave.Click += buttonSave_Click;
@@ -95,7 +96,7 @@
             buttonUpdate.Location = new Point(1181, 25);
             buttonUpdate.Margin = new Padding(2);
             buttonUpdate.Name = "buttonUpdate";
-            buttonUpdate.Size = new Size(32, 32);
+            buttonUpdate.Size = new Size(31, 32);
             buttonUpdate.TabIndex = 2;
             buttonUpdate.UseVisualStyleBackColor = true;
             buttonUpdate.Click += buttonUpdate_Click;
@@ -103,7 +104,8 @@
             // comboBoxPalette
             // 
             comboBoxPalette.FormattingEnabled = true;
-            comboBoxPalette.Location = new Point(41, 34);
+            comboBoxPalette.Location = new Point(41, 33);
+            comboBoxPalette.Margin = new Padding(4, 3, 4, 3);
             comboBoxPalette.Name = "comboBoxPalette";
             comboBoxPalette.Size = new Size(160, 23);
             comboBoxPalette.TabIndex = 4;
@@ -117,6 +119,8 @@
             Controls.Add(buttonUpdate);
             Controls.Add(buttonSave);
             Controls.Add(areaChart);
+            Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            ForeColor = SystemColors.ControlText;
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(2);
             Name = "ChartForm";

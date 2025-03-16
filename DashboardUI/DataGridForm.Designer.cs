@@ -98,6 +98,7 @@
             // 
             // comboBoxDepartment
             // 
+            comboBoxDepartment.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxDepartment.FormattingEnabled = true;
             comboBoxDepartment.Location = new Point(190, 33);
             comboBoxDepartment.Margin = new Padding(2);
@@ -107,6 +108,7 @@
             // 
             // comboBoxManagement
             // 
+            comboBoxManagement.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxManagement.FormattingEnabled = true;
             comboBoxManagement.Location = new Point(23, 33);
             comboBoxManagement.Margin = new Padding(2);
