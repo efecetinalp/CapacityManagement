@@ -47,7 +47,9 @@
             buttonRefresh = new Button();
             buttonExportToExcel = new Button();
             buttonList = new Button();
+            imgProjectCardIcon = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dbGrid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)imgProjectCardIcon).BeginInit();
             SuspendLayout();
             // 
             // buttonEdit
@@ -182,6 +184,7 @@
             dbGrid.CellBeginEdit += dbGrid_CellBeginEdit;
             dbGrid.CellContentClick += dbGrid_CellContentClick;
             dbGrid.CellEndEdit += dbGrid_CellEndEdit;
+            dbGrid.CellMouseMove += dbGrid_CellMouseMove;
             dbGrid.ColumnAdded += dbGrid_ColumnAdded;
             // 
             // label1
@@ -294,12 +297,25 @@
             buttonList.UseVisualStyleBackColor = false;
             buttonList.Click += buttonList_Click;
             // 
+            // imgProjectCardIcon
+            // 
+            imgProjectCardIcon.Image = (Image)resources.GetObject("imgProjectCardIcon.Image");
+            imgProjectCardIcon.Location = new Point(1237, 79);
+            imgProjectCardIcon.Name = "imgProjectCardIcon";
+            imgProjectCardIcon.Size = new Size(20, 23);
+            imgProjectCardIcon.SizeMode = PictureBoxSizeMode.AutoSize;
+            imgProjectCardIcon.TabIndex = 37;
+            imgProjectCardIcon.TabStop = false;
+            imgProjectCardIcon.Visible = false;
+            imgProjectCardIcon.Click += imgProjectCardIcon_Click;
+            // 
             // DataGridForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(242, 242, 242);
             ClientSize = new Size(1280, 660);
+            Controls.Add(imgProjectCardIcon);
             Controls.Add(buttonList);
             Controls.Add(buttonExportToExcel);
             Controls.Add(buttonRefresh);
@@ -321,6 +337,7 @@
             Text = "DataGridForm";
             Load += DataGridForm_Load;
             ((System.ComponentModel.ISupportInitialize)dbGrid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)imgProjectCardIcon).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -342,5 +359,6 @@
         private Button buttonRefresh;
         private Button buttonExportToExcel;
         private Button buttonList;
+        private PictureBox imgProjectCardIcon;
     }
 }

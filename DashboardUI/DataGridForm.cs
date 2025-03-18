@@ -15,6 +15,7 @@ using System.Diagnostics;
 using System.Drawing;
 using Font = System.Drawing.Font;
 using Rectangle = System.Drawing.Rectangle;
+using Point = System.Drawing.Point;
 using System.Drawing.Text;
 using System.Linq;
 using System.Text;
@@ -40,6 +41,7 @@ namespace DashboardUI
         //UI Form Referances
         CreateForm createForm;
         Dashboard _dashboardForm;
+        DataCardUI _dataCard;
 
         //Class Referances
         AlertBox alertBox;
@@ -53,6 +55,7 @@ namespace DashboardUI
         private DateTime _startDate;
         private DateTime _endDate;
         public bool isDataListed = false;
+        private int _rowIndex;
 
         public DataGridForm(ProjectManager projectManager, DepartmentManager departmentManager, ManagementManager managementManager, CategoryManager categoryManager, DepartmentCapacityManager departmentCapacityManager, ProjectCapacityManager projectCapacityManager, Dashboard dashboardForm)
         {
@@ -844,22 +847,30 @@ namespace DashboardUI
 
         #endregion
 
-        //NOT WORKED ON YET
         #region Project Information Card
 
         private void dbGrid_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.RowIndex > 0)
+            if (e.RowIndex >= 3 && e.ColumnIndex == 0)
             {
-                if (dbGrid.Rows[e.RowIndex].Tag == "Project")
-                {
-                    for (int i = 0; i < dbGrid.Rows.Count; i++)
-                    {
-                        dbGrid.Rows[i].HeaderCell.Value = "";
-                    }
-                    dbGrid.Rows[e.RowIndex].HeaderCell.Value = "x";
-                }
+                _rowIndex = e.RowIndex;
+                imgProjectCardIcon.Top = dbGrid.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false).Top + dbGrid.Top + 3;
+                imgProjectCardIcon.Left = dbGrid.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false).Right - 5;
+                imgProjectCardIcon.Visible = true;
             }
+            else
+                imgProjectCardIcon.Visible = false;
+        }
+
+        private void imgProjectCardIcon_Click(object sender, EventArgs e)
+        {
+            if (_dataCard == null)
+            {
+                _dataCard = new();
+            }
+            _dataCard.Location = this.Location;
+            //_dataCard.Left = dbGrid.Left + 5;
+            _dataCard.Show();
         }
 
         #endregion
@@ -913,5 +924,7 @@ namespace DashboardUI
 
         #endregion
 
+
+        
     }
 }
