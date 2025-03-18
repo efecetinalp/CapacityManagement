@@ -35,7 +35,32 @@
             areaChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             buttonSave = new Button();
             buttonUpdate = new Button();
-            comboBoxPalette = new ComboBox();
+            comboBoxColorPalette = new ComboBox();
+            labelColorPalette = new Label();
+            labelPaletteType = new Label();
+            comboBoxPaletteType = new ComboBox();
+            labelAxisValueSize = new Label();
+            comboBoxAxisValueSize = new ComboBox();
+            labelXAxisInterval = new Label();
+            comboBoxXAxisInterval = new ComboBox();
+            labelYAxisInterval = new Label();
+            comboBoxYAxisInterval = new ComboBox();
+            labelGridColor = new Label();
+            comboBoxGridColor = new ComboBox();
+            labelGridWidth = new Label();
+            comboBoxGridWidth = new ComboBox();
+            checkBoxValueRotate = new CheckBox();
+            labelLineColor = new Label();
+            comboBoxLineColor = new ComboBox();
+            labelLineWidth = new Label();
+            comboBoxLineWidth = new ComboBox();
+            labelAreaBorderColor = new Label();
+            comboBoxAreaBorderColor = new ComboBox();
+            labelAreaBorder = new Label();
+            comboBoxAreaBorder = new ComboBox();
+            checkBoxMinorGrids = new CheckBox();
+            labelGridStyle = new Label();
+            comboBoxGridStyle = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)areaChart).BeginInit();
             SuspendLayout();
             // 
@@ -57,7 +82,7 @@
             legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             legend1.Name = "Legend1";
             areaChart.Legends.Add(legend1);
-            areaChart.Location = new Point(21, 78);
+            areaChart.Location = new Point(21, 122);
             areaChart.Margin = new Padding(2);
             areaChart.Name = "areaChart";
             areaChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
@@ -67,7 +92,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             areaChart.Series.Add(series1);
-            areaChart.Size = new Size(1236, 558);
+            areaChart.Size = new Size(1236, 514);
             areaChart.TabIndex = 0;
             areaChart.Text = "Capacity";
             // 
@@ -78,7 +103,7 @@
             buttonSave.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
             buttonSave.FlatStyle = FlatStyle.Flat;
             buttonSave.Image = (Image)resources.GetObject("buttonSave.Image");
-            buttonSave.Location = new Point(1226, 25);
+            buttonSave.Location = new Point(1224, 53);
             buttonSave.Margin = new Padding(2);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(31, 32);
@@ -93,7 +118,7 @@
             buttonUpdate.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
             buttonUpdate.FlatStyle = FlatStyle.Flat;
             buttonUpdate.Image = (Image)resources.GetObject("buttonUpdate.Image");
-            buttonUpdate.Location = new Point(1181, 25);
+            buttonUpdate.Location = new Point(1179, 53);
             buttonUpdate.Margin = new Padding(2);
             buttonUpdate.Name = "buttonUpdate";
             buttonUpdate.Size = new Size(31, 32);
@@ -101,21 +126,326 @@
             buttonUpdate.UseVisualStyleBackColor = true;
             buttonUpdate.Click += buttonUpdate_Click;
             // 
-            // comboBoxPalette
+            // comboBoxColorPalette
             // 
-            comboBoxPalette.FormattingEnabled = true;
-            comboBoxPalette.Location = new Point(41, 33);
-            comboBoxPalette.Margin = new Padding(4, 3, 4, 3);
-            comboBoxPalette.Name = "comboBoxPalette";
-            comboBoxPalette.Size = new Size(160, 23);
-            comboBoxPalette.TabIndex = 4;
+            comboBoxColorPalette.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxColorPalette.FormattingEnabled = true;
+            comboBoxColorPalette.Location = new Point(21, 65);
+            comboBoxColorPalette.Margin = new Padding(4, 3, 4, 3);
+            comboBoxColorPalette.Name = "comboBoxColorPalette";
+            comboBoxColorPalette.Size = new Size(124, 20);
+            comboBoxColorPalette.TabIndex = 4;
+            // 
+            // labelColorPalette
+            // 
+            labelColorPalette.AutoSize = true;
+            labelColorPalette.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelColorPalette.ForeColor = Color.Black;
+            labelColorPalette.Location = new Point(21, 50);
+            labelColorPalette.Margin = new Padding(2, 0, 2, 0);
+            labelColorPalette.Name = "labelColorPalette";
+            labelColorPalette.Size = new Size(64, 12);
+            labelColorPalette.TabIndex = 28;
+            labelColorPalette.Text = "Color Palette";
+            // 
+            // labelPaletteType
+            // 
+            labelPaletteType.AutoSize = true;
+            labelPaletteType.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelPaletteType.ForeColor = Color.Black;
+            labelPaletteType.Location = new Point(21, 11);
+            labelPaletteType.Margin = new Padding(2, 0, 2, 0);
+            labelPaletteType.Name = "labelPaletteType";
+            labelPaletteType.Size = new Size(61, 12);
+            labelPaletteType.TabIndex = 30;
+            labelPaletteType.Text = "Palette Type";
+            // 
+            // comboBoxPaletteType
+            // 
+            comboBoxPaletteType.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxPaletteType.FormattingEnabled = true;
+            comboBoxPaletteType.Location = new Point(21, 25);
+            comboBoxPaletteType.Margin = new Padding(4, 3, 4, 3);
+            comboBoxPaletteType.Name = "comboBoxPaletteType";
+            comboBoxPaletteType.Size = new Size(120, 20);
+            comboBoxPaletteType.TabIndex = 29;
+            comboBoxPaletteType.SelectedIndexChanged += comboBoxPaletteType_SelectedIndexChanged;
+            // 
+            // labelAxisValueSize
+            // 
+            labelAxisValueSize.AutoSize = true;
+            labelAxisValueSize.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelAxisValueSize.ForeColor = Color.Black;
+            labelAxisValueSize.Location = new Point(149, 10);
+            labelAxisValueSize.Margin = new Padding(2, 0, 2, 0);
+            labelAxisValueSize.Name = "labelAxisValueSize";
+            labelAxisValueSize.Size = new Size(74, 12);
+            labelAxisValueSize.TabIndex = 32;
+            labelAxisValueSize.Text = "Axis Value Size";
+            // 
+            // comboBoxAxisValueSize
+            // 
+            comboBoxAxisValueSize.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxAxisValueSize.FormattingEnabled = true;
+            comboBoxAxisValueSize.Location = new Point(149, 25);
+            comboBoxAxisValueSize.Margin = new Padding(4, 3, 4, 3);
+            comboBoxAxisValueSize.Name = "comboBoxAxisValueSize";
+            comboBoxAxisValueSize.Size = new Size(124, 20);
+            comboBoxAxisValueSize.TabIndex = 31;
+            // 
+            // labelXAxisInterval
+            // 
+            labelXAxisInterval.AutoSize = true;
+            labelXAxisInterval.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelXAxisInterval.ForeColor = Color.Black;
+            labelXAxisInterval.Location = new Point(281, 10);
+            labelXAxisInterval.Margin = new Padding(2, 0, 2, 0);
+            labelXAxisInterval.Name = "labelXAxisInterval";
+            labelXAxisInterval.Size = new Size(71, 12);
+            labelXAxisInterval.TabIndex = 34;
+            labelXAxisInterval.Text = "X Axis Interval";
+            // 
+            // comboBoxXAxisInterval
+            // 
+            comboBoxXAxisInterval.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxXAxisInterval.FormattingEnabled = true;
+            comboBoxXAxisInterval.Location = new Point(281, 25);
+            comboBoxXAxisInterval.Margin = new Padding(4, 3, 4, 3);
+            comboBoxXAxisInterval.Name = "comboBoxXAxisInterval";
+            comboBoxXAxisInterval.Size = new Size(96, 20);
+            comboBoxXAxisInterval.TabIndex = 33;
+            // 
+            // labelYAxisInterval
+            // 
+            labelYAxisInterval.AutoSize = true;
+            labelYAxisInterval.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelYAxisInterval.ForeColor = Color.Black;
+            labelYAxisInterval.Location = new Point(281, 50);
+            labelYAxisInterval.Margin = new Padding(2, 0, 2, 0);
+            labelYAxisInterval.Name = "labelYAxisInterval";
+            labelYAxisInterval.Size = new Size(71, 12);
+            labelYAxisInterval.TabIndex = 36;
+            labelYAxisInterval.Text = "Y Axis Interval";
+            // 
+            // comboBoxYAxisInterval
+            // 
+            comboBoxYAxisInterval.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxYAxisInterval.FormattingEnabled = true;
+            comboBoxYAxisInterval.Location = new Point(281, 65);
+            comboBoxYAxisInterval.Margin = new Padding(4, 3, 4, 3);
+            comboBoxYAxisInterval.Name = "comboBoxYAxisInterval";
+            comboBoxYAxisInterval.Size = new Size(96, 20);
+            comboBoxYAxisInterval.TabIndex = 35;
+            // 
+            // labelGridColor
+            // 
+            labelGridColor.AutoSize = true;
+            labelGridColor.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelGridColor.ForeColor = Color.Black;
+            labelGridColor.Location = new Point(385, 50);
+            labelGridColor.Margin = new Padding(2, 0, 2, 0);
+            labelGridColor.Name = "labelGridColor";
+            labelGridColor.Size = new Size(53, 12);
+            labelGridColor.TabIndex = 40;
+            labelGridColor.Text = "Grid Color";
+            // 
+            // comboBoxGridColor
+            // 
+            comboBoxGridColor.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxGridColor.FormattingEnabled = true;
+            comboBoxGridColor.Location = new Point(385, 65);
+            comboBoxGridColor.Margin = new Padding(4, 3, 4, 3);
+            comboBoxGridColor.Name = "comboBoxGridColor";
+            comboBoxGridColor.Size = new Size(96, 20);
+            comboBoxGridColor.TabIndex = 39;
+            // 
+            // labelGridWidth
+            // 
+            labelGridWidth.AutoSize = true;
+            labelGridWidth.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelGridWidth.ForeColor = Color.Black;
+            labelGridWidth.Location = new Point(385, 10);
+            labelGridWidth.Margin = new Padding(2, 0, 2, 0);
+            labelGridWidth.Name = "labelGridWidth";
+            labelGridWidth.Size = new Size(56, 12);
+            labelGridWidth.TabIndex = 38;
+            labelGridWidth.Text = "Grid Width";
+            // 
+            // comboBoxGridWidth
+            // 
+            comboBoxGridWidth.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxGridWidth.FormattingEnabled = true;
+            comboBoxGridWidth.Location = new Point(385, 25);
+            comboBoxGridWidth.Margin = new Padding(4, 3, 4, 3);
+            comboBoxGridWidth.Name = "comboBoxGridWidth";
+            comboBoxGridWidth.Size = new Size(96, 20);
+            comboBoxGridWidth.TabIndex = 37;
+            // 
+            // checkBoxValueRotate
+            // 
+            checkBoxValueRotate.AutoSize = true;
+            checkBoxValueRotate.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            checkBoxValueRotate.ForeColor = Color.Black;
+            checkBoxValueRotate.Location = new Point(152, 65);
+            checkBoxValueRotate.Name = "checkBoxValueRotate";
+            checkBoxValueRotate.Size = new Size(81, 16);
+            checkBoxValueRotate.TabIndex = 41;
+            checkBoxValueRotate.Text = "Rotate Dates";
+            checkBoxValueRotate.UseVisualStyleBackColor = true;
+            // 
+            // labelLineColor
+            // 
+            labelLineColor.AutoSize = true;
+            labelLineColor.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelLineColor.ForeColor = Color.Black;
+            labelLineColor.Location = new Point(602, 50);
+            labelLineColor.Margin = new Padding(2, 0, 2, 0);
+            labelLineColor.Name = "labelLineColor";
+            labelLineColor.Size = new Size(52, 12);
+            labelLineColor.TabIndex = 45;
+            labelLineColor.Text = "Line Color";
+            // 
+            // comboBoxLineColor
+            // 
+            comboBoxLineColor.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxLineColor.FormattingEnabled = true;
+            comboBoxLineColor.Location = new Point(602, 65);
+            comboBoxLineColor.Margin = new Padding(4, 3, 4, 3);
+            comboBoxLineColor.Name = "comboBoxLineColor";
+            comboBoxLineColor.Size = new Size(96, 20);
+            comboBoxLineColor.TabIndex = 44;
+            // 
+            // labelLineWidth
+            // 
+            labelLineWidth.AutoSize = true;
+            labelLineWidth.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelLineWidth.ForeColor = Color.Black;
+            labelLineWidth.Location = new Point(602, 10);
+            labelLineWidth.Margin = new Padding(2, 0, 2, 0);
+            labelLineWidth.Name = "labelLineWidth";
+            labelLineWidth.Size = new Size(55, 12);
+            labelLineWidth.TabIndex = 43;
+            labelLineWidth.Text = "Line Width";
+            // 
+            // comboBoxLineWidth
+            // 
+            comboBoxLineWidth.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxLineWidth.FormattingEnabled = true;
+            comboBoxLineWidth.Location = new Point(602, 25);
+            comboBoxLineWidth.Margin = new Padding(4, 3, 4, 3);
+            comboBoxLineWidth.Name = "comboBoxLineWidth";
+            comboBoxLineWidth.Size = new Size(96, 20);
+            comboBoxLineWidth.TabIndex = 42;
+            // 
+            // labelAreaBorderColor
+            // 
+            labelAreaBorderColor.AutoSize = true;
+            labelAreaBorderColor.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelAreaBorderColor.ForeColor = Color.Black;
+            labelAreaBorderColor.Location = new Point(706, 50);
+            labelAreaBorderColor.Margin = new Padding(2, 0, 2, 0);
+            labelAreaBorderColor.Name = "labelAreaBorderColor";
+            labelAreaBorderColor.Size = new Size(89, 12);
+            labelAreaBorderColor.TabIndex = 49;
+            labelAreaBorderColor.Text = "Area Border Color";
+            // 
+            // comboBoxAreaBorderColor
+            // 
+            comboBoxAreaBorderColor.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxAreaBorderColor.FormattingEnabled = true;
+            comboBoxAreaBorderColor.Location = new Point(706, 65);
+            comboBoxAreaBorderColor.Margin = new Padding(4, 3, 4, 3);
+            comboBoxAreaBorderColor.Name = "comboBoxAreaBorderColor";
+            comboBoxAreaBorderColor.Size = new Size(96, 20);
+            comboBoxAreaBorderColor.TabIndex = 48;
+            // 
+            // labelAreaBorder
+            // 
+            labelAreaBorder.AutoSize = true;
+            labelAreaBorder.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelAreaBorder.ForeColor = Color.Black;
+            labelAreaBorder.Location = new Point(706, 10);
+            labelAreaBorder.Margin = new Padding(2, 0, 2, 0);
+            labelAreaBorder.Name = "labelAreaBorder";
+            labelAreaBorder.Size = new Size(61, 12);
+            labelAreaBorder.TabIndex = 47;
+            labelAreaBorder.Text = "Area Border";
+            // 
+            // comboBoxAreaBorder
+            // 
+            comboBoxAreaBorder.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxAreaBorder.FormattingEnabled = true;
+            comboBoxAreaBorder.Location = new Point(706, 25);
+            comboBoxAreaBorder.Margin = new Padding(4, 3, 4, 3);
+            comboBoxAreaBorder.Name = "comboBoxAreaBorder";
+            comboBoxAreaBorder.Size = new Size(96, 20);
+            comboBoxAreaBorder.TabIndex = 46;
+            // 
+            // checkBoxMinorGrids
+            // 
+            checkBoxMinorGrids.AutoSize = true;
+            checkBoxMinorGrids.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            checkBoxMinorGrids.ForeColor = Color.Black;
+            checkBoxMinorGrids.Location = new Point(489, 63);
+            checkBoxMinorGrids.Name = "checkBoxMinorGrids";
+            checkBoxMinorGrids.Size = new Size(106, 16);
+            checkBoxMinorGrids.TabIndex = 51;
+            checkBoxMinorGrids.Text = "Show Minor Grids";
+            checkBoxMinorGrids.UseVisualStyleBackColor = true;
+            // 
+            // labelGridStyle
+            // 
+            labelGridStyle.AutoSize = true;
+            labelGridStyle.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelGridStyle.ForeColor = Color.Black;
+            labelGridStyle.Location = new Point(489, 10);
+            labelGridStyle.Margin = new Padding(2, 0, 2, 0);
+            labelGridStyle.Name = "labelGridStyle";
+            labelGridStyle.Size = new Size(49, 12);
+            labelGridStyle.TabIndex = 53;
+            labelGridStyle.Text = "Grid Style";
+            // 
+            // comboBoxGridStyle
+            // 
+            comboBoxGridStyle.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxGridStyle.FormattingEnabled = true;
+            comboBoxGridStyle.Location = new Point(489, 25);
+            comboBoxGridStyle.Margin = new Padding(4, 3, 4, 3);
+            comboBoxGridStyle.Name = "comboBoxGridStyle";
+            comboBoxGridStyle.Size = new Size(96, 20);
+            comboBoxGridStyle.TabIndex = 52;
             // 
             // ChartForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1280, 660);
-            Controls.Add(comboBoxPalette);
+            Controls.Add(labelGridStyle);
+            Controls.Add(comboBoxGridStyle);
+            Controls.Add(checkBoxMinorGrids);
+            Controls.Add(labelAreaBorderColor);
+            Controls.Add(comboBoxAreaBorderColor);
+            Controls.Add(labelAreaBorder);
+            Controls.Add(comboBoxAreaBorder);
+            Controls.Add(labelLineColor);
+            Controls.Add(comboBoxLineColor);
+            Controls.Add(labelLineWidth);
+            Controls.Add(comboBoxLineWidth);
+            Controls.Add(checkBoxValueRotate);
+            Controls.Add(labelGridColor);
+            Controls.Add(comboBoxGridColor);
+            Controls.Add(labelGridWidth);
+            Controls.Add(comboBoxGridWidth);
+            Controls.Add(labelYAxisInterval);
+            Controls.Add(comboBoxYAxisInterval);
+            Controls.Add(labelXAxisInterval);
+            Controls.Add(comboBoxXAxisInterval);
+            Controls.Add(labelAxisValueSize);
+            Controls.Add(comboBoxAxisValueSize);
+            Controls.Add(labelPaletteType);
+            Controls.Add(comboBoxPaletteType);
+            Controls.Add(labelColorPalette);
+            Controls.Add(comboBoxColorPalette);
             Controls.Add(buttonUpdate);
             Controls.Add(buttonSave);
             Controls.Add(areaChart);
@@ -128,6 +458,7 @@
             Load += ChartForm_Load;
             ((System.ComponentModel.ISupportInitialize)areaChart).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -135,6 +466,31 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart areaChart;
         private Button buttonSave;
         private Button buttonUpdate;
-        private ComboBox comboBoxPalette;
+        private ComboBox comboBoxColorPalette;
+        private Label labelColorPalette;
+        private Label labelPaletteType;
+        private ComboBox comboBoxPaletteType;
+        private Label labelAxisValueSize;
+        private ComboBox comboBoxAxisValueSize;
+        private Label labelXAxisInterval;
+        private ComboBox comboBoxXAxisInterval;
+        private Label labelYAxisInterval;
+        private ComboBox comboBoxYAxisInterval;
+        private Label labelGridColor;
+        private ComboBox comboBoxGridColor;
+        private Label labelGridWidth;
+        private ComboBox comboBoxGridWidth;
+        private CheckBox checkBoxValueRotate;
+        private Label labelLineColor;
+        private ComboBox comboBoxLineColor;
+        private Label labelLineWidth;
+        private ComboBox comboBoxLineWidth;
+        private Label labelAreaBorderColor;
+        private ComboBox comboBoxAreaBorderColor;
+        private Label labelAreaBorder;
+        private ComboBox comboBoxAreaBorder;
+        private CheckBox checkBoxMinorGrids;
+        private Label labelGridStyle;
+        private ComboBox comboBoxGridStyle;
     }
 }

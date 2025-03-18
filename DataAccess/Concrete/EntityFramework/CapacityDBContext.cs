@@ -38,5 +38,8 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectCapacity> ProjectCapacities { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<ColorCode> ColorCodes { get; set; }
+        public DbSet<ColorPalette> ColorPalettes { get; set; }
+
     }
 }

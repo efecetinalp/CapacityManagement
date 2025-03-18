@@ -52,6 +52,7 @@ namespace DashboardUI
         private int _alertPosY;
         private DateTime _startDate;
         private DateTime _endDate;
+        public bool isDataListed = false;
 
         public DataGridForm(ProjectManager projectManager, DepartmentManager departmentManager, ManagementManager managementManager, CategoryManager categoryManager, DepartmentCapacityManager departmentCapacityManager, ProjectCapacityManager projectCapacityManager, Dashboard dashboardForm)
         {
@@ -132,6 +133,7 @@ namespace DashboardUI
             //fetches data and format into data grid view
             FetchData();
 
+            isDataListed = true;
             alertBox.SuccessAlert("Success", _alertPosX, _alertPosY);
         }
 
@@ -901,6 +903,7 @@ namespace DashboardUI
             }
             #endregion
 
+            chartRequest.ChartDesignation = dbGrid.Rows[1].Cells[0].Value.ToString();
             chartRequest.Months = months;
             chartRequest.Series = series;
             chartRequest.Legends = legends;

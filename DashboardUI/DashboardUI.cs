@@ -31,6 +31,8 @@ namespace DashboardUI
         ProjectCapacityManager projectCapacityManager;
         DepartmentCapacityManager departmentCapacityManager;
         UserManager userManager;
+        ColorCodeManager colorCodeManager;
+        ColorPaletteManager colorPaletteManager;
 
         //user credentials
         public User activeUser;
@@ -44,6 +46,8 @@ namespace DashboardUI
             projectCapacityManager = new ProjectCapacityManager(new EfProjectCapacityDal());
             departmentCapacityManager = new DepartmentCapacityManager(new EfDepartmentCapacityDal());
             userManager = new UserManager(new EfUserDal());
+            colorCodeManager = new ColorCodeManager(new EfColorCodeDal());
+            colorPaletteManager = new ColorPaletteManager(new EfColorPaletteDal());
 
             InitializeComponent();
         }
@@ -134,7 +138,7 @@ namespace DashboardUI
             {
                 ChartRequest chartRequest = new();
 
-                chartForm = new(dataGridForm);
+                chartForm = new(dataGridForm, colorCodeManager, colorPaletteManager);
                 chartForm.FormClosed += ChartForm_FormClosed;
                 chartForm.MdiParent = this;
                 chartForm.Dock = DockStyle.Fill;
