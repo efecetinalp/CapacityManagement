@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataCardUI));
-            pictureBox1 = new PictureBox();
+            imgProjectPicture = new PictureBox();
             panel1 = new Panel();
             labelProjectDetails = new Label();
             label2 = new Label();
@@ -37,41 +37,44 @@
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
-            pictureBox2 = new PictureBox();
-            pictureBox3 = new PictureBox();
+            imgEdit = new PictureBox();
+            imageClose = new PictureBox();
             label6 = new Label();
-            label7 = new Label();
             buttonClose = new Button();
-            comboBox1 = new ComboBox();
-            comboBox2 = new ComboBox();
-            comboBox3 = new ComboBox();
-            comboBox4 = new ComboBox();
-            comboBox5 = new ComboBox();
-            comboBox6 = new ComboBox();
-            comboBox7 = new ComboBox();
-            textBox1 = new TextBox();
-            label8 = new Label();
-            label9 = new Label();
-            label10 = new Label();
-            label11 = new Label();
-            label12 = new Label();
-            label13 = new Label();
-            label14 = new Label();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            comboBoxManagement = new ComboBox();
+            comboBoxUser = new ComboBox();
+            comboBoxCategory = new ComboBox();
+            comboBoxDepartment = new ComboBox();
+            txtProjectName = new TextBox();
+            lblManagement = new Label();
+            lblDepartment = new Label();
+            lblCategory = new Label();
+            lblStartDate = new Label();
+            lblEndDate = new Label();
+            lblOwner = new Label();
+            lblProjectName = new Label();
+            dateTimePickerStart = new DateTimePicker();
+            dateTimePickerEnd = new DateTimePicker();
+            checkBoxIsProgressing = new CheckBox();
+            label7 = new Label();
+            lblStatus = new Label();
+            imgSave = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)imgProjectPicture).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)imgEdit).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)imageClose).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)imgSave).BeginInit();
             SuspendLayout();
             // 
-            // pictureBox1
+            // imgProjectPicture
             // 
-            pictureBox1.BackColor = SystemColors.ActiveCaption;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(13, 12);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(48, 43);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            imgProjectPicture.BackColor = SystemColors.ActiveCaption;
+            imgProjectPicture.Image = (Image)resources.GetObject("imgProjectPicture.Image");
+            imgProjectPicture.Location = new Point(13, 12);
+            imgProjectPicture.Name = "imgProjectPicture";
+            imgProjectPicture.Size = new Size(48, 43);
+            imgProjectPicture.SizeMode = PictureBoxSizeMode.Zoom;
+            imgProjectPicture.TabIndex = 0;
+            imgProjectPicture.TabStop = false;
             // 
             // panel1
             // 
@@ -84,6 +87,7 @@
             // labelProjectDetails
             // 
             labelProjectDetails.AutoSize = true;
+            labelProjectDetails.BackColor = Color.Transparent;
             labelProjectDetails.Font = new Font("Calibri", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             labelProjectDetails.Location = new Point(13, 76);
             labelProjectDetails.Name = "labelProjectDetails";
@@ -94,6 +98,7 @@
             // label2
             // 
             label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
             label2.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
             label2.Location = new Point(18, 100);
             label2.Name = "label2";
@@ -104,6 +109,7 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
             label1.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
             label1.Location = new Point(22, 121);
             label1.Name = "label1";
@@ -114,6 +120,7 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
             label3.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
             label3.Location = new Point(33, 142);
             label3.Name = "label3";
@@ -124,8 +131,9 @@
             // label4
             // 
             label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
             label4.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(30, 163);
+            label4.Location = new Point(30, 182);
             label4.Name = "label4";
             label4.Size = new Size(52, 11);
             label4.TabIndex = 7;
@@ -134,60 +142,54 @@
             // label5
             // 
             label5.AutoSize = true;
+            label5.BackColor = Color.Transparent;
             label5.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(22, 184);
+            label5.Location = new Point(22, 203);
             label5.Name = "label5";
             label5.Size = new Size(60, 11);
             label5.TabIndex = 8;
             label5.Text = "Finish Date:";
             // 
-            // pictureBox2
+            // imgEdit
             // 
-            pictureBox2.BackColor = SystemColors.ActiveCaption;
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(193, 65);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(21, 20);
-            pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
-            pictureBox2.TabIndex = 9;
-            pictureBox2.TabStop = false;
+            imgEdit.BackColor = SystemColors.ActiveCaption;
+            imgEdit.Image = (Image)resources.GetObject("imgEdit.Image");
+            imgEdit.Location = new Point(193, 65);
+            imgEdit.Name = "imgEdit";
+            imgEdit.Size = new Size(21, 20);
+            imgEdit.SizeMode = PictureBoxSizeMode.AutoSize;
+            imgEdit.TabIndex = 9;
+            imgEdit.TabStop = false;
+            imgEdit.Click += imgEdit_Click;
             // 
-            // pictureBox3
+            // imageClose
             // 
-            pictureBox3.BackColor = SystemColors.ActiveCaption;
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(200, 3);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(20, 17);
-            pictureBox3.SizeMode = PictureBoxSizeMode.AutoSize;
-            pictureBox3.TabIndex = 10;
-            pictureBox3.TabStop = false;
+            imageClose.BackColor = SystemColors.ActiveCaption;
+            imageClose.Image = (Image)resources.GetObject("imageClose.Image");
+            imageClose.Location = new Point(200, 3);
+            imageClose.Name = "imageClose";
+            imageClose.Size = new Size(20, 17);
+            imageClose.SizeMode = PictureBoxSizeMode.AutoSize;
+            imageClose.TabIndex = 10;
+            imageClose.TabStop = false;
+            imageClose.Click += imageClose_Click;
             // 
             // label6
             // 
             label6.AutoSize = true;
+            label6.BackColor = Color.Transparent;
             label6.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.Location = new Point(45, 205);
+            label6.Location = new Point(45, 224);
             label6.Name = "label6";
             label6.Size = new Size(37, 11);
             label6.TabIndex = 11;
             label6.Text = "Owner:";
             // 
-            // label7
-            // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.Location = new Point(30, 226);
-            label7.Name = "label7";
-            label7.Size = new Size(52, 11);
-            label7.TabIndex = 12;
-            label7.Text = "Customer:";
-            // 
             // buttonClose
             // 
             buttonClose.FlatStyle = FlatStyle.Flat;
             buttonClose.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonClose.Location = new Point(145, 261);
+            buttonClose.Location = new Point(145, 259);
             buttonClose.Name = "buttonClose";
             buttonClose.Size = new Size(75, 23);
             buttonClose.TabIndex = 13;
@@ -195,181 +197,231 @@
             buttonClose.UseVisualStyleBackColor = true;
             buttonClose.Click += buttonClose_Click;
             // 
-            // comboBox1
+            // comboBoxManagement
             // 
-            comboBox1.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(88, 96);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(126, 20);
-            comboBox1.TabIndex = 14;
-            comboBox1.Visible = false;
+            comboBoxManagement.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
+            comboBoxManagement.FormattingEnabled = true;
+            comboBoxManagement.Location = new Point(88, 96);
+            comboBoxManagement.Name = "comboBoxManagement";
+            comboBoxManagement.Size = new Size(126, 20);
+            comboBoxManagement.TabIndex = 14;
+            comboBoxManagement.Visible = false;
             // 
-            // comboBox2
+            // comboBoxUser
             // 
-            comboBox2.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(88, 222);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(126, 20);
-            comboBox2.TabIndex = 15;
-            comboBox2.Visible = false;
+            comboBoxUser.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
+            comboBoxUser.FormattingEnabled = true;
+            comboBoxUser.Location = new Point(88, 218);
+            comboBoxUser.Name = "comboBoxUser";
+            comboBoxUser.Size = new Size(126, 20);
+            comboBoxUser.TabIndex = 16;
+            comboBoxUser.Visible = false;
             // 
-            // comboBox3
+            // comboBoxCategory
             // 
-            comboBox3.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(88, 201);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(126, 20);
-            comboBox3.TabIndex = 16;
-            comboBox3.Visible = false;
+            comboBoxCategory.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
+            comboBoxCategory.FormattingEnabled = true;
+            comboBoxCategory.Location = new Point(88, 138);
+            comboBoxCategory.Name = "comboBoxCategory";
+            comboBoxCategory.Size = new Size(126, 20);
+            comboBoxCategory.TabIndex = 19;
+            comboBoxCategory.Visible = false;
             // 
-            // comboBox4
+            // comboBoxDepartment
             // 
-            comboBox4.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(88, 180);
-            comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(126, 20);
-            comboBox4.TabIndex = 17;
-            comboBox4.Visible = false;
+            comboBoxDepartment.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
+            comboBoxDepartment.FormattingEnabled = true;
+            comboBoxDepartment.Location = new Point(88, 117);
+            comboBoxDepartment.Name = "comboBoxDepartment";
+            comboBoxDepartment.Size = new Size(126, 20);
+            comboBoxDepartment.TabIndex = 20;
+            comboBoxDepartment.Visible = false;
             // 
-            // comboBox5
+            // txtProjectName
             // 
-            comboBox5.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            comboBox5.FormattingEnabled = true;
-            comboBox5.Location = new Point(88, 159);
-            comboBox5.Name = "comboBox5";
-            comboBox5.Size = new Size(126, 20);
-            comboBox5.TabIndex = 18;
-            comboBox5.Visible = false;
+            txtProjectName.Font = new Font("Calibri", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            txtProjectName.Location = new Point(67, 28);
+            txtProjectName.Name = "txtProjectName";
+            txtProjectName.Size = new Size(146, 31);
+            txtProjectName.TabIndex = 21;
+            txtProjectName.Visible = false;
             // 
-            // comboBox6
+            // lblManagement
             // 
-            comboBox6.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            comboBox6.FormattingEnabled = true;
-            comboBox6.Location = new Point(88, 138);
-            comboBox6.Name = "comboBox6";
-            comboBox6.Size = new Size(126, 20);
-            comboBox6.TabIndex = 19;
-            comboBox6.Visible = false;
+            lblManagement.AutoSize = true;
+            lblManagement.BackColor = Color.Transparent;
+            lblManagement.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
+            lblManagement.Location = new Point(88, 100);
+            lblManagement.Name = "lblManagement";
+            lblManagement.Size = new Size(61, 12);
+            lblManagement.TabIndex = 22;
+            lblManagement.Text = "Management1";
             // 
-            // comboBox7
+            // lblDepartment
             // 
-            comboBox7.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            comboBox7.FormattingEnabled = true;
-            comboBox7.Location = new Point(88, 117);
-            comboBox7.Name = "comboBox7";
-            comboBox7.Size = new Size(126, 20);
-            comboBox7.TabIndex = 20;
-            comboBox7.Visible = false;
+            lblDepartment.AutoSize = true;
+            lblDepartment.BackColor = Color.Transparent;
+            lblDepartment.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
+            lblDepartment.Location = new Point(88, 121);
+            lblDepartment.Name = "lblDepartment";
+            lblDepartment.Size = new Size(56, 12);
+            lblDepartment.TabIndex = 23;
+            lblDepartment.Text = "Department1";
             // 
-            // textBox1
+            // lblCategory
             // 
-            textBox1.Font = new Font("Calibri", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            textBox1.Location = new Point(67, 28);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(146, 31);
-            textBox1.TabIndex = 21;
-            textBox1.Text = "Project Name";
-            textBox1.Visible = false;
+            lblCategory.AutoSize = true;
+            lblCategory.BackColor = Color.Transparent;
+            lblCategory.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
+            lblCategory.Location = new Point(88, 142);
+            lblCategory.Name = "lblCategory";
+            lblCategory.Size = new Size(45, 12);
+            lblCategory.TabIndex = 24;
+            lblCategory.Text = "Category1";
             // 
-            // label8
+            // lblStartDate
             // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            label8.Location = new Point(97, 99);
-            label8.Name = "label8";
-            label8.Size = new Size(28, 12);
-            label8.TabIndex = 22;
-            label8.Text = "label8";
+            lblStartDate.AutoSize = true;
+            lblStartDate.BackColor = Color.Transparent;
+            lblStartDate.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
+            lblStartDate.Location = new Point(88, 182);
+            lblStartDate.Name = "lblStartDate";
+            lblStartDate.Size = new Size(28, 12);
+            lblStartDate.TabIndex = 25;
+            lblStartDate.Text = "Date1";
             // 
-            // label9
+            // lblEndDate
             // 
-            label9.AutoSize = true;
-            label9.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            label9.Location = new Point(97, 120);
-            label9.Name = "label9";
-            label9.Size = new Size(28, 12);
-            label9.TabIndex = 23;
-            label9.Text = "label9";
+            lblEndDate.AutoSize = true;
+            lblEndDate.BackColor = Color.Transparent;
+            lblEndDate.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
+            lblEndDate.Location = new Point(88, 203);
+            lblEndDate.Name = "lblEndDate";
+            lblEndDate.Size = new Size(28, 12);
+            lblEndDate.TabIndex = 26;
+            lblEndDate.Text = "Date2";
             // 
-            // label10
+            // lblOwner
             // 
-            label10.AutoSize = true;
-            label10.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            label10.Location = new Point(97, 141);
-            label10.Name = "label10";
-            label10.Size = new Size(33, 12);
-            label10.TabIndex = 24;
-            label10.Text = "label10";
+            lblOwner.AutoSize = true;
+            lblOwner.BackColor = Color.Transparent;
+            lblOwner.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
+            lblOwner.Location = new Point(88, 224);
+            lblOwner.Name = "lblOwner";
+            lblOwner.Size = new Size(27, 12);
+            lblOwner.TabIndex = 27;
+            lblOwner.Text = "User1";
             // 
-            // label11
+            // lblProjectName
             // 
-            label11.AutoSize = true;
-            label11.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            label11.Location = new Point(97, 162);
-            label11.Name = "label11";
-            label11.Size = new Size(33, 12);
-            label11.TabIndex = 25;
-            label11.Text = "label11";
+            lblProjectName.AutoSize = true;
+            lblProjectName.BackColor = Color.Transparent;
+            lblProjectName.Font = new Font("Calibri", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblProjectName.Location = new Point(76, 32);
+            lblProjectName.Name = "lblProjectName";
+            lblProjectName.Size = new Size(118, 23);
+            lblProjectName.TabIndex = 28;
+            lblProjectName.Text = "Project Name";
             // 
-            // label12
+            // dateTimePickerStart
             // 
-            label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            label12.Location = new Point(97, 183);
-            label12.Name = "label12";
-            label12.Size = new Size(33, 12);
-            label12.TabIndex = 26;
-            label12.Text = "label12";
+            dateTimePickerStart.CustomFormat = "MMM-yy";
+            dateTimePickerStart.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            dateTimePickerStart.Format = DateTimePickerFormat.Custom;
+            dateTimePickerStart.ImeMode = ImeMode.NoControl;
+            dateTimePickerStart.Location = new Point(88, 176);
+            dateTimePickerStart.Margin = new Padding(2);
+            dateTimePickerStart.Name = "dateTimePickerStart";
+            dateTimePickerStart.Size = new Size(126, 20);
+            dateTimePickerStart.TabIndex = 29;
+            dateTimePickerStart.Visible = false;
             // 
-            // label13
+            // dateTimePickerEnd
             // 
-            label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            label13.Location = new Point(97, 204);
-            label13.Name = "label13";
-            label13.Size = new Size(33, 12);
-            label13.TabIndex = 27;
-            label13.Text = "label13";
+            dateTimePickerEnd.CustomFormat = "MMM-yy";
+            dateTimePickerEnd.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            dateTimePickerEnd.Format = DateTimePickerFormat.Custom;
+            dateTimePickerEnd.ImeMode = ImeMode.NoControl;
+            dateTimePickerEnd.Location = new Point(88, 197);
+            dateTimePickerEnd.Margin = new Padding(2);
+            dateTimePickerEnd.Name = "dateTimePickerEnd";
+            dateTimePickerEnd.Size = new Size(126, 20);
+            dateTimePickerEnd.TabIndex = 30;
+            dateTimePickerEnd.Visible = false;
             // 
-            // label14
+            // checkBoxIsProgressing
             // 
-            label14.AutoSize = true;
-            label14.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            label14.Location = new Point(97, 225);
-            label14.Name = "label14";
-            label14.Size = new Size(33, 12);
-            label14.TabIndex = 28;
-            label14.Text = "label14";
+            checkBoxIsProgressing.AutoSize = true;
+            checkBoxIsProgressing.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
+            checkBoxIsProgressing.Location = new Point(88, 159);
+            checkBoxIsProgressing.Name = "checkBoxIsProgressing";
+            checkBoxIsProgressing.Size = new Size(94, 16);
+            checkBoxIsProgressing.TabIndex = 31;
+            checkBoxIsProgressing.Text = "Project Completed";
+            checkBoxIsProgressing.UseVisualStyleBackColor = true;
+            checkBoxIsProgressing.Visible = false;
+            checkBoxIsProgressing.CheckedChanged += checkBoxIsProgressing_CheckedChanged;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.BackColor = Color.Transparent;
+            label7.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.Location = new Point(46, 162);
+            label7.Name = "label7";
+            label7.Size = new Size(36, 11);
+            label7.TabIndex = 32;
+            label7.Text = "Status:";
+            // 
+            // lblStatus
+            // 
+            lblStatus.AutoSize = true;
+            lblStatus.BackColor = Color.Transparent;
+            lblStatus.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
+            lblStatus.Location = new Point(88, 161);
+            lblStatus.Name = "lblStatus";
+            lblStatus.Size = new Size(34, 12);
+            lblStatus.TabIndex = 33;
+            lblStatus.Text = "Status1";
+            // 
+            // imgSave
+            // 
+            imgSave.BackColor = SystemColors.ActiveCaption;
+            imgSave.Image = (Image)resources.GetObject("imgSave.Image");
+            imgSave.Location = new Point(166, 65);
+            imgSave.Name = "imgSave";
+            imgSave.Size = new Size(20, 21);
+            imgSave.SizeMode = PictureBoxSizeMode.AutoSize;
+            imgSave.TabIndex = 34;
+            imgSave.TabStop = false;
+            imgSave.Visible = false;
+            imgSave.Click += imgSave_Click;
             // 
             // DataCardUI
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(224, 290);
-            Controls.Add(label14);
-            Controls.Add(label13);
-            Controls.Add(label12);
-            Controls.Add(label11);
-            Controls.Add(label10);
-            Controls.Add(label9);
-            Controls.Add(label8);
-            Controls.Add(textBox1);
-            Controls.Add(comboBox7);
-            Controls.Add(comboBox6);
-            Controls.Add(comboBox5);
-            Controls.Add(comboBox4);
-            Controls.Add(comboBox3);
-            Controls.Add(comboBox2);
-            Controls.Add(comboBox1);
-            Controls.Add(buttonClose);
+            Controls.Add(imgSave);
+            Controls.Add(lblStatus);
             Controls.Add(label7);
+            Controls.Add(checkBoxIsProgressing);
+            Controls.Add(lblProjectName);
+            Controls.Add(lblOwner);
+            Controls.Add(lblEndDate);
+            Controls.Add(lblStartDate);
+            Controls.Add(lblCategory);
+            Controls.Add(lblDepartment);
+            Controls.Add(lblManagement);
+            Controls.Add(txtProjectName);
+            Controls.Add(comboBoxDepartment);
+            Controls.Add(comboBoxCategory);
+            Controls.Add(comboBoxUser);
+            Controls.Add(comboBoxManagement);
+            Controls.Add(buttonClose);
             Controls.Add(label6);
-            Controls.Add(pictureBox3);
-            Controls.Add(pictureBox2);
+            Controls.Add(imageClose);
+            Controls.Add(imgEdit);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -377,20 +429,25 @@
             Controls.Add(label2);
             Controls.Add(labelProjectDetails);
             Controls.Add(panel1);
-            Controls.Add(pictureBox1);
+            Controls.Add(imgProjectPicture);
+            Controls.Add(dateTimePickerStart);
+            Controls.Add(dateTimePickerEnd);
             FormBorderStyle = FormBorderStyle.None;
             Name = "DataCardUI";
+            StartPosition = FormStartPosition.Manual;
             Text = "DataCard";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            Load += DataCardUI_Load;
+            ((System.ComponentModel.ISupportInitialize)imgProjectPicture).EndInit();
+            ((System.ComponentModel.ISupportInitialize)imgEdit).EndInit();
+            ((System.ComponentModel.ISupportInitialize)imageClose).EndInit();
+            ((System.ComponentModel.ISupportInitialize)imgSave).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private PictureBox pictureBox1;
+        private PictureBox imgProjectPicture;
         private Panel panel1;
         private Label labelProjectDetails;
         private Label label2;
@@ -398,25 +455,27 @@
         private Label label3;
         private Label label4;
         private Label label5;
-        private PictureBox pictureBox2;
-        private PictureBox pictureBox3;
+        private PictureBox imgEdit;
+        private PictureBox imageClose;
         private Label label6;
-        private Label label7;
         private Button buttonClose;
-        private ComboBox comboBox1;
-        private ComboBox comboBox2;
-        private ComboBox comboBox3;
-        private ComboBox comboBox4;
-        private ComboBox comboBox5;
-        private ComboBox comboBox6;
-        private ComboBox comboBox7;
-        private TextBox textBox1;
-        private Label label8;
-        private Label label9;
-        private Label label10;
-        private Label label11;
-        private Label label12;
-        private Label label13;
-        private Label label14;
+        private ComboBox comboBoxManagement;
+        private ComboBox comboBoxUser;
+        private ComboBox comboBoxCategory;
+        private ComboBox comboBoxDepartment;
+        private TextBox txtProjectName;
+        private Label lblManagement;
+        private Label lblDepartment;
+        private Label lblCategory;
+        private Label lblStartDate;
+        private Label lblEndDate;
+        private Label lblOwner;
+        private Label lblProjectName;
+        private DateTimePicker dateTimePickerStart;
+        private DateTimePicker dateTimePickerEnd;
+        private CheckBox checkBoxIsProgressing;
+        private Label label7;
+        private Label lblStatus;
+        private PictureBox imgSave;
     }
 }

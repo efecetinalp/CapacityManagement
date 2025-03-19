@@ -41,7 +41,6 @@ namespace DashboardUI
         //UI Form Referances
         CreateForm createForm;
         Dashboard _dashboardForm;
-        DataCardUI _dataCard;
 
         //Class Referances
         AlertBox alertBox;
@@ -50,12 +49,14 @@ namespace DashboardUI
         //Properties
         private string _cellValueBegin;
         private bool isEditing = false;
+        private bool isSorted = false;
         private int _alertPosX;
         private int _alertPosY;
         private DateTime _startDate;
         private DateTime _endDate;
         public bool isDataListed = false;
         private int _rowIndex;
+        private List<int> completedProjectList = new();
 
         public DataGridForm(ProjectManager projectManager, DepartmentManager departmentManager, ManagementManager managementManager, CategoryManager categoryManager, DepartmentCapacityManager departmentCapacityManager, ProjectCapacityManager projectCapacityManager, Dashboard dashboardForm)
         {
@@ -136,8 +137,8 @@ namespace DashboardUI
             //fetches data and format into data grid view
             FetchData();
 
-            isDataListed = true;
-            alertBox.SuccessAlert("Success", _alertPosX, _alertPosY);
+            if (isDataListed)
+                alertBox.SuccessAlert("Success", _alertPosX, _alertPosY);
         }
 
         private async void FetchData()
@@ -196,7 +197,8 @@ namespace DashboardUI
             }
             else
             {
-                alertBox.ErrorAlert(departmentDatas.Massage, _alertPosX, _alertPosY);
+                alertBox.ErrorAlert("Test", _alertPosX, _alertPosY);
+                isDataListed = false;
                 return;
             }
 
@@ -207,10 +209,15 @@ namespace DashboardUI
 
             if (projectNames.Success && projectDatas.Success)
             {
+
                 foreach (var projectName in projectNames.Data)
                 {
                     DataRow projectRow = dataTable.Rows.Add();
                     projectRow[0] = projectName.ProjectName;
+
+                    //completed project table index list
+                    if (!projectName.IsProgressing)
+                        completedProjectList.Add(dataTable.Rows.Count - 1);
 
                     foreach (var projectData in projectDatas.Data)
                     {
@@ -233,12 +240,13 @@ namespace DashboardUI
             }
             else
             {
-                alertBox.ErrorAlert(projectNames.Massage, _alertPosX, _alertPosY);
+                alertBox.ErrorAlert("test", _alertPosX, _alertPosY);
                 return;
             }
 
             //place data table into data grid view
             dbGrid.DataSource = dataTable;
+            isDataListed = true;
 
             //data grid view style
             FormatDataGridView();
@@ -839,7 +847,8 @@ namespace DashboardUI
             comboBoxDepartment.ResetText();
             comboBoxDepartment.SelectedIndex = -1;
 
-            foreach (var department in departmentManager.GetAllByManagementId(comboBoxManagement.SelectedIndex + 1).Data)
+            var managementId = managementManager.GetByName(comboBoxManagement.SelectedItem.ToString()).Data.ManagementId;
+            foreach (var department in departmentManager.GetAllByManagementId(managementId).Data)
             {
                 comboBoxDepartment.Items.Add(department.DepartmentName);
             }
@@ -864,13 +873,13 @@ namespace DashboardUI
 
         private void imgProjectCardIcon_Click(object sender, EventArgs e)
         {
-            if (_dataCard == null)
-            {
-                _dataCard = new();
-            }
-            _dataCard.Location = this.Location;
-            //_dataCard.Left = dbGrid.Left + 5;
-            _dataCard.Show();
+            //REFACTOR THIS
+            var projectNames = projectManager.GetByName(dbGrid.Rows[_rowIndex].Cells[0].Value.ToString());
+            var projectDetail = projectManager.GetProjectDetail(projectNames.Data.ProjectId);
+
+            DataCardUI dataCard = new(projectDetail.Data);
+            dataCard.Location = dbGrid.PointToScreen(dbGrid.GetCellDisplayRectangle(0, _rowIndex, false).Location);
+            dataCard.Show();
         }
 
         #endregion
@@ -925,6 +934,21 @@ namespace DashboardUI
         #endregion
 
 
-        
+
+        private void checkBoxHideProjects_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxHideProjects.Checked)
+            {
+                //hide
+                foreach (var projectIndex in completedProjectList)
+                    dbGrid.Rows[projectIndex].Visible = false;
+            }
+            else
+            {
+                //unhide
+                foreach (var projectIndex in completedProjectList)
+                    dbGrid.Rows[projectIndex].Visible = true;
+            }
+        }
     }
 }

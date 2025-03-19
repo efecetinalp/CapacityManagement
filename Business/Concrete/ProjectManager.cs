@@ -140,6 +140,14 @@ namespace Business.Concrete
                 return new SuccessDataResult<List<ProjectDetailDto>>(result, Messages.ProjectListed);
         }
 
-        
+        public IDataResult<ProjectDetailDto> GetProjectDetail(int projectId)
+        {
+            ProjectDetailDto result = _projectDal.GetProjectDetail(p => p.ProjectId == projectId);
+
+            if (result != null)
+                return new SuccessDataResult<ProjectDetailDto>(result, Messages.ProjectListed);
+            else
+                return new ErrorDataResult<ProjectDetailDto>(result, Messages.EmptyData);
+        }
     }
 }

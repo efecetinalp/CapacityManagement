@@ -48,6 +48,7 @@
             buttonExportToExcel = new Button();
             buttonList = new Button();
             imgProjectCardIcon = new PictureBox();
+            checkBoxHideProjects = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)dbGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)imgProjectCardIcon).BeginInit();
             SuspendLayout();
@@ -309,12 +310,25 @@
             imgProjectCardIcon.Visible = false;
             imgProjectCardIcon.Click += imgProjectCardIcon_Click;
             // 
+            // checkBoxHideProjects
+            // 
+            checkBoxHideProjects.AutoSize = true;
+            checkBoxHideProjects.Font = new Font("Segoe UI Semibold", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
+            checkBoxHideProjects.Location = new Point(23, 58);
+            checkBoxHideProjects.Name = "checkBoxHideProjects";
+            checkBoxHideProjects.Size = new Size(89, 16);
+            checkBoxHideProjects.TabIndex = 38;
+            checkBoxHideProjects.Text = "Hide Completed";
+            checkBoxHideProjects.UseVisualStyleBackColor = true;
+            checkBoxHideProjects.CheckedChanged += checkBoxHideProjects_CheckedChanged;
+            // 
             // DataGridForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(242, 242, 242);
             ClientSize = new Size(1280, 660);
+            Controls.Add(checkBoxHideProjects);
             Controls.Add(imgProjectCardIcon);
             Controls.Add(buttonList);
             Controls.Add(buttonExportToExcel);
@@ -360,5 +374,6 @@
         private Button buttonExportToExcel;
         private Button buttonList;
         private PictureBox imgProjectCardIcon;
+        private CheckBox checkBoxHideProjects;
     }
 }
