@@ -147,7 +147,7 @@ namespace DashboardUI
 
         #endregion
 
-        private async void buttonUpdate_Click(object sender, EventArgs e)
+        public async void buttonUpdate_Click(object sender, EventArgs e)
         {
             if (!_dataGridForm.isDataListed)
             {

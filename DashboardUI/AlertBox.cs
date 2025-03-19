@@ -15,10 +15,6 @@ namespace DashboardUI
 {
     public partial class AlertBox : Form
     {
-        // public Color AlertBackColor { get; set; }
-        // public Color AlertTextColor { get; set; }
-        // public Image AlertImage { get; set; }
-        // public string AlertText { get; set; }
         public int _xPos, _yPos;
         private int _alertWidth;
 

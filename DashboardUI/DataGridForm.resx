@@ -243,4 +243,15 @@
         YII=
 </value>
   </data>
+  <data name="buttonChart.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wgAADsIBFShKgAAAAShJREFUOE/dkz1Ow0AQRleip0QcgA57bbJrW0TKziIBPYWliJ6eS6Si4Qo0dBRp
+        qHKK1KnhAFSAEMysP6HEdoiwocmTRra/3Xka/6l/oyiKXZz2JzZUakufckTUj+0WxsZdJpaeotxbRJuF
+        aebTxLojXH4T53TMfR9cz4gqfhJGg5HWhl54/TWydIZYHWZ+n7NF6Mv8KeKKdcID/pQ4n8sa1zvXWwqp
+        tm4WejK6CpuXWSfkbCq5tv5aphMh6rHKaYKtq7QJtfG3oYmPiFRi3DlnIhTZPeImdaFMhKZp2LAEpHdl
+        We4galIXymfA1/POv2NjQj3cCwtdqQt7k+R0IUJ+dmNE/YgHJ6YS0oNIZdLfFDSraONuIO1UrS9QJpXb
+        b5tiU0Hx1yj1BVydqlP64J+rAAAAAElFTkSuQmCC
+</value>
+  </data>
 </root>

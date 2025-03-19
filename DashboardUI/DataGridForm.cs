@@ -35,12 +35,14 @@ namespace DashboardUI
         DepartmentManager departmentManager;
         CategoryManager categoryManager;
         ProjectManager projectManager;
+        UserManager userManager;
         ProjectCapacityManager projectCapacityManager;
         DepartmentCapacityManager departmentCapacityManager;
 
         //UI Form Referances
         CreateForm createForm;
         Dashboard _dashboardForm;
+        DataCardUI _dataCardForm;
 
         //Class Referances
         AlertBox alertBox;
@@ -58,7 +60,7 @@ namespace DashboardUI
         private int _rowIndex;
         private List<int> completedProjectList = new();
 
-        public DataGridForm(ProjectManager projectManager, DepartmentManager departmentManager, ManagementManager managementManager, CategoryManager categoryManager, DepartmentCapacityManager departmentCapacityManager, ProjectCapacityManager projectCapacityManager, Dashboard dashboardForm)
+        public DataGridForm(ProjectManager projectManager, DepartmentManager departmentManager, ManagementManager managementManager, CategoryManager categoryManager, DepartmentCapacityManager departmentCapacityManager, ProjectCapacityManager projectCapacityManager, UserManager userManager, Dashboard dashboardForm)
         {
             this.projectManager = projectManager;
             this.departmentManager = departmentManager;
@@ -66,6 +68,7 @@ namespace DashboardUI
             this.categoryManager = categoryManager;
             this.projectCapacityManager = projectCapacityManager;
             this.departmentCapacityManager = departmentCapacityManager;
+            this.userManager = userManager;
 
             _dashboardForm = dashboardForm;
             _alertPosX = _dashboardForm.Left + _dashboardForm.Width;
@@ -236,7 +239,6 @@ namespace DashboardUI
                         }
                     }
                 }
-
             }
             else
             {
@@ -429,48 +431,13 @@ namespace DashboardUI
         {
             if (isEditing == false)
             {
-
-                DataGridViewImageColumn imageColumnUpdate = new();
-                DataGridViewImageColumn imageColumnDelete = new();
-
-                dbGrid.Columns.Add(imageColumnUpdate);
-                dbGrid.Columns.Add(imageColumnDelete);
-
-                int lastColumnIndex = dbGrid.Columns.Count - 1;
-                dbGrid.Columns[lastColumnIndex - 1].Name = "Update";
-                dbGrid.Columns[lastColumnIndex].Name = "Delete";
-
-
-                for (int i = 0; i < dbGrid.Rows.Count; i++)
-                {
-                    if (dbGrid.Rows[i].Tag == "Empty")
-                    {
-                        dbGrid.Rows[i].Cells[lastColumnIndex].Style.NullValue = null;
-                        dbGrid.Rows[i].Cells[lastColumnIndex - 1].Style.NullValue = null;
-                    }
-                    else
-                    {
-                        dbGrid.Rows[i].Cells[lastColumnIndex].Value = Properties.Resources.Remove;
-                        dbGrid.Rows[i].Cells[lastColumnIndex].Style.BackColor = Color.FromArgb(242, 242, 242);
-
-                        dbGrid.Rows[i].Cells[lastColumnIndex - 1].Value = Properties.Resources.DeleteIcon;
-                        dbGrid.Rows[i].Cells[lastColumnIndex - 1].Style.BackColor = Color.FromArgb(242, 242, 242);
-                    }
-                }
-
                 dbGrid.ReadOnly = false;
-
                 isEditing = true;
             }
 
             else if (isEditing == true)
             {
-
-                dbGrid.Columns.Remove("Delete");
-                dbGrid.Columns.Remove("Update");
-
                 dbGrid.ReadOnly = true;
-
                 isEditing = false;
             }
         }
@@ -877,9 +844,20 @@ namespace DashboardUI
             var projectNames = projectManager.GetByName(dbGrid.Rows[_rowIndex].Cells[0].Value.ToString());
             var projectDetail = projectManager.GetProjectDetail(projectNames.Data.ProjectId);
 
-            DataCardUI dataCard = new(projectDetail.Data);
-            dataCard.Location = dbGrid.PointToScreen(dbGrid.GetCellDisplayRectangle(0, _rowIndex, false).Location);
-            dataCard.Show();
+            if (_dataCardForm == null)
+            {
+                _dataCardForm = new(projectDetail.Data, managementManager, departmentManager, projectManager, categoryManager, userManager);
+                _dataCardForm.FormClosed += DataGridForm_FormClosed;
+                _dataCardForm.Location = dbGrid.PointToScreen(dbGrid.GetCellDisplayRectangle(0, _rowIndex, false).Location);
+                _dataCardForm.Show();
+            }
+            else
+                _dataCardForm.Activate();
+        }
+
+        private void DataGridForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _dataCardForm = null;
         }
 
         #endregion
@@ -933,7 +911,7 @@ namespace DashboardUI
 
         #endregion
 
-
+        #region Button Hide Completed Projects
 
         private void checkBoxHideProjects_CheckedChanged(object sender, EventArgs e)
         {
@@ -950,5 +928,16 @@ namespace DashboardUI
                     dbGrid.Rows[projectIndex].Visible = true;
             }
         }
+
+        #endregion
+
+        #region Button Chart Function
+
+        private void buttonChart_Click(object sender, EventArgs e)
+        {
+            _dashboardForm.ChartGenerateAndActivate(sender, e);
+        }
+
+        #endregion
     }
 }

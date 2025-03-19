@@ -59,10 +59,12 @@
             label7 = new Label();
             lblStatus = new Label();
             imgSave = new PictureBox();
+            imageDelete = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)imgProjectPicture).BeginInit();
             ((System.ComponentModel.ISupportInitialize)imgEdit).BeginInit();
             ((System.ComponentModel.ISupportInitialize)imageClose).BeginInit();
             ((System.ComponentModel.ISupportInitialize)imgSave).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)imageDelete).BeginInit();
             SuspendLayout();
             // 
             // imgProjectPicture
@@ -206,6 +208,7 @@
             comboBoxManagement.Size = new Size(126, 20);
             comboBoxManagement.TabIndex = 14;
             comboBoxManagement.Visible = false;
+            comboBoxManagement.SelectedIndexChanged += comboBoxManagement_SelectedIndexChanged;
             // 
             // comboBoxUser
             // 
@@ -397,11 +400,23 @@
             imgSave.Visible = false;
             imgSave.Click += imgSave_Click;
             // 
+            // imageDelete
+            // 
+            imageDelete.BackColor = SystemColors.ActiveCaption;
+            imageDelete.Image = (Image)resources.GetObject("imageDelete.Image");
+            imageDelete.Location = new Point(12, 265);
+            imageDelete.Name = "imageDelete";
+            imageDelete.Size = new Size(20, 17);
+            imageDelete.SizeMode = PictureBoxSizeMode.AutoSize;
+            imageDelete.TabIndex = 35;
+            imageDelete.TabStop = false;
+            // 
             // DataCardUI
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(224, 290);
+            Controls.Add(imageDelete);
             Controls.Add(imgSave);
             Controls.Add(lblStatus);
             Controls.Add(label7);
@@ -441,6 +456,7 @@
             ((System.ComponentModel.ISupportInitialize)imgEdit).EndInit();
             ((System.ComponentModel.ISupportInitialize)imageClose).EndInit();
             ((System.ComponentModel.ISupportInitialize)imgSave).EndInit();
+            ((System.ComponentModel.ISupportInitialize)imageDelete).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -477,5 +493,6 @@
         private Label label7;
         private Label lblStatus;
         private PictureBox imgSave;
+        private PictureBox imageDelete;
     }
 }

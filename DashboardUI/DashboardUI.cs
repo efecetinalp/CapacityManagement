@@ -58,7 +58,7 @@ namespace DashboardUI
             //Start with datagrid form
             UserLogin();
             MoveSlideBar(panelDataGrid);
-            dataGridForm = new(projectManager, departmentManager, managementManager, categoryManager, departmentCapacityManager, projectCapacityManager, this);
+            dataGridForm = new(projectManager, departmentManager, managementManager, categoryManager, departmentCapacityManager, projectCapacityManager, userManager, this);
             dataGridForm.FormClosed += DataGridForm_FormClosed;
             dataGridForm.MdiParent = this;
             dataGridForm.Dock = DockStyle.Fill;
@@ -100,7 +100,7 @@ namespace DashboardUI
 
             if (dataGridForm == null)
             {
-                dataGridForm = new(projectManager, departmentManager, managementManager, categoryManager, departmentCapacityManager, projectCapacityManager, this);
+                dataGridForm = new(projectManager, departmentManager, managementManager, categoryManager, departmentCapacityManager, projectCapacityManager, userManager, this);
                 dataGridForm.FormClosed += DataGridForm_FormClosed;
                 dataGridForm.MdiParent = this;
                 dataGridForm.Dock = DockStyle.Fill;
@@ -128,6 +128,27 @@ namespace DashboardUI
         private void DataGridForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             dataGridForm = null;
+        }
+
+        public void ChartGenerateAndActivate(object sender, EventArgs e)
+        {
+
+            MoveSlideBar(panelChart);
+
+            if (chartForm == null)
+            {
+                ChartRequest chartRequest = new();
+
+                chartForm = new(dataGridForm, colorCodeManager, colorPaletteManager);
+                chartForm.FormClosed += ChartForm_FormClosed;
+                chartForm.MdiParent = this;
+                chartForm.Dock = DockStyle.Fill;
+                chartForm.Show();
+            }
+            else
+                chartForm.Activate();
+
+            chartForm.buttonUpdate_Click(sender, e);
         }
 
         private void buttonChart_Click(object sender, EventArgs e)

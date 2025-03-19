@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataGridForm));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             buttonEdit = new Button();
             buttonReset = new Button();
             dateTimePickerEnd = new DateTimePicker();
@@ -49,6 +49,7 @@
             buttonList = new Button();
             imgProjectCardIcon = new PictureBox();
             checkBoxHideProjects = new CheckBox();
+            buttonChart = new Button();
             ((System.ComponentModel.ISupportInitialize)dbGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)imgProjectCardIcon).BeginInit();
             SuspendLayout();
@@ -144,38 +145,38 @@
             dbGrid.BackgroundColor = Color.White;
             dbGrid.BorderStyle = BorderStyle.None;
             dbGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(46, 52, 63);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(88, 183, 213);
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dbGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = Color.FromArgb(46, 52, 63);
+            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = Color.FromArgb(88, 183, 213);
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
+            dbGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             dbGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dbGrid.ColumnHeadersVisible = false;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(88, 183, 213);
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dbGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = SystemColors.Window;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle8.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = Color.FromArgb(88, 183, 213);
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
+            dbGrid.DefaultCellStyle = dataGridViewCellStyle8;
             dbGrid.EnableHeadersVisualStyles = false;
             dbGrid.GridColor = SystemColors.ActiveCaption;
             dbGrid.Location = new Point(21, 79);
             dbGrid.Margin = new Padding(2);
             dbGrid.Name = "dbGrid";
             dbGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(46, 52, 63);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(88, 183, 213);
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dbGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = Color.FromArgb(46, 52, 63);
+            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = Color.FromArgb(88, 183, 213);
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            dbGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             dbGrid.RowHeadersVisible = false;
             dbGrid.RowHeadersWidth = 62;
             dbGrid.RowTemplate.Height = 33;
@@ -274,7 +275,7 @@
             buttonExportToExcel.FlatStyle = FlatStyle.Flat;
             buttonExportToExcel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             buttonExportToExcel.Image = (Image)resources.GetObject("buttonExportToExcel.Image");
-            buttonExportToExcel.Location = new Point(720, 25);
+            buttonExportToExcel.Location = new Point(756, 25);
             buttonExportToExcel.Margin = new Padding(2);
             buttonExportToExcel.Name = "buttonExportToExcel";
             buttonExportToExcel.Size = new Size(32, 32);
@@ -322,12 +323,29 @@
             checkBoxHideProjects.UseVisualStyleBackColor = true;
             checkBoxHideProjects.CheckedChanged += checkBoxHideProjects_CheckedChanged;
             // 
+            // buttonChart
+            // 
+            buttonChart.BackColor = Color.Transparent;
+            buttonChart.Cursor = Cursors.Hand;
+            buttonChart.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
+            buttonChart.FlatStyle = FlatStyle.Flat;
+            buttonChart.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonChart.Image = (Image)resources.GetObject("buttonChart.Image");
+            buttonChart.Location = new Point(720, 25);
+            buttonChart.Margin = new Padding(2);
+            buttonChart.Name = "buttonChart";
+            buttonChart.Size = new Size(32, 32);
+            buttonChart.TabIndex = 39;
+            buttonChart.UseVisualStyleBackColor = false;
+            buttonChart.Click += buttonChart_Click;
+            // 
             // DataGridForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(242, 242, 242);
             ClientSize = new Size(1280, 660);
+            Controls.Add(buttonChart);
             Controls.Add(checkBoxHideProjects);
             Controls.Add(imgProjectCardIcon);
             Controls.Add(buttonList);
@@ -375,5 +393,6 @@
         private Button buttonList;
         private PictureBox imgProjectCardIcon;
         private CheckBox checkBoxHideProjects;
+        private Button buttonChart;
     }
 }
