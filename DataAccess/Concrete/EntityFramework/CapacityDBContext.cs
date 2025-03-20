@@ -1,34 +1,45 @@
 ﻿using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
-using System.IO;
-using System.Diagnostics;
 
 namespace DataAccess.Concrete.EntityFramework
 {
     public class CapacityDBContext : DbContext
     {
+        private string _dbLocationStr;
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //connection string
-            //USE WHEN PUBLISHING
-            var exePath = Path.GetDirectoryName(
-               new Uri(System.Reflection.Assembly.GetExecutingAssembly().Location).LocalPath);
-
-            var dbLocation = exePath + "\\database_path.txt";
-
-            StreamReader streamReader = new StreamReader(dbLocation);
-
-            if (streamReader == null)
+            if (_dbLocationStr == null)
             {
-                //HANDLE ERROR
+                try
+                {
+                    string? exePath = Path.GetDirectoryName(
+                        new Uri(System.Reflection.Assembly.GetExecutingAssembly().Location).LocalPath);
+
+                    string dbLocation = exePath + "\\database_path.txt";
+
+                    if (exePath != "")
+                        if (File.Exists(dbLocation))
+                        {
+                            using (StreamReader _streamReader = new StreamReader(dbLocation))
+                            {
+                                _dbLocationStr = _streamReader.ReadLine();
+                                _streamReader.Close();
+                            }
+                        }
+                        else
+                            throw new Exception("Database is not found!");
+                    else
+                        throw new Exception("Database location path is empty!");
+                }
+                catch (Exception)
+                {
+                    throw new Exception("Database connection error!");
+                }
             }
 
-            var dbLocationStr = streamReader.ReadLine();
-            streamReader.Close();
-
-            optionsBuilder.UseJet(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source =" + dbLocationStr + "; Persist Security Info = False;");
-            //optionsBuilder.UseJet(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source =" + exePath + "\\CapacityDB.accdb;Persist Security Info = False;");
-
+            optionsBuilder.UseJet(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source =" + _dbLocationStr + "; Persist Security Info = False;");
         }
 
         public DbSet<Category> Categories { get; set; }
@@ -40,6 +51,5 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<User> Users { get; set; }
         public DbSet<ColorCode> ColorCodes { get; set; }
         public DbSet<ColorPalette> ColorPalettes { get; set; }
-
     }
 }

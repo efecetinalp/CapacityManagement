@@ -29,33 +29,40 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            pictureAlertBox = new PictureBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AlertBox));
+            imgSuccess = new PictureBox();
             txtAlertBox = new Label();
             timerAnimation = new System.Windows.Forms.Timer(components);
             AlertDuration = new Panel();
             lblCloseIcon = new Label();
-            ((System.ComponentModel.ISupportInitialize)pictureAlertBox).BeginInit();
+            imgWarning = new PictureBox();
+            imgError = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)imgSuccess).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)imgWarning).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)imgError).BeginInit();
             SuspendLayout();
             // 
-            // pictureAlertBox
+            // imgSuccess
             // 
-            pictureAlertBox.Location = new Point(12, 6);
-            pictureAlertBox.Name = "pictureAlertBox";
-            pictureAlertBox.Size = new Size(25, 25);
-            pictureAlertBox.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureAlertBox.TabIndex = 0;
-            pictureAlertBox.TabStop = false;
-            pictureAlertBox.Click += pictureAlertBox_Click;
+            imgSuccess.Image = (Image)resources.GetObject("imgSuccess.Image");
+            imgSuccess.Location = new Point(5, 13);
+            imgSuccess.Name = "imgSuccess";
+            imgSuccess.Size = new Size(16, 16);
+            imgSuccess.SizeMode = PictureBoxSizeMode.StretchImage;
+            imgSuccess.TabIndex = 0;
+            imgSuccess.TabStop = false;
+            imgSuccess.Visible = false;
             // 
             // txtAlertBox
             // 
             txtAlertBox.AutoSize = true;
-            txtAlertBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            txtAlertBox.Location = new Point(43, 12);
+            txtAlertBox.Font = new Font("Segoe UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
+            txtAlertBox.Location = new Point(73, 15);
             txtAlertBox.Name = "txtAlertBox";
-            txtAlertBox.Size = new Size(114, 15);
+            txtAlertBox.Size = new Size(58, 12);
             txtAlertBox.TabIndex = 1;
-            txtAlertBox.Text = "Test Text Template";
+            txtAlertBox.Text = "Notification";
+            txtAlertBox.TextAlign = ContentAlignment.MiddleCenter;
             txtAlertBox.Click += txtAlertBox_Click;
             // 
             // timerAnimation
@@ -66,50 +73,78 @@
             // AlertDuration
             // 
             AlertDuration.BackColor = SystemColors.ActiveCaptionText;
-            AlertDuration.Location = new Point(0, 37);
+            AlertDuration.Location = new Point(0, 41);
             AlertDuration.Name = "AlertDuration";
-            AlertDuration.Size = new Size(350, 10);
+            AlertDuration.Size = new Size(206, 2);
             AlertDuration.TabIndex = 2;
             // 
             // lblCloseIcon
             // 
             lblCloseIcon.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblCloseIcon.AutoSize = true;
-            lblCloseIcon.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblCloseIcon.Location = new Point(332, 2);
+            lblCloseIcon.Font = new Font("Calibri", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lblCloseIcon.Location = new Point(192, -2);
             lblCloseIcon.Name = "lblCloseIcon";
-            lblCloseIcon.Size = new Size(14, 15);
+            lblCloseIcon.Size = new Size(13, 15);
             lblCloseIcon.TabIndex = 3;
             lblCloseIcon.Text = "x";
             lblCloseIcon.TextAlign = ContentAlignment.MiddleCenter;
             lblCloseIcon.Click += lblCloseIcon_Click;
             // 
+            // imgWarning
+            // 
+            imgWarning.Image = (Image)resources.GetObject("imgWarning.Image");
+            imgWarning.Location = new Point(5, 13);
+            imgWarning.Name = "imgWarning";
+            imgWarning.Size = new Size(16, 16);
+            imgWarning.SizeMode = PictureBoxSizeMode.StretchImage;
+            imgWarning.TabIndex = 4;
+            imgWarning.TabStop = false;
+            imgWarning.Visible = false;
+            // 
+            // imgError
+            // 
+            imgError.Image = (Image)resources.GetObject("imgError.Image");
+            imgError.Location = new Point(5, 13);
+            imgError.Name = "imgError";
+            imgError.Size = new Size(16, 16);
+            imgError.SizeMode = PictureBoxSizeMode.StretchImage;
+            imgError.TabIndex = 5;
+            imgError.TabStop = false;
+            imgError.Visible = false;
+            // 
             // AlertBox
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(350, 43);
+            ClientSize = new Size(205, 43);
+            Controls.Add(imgError);
+            Controls.Add(imgWarning);
             Controls.Add(lblCloseIcon);
             Controls.Add(AlertDuration);
             Controls.Add(txtAlertBox);
-            Controls.Add(pictureAlertBox);
+            Controls.Add(imgSuccess);
             FormBorderStyle = FormBorderStyle.None;
             Name = "AlertBox";
             Text = "AlertBox";
             TopMost = true;
             Load += AlertBox_Load;
             Click += AlertBox_Click;
-            ((System.ComponentModel.ISupportInitialize)pictureAlertBox).EndInit();
+            ((System.ComponentModel.ISupportInitialize)imgSuccess).EndInit();
+            ((System.ComponentModel.ISupportInitialize)imgWarning).EndInit();
+            ((System.ComponentModel.ISupportInitialize)imgError).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private PictureBox pictureAlertBox;
+        private PictureBox imgSuccess;
         private Label txtAlertBox;
         private System.Windows.Forms.Timer timerAnimation;
         private Panel AlertDuration;
         private Label lblCloseIcon;
+        private PictureBox imgWarning;
+        private PictureBox imgError;
     }
 }

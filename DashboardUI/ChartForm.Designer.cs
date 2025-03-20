@@ -61,6 +61,8 @@
             checkBoxMinorGrids = new CheckBox();
             labelGridStyle = new Label();
             comboBoxGridStyle = new ComboBox();
+            button1 = new Button();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)areaChart).BeginInit();
             SuspendLayout();
             // 
@@ -101,12 +103,14 @@
             buttonSave.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             buttonSave.Cursor = Cursors.Hand;
             buttonSave.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
+            buttonSave.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
             buttonSave.FlatStyle = FlatStyle.Flat;
             buttonSave.Image = (Image)resources.GetObject("buttonSave.Image");
-            buttonSave.Location = new Point(1224, 53);
+            buttonSave.Location = new Point(1203, 53);
             buttonSave.Margin = new Padding(2);
             buttonSave.Name = "buttonSave";
-            buttonSave.Size = new Size(31, 32);
+            buttonSave.Padding = new Padding(0, 0, 1, 1);
+            buttonSave.Size = new Size(20, 20);
             buttonSave.TabIndex = 3;
             buttonSave.UseVisualStyleBackColor = true;
             buttonSave.Click += buttonSave_Click;
@@ -116,12 +120,14 @@
             buttonUpdate.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             buttonUpdate.Cursor = Cursors.Hand;
             buttonUpdate.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
+            buttonUpdate.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
             buttonUpdate.FlatStyle = FlatStyle.Flat;
             buttonUpdate.Image = (Image)resources.GetObject("buttonUpdate.Image");
             buttonUpdate.Location = new Point(1179, 53);
             buttonUpdate.Margin = new Padding(2);
             buttonUpdate.Name = "buttonUpdate";
-            buttonUpdate.Size = new Size(31, 32);
+            buttonUpdate.Padding = new Padding(0, 0, 1, 1);
+            buttonUpdate.Size = new Size(20, 20);
             buttonUpdate.TabIndex = 2;
             buttonUpdate.UseVisualStyleBackColor = true;
             buttonUpdate.Click += buttonUpdate_Click;
@@ -415,11 +421,45 @@
             comboBoxGridStyle.Size = new Size(96, 20);
             comboBoxGridStyle.TabIndex = 52;
             // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button1.Cursor = Cursors.Hand;
+            button1.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
+            button1.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Image = (Image)resources.GetObject("button1.Image");
+            button1.Location = new Point(238, 61);
+            button1.Margin = new Padding(2);
+            button1.Name = "button1";
+            button1.Padding = new Padding(0, 0, 1, 1);
+            button1.Size = new Size(20, 20);
+            button1.TabIndex = 54;
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            button2.Cursor = Cursors.Hand;
+            button2.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
+            button2.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Image = (Image)resources.GetObject("button2.Image");
+            button2.Location = new Point(487, 84);
+            button2.Margin = new Padding(2);
+            button2.Name = "button2";
+            button2.Padding = new Padding(0, 0, 1, 1);
+            button2.Size = new Size(20, 20);
+            button2.TabIndex = 55;
+            button2.UseVisualStyleBackColor = true;
+            // 
             // ChartForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1280, 660);
+            Controls.Add(button2);
+            Controls.Add(button1);
             Controls.Add(labelGridStyle);
             Controls.Add(comboBoxGridStyle);
             Controls.Add(checkBoxMinorGrids);
@@ -492,5 +532,7 @@
         private CheckBox checkBoxMinorGrids;
         private Label labelGridStyle;
         private ComboBox comboBoxGridStyle;
+        private Button button1;
+        private Button button2;
     }
 }

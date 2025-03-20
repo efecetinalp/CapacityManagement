@@ -52,8 +52,8 @@ namespace DashboardUI
         private string _cellValueBegin;
         private bool isEditing = false;
         private bool isSorted = false;
-        private int _alertPosX;
-        private int _alertPosY;
+        private bool isHidden = false;
+   
         private DateTime _startDate;
         private DateTime _endDate;
         public bool isDataListed = false;
@@ -71,15 +71,13 @@ namespace DashboardUI
             this.userManager = userManager;
 
             _dashboardForm = dashboardForm;
-            _alertPosX = _dashboardForm.Left + _dashboardForm.Width;
-            _alertPosY = _dashboardForm.Top + _dashboardForm.Height;
             InitializeComponent();
         }
 
         private void DataGridForm_Load(object sender, EventArgs e)
         {
             //form initialize options
-            alertBox = new AlertBox();
+            alertBox = new AlertBox(_dashboardForm);
 
             _toolTip = new ToolTip();
             _toolTip.SetToolTip(this.buttonList, "List");
@@ -116,8 +114,10 @@ namespace DashboardUI
             }
             else if (_dashboardForm.activeUser.Admin || _dashboardForm.activeUser.Author)
             {
+                if (isDataListed)
+                    buttonEdit.Enabled = true;
+
                 buttonNew.Enabled = true;
-                buttonEdit.Enabled = true;
             }
 
             //DELETE LATER
@@ -133,7 +133,7 @@ namespace DashboardUI
 
             if (comboBoxManagement.Text == "" || comboBoxDepartment.Text == "")
             {
-                alertBox.WarningAlert("Please select a Department", _dashboardForm.Left + _dashboardForm.Width, _dashboardForm.Top + _dashboardForm.Height);
+                alertBox.WarningAlert("Please select a Department");
                 return;
             }
 
@@ -141,7 +141,7 @@ namespace DashboardUI
             FetchData();
 
             if (isDataListed)
-                alertBox.SuccessAlert("Success", _alertPosX, _alertPosY);
+                alertBox.SuccessAlert("Success");
         }
 
         private async void FetchData()
@@ -200,7 +200,7 @@ namespace DashboardUI
             }
             else
             {
-                alertBox.ErrorAlert("Test", _alertPosX, _alertPosY);
+                alertBox.ErrorAlert("Test");
                 isDataListed = false;
                 return;
             }
@@ -242,13 +242,18 @@ namespace DashboardUI
             }
             else
             {
-                alertBox.ErrorAlert("test", _alertPosX, _alertPosY);
+                alertBox.ErrorAlert("test");
                 return;
             }
 
             //place data table into data grid view
             dbGrid.DataSource = dataTable;
             isDataListed = true;
+
+            buttonEdit.Enabled = true;
+            buttonShowHide.Enabled = true;
+            buttonChart.Enabled = true;
+            buttonExportToExcel.Enabled = true;
 
             //data grid view style
             FormatDataGridView();
@@ -544,19 +549,19 @@ namespace DashboardUI
                                 Project projectToUpdate = projectByName.Data;
                                 projectToUpdate.ProjectName = cellValue;
                                 projectManager.Update(projectToUpdate);
-                                alertBox.SuccessAlert("Project name updated successfuly", _alertPosX, _alertPosY);
+                                alertBox.SuccessAlert("Project name updated successfuly");
                                 return;
                             }
                             else
                             {
-                                alertBox.ErrorAlert("Could not find project", _alertPosX, _alertPosY);
+                                alertBox.ErrorAlert("Could not find project");
                                 return;
                             }
                         }
                         else
                         {
                             dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
-                            alertBox.WarningAlert("Value cannot be empty", _alertPosX, _alertPosY);
+                            alertBox.WarningAlert("Value cannot be empty");
                             return;
                         }
                     }
@@ -566,7 +571,7 @@ namespace DashboardUI
                     if (!IsNumeric(cellValue))
                     {
                         dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
-                        alertBox.WarningAlert("Non-numeric value", _alertPosX, _alertPosY);
+                        alertBox.WarningAlert("Non-numeric value");
                         return;
                     }
 
@@ -574,7 +579,7 @@ namespace DashboardUI
                     var projectData = projectManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString());
                     if (!projectData.Success)
                     {
-                        alertBox.ErrorAlert("Could not find project data", _alertPosX, _alertPosY);
+                        alertBox.ErrorAlert("Could not find project data");
                         return;
                     }
 
@@ -595,7 +600,7 @@ namespace DashboardUI
                         else
                         {
                             Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + projectCapacityToAdd.ProjectCapacityId + "Error when adding data into database");
-                            alertBox.ErrorAlert("Error when adding data into database", _alertPosX, _alertPosY);
+                            alertBox.ErrorAlert("Error when adding data into database");
                         }
                     }
                     //current capacity value editing
@@ -606,7 +611,7 @@ namespace DashboardUI
                         if (!projectCapacityData.Success)
                         {
                             Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Could not find project capacity data");
-                            alertBox.ErrorAlert("Could not find project capacity data", _alertPosX, _alertPosY);
+                            alertBox.ErrorAlert("Could not find project capacity data");
                             return;
                         }
 
@@ -621,7 +626,7 @@ namespace DashboardUI
                             else
                             {
                                 Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Error when deleting data from database");
-                                alertBox.ErrorAlert("Error when deleting data from database", _alertPosX, _alertPosY);
+                                alertBox.ErrorAlert("Error when deleting data from database");
                             }
                         }
                         //new value will update on current data
@@ -634,7 +639,7 @@ namespace DashboardUI
                             else
                             {
                                 Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Error when updating data in database");
-                                alertBox.ErrorAlert("Error when updating data in database", _alertPosX, _alertPosY);
+                                alertBox.ErrorAlert("Error when updating data in database");
                             }
                         }
                     }
@@ -660,19 +665,19 @@ namespace DashboardUI
                                 Department departmentToUpdate = departmentByName.Data;
                                 departmentToUpdate.DepartmentName = cellValue;
                                 departmentManager.Update(departmentToUpdate);
-                                alertBox.SuccessAlert("Department name updated successfuly", _alertPosX, _alertPosY);
+                                alertBox.SuccessAlert("Department name updated successfuly");
                                 return;
                             }
                             else
                             {
-                                alertBox.ErrorAlert("Could not find department", _alertPosX, _alertPosY);
+                                alertBox.ErrorAlert("Could not find department");
                                 return;
                             }
                         }
                         else
                         {
                             dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
-                            alertBox.WarningAlert("Value cannot be empty", _alertPosX, _alertPosY);
+                            alertBox.WarningAlert("Value cannot be empty");
                             return;
                         }
                     }
@@ -682,7 +687,7 @@ namespace DashboardUI
                     if (!IsNumeric(cellValue))
                     {
                         dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
-                        alertBox.WarningAlert("Non-numeric value", _alertPosX, _alertPosY);
+                        alertBox.WarningAlert("Non-numeric value");
                         return;
                     }
 
@@ -690,7 +695,7 @@ namespace DashboardUI
                     var departmentData = departmentManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString());
                     if (!departmentData.Success)
                     {
-                        alertBox.ErrorAlert("Could not find department data", _alertPosX, _alertPosY);
+                        alertBox.ErrorAlert("Could not find department data");
                         return;
                     }
 
@@ -711,7 +716,7 @@ namespace DashboardUI
                         else
                         {
                             Debug.Print("Error when adding data into database");
-                            alertBox.ErrorAlert("Error when adding data into database", _alertPosX, _alertPosY);
+                            alertBox.ErrorAlert("Error when adding data into database");
                         }
                     }
                     //current department capacity value editing
@@ -722,7 +727,7 @@ namespace DashboardUI
                         if (!departmentCapacityData.Success)
                         {
                             Debug.Print("Could not find department capacity data");
-                            alertBox.ErrorAlert("Could not find department capacity data", _alertPosX, _alertPosY);
+                            alertBox.ErrorAlert("Could not find department capacity data");
                             return;
                         }
 
@@ -737,7 +742,7 @@ namespace DashboardUI
                             else
                             {
                                 Debug.Print("Error when deleting data from database");
-                                alertBox.ErrorAlert("Error when deleting data from database", _alertPosX, _alertPosY);
+                                alertBox.ErrorAlert("Error when deleting data from database");
                             }
                         }
                         //new value will update on current data
@@ -750,7 +755,7 @@ namespace DashboardUI
                             else
                             {
                                 Debug.Print("Error when updatig data in database");
-                                alertBox.ErrorAlert("Error when updatig data in database", _alertPosX, _alertPosY);
+                                alertBox.ErrorAlert("Error when updatig data in database");
                             }
                         }
                     }
@@ -776,19 +781,19 @@ namespace DashboardUI
                                 Management managementToUpdate = managementByName.Data;
                                 managementToUpdate.ManagementName = cellValue;
                                 managementManager.Update(managementToUpdate);
-                                alertBox.SuccessAlert("Management name updated successfuly", _alertPosX, _alertPosY);
+                                alertBox.SuccessAlert("Management name updated successfuly");
                                 return;
                             }
                             else
                             {
-                                alertBox.ErrorAlert("Could not find Management", _alertPosX, _alertPosY);
+                                alertBox.ErrorAlert("Could not find Management");
                                 return;
                             }
                         }
                         else
                         {
                             dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
-                            alertBox.WarningAlert("Value cannot be empty", _alertPosX, _alertPosY);
+                            alertBox.WarningAlert("Value cannot be empty");
                             return;
                         }
                     }
@@ -809,15 +814,18 @@ namespace DashboardUI
 
         private void comboBoxManagement_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //update department comboBox
-            comboBoxDepartment.Items.Clear();
-            comboBoxDepartment.ResetText();
-            comboBoxDepartment.SelectedIndex = -1;
-
-            var managementId = managementManager.GetByName(comboBoxManagement.SelectedItem.ToString()).Data.ManagementId;
-            foreach (var department in departmentManager.GetAllByManagementId(managementId).Data)
+            if (comboBoxManagement.Text != "")
             {
-                comboBoxDepartment.Items.Add(department.DepartmentName);
+                //update department comboBox
+                comboBoxDepartment.Items.Clear();
+                comboBoxDepartment.ResetText();
+                comboBoxDepartment.SelectedIndex = -1;
+
+                var managementId = managementManager.GetByName(comboBoxManagement.SelectedItem.ToString()).Data.ManagementId;
+                foreach (var department in departmentManager.GetAllByManagementId(managementId).Data)
+                {
+                    comboBoxDepartment.Items.Add(department.DepartmentName);
+                }
             }
         }
 
@@ -830,15 +838,15 @@ namespace DashboardUI
             if (e.RowIndex >= 3 && e.ColumnIndex == 0)
             {
                 _rowIndex = e.RowIndex;
-                imgProjectCardIcon.Top = dbGrid.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false).Top + dbGrid.Top + 3;
-                imgProjectCardIcon.Left = dbGrid.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false).Right - 5;
-                imgProjectCardIcon.Visible = true;
+                buttonCard.Top = dbGrid.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false).Top + dbGrid.Top + 3;
+                buttonCard.Left = dbGrid.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false).Right - 3;
+                buttonCard.Visible = true;
             }
             else
-                imgProjectCardIcon.Visible = false;
+                buttonCard.Visible = false;
         }
 
-        private void imgProjectCardIcon_Click(object sender, EventArgs e)
+        private void buttonCard_Click(object sender, EventArgs e)
         {
             //REFACTOR THIS
             var projectNames = projectManager.GetByName(dbGrid.Rows[_rowIndex].Cells[0].Value.ToString());
@@ -864,6 +872,11 @@ namespace DashboardUI
 
         //NOT WORKED ON YET
         #region Button Chart Function
+
+        private void buttonChart_Click(object sender, EventArgs e)
+        {
+            _dashboardForm.ChartGenerateAndActivate(sender, e);
+        }
 
         public ChartRequest GenerateChartData()
         {
@@ -913,17 +926,19 @@ namespace DashboardUI
 
         #region Button Hide Completed Projects
 
-        private void checkBoxHideProjects_CheckedChanged(object sender, EventArgs e)
+        private void buttonShowHide_Click(object sender, EventArgs e)
         {
-            if (checkBoxHideProjects.Checked)
+            if (!isHidden)
             {
                 //hide
+                isHidden = true;
                 foreach (var projectIndex in completedProjectList)
                     dbGrid.Rows[projectIndex].Visible = false;
             }
             else
             {
                 //unhide
+                isHidden = false;
                 foreach (var projectIndex in completedProjectList)
                     dbGrid.Rows[projectIndex].Visible = true;
             }
@@ -931,13 +946,6 @@ namespace DashboardUI
 
         #endregion
 
-        #region Button Chart Function
 
-        private void buttonChart_Click(object sender, EventArgs e)
-        {
-            _dashboardForm.ChartGenerateAndActivate(sender, e);
-        }
-
-        #endregion
     }
 }

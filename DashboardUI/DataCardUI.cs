@@ -99,26 +99,11 @@ namespace DashboardUI
 
         }
 
-        private void buttonClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void imageClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void imgEdit_Click(object sender, EventArgs e)
-        {
-            //start edit mode
-            BeginEditMode();
-        }
-
         private void BeginEditMode()
         {
-            imgEdit.Visible = false;
-            imgSave.Visible = true;
+            buttonEdit.Visible = false;
+            buttonSave.Visible = true;
+            buttonDelete.Visible = true;
 
             lblProjectName.Visible = false;
             lblManagement.Visible = false;
@@ -144,8 +129,9 @@ namespace DashboardUI
 
         private void QuitEditMode()
         {
-            imgEdit.Visible = true;
-            imgSave.Visible = false;
+            buttonEdit.Visible = true;
+            buttonSave.Visible = false;
+            buttonDelete.Visible = false;
 
             lblProjectName.Visible = true;
             lblManagement.Visible = true;
@@ -174,13 +160,7 @@ namespace DashboardUI
                 dateTimePickerEnd.Enabled = true;
         }
 
-        private void imgSave_Click(object sender, EventArgs e)
-        {
-            //save edited card
 
-            //UI change
-            QuitEditMode();
-        }
 
         private void comboBoxManagement_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -199,6 +179,37 @@ namespace DashboardUI
             {
                 //alertbox
             }
+        }
+
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            //start edit mode
+            BeginEditMode();
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            //save edited card
+
+            //UI change
+            QuitEditMode();
+        }
+
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            //ask confirmation from user
+
+            //delete project and project capacity datas
+        }
+
+        private void buttonQuit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

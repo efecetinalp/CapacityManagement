@@ -16,26 +16,31 @@ namespace DashboardUI
     public partial class AlertBox : Form
     {
         public int _xPos, _yPos;
-        private int _alertWidth;
+        private Form _form;
 
-        public AlertBox()
+        public AlertBox(Form form)
         {
+            _form = form;
             InitializeComponent();
         }
 
         private void AlertBox_Load(object sender, EventArgs e)
         {
+            _xPos = _form.Left + 15;
+            _yPos = _form.Bottom - 15;
+
             DialogAction();
         }
 
         private void DialogAction()
         {
             //for the first initialize
-            this.Location = new Point(_xPos - _alertWidth - 20, _yPos - 70);
+            this.Left = _xPos;
+            this.Top = _yPos - this.Height;
 
             AlertDuration.Width = 0;
 
-            for (int i = 0; i < _alertWidth; i++)
+            for (int i = 0; i < this.Width; i++)
             {
                 timerAnimation.Start();
             }
@@ -44,89 +49,67 @@ namespace DashboardUI
         private void timerAnimation_Tick(object sender, EventArgs e)
         {
             AlertDuration.Width = AlertDuration.Width + 2;
-            if (AlertDuration.Width >= _alertWidth)
+            if (AlertDuration.Width >= this.Width)
             {
                 this.Hide();
             }
         }
 
-        public void SuccessAlert(string alertText, int xPos, int yPos)
+        private void HideImages()
         {
-            if (this.Visible)
-                this.Hide();
+            imgError.Visible = false;
+            imgSuccess.Visible = false;
+            imgWarning.Visible = false;
+        }
 
-            _xPos = xPos;
-            _yPos = yPos;
+        public void SuccessAlert(string alertText)
+        {
+            HideImages();
             txtAlertBox.Text = alertText;
-            this.Width = txtAlertBox.Width + 70;
-            _alertWidth = this.Width;
-            this.Location = new Point(_xPos - _alertWidth - 20, _yPos - 70);
+            this.Left = _xPos;
+            this.Top = _yPos - this.Height;
             AlertDuration.Width = 0;
             this.BackColor = Color.LightGreen;
-            txtAlertBox.ForeColor = Color.SeaGreen;
-            lblCloseIcon.ForeColor = Color.SeaGreen;
-            AlertDuration.BackColor = Color.SeaGreen;
-            pictureAlertBox.Image = Properties.Resources.success_alert;
+            txtAlertBox.ForeColor = Color.DarkGreen;
+            lblCloseIcon.ForeColor = Color.DarkGreen;
+            AlertDuration.BackColor = Color.DarkGreen;
+            txtAlertBox.Left = (this.Width / 2) - (txtAlertBox.Width /2) + 8;
+            imgSuccess.Left = txtAlertBox.Left - imgSuccess.Width - 2;
+            imgSuccess.Visible = true;
             this.Show();
         }
 
-        public void ErrorAlert(string alertText, int xPos, int yPos)
+        public void ErrorAlert(string alertText)
         {
-            if (this.Visible)
-                this.Hide();
-
-            _xPos = xPos;
-            _yPos = yPos;
+            HideImages();
             txtAlertBox.Text = alertText;
-            this.Width = txtAlertBox.Width + 70;
-            _alertWidth = this.Width;
-            this.Location = new Point(_xPos - _alertWidth - 20, _yPos - 70);
+            this.Left = _xPos;
+            this.Top = _yPos - this.Height;
             AlertDuration.Width = 0;
             this.BackColor = Color.LightPink;
             txtAlertBox.ForeColor = Color.DarkRed;
             lblCloseIcon.ForeColor = Color.DarkRed;
             AlertDuration.BackColor = Color.DarkRed;
-            pictureAlertBox.Image = Properties.Resources.error_alert;
+            txtAlertBox.Left = (this.Width / 2) - (txtAlertBox.Width / 2) + 8;
+            imgError.Left = txtAlertBox.Left - imgError.Width - 2;
+            imgError.Visible = true;
             this.Show();
         }
 
-        public void WarningAlert(string alertText, int xPos, int yPos)
+        public void WarningAlert(string alertText)
         {
-            if (this.Visible)
-                this.Hide();
-
-            _xPos = xPos;
-            _yPos = yPos;
+            HideImages();
             txtAlertBox.Text = alertText;
-            this.Width = txtAlertBox.Width + 70;
-            _alertWidth = this.Width;
+            this.Left = _xPos;
+            this.Top = _yPos - this.Height;
             AlertDuration.Width = 0;
-            this.Location = new Point(_xPos - _alertWidth - 20, _yPos - 70);
             this.BackColor = Color.LightGoldenrodYellow;
-            txtAlertBox.ForeColor = Color.Goldenrod;
-            lblCloseIcon.ForeColor = Color.Goldenrod;
-            AlertDuration.BackColor = Color.Goldenrod;
-            pictureAlertBox.Image = Properties.Resources.warning_alert;
-            this.Show();
-        }
-
-        public void InformationAlert(string alertText, int xPos, int yPos)
-        {
-            if (this.Visible)
-                this.Hide();
-
-            _xPos = xPos;
-            _yPos = yPos;
-            txtAlertBox.Text = alertText;
-            this.Width = txtAlertBox.Width + 70;
-            _alertWidth = this.Width;
-            this.Location = new Point(_xPos - _alertWidth - 20, _yPos - 70);
-            AlertDuration.Width = 0;
-            this.BackColor = Color.LightSteelBlue;
-            txtAlertBox.ForeColor = Color.DodgerBlue;
-            lblCloseIcon.ForeColor = Color.DodgerBlue;
-            AlertDuration.BackColor = Color.DodgerBlue;
-            pictureAlertBox.Image = Properties.Resources.info_alert;
+            txtAlertBox.ForeColor = Color.DarkOrange;
+            lblCloseIcon.ForeColor = Color.DarkOrange;
+            AlertDuration.BackColor = Color.DarkOrange;
+            txtAlertBox.Left = (this.Width / 2) - (txtAlertBox.Width / 2) + 8;
+            imgWarning.Left = txtAlertBox.Left - imgWarning.Width - 2;
+            imgWarning.Visible = true;
             this.Show();
         }
 
@@ -136,11 +119,6 @@ namespace DashboardUI
         }
 
         private void txtAlertBox_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
-
-        private void pictureAlertBox_Click(object sender, EventArgs e)
         {
             this.Hide();
         }

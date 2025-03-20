@@ -12,7 +12,7 @@ namespace DashboardUI
         {
             InitializeComponent();
             _areaChart = exportedChart;
-            _alertBox = new();
+            _alertBox = new(this);
 
         }
 
@@ -61,15 +61,15 @@ namespace DashboardUI
             {
                 if (ExportChart(textBoxExportPath.Text, textBoxFileName.Text))
                 {
-                    _alertBox.SuccessAlert("Sucessfully exported.", _areaChart.Left + _areaChart.Width, _areaChart.Top + _areaChart.Height);
+                    _alertBox.SuccessAlert("Sucessfully exported.");
                 }
                 else
                 {
-                    _alertBox.ErrorAlert("Failed while exporting!", _areaChart.Left + _areaChart.Width, _areaChart.Top + _areaChart.Height);
+                    _alertBox.ErrorAlert("Failed while exporting!");
                 }
             }
             else
-                _alertBox.WarningAlert("Please fill empty areas!", _areaChart.Left + _areaChart.Width, _areaChart.Top + _areaChart.Height);
+                _alertBox.WarningAlert("Please fill empty areas!");
         }
     }
 }

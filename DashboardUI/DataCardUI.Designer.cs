@@ -30,16 +30,14 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataCardUI));
             imgProjectPicture = new PictureBox();
-            panel1 = new Panel();
+            panelSeperator = new Panel();
             labelProjectDetails = new Label();
-            label2 = new Label();
-            label1 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            imgEdit = new PictureBox();
-            imageClose = new PictureBox();
-            label6 = new Label();
+            labelManagement = new Label();
+            labelDepartment = new Label();
+            labelCategory = new Label();
+            labelStartDate = new Label();
+            labelEndDate = new Label();
+            labelOwner = new Label();
             buttonClose = new Button();
             comboBoxManagement = new ComboBox();
             comboBoxUser = new ComboBox();
@@ -56,35 +54,33 @@
             dateTimePickerStart = new DateTimePicker();
             dateTimePickerEnd = new DateTimePicker();
             checkBoxIsProgressing = new CheckBox();
-            label7 = new Label();
+            labelStatus = new Label();
             lblStatus = new Label();
-            imgSave = new PictureBox();
-            imageDelete = new PictureBox();
+            buttonSave = new Button();
+            buttonDelete = new Button();
+            buttonQuit = new Button();
+            buttonEdit = new Button();
             ((System.ComponentModel.ISupportInitialize)imgProjectPicture).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)imgEdit).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)imageClose).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)imgSave).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)imageDelete).BeginInit();
             SuspendLayout();
             // 
             // imgProjectPicture
             // 
-            imgProjectPicture.BackColor = SystemColors.ActiveCaption;
+            imgProjectPicture.BackColor = Color.Transparent;
             imgProjectPicture.Image = (Image)resources.GetObject("imgProjectPicture.Image");
-            imgProjectPicture.Location = new Point(13, 12);
+            imgProjectPicture.Location = new Point(13, 28);
             imgProjectPicture.Name = "imgProjectPicture";
-            imgProjectPicture.Size = new Size(48, 43);
-            imgProjectPicture.SizeMode = PictureBoxSizeMode.Zoom;
+            imgProjectPicture.Size = new Size(32, 32);
+            imgProjectPicture.SizeMode = PictureBoxSizeMode.AutoSize;
             imgProjectPicture.TabIndex = 0;
             imgProjectPicture.TabStop = false;
             // 
-            // panel1
+            // panelSeperator
             // 
-            panel1.BackColor = SystemColors.ControlDarkDark;
-            panel1.Location = new Point(13, 62);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(200, 1);
-            panel1.TabIndex = 2;
+            panelSeperator.BackColor = SystemColors.ControlDarkDark;
+            panelSeperator.Location = new Point(13, 62);
+            panelSeperator.Name = "panelSeperator";
+            panelSeperator.Size = new Size(200, 1);
+            panelSeperator.TabIndex = 2;
             // 
             // labelProjectDetails
             // 
@@ -97,95 +93,71 @@
             labelProjectDetails.TabIndex = 3;
             labelProjectDetails.Text = "Project Details";
             // 
-            // label2
+            // labelManagement
             // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(18, 100);
-            label2.Name = "label2";
-            label2.Size = new Size(64, 11);
-            label2.TabIndex = 4;
-            label2.Text = "Management:";
+            labelManagement.AutoSize = true;
+            labelManagement.BackColor = Color.Transparent;
+            labelManagement.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelManagement.Location = new Point(18, 100);
+            labelManagement.Name = "labelManagement";
+            labelManagement.Size = new Size(64, 11);
+            labelManagement.TabIndex = 4;
+            labelManagement.Text = "Management:";
             // 
-            // label1
+            // labelDepartment
             // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(22, 121);
-            label1.Name = "label1";
-            label1.Size = new Size(60, 11);
-            label1.TabIndex = 5;
-            label1.Text = "Department:";
+            labelDepartment.AutoSize = true;
+            labelDepartment.BackColor = Color.Transparent;
+            labelDepartment.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelDepartment.Location = new Point(22, 121);
+            labelDepartment.Name = "labelDepartment";
+            labelDepartment.Size = new Size(60, 11);
+            labelDepartment.TabIndex = 5;
+            labelDepartment.Text = "Department:";
             // 
-            // label3
+            // labelCategory
             // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(33, 142);
-            label3.Name = "label3";
-            label3.Size = new Size(49, 11);
-            label3.TabIndex = 6;
-            label3.Text = "Category:";
+            labelCategory.AutoSize = true;
+            labelCategory.BackColor = Color.Transparent;
+            labelCategory.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelCategory.Location = new Point(33, 142);
+            labelCategory.Name = "labelCategory";
+            labelCategory.Size = new Size(49, 11);
+            labelCategory.TabIndex = 6;
+            labelCategory.Text = "Category:";
             // 
-            // label4
+            // labelStartDate
             // 
-            label4.AutoSize = true;
-            label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(30, 182);
-            label4.Name = "label4";
-            label4.Size = new Size(52, 11);
-            label4.TabIndex = 7;
-            label4.Text = "Start Date:";
+            labelStartDate.AutoSize = true;
+            labelStartDate.BackColor = Color.Transparent;
+            labelStartDate.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelStartDate.Location = new Point(30, 182);
+            labelStartDate.Name = "labelStartDate";
+            labelStartDate.Size = new Size(52, 11);
+            labelStartDate.TabIndex = 7;
+            labelStartDate.Text = "Start Date:";
             // 
-            // label5
+            // labelEndDate
             // 
-            label5.AutoSize = true;
-            label5.BackColor = Color.Transparent;
-            label5.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(22, 203);
-            label5.Name = "label5";
-            label5.Size = new Size(60, 11);
-            label5.TabIndex = 8;
-            label5.Text = "Finish Date:";
+            labelEndDate.AutoSize = true;
+            labelEndDate.BackColor = Color.Transparent;
+            labelEndDate.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelEndDate.Location = new Point(22, 203);
+            labelEndDate.Name = "labelEndDate";
+            labelEndDate.Size = new Size(60, 11);
+            labelEndDate.TabIndex = 8;
+            labelEndDate.Text = "Finish Date:";
             // 
-            // imgEdit
+            // labelOwner
             // 
-            imgEdit.BackColor = SystemColors.ActiveCaption;
-            imgEdit.Image = (Image)resources.GetObject("imgEdit.Image");
-            imgEdit.Location = new Point(193, 65);
-            imgEdit.Name = "imgEdit";
-            imgEdit.Size = new Size(21, 20);
-            imgEdit.SizeMode = PictureBoxSizeMode.AutoSize;
-            imgEdit.TabIndex = 9;
-            imgEdit.TabStop = false;
-            imgEdit.Click += imgEdit_Click;
-            // 
-            // imageClose
-            // 
-            imageClose.BackColor = SystemColors.ActiveCaption;
-            imageClose.Image = (Image)resources.GetObject("imageClose.Image");
-            imageClose.Location = new Point(200, 3);
-            imageClose.Name = "imageClose";
-            imageClose.Size = new Size(20, 17);
-            imageClose.SizeMode = PictureBoxSizeMode.AutoSize;
-            imageClose.TabIndex = 10;
-            imageClose.TabStop = false;
-            imageClose.Click += imageClose_Click;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.BackColor = Color.Transparent;
-            label6.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.Location = new Point(45, 224);
-            label6.Name = "label6";
-            label6.Size = new Size(37, 11);
-            label6.TabIndex = 11;
-            label6.Text = "Owner:";
+            labelOwner.AutoSize = true;
+            labelOwner.BackColor = Color.Transparent;
+            labelOwner.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelOwner.Location = new Point(45, 224);
+            labelOwner.Name = "labelOwner";
+            labelOwner.Size = new Size(37, 11);
+            labelOwner.TabIndex = 11;
+            labelOwner.Text = "Owner:";
             // 
             // buttonClose
             // 
@@ -243,9 +215,9 @@
             // txtProjectName
             // 
             txtProjectName.Font = new Font("Calibri", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            txtProjectName.Location = new Point(67, 28);
+            txtProjectName.Location = new Point(48, 28);
             txtProjectName.Name = "txtProjectName";
-            txtProjectName.Size = new Size(146, 31);
+            txtProjectName.Size = new Size(165, 31);
             txtProjectName.TabIndex = 21;
             txtProjectName.Visible = false;
             // 
@@ -320,7 +292,7 @@
             lblProjectName.AutoSize = true;
             lblProjectName.BackColor = Color.Transparent;
             lblProjectName.Font = new Font("Calibri", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblProjectName.Location = new Point(76, 32);
+            lblProjectName.Location = new Point(51, 31);
             lblProjectName.Name = "lblProjectName";
             lblProjectName.Size = new Size(118, 23);
             lblProjectName.TabIndex = 28;
@@ -365,16 +337,16 @@
             checkBoxIsProgressing.Visible = false;
             checkBoxIsProgressing.CheckedChanged += checkBoxIsProgressing_CheckedChanged;
             // 
-            // label7
+            // labelStatus
             // 
-            label7.AutoSize = true;
-            label7.BackColor = Color.Transparent;
-            label7.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.Location = new Point(46, 162);
-            label7.Name = "label7";
-            label7.Size = new Size(36, 11);
-            label7.TabIndex = 32;
-            label7.Text = "Status:";
+            labelStatus.AutoSize = true;
+            labelStatus.BackColor = Color.Transparent;
+            labelStatus.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelStatus.Location = new Point(46, 162);
+            labelStatus.Name = "labelStatus";
+            labelStatus.Size = new Size(36, 11);
+            labelStatus.TabIndex = 32;
+            labelStatus.Text = "Status:";
             // 
             // lblStatus
             // 
@@ -387,39 +359,76 @@
             lblStatus.TabIndex = 33;
             lblStatus.Text = "Status1";
             // 
-            // imgSave
+            // buttonSave
             // 
-            imgSave.BackColor = SystemColors.ActiveCaption;
-            imgSave.Image = (Image)resources.GetObject("imgSave.Image");
-            imgSave.Location = new Point(166, 65);
-            imgSave.Name = "imgSave";
-            imgSave.Size = new Size(20, 21);
-            imgSave.SizeMode = PictureBoxSizeMode.AutoSize;
-            imgSave.TabIndex = 34;
-            imgSave.TabStop = false;
-            imgSave.Visible = false;
-            imgSave.Click += imgSave_Click;
+            buttonSave.FlatAppearance.BorderSize = 0;
+            buttonSave.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonSave.FlatStyle = FlatStyle.Flat;
+            buttonSave.Image = (Image)resources.GetObject("buttonSave.Image");
+            buttonSave.Location = new Point(194, 65);
+            buttonSave.Name = "buttonSave";
+            buttonSave.Padding = new Padding(0, 0, 1, 1);
+            buttonSave.Size = new Size(20, 20);
+            buttonSave.TabIndex = 37;
+            buttonSave.UseVisualStyleBackColor = true;
+            buttonSave.Visible = false;
+            buttonSave.Click += buttonSave_Click;
             // 
-            // imageDelete
+            // buttonDelete
             // 
-            imageDelete.BackColor = SystemColors.ActiveCaption;
-            imageDelete.Image = (Image)resources.GetObject("imageDelete.Image");
-            imageDelete.Location = new Point(12, 265);
-            imageDelete.Name = "imageDelete";
-            imageDelete.Size = new Size(20, 17);
-            imageDelete.SizeMode = PictureBoxSizeMode.AutoSize;
-            imageDelete.TabIndex = 35;
-            imageDelete.TabStop = false;
+            buttonDelete.FlatAppearance.BorderSize = 0;
+            buttonDelete.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonDelete.FlatStyle = FlatStyle.Flat;
+            buttonDelete.Image = (Image)resources.GetObject("buttonDelete.Image");
+            buttonDelete.Location = new Point(8, 262);
+            buttonDelete.Name = "buttonDelete";
+            buttonDelete.Padding = new Padding(0, 0, 1, 1);
+            buttonDelete.Size = new Size(20, 20);
+            buttonDelete.TabIndex = 38;
+            buttonDelete.UseVisualStyleBackColor = true;
+            buttonDelete.Visible = false;
+            buttonDelete.Click += buttonDelete_Click;
+            // 
+            // buttonQuit
+            // 
+            buttonQuit.FlatAppearance.BorderSize = 0;
+            buttonQuit.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonQuit.FlatStyle = FlatStyle.Flat;
+            buttonQuit.Image = (Image)resources.GetObject("buttonQuit.Image");
+            buttonQuit.Location = new Point(208, 5);
+            buttonQuit.Name = "buttonQuit";
+            buttonQuit.Padding = new Padding(0, 0, 1, 1);
+            buttonQuit.Size = new Size(12, 12);
+            buttonQuit.TabIndex = 39;
+            buttonQuit.UseVisualStyleBackColor = true;
+            buttonQuit.Click += buttonQuit_Click;
+            // 
+            // buttonEdit
+            // 
+            buttonEdit.FlatAppearance.BorderSize = 0;
+            buttonEdit.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonEdit.FlatStyle = FlatStyle.Flat;
+            buttonEdit.Image = (Image)resources.GetObject("buttonEdit.Image");
+            buttonEdit.Location = new Point(194, 65);
+            buttonEdit.Name = "buttonEdit";
+            buttonEdit.Padding = new Padding(0, 0, 1, 1);
+            buttonEdit.Size = new Size(20, 20);
+            buttonEdit.TabIndex = 40;
+            buttonEdit.UseVisualStyleBackColor = true;
+            buttonEdit.Click += buttonEdit_Click;
             // 
             // DataCardUI
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(224, 290);
-            Controls.Add(imageDelete);
-            Controls.Add(imgSave);
+            Controls.Add(buttonEdit);
+            Controls.Add(buttonQuit);
+            Controls.Add(buttonDelete);
+            Controls.Add(buttonSave);
             Controls.Add(lblStatus);
-            Controls.Add(label7);
+            Controls.Add(labelStatus);
             Controls.Add(checkBoxIsProgressing);
             Controls.Add(lblProjectName);
             Controls.Add(lblOwner);
@@ -434,16 +443,14 @@
             Controls.Add(comboBoxUser);
             Controls.Add(comboBoxManagement);
             Controls.Add(buttonClose);
-            Controls.Add(label6);
-            Controls.Add(imageClose);
-            Controls.Add(imgEdit);
-            Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label1);
-            Controls.Add(label2);
+            Controls.Add(labelOwner);
+            Controls.Add(labelEndDate);
+            Controls.Add(labelStartDate);
+            Controls.Add(labelCategory);
+            Controls.Add(labelDepartment);
+            Controls.Add(labelManagement);
             Controls.Add(labelProjectDetails);
-            Controls.Add(panel1);
+            Controls.Add(panelSeperator);
             Controls.Add(imgProjectPicture);
             Controls.Add(dateTimePickerStart);
             Controls.Add(dateTimePickerEnd);
@@ -453,10 +460,6 @@
             Text = "DataCard";
             Load += DataCardUI_Load;
             ((System.ComponentModel.ISupportInitialize)imgProjectPicture).EndInit();
-            ((System.ComponentModel.ISupportInitialize)imgEdit).EndInit();
-            ((System.ComponentModel.ISupportInitialize)imageClose).EndInit();
-            ((System.ComponentModel.ISupportInitialize)imgSave).EndInit();
-            ((System.ComponentModel.ISupportInitialize)imageDelete).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -464,16 +467,15 @@
         #endregion
 
         private PictureBox imgProjectPicture;
-        private Panel panel1;
+        private Panel panelSeperator;
         private Label labelProjectDetails;
-        private Label label2;
-        private Label label1;
-        private Label label3;
-        private Label label4;
-        private Label label5;
-        private PictureBox imgEdit;
+        private Label labelManagement;
+        private Label labelDepartment;
+        private Label labelCategory;
+        private Label labelStartDate;
+        private Label labelEndDate;
         private PictureBox imageClose;
-        private Label label6;
+        private Label labelOwner;
         private Button buttonClose;
         private ComboBox comboBoxManagement;
         private ComboBox comboBoxUser;
@@ -490,9 +492,12 @@
         private DateTimePicker dateTimePickerStart;
         private DateTimePicker dateTimePickerEnd;
         private CheckBox checkBoxIsProgressing;
-        private Label label7;
+        private Label labelStatus;
         private Label lblStatus;
-        private PictureBox imgSave;
         private PictureBox imageDelete;
+        private Button buttonSave;
+        private Button buttonDelete;
+        private Button buttonQuit;
+        private Button buttonEdit;
     }
 }
