@@ -8,43 +8,45 @@ namespace DashboardUI
 {
     public partial class AdminForm : Form
     {
-        UserManager userManager;
+        ManagementManager _managementManager;
+        DepartmentManager _departmentManager;
+        CategoryManager _categoryManager;
+        ProjectManager _projectManager;
+        UserManager _userManager;
+
         AlertBox alertBox;
         ToolTip toolTip;
         Dashboard _dashboardForm;
+        CreateForm _createForm;
 
         object _tempCellValue;
 
-        public AdminForm(Dashboard dashboardForm)
+        public AdminForm(Dashboard dashboardForm, ManagementManager managementManager, DepartmentManager departmentManager, CategoryManager categoryManager, ProjectManager projectManager, UserManager userManager)
         {
             InitializeComponent();
+
+            _managementManager = managementManager;
+            _departmentManager = departmentManager;
+            _categoryManager = categoryManager;
+            _projectManager = projectManager;
             _dashboardForm = dashboardForm;
-            userManager = new UserManager(new EfUserDal());
+            _userManager = userManager;
 
             var exePath = Path.GetDirectoryName(
                new Uri(System.Reflection.Assembly.GetExecutingAssembly().Location).LocalPath);
 
             var dbLocation = exePath + "\\database_path.txt";
-
             StreamReader streamReader = new StreamReader(dbLocation);
-
-            if (streamReader == null)
-            {
-                // ERROR HANDLE
-            }
-
             textBoxPath.Text = streamReader.ReadLine();
             streamReader.Close();
         }
 
         private void AdminForm_Load(object sender, EventArgs e)
         {
-            userDataGrid.DataSource = userManager.GetAll().Data;
-            toolTip = new ToolTip();
-            toolTip.SetToolTip(this.buttonCreate, "Create New User");
-            toolTip.SetToolTip(this.buttonDelete, "Delete User");
             alertBox = new AlertBox(_dashboardForm);
         }
+
+        #region CRUD User
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
@@ -55,16 +57,15 @@ namespace DashboardUI
 
         private void CreateUser_FormClosed(object sender, FormClosedEventArgs e)
         {
-            RefreshUserList();
+            ResetDataGridView();
         }
 
-        private void RefreshUserList()
+        private void ResetDataGridView()
         {
             //reset gridview
-            userDataGrid.DataSource = null;
-            userDataGrid.Rows.Clear();
-            userDataGrid.Columns.Clear();
-            userDataGrid.DataSource = userManager.GetAll().Data;
+            adminDataGrid.DataSource = null;
+            adminDataGrid.Rows.Clear();
+            adminDataGrid.Columns.Clear();
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -72,32 +73,28 @@ namespace DashboardUI
             DialogResult dialogResult = MessageBox.Show("Are you sure to delete selected user permanently!", "User Delete", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                var userIndex = userDataGrid.Rows[userDataGrid.CurrentCell.RowIndex].Cells[0].Value;
-                User userToDelete = userManager.GetById(Convert.ToInt32(userIndex)).Data;
-                userManager.Delete(userToDelete);
-
-                //notification
+                var userIndex = adminDataGrid.Rows[adminDataGrid.CurrentCell.RowIndex].Cells[0].Value;
+                User userToDelete = _userManager.GetById(Convert.ToInt32(userIndex)).Data;
+                _userManager.Delete(userToDelete);
 
                 alertBox.SuccessAlert("User deleted!");
             }
 
-            RefreshUserList();
+            ResetDataGridView();
         }
 
         private void userDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex != 0 && e.ColumnIndex != 1)
+            if (e.ColumnIndex > 1 && e.RowIndex > -1)
             {
-
-                var userIndex = userDataGrid.Rows[userDataGrid.CurrentCell.RowIndex].Cells[0].Value;
-                User userToUpdate = userManager.GetById(Convert.ToInt32(userIndex)).Data;
+                var userIndex = adminDataGrid.Rows[adminDataGrid.CurrentCell.RowIndex].Cells[0].Value;
+                User userToUpdate = _userManager.GetById(Convert.ToInt32(userIndex)).Data;
 
                 if (e.ColumnIndex == 2)
                 {
                     userToUpdate.Admin = true;
                     userToUpdate.Author = false;
-                    userToUpdate.Reader = false;
-                    userManager.Update(userToUpdate);
+                    _userManager.Update(userToUpdate);
 
                     //notification
                     alertBox.SuccessAlert("User set as Admin Role!");
@@ -106,72 +103,91 @@ namespace DashboardUI
                 {
                     userToUpdate.Admin = false;
                     userToUpdate.Author = true;
-                    userToUpdate.Reader = false;
-                    userManager.Update(userToUpdate);
+                    _userManager.Update(userToUpdate);
 
                     //notification
                     alertBox.SuccessAlert("User set as Author Role!");
                 }
-                else if (e.ColumnIndex == 4)
-                {
-                    userToUpdate.Admin = false;
-                    userToUpdate.Author = false;
-                    userToUpdate.Reader = true;
-                    userManager.Update(userToUpdate);
-
-                    //notification
-                    alertBox.SuccessAlert("User set as Reader Role!");
-                }
+                ResetDataGridView();
             }
-            else if (e.ColumnIndex == 1)
-            {
-                // name update
-            }
-
-            RefreshUserList();
         }
 
         private void userDataGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-
-            if (e.ColumnIndex != 1)
+            if (e.ColumnIndex == 1)
             {
-                return;
-            }
+                var cellValue = adminDataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
 
-            var cellValue = userDataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-
-            //check if cell value is changed
-            if (_tempCellValue != cellValue)
-            {
-                if (cellValue != null)
+                //check if cell value is changed
+                if (_tempCellValue != cellValue)
                 {
-                    var userIndex = userDataGrid.Rows[userDataGrid.CurrentCell.RowIndex].Cells[0].Value;
-                    User userToUpdate = userManager.GetById(Convert.ToInt32(userIndex)).Data;
-                    userToUpdate.UserName = cellValue.ToString();
-                    userManager.Update(userToUpdate);
+                    if (cellValue != null)
+                    {
+                        var userIndex = adminDataGrid.Rows[adminDataGrid.CurrentCell.RowIndex].Cells[0].Value;
+                        User userToUpdate = _userManager.GetById(Convert.ToInt32(userIndex)).Data;
+                        userToUpdate.UserName = cellValue.ToString();
+                        _userManager.Update(userToUpdate);
 
-                    //notification
-                    alertBox.SuccessAlert("User name is updated!");
+                        //notification
+                        alertBox.SuccessAlert("User name is updated!");
+                    }
+                    else
+                    {
+                        adminDataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _tempCellValue;
+
+                        //notification
+                        alertBox.ErrorAlert("User name cannot be empty!");
+                    }
                 }
                 else
                 {
-                    userDataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _tempCellValue;
-
                     //notification
-                    alertBox.ErrorAlert("User name cannot be empty!");
+                    alertBox.WarningAlert("The value is not changed!");
                 }
             }
-            else
-            {
-                //notification
-                alertBox.WarningAlert("The value is not changed!");
-            }
         }
+
         private void userDataGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            _tempCellValue = userDataGrid.Rows[e.RowIndex].Cells[1].Value;
+            _tempCellValue = adminDataGrid.Rows[e.RowIndex].Cells[1].Value;
         }
+
+        private void buttonManagement_Click(object sender, EventArgs e)
+        {
+            ResetDataGridView();
+
+            adminDataGrid.DataSource = _managementManager.GetAll().Data;
+            adminDataGrid.Columns[0].Visible = false;
+        }
+
+        private void buttonDepartment_Click(object sender, EventArgs e)
+        {
+            ResetDataGridView();
+
+            adminDataGrid.DataSource = _departmentManager.GetAll().Data;
+            adminDataGrid.Columns[0].Visible = false;
+            adminDataGrid.Columns[1].Visible = false;
+        }
+
+        private void buttonCategory_Click(object sender, EventArgs e)
+        {
+            ResetDataGridView();
+
+            adminDataGrid.DataSource = _categoryManager.GetAll().Data;
+            adminDataGrid.Columns[0].Visible = false;
+        }
+
+        private void buttonUser_Click(object sender, EventArgs e)
+        {
+            ResetDataGridView();
+
+            adminDataGrid.DataSource = _userManager.GetAll().Data;
+            adminDataGrid.Columns[0].Visible = false;
+        }
+
+        #endregion
+
+        #region Change Database Path
 
         private void buttonBrowse_Click(object sender, EventArgs e)
         {
@@ -191,6 +207,27 @@ namespace DashboardUI
             StreamWriter streamWriter = new StreamWriter(dbLocation);
             streamWriter.Write(textBoxPath.Text);
             streamWriter.Close();
+        }
+
+        #endregion
+
+        private void buttonNew_Click(object sender, EventArgs e)
+        {
+            if (_createForm == null)
+            {
+                _createForm = new CreateForm(_managementManager, _departmentManager, _categoryManager, _projectManager);
+                _createForm.FormClosed += CreateForm_FormClosed;
+                _createForm.ShowDialog();
+            }
+            else
+            {
+                _createForm.Activate();
+            }
+        }
+
+        private void CreateForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _createForm = null;
         }
     }
 }

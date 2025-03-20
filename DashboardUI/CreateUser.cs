@@ -50,10 +50,6 @@ namespace DashboardUI
             {
                 newUser.Author = true;
             }
-            else
-            {
-                newUser.Reader = true;
-            }
 
             _userManager.Add(newUser);
 

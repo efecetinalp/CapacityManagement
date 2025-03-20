@@ -20,7 +20,6 @@ namespace DashboardUI
         DataGridForm dataGridForm;
         DashboardForm dashboardForm;
         ChartForm chartForm;
-        CreateUser loginForm;
         AdminForm adminForm;
 
         //database manager referances
@@ -63,6 +62,24 @@ namespace DashboardUI
             dataGridForm.MdiParent = this;
             dataGridForm.Dock = DockStyle.Fill;
             dataGridForm.Show();
+        }
+
+        private void UserLogin()
+        {
+            activeUser = userManager.GetByUserName(Environment.UserName.ToUpper()).Data;
+            labelActiveUser.Text = labelActiveUser.Text.Replace("Signing...", Environment.UserName.ToUpper());
+
+            if (activeUser == null)
+            {
+                return;
+            }
+
+            labelActiveUser.Visible = true;
+
+            if (activeUser.Admin)
+            {
+                buttonAdmin.Visible = true;
+            }
         }
 
         //MENU OPERATIONS
@@ -108,19 +125,6 @@ namespace DashboardUI
             }
             else
             {
-                if (activeUser != null)
-                {
-                    if (activeUser.Author || activeUser.Admin)
-                    {
-                        foreach (Control control in dataGridForm.Controls)
-                        {
-                            if (control.Name == "btnEdit" || control.Name == "buttonNew")
-                            {
-                                control.Enabled = true;
-                            }
-                        }
-                    }
-                }
                 dataGridForm.Activate();
             }
         }
@@ -174,24 +178,6 @@ namespace DashboardUI
             chartForm = null;
         }
 
-        private void UserLogin()
-        {
-            activeUser = userManager.GetByUserName(Environment.UserName.ToUpper()).Data;
-            labelActiveUser.Text = labelActiveUser.Text.Replace("Signing...", Environment.UserName.ToUpper());
-
-            if (activeUser == null)
-            {
-                return;
-            }
-            
-            labelActiveUser.Visible = true;
-            loginForm = null;
-
-            if (activeUser.Admin)
-            {
-                buttonAdmin.Visible = true;
-            }
-        }
 
         private void buttonAdmin_Click(object sender, EventArgs e)
         {
@@ -199,8 +185,8 @@ namespace DashboardUI
 
             if (adminForm == null)
             {
-                adminForm = new(this);
-                adminForm.FormClosed += ChartForm_FormClosed;
+                adminForm = new(this, managementManager, departmentManager, categoryManager, projectManager, userManager);
+                adminForm.FormClosed += AdminForm_FormClosed;
                 adminForm.MdiParent = this;
                 adminForm.Dock = DockStyle.Fill;
                 adminForm.Show();
@@ -208,6 +194,11 @@ namespace DashboardUI
             else
                 adminForm.Activate();
         }
-      
+
+        private void AdminForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            adminForm = null;
+        }
+
     }
 }

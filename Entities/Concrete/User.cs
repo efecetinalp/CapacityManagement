@@ -13,6 +13,5 @@ namespace Entities.Concrete
         public string UserName { get; set; }
         public bool Admin { get; set; }
         public bool Author { get; set; }
-        public bool Reader { get; set; }
     }
 }

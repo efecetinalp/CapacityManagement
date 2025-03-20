@@ -423,7 +423,6 @@
             // 
             // button1
             // 
-            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             button1.Cursor = Cursors.Hand;
             button1.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
             button1.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
@@ -439,7 +438,6 @@
             // 
             // button2
             // 
-            button2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             button2.Cursor = Cursors.Hand;
             button2.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
             button2.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
