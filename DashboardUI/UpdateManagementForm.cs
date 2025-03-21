@@ -24,7 +24,7 @@ namespace DashboardUI
             managementManager = manager;
             InitializeComponent();
         }
-
+        
         private void UpdateManagementForm_Load(object sender, EventArgs e)
         {
             textBoxManagement.Text = tableValue;

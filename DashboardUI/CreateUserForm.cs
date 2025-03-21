@@ -14,12 +14,13 @@ using System.Windows.Forms;
 
 namespace DashboardUI
 {
-    public partial class CreateUser : Form
+    public partial class CreateUserForm : Form
     {
         UserManager _userManager;
 
-        public CreateUser()
+        public CreateUserForm(UserManager userManager)
         {
+            _userManager = userManager;
             InitializeComponent();
         }
 
@@ -30,9 +31,6 @@ namespace DashboardUI
 
         private void CreateUser_Load(object sender, EventArgs e)
         {
-            _userManager = new UserManager(new EfUserDal());
-
-            comboBoxRoles.Items.Add("Reader");
             comboBoxRoles.Items.Add("Author");
             comboBoxRoles.Items.Add("Admin");
         }
@@ -42,11 +40,11 @@ namespace DashboardUI
             User newUser = new();
             newUser.UserName = textBoxUserName.Text.ToUpper();
 
-            if (comboBoxRoles.SelectedIndex == 2)
+            if (comboBoxRoles.SelectedIndex == 1)
             {
                 newUser.Admin = true;
             }
-            else if (comboBoxRoles.SelectedIndex == 1)
+            else if (comboBoxRoles.SelectedIndex == 0)
             {
                 newUser.Author = true;
             }

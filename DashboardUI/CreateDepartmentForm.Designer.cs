@@ -34,14 +34,14 @@
             label1 = new Label();
             lblManagement = new Label();
             comboBoxManagement = new ComboBox();
+            buttonCancel = new Button();
             SuspendLayout();
             // 
             // label4
             // 
-            label4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label4.Location = new Point(42, 142);
+            label4.Location = new Point(24, 119);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
             label4.Size = new Size(73, 15);
@@ -50,24 +50,22 @@
             // 
             // textBoxDepartment
             // 
-            textBoxDepartment.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBoxDepartment.Location = new Point(40, 160);
+            textBoxDepartment.Location = new Point(22, 137);
             textBoxDepartment.Margin = new Padding(2);
             textBoxDepartment.Name = "textBoxDepartment";
-            textBoxDepartment.Size = new Size(260, 23);
+            textBoxDepartment.Size = new Size(199, 23);
             textBoxDepartment.TabIndex = 42;
             // 
             // buttonCreate
             // 
-            buttonCreate.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             buttonCreate.BackColor = Color.FromArgb(58, 154, 193);
             buttonCreate.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
             buttonCreate.FlatStyle = FlatStyle.Flat;
             buttonCreate.ForeColor = SystemColors.ControlLightLight;
-            buttonCreate.Location = new Point(70, 350);
+            buttonCreate.Location = new Point(21, 195);
             buttonCreate.Margin = new Padding(2);
             buttonCreate.Name = "buttonCreate";
-            buttonCreate.Size = new Size(200, 32);
+            buttonCreate.Size = new Size(200, 28);
             buttonCreate.TabIndex = 41;
             buttonCreate.Text = "Create Department";
             buttonCreate.UseVisualStyleBackColor = false;
@@ -75,10 +73,9 @@
             // 
             // label1
             // 
-            label1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(122, 50);
+            label1.Location = new Point(76, 25);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
             label1.Size = new Size(100, 19);
@@ -87,10 +84,9 @@
             // 
             // lblManagement
             // 
-            lblManagement.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblManagement.AutoSize = true;
             lblManagement.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            lblManagement.Location = new Point(39, 91);
+            lblManagement.Location = new Point(21, 68);
             lblManagement.Margin = new Padding(2, 0, 2, 0);
             lblManagement.Name = "lblManagement";
             lblManagement.Size = new Size(79, 15);
@@ -99,19 +95,34 @@
             // 
             // comboBoxManagement
             // 
-            comboBoxManagement.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             comboBoxManagement.FormattingEnabled = true;
-            comboBoxManagement.Location = new Point(40, 110);
+            comboBoxManagement.Location = new Point(22, 87);
             comboBoxManagement.Margin = new Padding(2);
             comboBoxManagement.Name = "comboBoxManagement";
-            comboBoxManagement.Size = new Size(260, 23);
+            comboBoxManagement.Size = new Size(199, 23);
             comboBoxManagement.TabIndex = 38;
+            // 
+            // buttonCancel
+            // 
+            buttonCancel.BackColor = Color.FromArgb(58, 154, 193);
+            buttonCancel.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
+            buttonCancel.FlatStyle = FlatStyle.Flat;
+            buttonCancel.ForeColor = SystemColors.ControlLightLight;
+            buttonCancel.Location = new Point(21, 227);
+            buttonCancel.Margin = new Padding(2);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new Size(200, 28);
+            buttonCancel.TabIndex = 44;
+            buttonCancel.Text = "Cancel";
+            buttonCancel.UseVisualStyleBackColor = false;
+            buttonCancel.Click += buttonCancel_Click;
             // 
             // CreateDepartmentForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(340, 450);
+            ClientSize = new Size(247, 279);
+            Controls.Add(buttonCancel);
             Controls.Add(label4);
             Controls.Add(textBoxDepartment);
             Controls.Add(buttonCreate);
@@ -121,6 +132,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(2);
             Name = "CreateDepartmentForm";
+            StartPosition = FormStartPosition.Manual;
             Text = "CreateDepartmentForm";
             Load += CreateDepartmentForm_Load;
             ResumeLayout(false);
@@ -135,5 +147,6 @@
         private Label label1;
         private Label lblManagement;
         private ComboBox comboBoxManagement;
+        private Button buttonCancel;
     }
 }

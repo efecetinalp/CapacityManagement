@@ -32,14 +32,14 @@
             textBoxCategory = new TextBox();
             buttonCreate = new Button();
             label2 = new Label();
+            buttonCancel = new Button();
             SuspendLayout();
             // 
             // label3
             // 
-            label3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label3.Location = new Point(38, 92);
+            label3.Location = new Point(22, 71);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
             label3.Size = new Size(93, 15);
@@ -48,21 +48,19 @@
             // 
             // textBoxCategory
             // 
-            textBoxCategory.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            textBoxCategory.Location = new Point(40, 110);
+            textBoxCategory.Location = new Point(24, 89);
             textBoxCategory.Margin = new Padding(2);
             textBoxCategory.Name = "textBoxCategory";
-            textBoxCategory.Size = new Size(260, 23);
+            textBoxCategory.Size = new Size(200, 23);
             textBoxCategory.TabIndex = 42;
             // 
             // buttonCreate
             // 
-            buttonCreate.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             buttonCreate.BackColor = Color.FromArgb(58, 154, 193);
             buttonCreate.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
             buttonCreate.FlatStyle = FlatStyle.Flat;
             buttonCreate.ForeColor = SystemColors.ButtonHighlight;
-            buttonCreate.Location = new Point(70, 350);
+            buttonCreate.Location = new Point(24, 147);
             buttonCreate.Margin = new Padding(2);
             buttonCreate.Name = "buttonCreate";
             buttonCreate.Size = new Size(200, 32);
@@ -73,21 +71,36 @@
             // 
             // label2
             // 
-            label2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(126, 50);
+            label2.Location = new Point(86, 32);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
             label2.Size = new Size(81, 19);
             label2.TabIndex = 40;
             label2.Text = "CATEGORY";
             // 
+            // buttonCancel
+            // 
+            buttonCancel.BackColor = Color.FromArgb(58, 154, 193);
+            buttonCancel.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
+            buttonCancel.FlatStyle = FlatStyle.Flat;
+            buttonCancel.ForeColor = SystemColors.ControlLightLight;
+            buttonCancel.Location = new Point(24, 183);
+            buttonCancel.Margin = new Padding(2);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new Size(200, 28);
+            buttonCancel.TabIndex = 45;
+            buttonCancel.Text = "Cancel";
+            buttonCancel.UseVisualStyleBackColor = false;
+            buttonCancel.Click += buttonCancel_Click;
+            // 
             // CreateCategoryForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(340, 450);
+            ClientSize = new Size(255, 224);
+            Controls.Add(buttonCancel);
             Controls.Add(label3);
             Controls.Add(textBoxCategory);
             Controls.Add(buttonCreate);
@@ -95,6 +108,7 @@
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(2);
             Name = "CreateCategoryForm";
+            StartPosition = FormStartPosition.Manual;
             Text = "CreateCategoryForm";
             ResumeLayout(false);
             PerformLayout();
@@ -106,5 +120,6 @@
         private TextBox textBoxCategory;
         private Button buttonCreate;
         private Label label2;
+        private Button buttonCancel;
     }
 }

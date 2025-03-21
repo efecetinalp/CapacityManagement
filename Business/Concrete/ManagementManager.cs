@@ -44,14 +44,24 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Management>>(_managementDal.GetAll());
         }
 
-        public IDataResult<List<Management>> GetAllById(int id)
+        public IDataResult<List<Management>> GetAllById(int managementId)
         {
-            return new SuccessDataResult<List<Management>>(_managementDal.GetAll(m => m.ManagementId == id));
+            return new SuccessDataResult<List<Management>>(_managementDal.GetAll(m => m.ManagementId == managementId));
         }
 
         public IDataResult<Management> GetByName(string managementName)
         {
             Management result = _managementDal.Get(m => m.ManagementName == managementName);
+
+            if (result != null)
+                return new SuccessDataResult<Management>(result, Messages.ProjectListed);
+            else
+                return new ErrorDataResult<Management>(result, Messages.EmptyData);
+        }
+
+        public IDataResult<Management> GetById(int managementId)
+        {
+            Management result = _managementDal.Get(m => m.ManagementId == managementId);
 
             if (result != null)
                 return new SuccessDataResult<Management>(result, Messages.ProjectListed);

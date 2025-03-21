@@ -1,6 +1,6 @@
 ﻿namespace DashboardUI
 {
-    partial class CreateUser
+    partial class CreateUserForm
     {
         /// <summary>
         /// Required designer variable.
@@ -123,7 +123,7 @@
             comboBoxRoles.Size = new Size(175, 23);
             comboBoxRoles.TabIndex = 33;
             // 
-            // CreateUser
+            // CreateUserForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -138,8 +138,8 @@
             Controls.Add(textBoxUserName);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(2);
-            Name = "CreateUser";
-            StartPosition = FormStartPosition.CenterScreen;
+            Name = "CreateUserForm";
+            StartPosition = FormStartPosition.Manual;
             Text = "CreateUserForm";
             Load += CreateUser_Load;
             ResumeLayout(false);

@@ -30,5 +30,10 @@ namespace DashboardUI
             _categoryManager.Add(categoryToCreate);
             Debug.Print("category created");
         }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -30,5 +30,10 @@ namespace DashboardUI
             _managementManager.Add(managementToCreate);
             Debug.Print("management created");
         }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

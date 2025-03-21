@@ -40,7 +40,7 @@ namespace DashboardUI
         DepartmentCapacityManager departmentCapacityManager;
 
         //UI Form Referances
-        CreateForm createForm;
+        //Form createForm;
         Dashboard _dashboardForm;
         DataCardUI _dataCardForm;
 
@@ -406,25 +406,27 @@ namespace DashboardUI
 
         #endregion
 
+        //WORK ON HERE
         #region Button Create New Project Function
 
+        //WORK ON HERE
         private void buttonNew_Click(object sender, EventArgs e)
         {
-            if (createForm == null)
-            {
-                createForm = new CreateForm(managementManager, departmentManager, categoryManager, projectManager);
-                createForm.FormClosed += CreateForm_FormClosed;
-                createForm.ShowDialog();
-            }
-            else
-            {
-                createForm.Activate();
-            }
+            //if (createForm == null)
+            //{
+            //    createForm = new CreateForm(managementManager, departmentManager, categoryManager, projectManager);
+            //    createForm.FormClosed += CreateForm_FormClosed;
+            //    createForm.ShowDialog();
+            //}
+            //else
+            //{
+            //    createForm.Activate();
+            //}
         }
 
         private void CreateForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            createForm = null;
+            //createForm = null;
         }
 
         #endregion

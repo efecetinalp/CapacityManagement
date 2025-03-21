@@ -50,5 +50,10 @@ namespace DashboardUI
                 MessageBox.Show("Management cannot be null");
             }
         }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

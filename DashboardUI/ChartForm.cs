@@ -323,6 +323,7 @@ namespace DashboardUI
             else if (comboBoxPaletteType.Text == "Gradient")
             {
                 //generates gradient type color list
+
                 Color grad1 = _colorDetails.Data[0].GetColorCode;
                 Color grad2 = _colorDetails.Data[1].GetColorCode;
                 Color grad3 = _colorDetails.Data[2].GetColorCode;

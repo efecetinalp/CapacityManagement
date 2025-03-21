@@ -14,6 +14,8 @@ namespace Business.Abstract
         IDataResult<List<Department>> GetAll();
         IDataResult<List<Department>> GetAllByManagementId(int id);
         IDataResult<List<Department>> GetAllById(int id);
+        IDataResult<List<DepartmentDetailDto>> GetDepartmentDetails();
+        IDataResult<List<DepartmentDetailDto>> GetDepartmentDetails(int managementId);
 
         IDataResult<Department> GetByName(string departmentName);
 

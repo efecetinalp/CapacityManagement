@@ -4,6 +4,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,7 +63,26 @@ namespace Business.Concrete
                 return new SuccessDataResult<Department>(result, Messages.DepartmentListed);
             else
                 return new ErrorDataResult<Department>(result, Messages.EmptyData);
+        }
 
+        public IDataResult<List<DepartmentDetailDto>> GetDepartmentDetails()
+        {
+            List<DepartmentDetailDto> result = _departmentDal.GetDepartmentDetails();
+
+            if (result.Count == 0)
+                return new ErrorDataResult<List<DepartmentDetailDto>>(result, Messages.EmptyData);
+            else
+                return new SuccessDataResult<List<DepartmentDetailDto>>(result, Messages.ProjectListed);
+        }
+
+        public IDataResult<List<DepartmentDetailDto>> GetDepartmentDetails(int managementId)
+        {
+            List<DepartmentDetailDto> result = _departmentDal.GetDepartmentDetails(d => d.ManagementId == managementId);
+
+            if (result.Count == 0)
+                return new ErrorDataResult<List<DepartmentDetailDto>>(result, Messages.EmptyData);
+            else
+                return new SuccessDataResult<List<DepartmentDetailDto>>(result, Messages.ProjectListed);
         }
     }
 }

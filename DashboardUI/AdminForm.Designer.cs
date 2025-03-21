@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminForm));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminForm));
-            adminDataGrid = new DataGridView();
             textBoxPath = new TextBox();
             buttonBrowse = new Button();
             labelDatabase = new Label();
@@ -40,63 +39,22 @@
             buttonDepartment = new Button();
             buttonCategory = new Button();
             buttonUser = new Button();
-            buttonNew = new Button();
             panel2 = new Panel();
-            ((System.ComponentModel.ISupportInitialize)adminDataGrid).BeginInit();
+            adminDataGrid = new DataGridView();
+            buttonDelete = new Button();
+            buttonCreate = new Button();
+            buttonEdit = new Button();
+            buttonProject = new Button();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)adminDataGrid).BeginInit();
             SuspendLayout();
-            // 
-            // adminDataGrid
-            // 
-            adminDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            adminDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            adminDataGrid.BackgroundColor = SystemColors.ButtonHighlight;
-            adminDataGrid.BorderStyle = BorderStyle.None;
-            adminDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.MidnightBlue;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.Window;
-            dataGridViewCellStyle1.SelectionBackColor = Color.LightSteelBlue;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            adminDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            adminDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.AliceBlue;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = Color.LightSteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            adminDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
-            adminDataGrid.Location = new Point(22, 114);
-            adminDataGrid.Margin = new Padding(2);
-            adminDataGrid.Name = "adminDataGrid";
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            adminDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            adminDataGrid.RowHeadersVisible = false;
-            adminDataGrid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            adminDataGrid.RowTemplate.Height = 25;
-            adminDataGrid.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            adminDataGrid.Size = new Size(1233, 524);
-            adminDataGrid.TabIndex = 0;
-            adminDataGrid.CellBeginEdit += userDataGrid_CellBeginEdit;
-            adminDataGrid.CellContentClick += userDataGrid_CellContentClick;
-            adminDataGrid.CellEndEdit += userDataGrid_CellEndEdit;
             // 
             // textBoxPath
             // 
             textBoxPath.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxPath.Location = new Point(11, 23);
             textBoxPath.Name = "textBoxPath";
-            textBoxPath.Size = new Size(270, 20);
+            textBoxPath.Size = new Size(421, 20);
             textBoxPath.TabIndex = 35;
             // 
             // buttonBrowse
@@ -108,7 +66,7 @@
             buttonBrowse.FlatStyle = FlatStyle.Flat;
             buttonBrowse.ForeColor = SystemColors.ControlLightLight;
             buttonBrowse.Image = (Image)resources.GetObject("buttonBrowse.Image");
-            buttonBrowse.Location = new Point(289, 23);
+            buttonBrowse.Location = new Point(437, 23);
             buttonBrowse.Margin = new Padding(2);
             buttonBrowse.Name = "buttonBrowse";
             buttonBrowse.Padding = new Padding(0, 0, 1, 1);
@@ -139,7 +97,7 @@
             buttonManagement.ForeColor = Color.Black;
             buttonManagement.Image = (Image)resources.GetObject("buttonManagement.Image");
             buttonManagement.ImageAlign = ContentAlignment.TopCenter;
-            buttonManagement.Location = new Point(22, 12);
+            buttonManagement.Location = new Point(70, 11);
             buttonManagement.Margin = new Padding(2);
             buttonManagement.Name = "buttonManagement";
             buttonManagement.Padding = new Padding(0, 15, 0, 15);
@@ -161,7 +119,7 @@
             buttonDepartment.ForeColor = Color.Black;
             buttonDepartment.Image = (Image)resources.GetObject("buttonDepartment.Image");
             buttonDepartment.ImageAlign = ContentAlignment.TopCenter;
-            buttonDepartment.Location = new Point(98, 12);
+            buttonDepartment.Location = new Point(148, 10);
             buttonDepartment.Margin = new Padding(2);
             buttonDepartment.Name = "buttonDepartment";
             buttonDepartment.Padding = new Padding(0, 15, 0, 15);
@@ -183,7 +141,7 @@
             buttonCategory.ForeColor = Color.Black;
             buttonCategory.Image = (Image)resources.GetObject("buttonCategory.Image");
             buttonCategory.ImageAlign = ContentAlignment.TopCenter;
-            buttonCategory.Location = new Point(174, 12);
+            buttonCategory.Location = new Point(304, 11);
             buttonCategory.Margin = new Padding(2);
             buttonCategory.Name = "buttonCategory";
             buttonCategory.Padding = new Padding(0, 15, 0, 15);
@@ -205,7 +163,7 @@
             buttonUser.ForeColor = Color.Black;
             buttonUser.Image = (Image)resources.GetObject("buttonUser.Image");
             buttonUser.ImageAlign = ContentAlignment.TopCenter;
-            buttonUser.Location = new Point(250, 12);
+            buttonUser.Location = new Point(382, 11);
             buttonUser.Margin = new Padding(2);
             buttonUser.Name = "buttonUser";
             buttonUser.Padding = new Padding(0, 15, 0, 15);
@@ -216,26 +174,6 @@
             buttonUser.UseVisualStyleBackColor = false;
             buttonUser.Click += buttonUser_Click;
             // 
-            // buttonNew
-            // 
-            buttonNew.BackColor = Color.Transparent;
-            buttonNew.Cursor = Cursors.Hand;
-            buttonNew.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
-            buttonNew.FlatAppearance.BorderSize = 0;
-            buttonNew.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
-            buttonNew.FlatStyle = FlatStyle.Flat;
-            buttonNew.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonNew.ForeColor = Color.White;
-            buttonNew.Image = (Image)resources.GetObject("buttonNew.Image");
-            buttonNew.Location = new Point(339, 78);
-            buttonNew.Margin = new Padding(2);
-            buttonNew.Name = "buttonNew";
-            buttonNew.Padding = new Padding(0, 0, 1, 1);
-            buttonNew.Size = new Size(20, 20);
-            buttonNew.TabIndex = 53;
-            buttonNew.UseVisualStyleBackColor = false;
-            buttonNew.Click += buttonNew_Click;
-            // 
             // panel2
             // 
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -243,10 +181,139 @@
             panel2.Controls.Add(textBoxPath);
             panel2.Controls.Add(labelDatabase);
             panel2.Controls.Add(buttonBrowse);
-            panel2.Location = new Point(927, 42);
+            panel2.Location = new Point(735, 42);
             panel2.Name = "panel2";
-            panel2.Size = new Size(328, 56);
+            panel2.Size = new Size(475, 56);
             panel2.TabIndex = 52;
+            // 
+            // adminDataGrid
+            // 
+            adminDataGrid.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            adminDataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            adminDataGrid.BackgroundColor = SystemColors.ButtonHighlight;
+            adminDataGrid.BorderStyle = BorderStyle.None;
+            adminDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.MidnightBlue;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = SystemColors.Window;
+            dataGridViewCellStyle1.SelectionBackColor = Color.LightSteelBlue;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            adminDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            adminDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.AliceBlue;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = Color.LightSteelBlue;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            adminDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            adminDataGrid.Location = new Point(70, 113);
+            adminDataGrid.Margin = new Padding(2);
+            adminDataGrid.Name = "adminDataGrid";
+            adminDataGrid.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Control;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            adminDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            adminDataGrid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            adminDataGrid.RowTemplate.Height = 25;
+            adminDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            adminDataGrid.Size = new Size(1140, 527);
+            adminDataGrid.TabIndex = 55;
+            adminDataGrid.CellContentClick += adminDataGrid_CellContentClick;
+            adminDataGrid.CellMouseMove += adminDataGrid_CellMouseMove;
+            // 
+            // buttonDelete
+            // 
+            buttonDelete.BackColor = Color.Transparent;
+            buttonDelete.Cursor = Cursors.Hand;
+            buttonDelete.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
+            buttonDelete.FlatAppearance.BorderSize = 0;
+            buttonDelete.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonDelete.FlatStyle = FlatStyle.Flat;
+            buttonDelete.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonDelete.ForeColor = Color.White;
+            buttonDelete.Image = (Image)resources.GetObject("buttonDelete.Image");
+            buttonDelete.Location = new Point(22, 137);
+            buttonDelete.Margin = new Padding(2);
+            buttonDelete.Name = "buttonDelete";
+            buttonDelete.Padding = new Padding(0, 0, 1, 1);
+            buttonDelete.Size = new Size(20, 20);
+            buttonDelete.TabIndex = 57;
+            buttonDelete.UseVisualStyleBackColor = false;
+            buttonDelete.Visible = false;
+            buttonDelete.Click += buttonDelete_Click;
+            // 
+            // buttonCreate
+            // 
+            buttonCreate.BackColor = Color.Transparent;
+            buttonCreate.Cursor = Cursors.Hand;
+            buttonCreate.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
+            buttonCreate.FlatAppearance.BorderSize = 0;
+            buttonCreate.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonCreate.FlatStyle = FlatStyle.Flat;
+            buttonCreate.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonCreate.ForeColor = Color.White;
+            buttonCreate.Image = (Image)resources.GetObject("buttonCreate.Image");
+            buttonCreate.Location = new Point(46, 113);
+            buttonCreate.Margin = new Padding(2);
+            buttonCreate.Name = "buttonCreate";
+            buttonCreate.Padding = new Padding(0, 0, 1, 1);
+            buttonCreate.Size = new Size(20, 20);
+            buttonCreate.TabIndex = 56;
+            buttonCreate.UseVisualStyleBackColor = false;
+            buttonCreate.Visible = false;
+            buttonCreate.Click += buttonCreate_Click;
+            // 
+            // buttonEdit
+            // 
+            buttonEdit.BackColor = Color.Transparent;
+            buttonEdit.Cursor = Cursors.Hand;
+            buttonEdit.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
+            buttonEdit.FlatAppearance.BorderSize = 0;
+            buttonEdit.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonEdit.FlatStyle = FlatStyle.Flat;
+            buttonEdit.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonEdit.ForeColor = Color.White;
+            buttonEdit.Image = (Image)resources.GetObject("buttonEdit.Image");
+            buttonEdit.Location = new Point(46, 137);
+            buttonEdit.Margin = new Padding(2);
+            buttonEdit.Name = "buttonEdit";
+            buttonEdit.Padding = new Padding(0, 0, 1, 1);
+            buttonEdit.Size = new Size(20, 20);
+            buttonEdit.TabIndex = 58;
+            buttonEdit.UseVisualStyleBackColor = false;
+            buttonEdit.Visible = false;
+            buttonEdit.Click += buttonEdit_Click;
+            // 
+            // buttonProject
+            // 
+            buttonProject.BackColor = Color.Transparent;
+            buttonProject.Cursor = Cursors.Hand;
+            buttonProject.FlatAppearance.BorderColor = SystemColors.ActiveCaptionText;
+            buttonProject.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonProject.FlatStyle = FlatStyle.Flat;
+            buttonProject.Font = new Font("Calibri", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonProject.ForeColor = Color.Black;
+            buttonProject.Image = (Image)resources.GetObject("buttonProject.Image");
+            buttonProject.ImageAlign = ContentAlignment.TopCenter;
+            buttonProject.Location = new Point(226, 11);
+            buttonProject.Margin = new Padding(2);
+            buttonProject.Name = "buttonProject";
+            buttonProject.Padding = new Padding(0, 15, 0, 15);
+            buttonProject.Size = new Size(72, 87);
+            buttonProject.TabIndex = 59;
+            buttonProject.Text = "PROJECT";
+            buttonProject.TextAlign = ContentAlignment.BottomCenter;
+            buttonProject.UseVisualStyleBackColor = false;
+            buttonProject.Click += buttonProject_Click;
             // 
             // AdminForm
             // 
@@ -254,26 +321,27 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(242, 242, 242);
             ClientSize = new Size(1280, 660);
-            Controls.Add(buttonNew);
+            Controls.Add(buttonProject);
+            Controls.Add(buttonEdit);
+            Controls.Add(adminDataGrid);
+            Controls.Add(buttonDelete);
+            Controls.Add(buttonCreate);
             Controls.Add(panel2);
             Controls.Add(buttonUser);
             Controls.Add(buttonCategory);
             Controls.Add(buttonDepartment);
             Controls.Add(buttonManagement);
-            Controls.Add(adminDataGrid);
             FormBorderStyle = FormBorderStyle.None;
             Name = "AdminForm";
             Text = "AdminForm";
             Load += AdminForm_Load;
-            ((System.ComponentModel.ISupportInitialize)adminDataGrid).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)adminDataGrid).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private DataGridView adminDataGrid;
         private TextBox textBoxPath;
         private Button buttonBrowse;
         private Label labelDatabase;
@@ -282,6 +350,10 @@
         private Button buttonCategory;
         private Button buttonUser;
         private Panel panel2;
-        private Button buttonNew;
+        private DataGridView adminDataGrid;
+        private Button buttonDelete;
+        private Button buttonCreate;
+        private Button buttonEdit;
+        private Button buttonProject;
     }
 }
