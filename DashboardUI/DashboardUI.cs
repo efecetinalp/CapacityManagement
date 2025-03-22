@@ -69,17 +69,19 @@ namespace DashboardUI
             activeUser = userManager.GetByUserName(Environment.UserName.ToUpper()).Data;
             labelActiveUser.Text = labelActiveUser.Text.Replace("Signing...", Environment.UserName.ToUpper());
 
-            if (activeUser == null)
+            if (activeUser != null)
             {
-                return;
-            }
+                labelCredential.Text = "AUTHOR";
 
-            labelActiveUser.Visible = true;
-
-            if (activeUser.Admin)
-            {
-                buttonAdmin.Visible = true;
+                if (activeUser.Admin)
+                {
+                    labelCredential.Text = "ADMIN";
+                    buttonAdmin.Visible = true;
+                }
             }
+            else
+                labelCredential.Text = "GUEST";
+
         }
 
         //MENU OPERATIONS

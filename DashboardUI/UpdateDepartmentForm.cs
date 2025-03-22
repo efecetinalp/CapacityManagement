@@ -99,7 +99,7 @@ namespace DashboardUI
                 {
                     Department departmentToUpdate = departmentData.Data;
                     departmentToUpdate.DepartmentName = textBoxDepartment.Text;
-                    departmentToUpdate.ManagementId = _managementManager.GetById(_managementIndex[comboBoxManagement.SelectedIndex]).Data.ManagementId;
+                    departmentToUpdate.ManagementId = _managementIndex[comboBoxManagement.SelectedIndex];
 
                     var departmentOperation = _departmentManager.Update(departmentToUpdate);
                     if (departmentOperation.Success)

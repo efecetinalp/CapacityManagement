@@ -34,6 +34,7 @@
             panelMenu = new Panel();
             panelSideBar = new Panel();
             panelAdmin2 = new Panel();
+            labelCredential = new Label();
             labelActiveUser = new Label();
             panelAdmin = new Panel();
             buttonAdmin = new Button();
@@ -110,12 +111,27 @@
             // 
             // panelAdmin2
             // 
+            panelAdmin2.Controls.Add(labelCredential);
             panelAdmin2.Controls.Add(labelActiveUser);
             panelAdmin2.Location = new Point(58, 168);
             panelAdmin2.Margin = new Padding(2);
             panelAdmin2.Name = "panelAdmin2";
-            panelAdmin2.Size = new Size(105, 35);
+            panelAdmin2.Size = new Size(158, 57);
             panelAdmin2.TabIndex = 23;
+            // 
+            // labelCredential
+            // 
+            labelCredential.AutoSize = true;
+            labelCredential.BackColor = Color.Transparent;
+            labelCredential.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelCredential.ForeColor = SystemColors.ButtonHighlight;
+            labelCredential.ImageAlign = ContentAlignment.MiddleLeft;
+            labelCredential.Location = new Point(35, 29);
+            labelCredential.Name = "labelCredential";
+            labelCredential.Size = new Size(42, 15);
+            labelCredential.TabIndex = 22;
+            labelCredential.Text = "GUEST";
+            labelCredential.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // labelActiveUser
             // 
@@ -266,5 +282,6 @@
         private Panel panelAdmin;
         private Button buttonAdmin;
         private Label labelActiveUser;
+        private Label labelCredential;
     }
 }

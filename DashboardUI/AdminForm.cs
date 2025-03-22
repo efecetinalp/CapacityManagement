@@ -73,7 +73,7 @@ namespace DashboardUI
                 }
                 else if (isProjectActive)
                 {
-                    _createForm = new DeleteProject(_projectManager, _projectManager.GetById(_tableIndex).Data);
+                    _createForm = new DeleteProjectForm(_projectManager, _projectManager.GetById(_tableIndex).Data);
                 }
                 else if (isCategoryActive)
                 {
@@ -110,7 +110,7 @@ namespace DashboardUI
                 }
                 else if (isProjectActive)
                 {
-                    _createForm = new CreateProjectForm(_managementManager, _departmentManager, _categoryManager, _projectManager);
+                    _createForm = new CreateProjectForm(_managementManager, _departmentManager, _categoryManager, _projectManager, _userManager);
                 }
                 else if (isCategoryActive)
                 {
@@ -268,7 +268,7 @@ namespace DashboardUI
         {
             if (isManagementActive)
             {
-                buttonManagement_Click(default,default);
+                buttonManagement_Click(default, default);
             }
             else if (isDepartmentActive)
             {

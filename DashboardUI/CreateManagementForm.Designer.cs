@@ -38,20 +38,21 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label3.Location = new Point(20, 59);
+            label3.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label3.Location = new Point(21, 60);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(79, 15);
+            label3.Size = new Size(96, 12);
             label3.TabIndex = 39;
-            label3.Text = "Management";
+            label3.Text = "Management Name";
             // 
             // textBoxManagement
             // 
-            textBoxManagement.Location = new Point(21, 78);
+            textBoxManagement.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxManagement.Location = new Point(21, 74);
             textBoxManagement.Margin = new Padding(2);
             textBoxManagement.Name = "textBoxManagement";
-            textBoxManagement.Size = new Size(200, 23);
+            textBoxManagement.Size = new Size(200, 20);
             textBoxManagement.TabIndex = 38;
             // 
             // buttonCreate
@@ -59,36 +60,38 @@
             buttonCreate.BackColor = Color.FromArgb(58, 154, 193);
             buttonCreate.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
             buttonCreate.FlatStyle = FlatStyle.Flat;
+            buttonCreate.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             buttonCreate.ForeColor = SystemColors.ControlLightLight;
-            buttonCreate.Location = new Point(21, 143);
+            buttonCreate.Location = new Point(21, 121);
             buttonCreate.Margin = new Padding(2);
             buttonCreate.Name = "buttonCreate";
-            buttonCreate.Size = new Size(200, 32);
+            buttonCreate.Size = new Size(86, 24);
             buttonCreate.TabIndex = 37;
-            buttonCreate.Text = "Create Management";
+            buttonCreate.Text = "Create";
             buttonCreate.UseVisualStyleBackColor = false;
             buttonCreate.Click += buttonCreate_Click;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(70, 26);
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label2.Location = new Point(64, 26);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(101, 17);
+            label2.Size = new Size(122, 15);
             label2.TabIndex = 36;
-            label2.Text = "MANAGEMENT";
+            label2.Text = "NEW MANAGEMENT";
             // 
             // buttonCancel
             // 
             buttonCancel.BackColor = Color.Silver;
             buttonCancel.FlatStyle = FlatStyle.Flat;
+            buttonCancel.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             buttonCancel.ForeColor = SystemColors.ActiveCaptionText;
-            buttonCancel.Location = new Point(21, 181);
+            buttonCancel.Location = new Point(135, 121);
             buttonCancel.Margin = new Padding(2);
             buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(200, 29);
+            buttonCancel.Size = new Size(86, 24);
             buttonCancel.TabIndex = 40;
             buttonCancel.Text = "Cancel";
             buttonCancel.UseVisualStyleBackColor = false;
@@ -98,7 +101,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(263, 221);
+            ClientSize = new Size(251, 174);
             Controls.Add(buttonCancel);
             Controls.Add(label3);
             Controls.Add(textBoxManagement);
@@ -107,8 +110,11 @@
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(2);
             Name = "CreateManagementForm";
-            StartPosition = FormStartPosition.Manual;
+            StartPosition = FormStartPosition.CenterParent;
             Text = "CreateManagement";
+            TopMost = true;
+            Load += CreateManagementForm_Load;
+            MouseDown += CreateManagementForm_MouseDown;
             ResumeLayout(false);
             PerformLayout();
         }

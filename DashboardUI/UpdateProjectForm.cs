@@ -42,10 +42,10 @@ namespace DashboardUI
 
         //Global variables
         int _projectIndex;
-        List<int> managementIndex = new();
-        List<int> departmentIndex = new();
-        List<int> categoryIndex = new();
-        List<int> userIndex = new();
+        List<int> _managementIndexes = new();
+        List<int> _departmentIndexes = new();
+        List<int> _categoryIndexes = new();
+        List<int> _userIndexes = new();
 
         public UpdateProjectForm(ManagementManager managementManager, DepartmentManager departmentManager, CategoryManager categoryManager, ProjectManager projectManager, UserManager userManager, int index)
         {
@@ -81,7 +81,7 @@ namespace DashboardUI
                 foreach (var management in _managementData.Data)
                 {
                     comboBoxManagement.Items.Add(management.ManagementName);
-                    managementIndex.Add(management.ManagementId);
+                    _managementIndexes.Add(management.ManagementId);
                 }
             }
             else
@@ -97,7 +97,7 @@ namespace DashboardUI
                 foreach (var category in _categoryData.Data)
                 {
                     comboBoxCategory.Items.Add(category.CategoryName);
-                    categoryIndex.Add(category.CategoryId);
+                    _categoryIndexes.Add(category.CategoryId);
                 }
             }
             else
@@ -113,7 +113,7 @@ namespace DashboardUI
                 foreach (var user in _userData.Data)
                 {
                     comboBoxUser.Items.Add(user.UserName);
-                    userIndex.Add(user.UserId);
+                    _userIndexes.Add(user.UserId);
                 }
             }
             else
@@ -157,15 +157,24 @@ namespace DashboardUI
                 {
                     Project projectToUpdate = projectData.Data;
                     projectToUpdate.ProjectName = textBoxProject.Text;
-                    projectToUpdate.ManagementId = _managementManager.GetById(managementIndex[comboBoxManagement.SelectedIndex]).Data.ManagementId;
-                    projectToUpdate.DepartmentId = _departmentManager.GetById(departmentIndex[comboBoxDepartment.SelectedIndex]).Data.DepartmentId;
-                    projectToUpdate.CategoryId = _categoryManager.GetById(categoryIndex[comboBoxCategory.SelectedIndex]).Data.CategoryId;
-                    projectToUpdate.UserId = _userManager.GetById(userIndex[comboBoxUser.SelectedIndex]).Data.UserId;
-                    projectToUpdate.StartDate = dateTimePickerStart.Value;
+                    projectToUpdate.ManagementId = _managementIndexes[comboBoxManagement.SelectedIndex];
+                    projectToUpdate.DepartmentId = _departmentIndexes[comboBoxDepartment.SelectedIndex];
+                    projectToUpdate.CategoryId = _categoryIndexes[comboBoxCategory.SelectedIndex];
+                    projectToUpdate.UserId = _userIndexes[comboBoxUser.SelectedIndex];
+
+                    DateTime startDate = dateTimePickerStart.Value;
+                    startDate = new DateTime(startDate.Year, startDate.Month, 01);
+                    projectToUpdate.StartDate = startDate;
+
                     projectToUpdate.IsCompleted = checkBoxCompleted.Checked;
 
                     if (checkBoxCompleted.Checked)
-                        projectToUpdate.EndDate = dateTimePickerEnd.Value;
+                    {
+                        DateTime endDate = dateTimePickerEnd.Value;
+                        endDate = new DateTime(endDate.Year, endDate.Month, 01);
+                        projectToUpdate.EndDate = endDate;
+                    }
+
 
                     var projectOperation = _projectManager.Update(projectToUpdate);
                     if (projectOperation.Success)
@@ -182,7 +191,6 @@ namespace DashboardUI
             else
             {
                 MessageBox.Show("Please fill empty selections!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                Debug.Print(comboBoxManagement.SelectedIndex.ToString() + " " + comboBoxDepartment.SelectedIndex.ToString() + " " + comboBoxCategory.SelectedIndex.ToString() + " " + comboBoxUser.SelectedIndex.ToString());
             }
         }
 
@@ -197,15 +205,15 @@ namespace DashboardUI
             comboBoxDepartment.SelectedIndex = -1;
 
             #region Department Data
-            _departmentData = _departmentManager.GetAllByManagementId(managementIndex[comboBoxManagement.SelectedIndex]);
+            _departmentData = _departmentManager.GetAllByManagementId(_managementIndexes[comboBoxManagement.SelectedIndex]);
 
             if (_departmentData.Success)
             {
-                departmentIndex.Clear();
+                _departmentIndexes.Clear();
                 foreach (var department in _departmentData.Data)
                 {
                     comboBoxDepartment.Items.Add(department.DepartmentName);
-                    departmentIndex.Add(department.DepartmentId);
+                    _departmentIndexes.Add(department.DepartmentId);
                 }
             }
             else

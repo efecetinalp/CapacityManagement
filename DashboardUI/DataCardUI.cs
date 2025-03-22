@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.DTOs;
 using System;
@@ -15,15 +16,30 @@ namespace DashboardUI
 {
     public partial class DataCardUI : Form
     {
+        //Form window drag to move
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+
         //Class Instances
         ManagementManager _managementManager;
         DepartmentManager _departmentManager;
         ProjectManager _projectManager;
         CategoryManager _categoryManager;
         UserManager _userManager;
-
         ProjectDetailDto _projectDetail;
 
+        IDataResult<List<Category>> _categoryData;
+        IDataResult<List<User>> _userData;
+
+        List<int> _categoryIndexes = new();
+        List<int> _userIndexes = new();
+
+        Form _deleteForm;
 
         public DataCardUI(ProjectDetailDto projectDetail, ManagementManager managementManager, DepartmentManager departmentManager, ProjectManager projectManager, CategoryManager categoryManager, UserManager userManager)
         {
@@ -40,13 +56,23 @@ namespace DashboardUI
         {
             //Project Card Information
             lblProjectName.Text = _projectDetail.ProjectName;
+            if (lblProjectName.Width > 340)
+            {
+                float i = 13;
+                do
+                {
+                    lblProjectName.Font = new Font("Calibri", i);
+                    i--;
+                } while (lblProjectName.Width > 340);
+            }
+
             lblManagement.Text = _projectDetail.ManagementName;
             lblDepartment.Text = _projectDetail.DepartmentName;
             lblCategory.Text = _projectDetail.CategoryName;
             lblStartDate.Text = _projectDetail.StartDate.ToString("MMM-yy");
             lblOwner.Text = _projectDetail.UserName;
-            checkBoxIsProgressing.Checked = !_projectDetail.IsCompleted;
-            if (_projectDetail.IsCompleted)
+
+            if (!_projectDetail.IsCompleted)
             {
                 lblStatus.Text = "Progressing";
                 lblEndDate.Text = "N/A";
@@ -59,126 +85,65 @@ namespace DashboardUI
 
             //Project Card Edit Information
             txtProjectName.Text = _projectDetail.ProjectName;
-
-            var managementData = _managementManager.GetAll();
-            if (managementData.Success)
-            {
-                foreach (var management in managementData.Data)
-                    comboBoxManagement.Items.Add(management.ManagementName);
-            }
-            else
-            {
-                //alertbox
-            }
-
-            var categoryData = _categoryManager.GetAll();
-            if (categoryData.Success)
-            {
-                foreach (var category in categoryData.Data)
-                    comboBoxCategory.Items.Add(category.CategoryName);
-            }
-            else
-            {
-                //alertbox
-            }
-
+            checkBoxCompleted.Checked = _projectDetail.IsCompleted;
             dateTimePickerStart.Value = _projectDetail.StartDate;
             dateTimePickerEnd.Value = _projectDetail.EndDate;
 
-            var userData = _userManager.GetAll();
-            if (userData.Success)
+            _categoryData = _categoryManager.GetAll();
+            _userData = _userManager.GetAll();
+
+            #region Category Data
+            if (_categoryData.Success)
             {
-                foreach (var user in userData.Data)
-                    comboBoxUser.Items.Add(user.UserName);
+                foreach (var category in _categoryData.Data)
+                {
+                    comboBoxCategory.Items.Add(category.CategoryName);
+                    _categoryIndexes.Add(category.CategoryId);
+                }
             }
             else
             {
-                //alertbox
+                MessageBox.Show(_categoryData.Massage, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+            #endregion
+
+            #region User Data
+            if (_userData.Success)
+            {
+                foreach (var user in _userData.Data)
+                {
+                    comboBoxUser.Items.Add(user.UserName);
+                    _userIndexes.Add(user.UserId);
+                }
+            }
+            else
+            {
+                MessageBox.Show(_userData.Massage, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            #endregion
 
         }
 
-        private void BeginEditMode()
+        private void DataCardUI_MouseDown(object sender, MouseEventArgs e)
         {
-            buttonEdit.Visible = false;
-            buttonSave.Visible = true;
-            buttonDelete.Visible = true;
-
-            lblProjectName.Visible = false;
-            lblManagement.Visible = false;
-            lblDepartment.Visible = false;
-            lblCategory.Visible = false;
-            lblStatus.Visible = false;
-            lblStartDate.Visible = false;
-            lblEndDate.Visible = false;
-            lblOwner.Visible = false;
-
-            txtProjectName.Visible = true;
-            comboBoxManagement.Visible = true;
-            comboBoxDepartment.Visible = true;
-            comboBoxCategory.Visible = true;
-            dateTimePickerStart.Visible = true;
-            dateTimePickerEnd.Visible = true;
-            checkBoxIsProgressing.Visible = true;
-            comboBoxUser.Visible = true;
-
-            if (_projectDetail.IsCompleted)
-                dateTimePickerEnd.Enabled = false;
-        }
-
-        private void QuitEditMode()
-        {
-            buttonEdit.Visible = true;
-            buttonSave.Visible = false;
-            buttonDelete.Visible = false;
-
-            lblProjectName.Visible = true;
-            lblManagement.Visible = true;
-            lblDepartment.Visible = true;
-            lblCategory.Visible = true;
-            lblStatus.Visible = true;
-            lblStartDate.Visible = true;
-            lblEndDate.Visible = true;
-            lblOwner.Visible = true;
-
-            txtProjectName.Visible = false;
-            comboBoxManagement.Visible = false;
-            comboBoxDepartment.Visible = false;
-            comboBoxCategory.Visible = false;
-            dateTimePickerStart.Visible = false;
-            dateTimePickerEnd.Visible = false;
-            checkBoxIsProgressing.Visible = false;
-            comboBoxUser.Visible = false;
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
         }
 
         private void checkBoxIsProgressing_CheckedChanged(object sender, EventArgs e)
         {
-            if (!checkBoxIsProgressing.Checked)
+            if (!checkBoxCompleted.Checked)
                 dateTimePickerEnd.Enabled = false;
             else
                 dateTimePickerEnd.Enabled = true;
         }
 
-
-
-        private void comboBoxManagement_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            comboBoxDepartment.Items.Clear();
-            comboBoxDepartment.SelectedIndex = -1;
-
-            var managementId = _managementManager.GetByName(comboBoxManagement.Text).Data.ManagementId;
-            var departmentData = _departmentManager.GetAllByManagementId(managementId);
-
-            if (departmentData.Success)
-            {
-                foreach (var department in departmentData.Data)
-                    comboBoxDepartment.Items.Add(department.DepartmentName);
-            }
-            else
-            {
-                //alertbox
-            }
-        }
+        #region Edit Button Function
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
@@ -186,20 +151,155 @@ namespace DashboardUI
             BeginEditMode();
         }
 
+        private void BeginEditMode()
+        {
+            buttonEdit.Visible = false;
+            buttonSave.Visible = true;
+            buttonDelete.Visible = false;
+
+            lblProjectName.Visible = false;
+            lblCategory.Visible = false;
+            lblStatus.Visible = false;
+            lblStartDate.Visible = false;
+            lblEndDate.Visible = false;
+            lblOwner.Visible = false;
+
+            txtProjectName.Visible = true;
+            comboBoxCategory.Visible = true;
+            dateTimePickerStart.Visible = true;
+            dateTimePickerEnd.Visible = true;
+            checkBoxCompleted.Visible = true;
+            comboBoxUser.Visible = true;
+
+            if (!_projectDetail.IsCompleted)
+                dateTimePickerEnd.Enabled = false;
+        }
+
+        private void QuitEditMode()
+        {
+            buttonEdit.Visible = true;
+            buttonSave.Visible = false;
+            buttonDelete.Visible = true;
+
+            lblProjectName.Visible = true;
+            lblCategory.Visible = true;
+            lblStatus.Visible = true;
+            lblStartDate.Visible = true;
+            lblEndDate.Visible = true;
+            lblOwner.Visible = true;
+
+            txtProjectName.Visible = false;
+            comboBoxCategory.Visible = false;
+            dateTimePickerStart.Visible = false;
+            dateTimePickerEnd.Visible = false;
+            checkBoxCompleted.Visible = false;
+            comboBoxUser.Visible = false;
+        }
+
+        #endregion
+
+        #region Save Button Function
+
         private void buttonSave_Click(object sender, EventArgs e)
         {
             //save edited card
+            if (txtProjectName.Text != "" && comboBoxCategory.SelectedIndex > -1 && comboBoxUser.SelectedIndex > -1)
+            {
+                var projectData = _projectManager.GetById(_projectDetail.ProjectId);
 
-            //UI change
-            QuitEditMode();
+                if (projectData.Success)
+                {
+                    Project projectToUpdate = projectData.Data;
+                    projectToUpdate.ProjectName = txtProjectName.Text;
+                    projectToUpdate.CategoryId = _categoryIndexes[comboBoxCategory.SelectedIndex];
+                    projectToUpdate.UserId = _userIndexes[comboBoxUser.SelectedIndex];
+
+                    DateTime startDate = dateTimePickerStart.Value;
+                    startDate = new DateTime(startDate.Year, startDate.Month, 01);
+                    projectToUpdate.StartDate = startDate;
+
+                    projectToUpdate.IsCompleted = checkBoxCompleted.Checked;
+
+                    if (checkBoxCompleted.Checked)
+                    {
+                        DateTime endDate = dateTimePickerEnd.Value;
+                        endDate = new DateTime(endDate.Year, endDate.Month, 01);
+                        projectToUpdate.EndDate = endDate;
+                    }
+
+                    var projectOperation = _projectManager.Update(projectToUpdate);
+                    if (projectOperation.Success)
+                    {
+                        //UI change
+                        RefreshCard();
+                        QuitEditMode();
+                        MessageBox.Show(projectOperation.Massage, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                        MessageBox.Show(projectOperation.Massage, "Operation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(projectData.Massage, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show("Please fill empty selections!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
+
+        private void RefreshCard()
+        {
+            lblProjectName.Text = txtProjectName.Text;
+            if (lblProjectName.Width > 340)
+            {
+                float i = 13;
+                do
+                {
+                    lblProjectName.Font = new Font("Calibri", i);
+                    i--;
+                } while (lblProjectName.Width > 340);
+            }
+            lblCategory.Text = comboBoxCategory.Text;
+            lblOwner.Text = comboBoxUser.Text;
+            lblStartDate.Text = dateTimePickerStart.Value.ToString("MMM-yy");
+            if (!_projectDetail.IsCompleted)
+            {
+                lblStatus.Text = "Progressing";
+                lblEndDate.Text = "N/A";
+            }
+            else
+            {
+                lblStatus.Text = "Completed";
+                lblEndDate.Text = dateTimePickerEnd.Value.ToString("MMM-yy");
+            }
+        }
+        #endregion
+
+        #region Delete Button Function
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
-            //ask confirmation from user
+            if (_deleteForm == null)
+            {
+                Project projectToDelete = _projectManager.GetById(_projectDetail.ProjectId).Data;
+                _deleteForm = new DeleteProjectForm(_projectManager, projectToDelete);
 
-            //delete project and project capacity datas
+                _deleteForm.Left = this.Left;
+                _deleteForm.Top = this.Top;
+                _deleteForm.FormClosed += DeleteForm_FormClosed;
+                _deleteForm.ShowDialog();
+            }
+            else
+                _deleteForm.Activate();
         }
+
+        private void DeleteForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _deleteForm = null;
+            this.Close();
+        }
+
+        #endregion
 
         private void buttonQuit_Click(object sender, EventArgs e)
         {
@@ -210,5 +310,6 @@ namespace DashboardUI
         {
             this.Close();
         }
+
     }
 }

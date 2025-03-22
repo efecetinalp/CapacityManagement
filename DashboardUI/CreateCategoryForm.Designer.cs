@@ -38,20 +38,21 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label3.Location = new Point(22, 71);
+            label3.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label3.Location = new Point(24, 63);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(93, 15);
+            label3.Size = new Size(77, 12);
             label3.TabIndex = 43;
             label3.Text = "Category Name";
             // 
             // textBoxCategory
             // 
-            textBoxCategory.Location = new Point(24, 89);
+            textBoxCategory.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxCategory.Location = new Point(24, 77);
             textBoxCategory.Margin = new Padding(2);
             textBoxCategory.Name = "textBoxCategory";
-            textBoxCategory.Size = new Size(200, 23);
+            textBoxCategory.Size = new Size(200, 20);
             textBoxCategory.TabIndex = 42;
             // 
             // buttonCreate
@@ -59,37 +60,39 @@
             buttonCreate.BackColor = Color.FromArgb(58, 154, 193);
             buttonCreate.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
             buttonCreate.FlatStyle = FlatStyle.Flat;
+            buttonCreate.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             buttonCreate.ForeColor = SystemColors.ButtonHighlight;
-            buttonCreate.Location = new Point(24, 147);
+            buttonCreate.Location = new Point(24, 131);
             buttonCreate.Margin = new Padding(2);
             buttonCreate.Name = "buttonCreate";
-            buttonCreate.Size = new Size(200, 32);
+            buttonCreate.Size = new Size(85, 25);
             buttonCreate.TabIndex = 41;
-            buttonCreate.Text = "Create Category";
+            buttonCreate.Text = "Create";
             buttonCreate.UseVisualStyleBackColor = false;
             buttonCreate.Click += buttonCreate_Click;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(86, 32);
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label2.Location = new Point(77, 32);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(81, 19);
+            label2.Size = new Size(100, 15);
             label2.TabIndex = 40;
-            label2.Text = "CATEGORY";
+            label2.Text = "NEW CATEGORY";
             // 
             // buttonCancel
             // 
             buttonCancel.BackColor = Color.FromArgb(58, 154, 193);
             buttonCancel.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
             buttonCancel.FlatStyle = FlatStyle.Flat;
+            buttonCancel.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             buttonCancel.ForeColor = SystemColors.ControlLightLight;
-            buttonCancel.Location = new Point(24, 183);
+            buttonCancel.Location = new Point(139, 133);
             buttonCancel.Margin = new Padding(2);
             buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(200, 28);
+            buttonCancel.Size = new Size(85, 21);
             buttonCancel.TabIndex = 45;
             buttonCancel.Text = "Cancel";
             buttonCancel.UseVisualStyleBackColor = false;
@@ -99,7 +102,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(255, 224);
+            ClientSize = new Size(255, 178);
             Controls.Add(buttonCancel);
             Controls.Add(label3);
             Controls.Add(textBoxCategory);
@@ -108,8 +111,10 @@
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(2);
             Name = "CreateCategoryForm";
-            StartPosition = FormStartPosition.Manual;
+            StartPosition = FormStartPosition.CenterParent;
             Text = "CreateCategoryForm";
+            TopMost = true;
+            MouseDown += CreateCategoryForm_MouseDown;
             ResumeLayout(false);
             PerformLayout();
         }

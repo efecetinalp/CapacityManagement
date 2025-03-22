@@ -1,6 +1,6 @@
 ﻿namespace DashboardUI
 {
-    partial class DeleteProject
+    partial class DeleteProjectForm
     {
         /// <summary>
         /// Required designer variable.

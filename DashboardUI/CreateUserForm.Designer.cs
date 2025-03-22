@@ -30,71 +30,63 @@
         {
             textBoxUserName = new TextBox();
             labelUserName = new Label();
-            labelPassword = new Label();
-            buttonLogin = new Button();
+            buttonCreate = new Button();
             buttonCancel = new Button();
             label1 = new Label();
-            comboBoxRoles = new ComboBox();
+            checkBoxAdmin = new CheckBox();
+            checkBoxAuthor = new CheckBox();
             SuspendLayout();
             // 
             // textBoxUserName
             // 
-            textBoxUserName.BackColor = Color.FromArgb(46, 52, 63);
+            textBoxUserName.BackColor = SystemColors.ButtonHighlight;
             textBoxUserName.BorderStyle = BorderStyle.FixedSingle;
-            textBoxUserName.ForeColor = SystemColors.Window;
-            textBoxUserName.Location = new Point(41, 88);
+            textBoxUserName.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxUserName.ForeColor = SystemColors.ControlText;
+            textBoxUserName.Location = new Point(21, 64);
             textBoxUserName.Name = "textBoxUserName";
-            textBoxUserName.Size = new Size(175, 23);
+            textBoxUserName.Size = new Size(188, 20);
             textBoxUserName.TabIndex = 0;
             // 
             // labelUserName
             // 
             labelUserName.AutoSize = true;
-            labelUserName.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            labelUserName.ForeColor = SystemColors.Window;
-            labelUserName.Location = new Point(41, 68);
+            labelUserName.BackColor = Color.Transparent;
+            labelUserName.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelUserName.ForeColor = SystemColors.ControlText;
+            labelUserName.Location = new Point(21, 49);
             labelUserName.Margin = new Padding(2, 0, 2, 0);
             labelUserName.Name = "labelUserName";
-            labelUserName.Size = new Size(67, 15);
+            labelUserName.Size = new Size(56, 12);
             labelUserName.TabIndex = 28;
             labelUserName.Text = "User Name";
             // 
-            // labelPassword
+            // buttonCreate
             // 
-            labelPassword.AutoSize = true;
-            labelPassword.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            labelPassword.ForeColor = SystemColors.Window;
-            labelPassword.Location = new Point(41, 129);
-            labelPassword.Margin = new Padding(2, 0, 2, 0);
-            labelPassword.Name = "labelPassword";
-            labelPassword.Size = new Size(30, 15);
-            labelPassword.TabIndex = 29;
-            labelPassword.Text = "Role";
-            // 
-            // buttonLogin
-            // 
-            buttonLogin.BackColor = Color.FromArgb(58, 154, 193);
-            buttonLogin.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
-            buttonLogin.FlatStyle = FlatStyle.Flat;
-            buttonLogin.ForeColor = SystemColors.ButtonHighlight;
-            buttonLogin.Location = new Point(41, 209);
-            buttonLogin.Margin = new Padding(2);
-            buttonLogin.Name = "buttonLogin";
-            buttonLogin.Size = new Size(175, 29);
-            buttonLogin.TabIndex = 30;
-            buttonLogin.Text = "Create";
-            buttonLogin.UseVisualStyleBackColor = false;
-            buttonLogin.Click += buttonLogin_Click;
+            buttonCreate.BackColor = Color.FromArgb(58, 154, 193);
+            buttonCreate.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
+            buttonCreate.FlatStyle = FlatStyle.Flat;
+            buttonCreate.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonCreate.ForeColor = SystemColors.ButtonHighlight;
+            buttonCreate.Location = new Point(21, 152);
+            buttonCreate.Margin = new Padding(2);
+            buttonCreate.Name = "buttonCreate";
+            buttonCreate.Size = new Size(85, 23);
+            buttonCreate.TabIndex = 30;
+            buttonCreate.Text = "Create";
+            buttonCreate.UseVisualStyleBackColor = false;
+            buttonCreate.Click += buttonCreate_Click;
             // 
             // buttonCancel
             // 
             buttonCancel.BackColor = Color.Silver;
             buttonCancel.FlatStyle = FlatStyle.Flat;
+            buttonCancel.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             buttonCancel.ForeColor = SystemColors.ActiveCaptionText;
-            buttonCancel.Location = new Point(41, 254);
+            buttonCancel.Location = new Point(124, 152);
             buttonCancel.Margin = new Padding(2);
             buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(175, 29);
+            buttonCancel.Size = new Size(85, 23);
             buttonCancel.TabIndex = 31;
             buttonCancel.Text = "Cancel";
             buttonCancel.UseVisualStyleBackColor = false;
@@ -103,45 +95,61 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label1.ForeColor = SystemColors.Window;
-            label1.Location = new Point(78, 29);
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label1.ForeColor = SystemColors.ControlText;
+            label1.Location = new Point(82, 20);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(109, 15);
+            label1.Size = new Size(67, 15);
             label1.TabIndex = 32;
-            label1.Text = "CREATE NEW USER";
+            label1.Text = "NEW USER";
             // 
-            // comboBoxRoles
+            // checkBoxAdmin
             // 
-            comboBoxRoles.BackColor = Color.FromArgb(46, 52, 63);
-            comboBoxRoles.FlatStyle = FlatStyle.Flat;
-            comboBoxRoles.ForeColor = Color.White;
-            comboBoxRoles.FormattingEnabled = true;
-            comboBoxRoles.Location = new Point(41, 147);
-            comboBoxRoles.Name = "comboBoxRoles";
-            comboBoxRoles.Size = new Size(175, 23);
-            comboBoxRoles.TabIndex = 33;
+            checkBoxAdmin.AutoSize = true;
+            checkBoxAdmin.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            checkBoxAdmin.Location = new Point(81, 99);
+            checkBoxAdmin.Name = "checkBoxAdmin";
+            checkBoxAdmin.Size = new Size(53, 16);
+            checkBoxAdmin.TabIndex = 38;
+            checkBoxAdmin.Text = "Admin";
+            checkBoxAdmin.UseVisualStyleBackColor = true;
+            checkBoxAdmin.Click += checkBoxAdmin_CheckedChanged;
+            // 
+            // checkBoxAuthor
+            // 
+            checkBoxAuthor.AutoSize = true;
+            checkBoxAuthor.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            checkBoxAuthor.Location = new Point(21, 99);
+            checkBoxAuthor.Name = "checkBoxAuthor";
+            checkBoxAuthor.Size = new Size(54, 16);
+            checkBoxAuthor.TabIndex = 37;
+            checkBoxAuthor.Text = "Author";
+            checkBoxAuthor.UseVisualStyleBackColor = true;
+            checkBoxAuthor.Click += checkBoxAuthor_CheckedChanged;
             // 
             // CreateUserForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(46, 52, 63);
-            ClientSize = new Size(266, 316);
-            Controls.Add(comboBoxRoles);
+            BackColor = SystemColors.Control;
+            ClientSize = new Size(230, 201);
+            Controls.Add(checkBoxAdmin);
+            Controls.Add(checkBoxAuthor);
             Controls.Add(label1);
             Controls.Add(buttonCancel);
-            Controls.Add(buttonLogin);
-            Controls.Add(labelPassword);
+            Controls.Add(buttonCreate);
             Controls.Add(labelUserName);
             Controls.Add(textBoxUserName);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(2);
             Name = "CreateUserForm";
-            StartPosition = FormStartPosition.Manual;
+            StartPosition = FormStartPosition.CenterParent;
             Text = "CreateUserForm";
+            TopMost = true;
             Load += CreateUser_Load;
+            MouseDown += CreateUserForm_MouseDown;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -150,10 +158,10 @@
 
         private TextBox textBoxUserName;
         private Label labelUserName;
-        private Label labelPassword;
-        private Button buttonLogin;
+        private Button buttonCreate;
         private Button buttonCancel;
         private Label label1;
-        private ComboBox comboBoxRoles;
+        private CheckBox checkBoxAdmin;
+        private CheckBox checkBoxAuthor;
     }
 }

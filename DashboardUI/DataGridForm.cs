@@ -40,7 +40,7 @@ namespace DashboardUI
         DepartmentCapacityManager departmentCapacityManager;
 
         //UI Form Referances
-        //Form createForm;
+        Form createForm;
         Dashboard _dashboardForm;
         DataCardUI _dataCardForm;
 
@@ -53,14 +53,18 @@ namespace DashboardUI
         private bool isEditing = false;
         private bool isSorted = false;
         private bool isHidden = false;
-   
+
         private DateTime _startDate;
         private DateTime _endDate;
+        private bool _isActiveUser = false;
         public bool isDataListed = false;
         private int _rowIndex;
+        private int _departmentIndex;
+        private List<int> _projectIndex = new();
         private List<int> completedProjectList = new();
 
-        public DataGridForm(ProjectManager projectManager, DepartmentManager departmentManager, ManagementManager managementManager, CategoryManager categoryManager, DepartmentCapacityManager departmentCapacityManager, ProjectCapacityManager projectCapacityManager, UserManager userManager, Dashboard dashboardForm)
+        public DataGridForm(ProjectManager projectManager, DepartmentManager departmentManager, ManagementManager managementManager, CategoryManager categoryManager, 
+            DepartmentCapacityManager departmentCapacityManager, ProjectCapacityManager projectCapacityManager, UserManager userManager, Dashboard dashboardForm)
         {
             this.projectManager = projectManager;
             this.departmentManager = departmentManager;
@@ -78,13 +82,6 @@ namespace DashboardUI
         {
             //form initialize options
             alertBox = new AlertBox(_dashboardForm);
-
-            _toolTip = new ToolTip();
-            _toolTip.SetToolTip(this.buttonList, "List");
-            _toolTip.SetToolTip(this.buttonRefresh, "Refresh");
-            _toolTip.SetToolTip(this.buttonReset, "Reset");
-            _toolTip.SetToolTip(this.buttonNew, "Create");
-            _toolTip.SetToolTip(this.buttonEdit, "Edit");
 
             foreach (var management in managementManager.GetAll().Data)
             {
@@ -106,23 +103,17 @@ namespace DashboardUI
             dateTimePickerStart.Value = new DateTime(2024, 01, 01);
             dateTimePickerEnd.Value = dateTimePickerStart.Value.AddMonths(23);
 
-            dbGrid.ReadOnly = true;
-
-            if (_dashboardForm.activeUser == null)
-            {
-                return;
-            }
-            else if (_dashboardForm.activeUser.Admin || _dashboardForm.activeUser.Author)
-            {
-                if (isDataListed)
-                    buttonEdit.Enabled = true;
-
-                buttonNew.Enabled = true;
-            }
+            CheckUserCredential();
 
             //DELETE LATER
             comboBoxManagement.SelectedIndex = 0;
             comboBoxDepartment.SelectedIndex = 0;
+        }
+
+        private void CheckUserCredential()
+        {
+            if (_dashboardForm.activeUser != null)
+                _isActiveUser = true;
         }
 
         #region Button List Function
@@ -187,6 +178,7 @@ namespace DashboardUI
 
             if (departmentDatas.Success)
             {
+                _departmentIndex = departmentDatas.Data[0].DepartmentId;
                 foreach (var departmentData in departmentDatas.Data)
                 {
                     for (int i = 0; i <= monthCalulate; i++)
@@ -198,41 +190,40 @@ namespace DashboardUI
                     }
                 }
             }
-            else
-            {
-                alertBox.ErrorAlert("Test");
-                isDataListed = false;
-                return;
-            }
 
             //project name and capacity placed into row
             int departmentId = departmentManager.GetByName(comboBoxDepartment.Text).Data.DepartmentId;
             var projectNames = projectManager.GetAllByDepartmentId(departmentId);
             var projectDatas = projectCapacityManager.GetProjectCapacityDetailsByDateBetweenAndDepartmentId(_startDate, _endDate, departmentId);
+            _projectIndex.Clear();
 
-            if (projectNames.Success && projectDatas.Success)
+            if (projectNames.Success)
             {
 
                 foreach (var projectName in projectNames.Data)
                 {
                     DataRow projectRow = dataTable.Rows.Add();
                     projectRow[0] = projectName.ProjectName;
+                    _projectIndex.Add(projectName.ProjectId);
 
                     //completed project table index list
-                    if (!projectName.IsCompleted)
+                    if (projectName.IsCompleted)
                         completedProjectList.Add(dataTable.Rows.Count - 1);
 
-                    foreach (var projectData in projectDatas.Data)
+                    if (projectDatas.Success)
                     {
-                        for (int i = 0; i <= monthCalulate; i++)
+                        foreach (var projectData in projectDatas.Data)
                         {
-                            if (dateRow[i + 1].ToString() == projectData.Date.ToString("MMM-yy"))
+                            for (int i = 0; i <= monthCalulate; i++)
                             {
-                                for (int j = 0; j < dataTable.Rows.Count; j++)
+                                if (dateRow[i + 1].ToString() == projectData.Date.ToString("MMM-yy"))
                                 {
-                                    if (projectName.ProjectName == projectData.ProjectName)
+                                    for (int j = 0; j < dataTable.Rows.Count; j++)
                                     {
-                                        projectRow[i + 1] = projectData.PTotalCapacity;
+                                        if (projectName.ProjectName == projectData.ProjectName)
+                                        {
+                                            projectRow[i + 1] = projectData.PTotalCapacity;
+                                        }
                                     }
                                 }
                             }
@@ -240,20 +231,20 @@ namespace DashboardUI
                     }
                 }
             }
-            else
-            {
-                alertBox.ErrorAlert("test");
-                return;
-            }
 
             //place data table into data grid view
             dbGrid.DataSource = dataTable;
             isDataListed = true;
 
-            buttonEdit.Enabled = true;
-            buttonShowHide.Enabled = true;
-            buttonChart.Enabled = true;
-            buttonExportToExcel.Enabled = true;
+            if (_isActiveUser)
+            {
+                buttonReset.Enabled = true;
+                buttonShowHide.Enabled = true;
+                buttonChart.Enabled = true;
+                buttonExportToExcel.Enabled = true;
+                buttonNew.Enabled = true;
+                buttonEdit.Enabled = true;
+            }
 
             //data grid view style
             FormatDataGridView();
@@ -369,6 +360,13 @@ namespace DashboardUI
         {
             ResetGridView();
 
+            buttonReset.Enabled = false;
+            buttonShowHide.Enabled = false;
+            buttonChart.Enabled = false;
+            buttonExportToExcel.Enabled = false;
+            buttonNew.Enabled = false;
+            buttonEdit.Enabled = false;
+
             //reset filters
             comboBoxManagement.ResetText();
             comboBoxManagement.SelectedIndex = -1;
@@ -388,12 +386,12 @@ namespace DashboardUI
             dbGrid.Rows.Clear();
             dbGrid.Columns.Clear();
             isEditing = false;
+            dbGrid.ReadOnly = true;
+            pictureBoxLocked.Visible = true;
+            pictureBoxUnlocked.Visible = false;
+            labelLockStatus.Text = "Data editing is locked";
+            isDataListed = false;
         }
-
-        #endregion
-
-        //THIS IS EMPTY DELETE LATER
-        #region Button Refresh Function
 
         #endregion
 
@@ -406,101 +404,51 @@ namespace DashboardUI
 
         #endregion
 
-        //WORK ON HERE
         #region Button Create New Project Function
 
-        //WORK ON HERE
         private void buttonNew_Click(object sender, EventArgs e)
         {
-            //if (createForm == null)
-            //{
-            //    createForm = new CreateForm(managementManager, departmentManager, categoryManager, projectManager);
-            //    createForm.FormClosed += CreateForm_FormClosed;
-            //    createForm.ShowDialog();
-            //}
-            //else
-            //{
-            //    createForm.Activate();
-            //}
+            if (createForm == null)
+            {
+                Management management = managementManager.GetByName(comboBoxManagement.Text).Data;
+                Department department = departmentManager.GetById(_departmentIndex).Data;
+                createForm = new CreateProjectForm(management, department, categoryManager, projectManager, userManager);
+                createForm.FormClosed += CreateForm_FormClosed;
+                createForm.ShowDialog();
+            }
+            else
+            {
+                createForm.Activate();
+            }
         }
 
         private void CreateForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //createForm = null;
+            createForm = null;
         }
 
         #endregion
 
-        //TOTAL MESS INSIDE NEED TO REFACTOR
         #region Button Edit Function
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (isEditing == false)
+            if (isEditing)
             {
-                dbGrid.ReadOnly = false;
-                isEditing = true;
-            }
-
-            else if (isEditing == true)
-            {
-                dbGrid.ReadOnly = true;
                 isEditing = false;
+                dbGrid.ReadOnly = true;
+                pictureBoxLocked.Visible = true;
+                pictureBoxUnlocked.Visible = false;
+                labelLockStatus.Text = "Data editing is locked";
             }
-        }
-        //WRONG METHOD
-        private void dbGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex > 0 && e.RowIndex > 0)
+            else
             {
-                //delete project and project capacities
-                if (dbGrid.Columns[e.ColumnIndex].Name == "Delete" && dbGrid.Rows[e.RowIndex].Tag == "Project")
-                {
-                    DialogResult dialogResult = MessageBox.Show("Are you sure to delete selected project? Project index: " + e.RowIndex, "Delete Project", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        Project projectToDelete = projectManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()).Data;
-                        DeleteProject(projectToDelete);
-                    }
-                }
-                else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Project")
-                {
-                    UpdateProjectForm updateForm = new(managementManager, departmentManager, categoryManager, projectManager,userManager,1); //<=== THIS VALUE IS WORNG
-                    updateForm.ShowDialog();
-
-                }
-                else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Department")
-                {
-                    UpdateDepartmentForm updateForm = new(managementManager, departmentManager, 1);//<=== THIS VALUE IS WORNG
-                    updateForm.ShowDialog();
-
-                }
-                else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Management")
-                {
-                    UpdateManagementForm updateForm = new(managementManager, 1); ; //<=== THIS VALUE IS WORNG
-                    updateForm.ShowDialog();
-                }
+                isEditing = true;
+                dbGrid.ReadOnly = false;
+                pictureBoxLocked.Visible = false;
+                pictureBoxUnlocked.Visible = true;
+                labelLockStatus.Text = "Data editing is unlocked";
             }
-            else if (e.ColumnIndex < 0)
-            {
-                Debug.Print("project card opened");
-            }
-        }
-
-        private void DeleteProject(Project projectToDelete)
-        {
-            var projectCapacitiesToDelete = projectCapacityManager.GetAllByProjectId(projectToDelete.ProjectId);
-            if (projectCapacitiesToDelete.Success)
-            {
-                foreach (var projectCapacity in projectCapacitiesToDelete.Data)
-                {
-                    projectCapacityManager.Delete(projectCapacity);
-                }
-            }
-
-            projectManager.Delete(projectToDelete);
-
-            MessageBox.Show("Project deleted successfully", "Delete Project", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         #region CRUD Operations On DataGridView
@@ -542,43 +490,24 @@ namespace DashboardUI
                     //project name is editing
                     if (e.ColumnIndex == 0)
                     {
-                        //project name is updated
-                        if (cellValue != "")
-                        {
-                            var projectByName = projectManager.GetByName(_cellValueBegin);
-                            if (projectByName.Success)
-                            {
-                                Project projectToUpdate = projectByName.Data;
-                                projectToUpdate.ProjectName = cellValue;
-                                projectManager.Update(projectToUpdate);
-                                alertBox.SuccessAlert("Project name updated successfuly");
-                                return;
-                            }
-                            else
-                            {
-                                alertBox.ErrorAlert("Could not find project");
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
-                            alertBox.WarningAlert("Value cannot be empty");
-                            return;
-                        }
+                        dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
+                        return;
                     }
 
                     //editing project capacity data
                     //check if cell value is numaric
-                    if (!IsNumeric(cellValue))
+                    if (cellValue != "")
                     {
-                        dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
-                        alertBox.WarningAlert("Non-numeric value");
-                        return;
+                        if (!IsNumeric(cellValue))
+                        {
+                            dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
+                            alertBox.WarningAlert("Non-numeric value");
+                            return;
+                        }
                     }
 
                     //fetch current project data to edit
-                    var projectData = projectManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    var projectData = projectManager.GetById(_projectIndex[e.RowIndex - 3]);
                     if (!projectData.Success)
                     {
                         alertBox.ErrorAlert("Could not find project data");
@@ -621,7 +550,7 @@ namespace DashboardUI
                         ProjectCapacity projectCapacityToUpdate = projectCapacityData.Data;
 
                         //new value is null or 0 incase delete data
-                        if (cellValue == "" || Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1) == 0 && e.ColumnIndex > 1)
+                        if (cellValue == "" || Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1) == 0)
                         {
                             if (projectCapacityManager.Delete(projectCapacityToUpdate).Success)
                                 Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "DELETE" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Project capacity data deleted");
@@ -658,43 +587,24 @@ namespace DashboardUI
                     //department name is editing
                     if (e.ColumnIndex == 0)
                     {
-                        //department name is updated
-                        if (cellValue != "")
-                        {
-                            var departmentByName = departmentManager.GetByName(_cellValueBegin);
-                            if (departmentByName.Success)
-                            {
-                                Department departmentToUpdate = departmentByName.Data;
-                                departmentToUpdate.DepartmentName = cellValue;
-                                departmentManager.Update(departmentToUpdate);
-                                alertBox.SuccessAlert("Department name updated successfuly");
-                                return;
-                            }
-                            else
-                            {
-                                alertBox.ErrorAlert("Could not find department");
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
-                            alertBox.WarningAlert("Value cannot be empty");
-                            return;
-                        }
+                        dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
+                        return;
                     }
 
                     //editing department capacity data
                     //check if cell value is numeric
-                    if (!IsNumeric(cellValue))
+                    if (cellValue != "")
                     {
-                        dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
-                        alertBox.WarningAlert("Non-numeric value");
-                        return;
+                        if (!IsNumeric(cellValue))
+                        {
+                            dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
+                            alertBox.WarningAlert("Non-numeric value");
+                            return;
+                        }
                     }
 
                     //fetch current departmet data to edit
-                    var departmentData = departmentManager.GetByName(dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    var departmentData = departmentManager.GetById(_departmentIndex);
                     if (!departmentData.Success)
                     {
                         alertBox.ErrorAlert("Could not find department data");
@@ -737,7 +647,7 @@ namespace DashboardUI
                         DepartmentCapacity departmentCapacityToUpdate = departmentCapacityData.Data;
 
                         //new value is null or 0 incase delete data
-                        if (cellValue == "" || Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1) == 0 && e.ColumnIndex > 1)
+                        if (cellValue == "" || Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1) == 0)
                         {
                             if (departmentCapacityManager.Delete(departmentCapacityToUpdate).Success)
                                 Debug.Print("Department capacity data deleted");
@@ -765,40 +675,14 @@ namespace DashboardUI
                 else
                     Debug.Print("No change action");
             }
-            //editing management row
-            else if (dbGrid.Rows[e.RowIndex].Tag == "Management")
+            //editing other rows
+            else
             {
                 //check if cell value is changed
                 if (_cellValueBegin != cellValue)
                 {
-                    //management name is editing
-                    if (e.ColumnIndex == 0)
-                    {
-                        //management name is updated
-                        if (cellValue != "")
-                        {
-                            var managementByName = managementManager.GetByName(_cellValueBegin);
-                            if (managementByName.Success)
-                            {
-                                Management managementToUpdate = managementByName.Data;
-                                managementToUpdate.ManagementName = cellValue;
-                                managementManager.Update(managementToUpdate);
-                                alertBox.SuccessAlert("Management name updated successfuly");
-                                return;
-                            }
-                            else
-                            {
-                                alertBox.ErrorAlert("Could not find Management");
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
-                            alertBox.WarningAlert("Value cannot be empty");
-                            return;
-                        }
-                    }
+                    dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
+                    return;
                 }
             }
         }
@@ -850,6 +734,12 @@ namespace DashboardUI
 
         private void buttonCard_Click(object sender, EventArgs e)
         {
+            if (!_isActiveUser)
+            {
+                alertBox.WarningAlert("Need permission for this action");
+                return;
+            }
+
             //REFACTOR THIS
             var projectNames = projectManager.GetByName(dbGrid.Rows[_rowIndex].Cells[0].Value.ToString());
             var projectDetail = projectManager.GetProjectDetail(projectNames.Data.ProjectId);
@@ -872,7 +762,6 @@ namespace DashboardUI
 
         #endregion
 
-        //NOT WORKED ON YET
         #region Button Chart Function
 
         private void buttonChart_Click(object sender, EventArgs e)
@@ -947,7 +836,6 @@ namespace DashboardUI
         }
 
         #endregion
-
 
     }
 }

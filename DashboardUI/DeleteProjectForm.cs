@@ -13,12 +13,12 @@ using System.Windows.Forms;
 
 namespace DashboardUI
 {
-    public partial class DeleteProject : Form
+    public partial class DeleteProjectForm : Form
     {
         private ProjectManager _projectManager;
         private Project _projectToDelete;
 
-        public DeleteProject(ProjectManager projectManager, Project project)
+        public DeleteProjectForm(ProjectManager projectManager, Project project)
         {
             _projectManager = projectManager;
             _projectToDelete = project;
@@ -42,6 +42,7 @@ namespace DashboardUI
             {
                 _projectManager.Delete(_projectToDelete);
                 Debug.Print("delete test worked!");
+                this.Close();
             }
             else
             {

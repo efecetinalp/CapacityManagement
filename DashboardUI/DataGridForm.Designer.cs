@@ -44,7 +44,6 @@
             labelStartDate = new Label();
             labelEndDate = new Label();
             buttonNew = new Button();
-            buttonRefresh = new Button();
             buttonExportToExcel = new Button();
             buttonList = new Button();
             buttonChart = new Button();
@@ -52,9 +51,14 @@
             buttonShowHide = new Button();
             panel1 = new Panel();
             panel2 = new Panel();
+            pictureBoxLocked = new PictureBox();
+            pictureBoxUnlocked = new PictureBox();
+            labelLockStatus = new Label();
             ((System.ComponentModel.ISupportInitialize)dbGrid).BeginInit();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxLocked).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxUnlocked).BeginInit();
             SuspendLayout();
             // 
             // buttonEdit
@@ -83,6 +87,7 @@
             // 
             buttonReset.BackColor = Color.Transparent;
             buttonReset.Cursor = Cursors.Hand;
+            buttonReset.Enabled = false;
             buttonReset.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
             buttonReset.FlatAppearance.BorderSize = 0;
             buttonReset.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
@@ -177,6 +182,7 @@
             dbGrid.Location = new Point(21, 79);
             dbGrid.Margin = new Padding(2);
             dbGrid.Name = "dbGrid";
+            dbGrid.ReadOnly = true;
             dbGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.FromArgb(46, 52, 63);
@@ -193,7 +199,6 @@
             dbGrid.Size = new Size(1236, 558);
             dbGrid.TabIndex = 17;
             dbGrid.CellBeginEdit += dbGrid_CellBeginEdit;
-            dbGrid.CellContentClick += dbGrid_CellContentClick;
             dbGrid.CellEndEdit += dbGrid_CellEndEdit;
             dbGrid.CellMouseMove += dbGrid_CellMouseMove;
             dbGrid.ColumnAdded += dbGrid_ColumnAdded;
@@ -263,24 +268,6 @@
             buttonNew.TabIndex = 32;
             buttonNew.UseVisualStyleBackColor = false;
             buttonNew.Click += buttonNew_Click;
-            // 
-            // buttonRefresh
-            // 
-            buttonRefresh.BackColor = Color.Transparent;
-            buttonRefresh.Cursor = Cursors.Hand;
-            buttonRefresh.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
-            buttonRefresh.FlatAppearance.BorderSize = 0;
-            buttonRefresh.FlatAppearance.MouseOverBackColor = Color.IndianRed;
-            buttonRefresh.FlatStyle = FlatStyle.Flat;
-            buttonRefresh.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonRefresh.Image = (Image)resources.GetObject("buttonRefresh.Image");
-            buttonRefresh.Location = new Point(76, 2);
-            buttonRefresh.Margin = new Padding(2);
-            buttonRefresh.Name = "buttonRefresh";
-            buttonRefresh.Padding = new Padding(0, 0, 1, 1);
-            buttonRefresh.Size = new Size(20, 20);
-            buttonRefresh.TabIndex = 33;
-            buttonRefresh.UseVisualStyleBackColor = false;
             // 
             // buttonExportToExcel
             // 
@@ -389,7 +376,6 @@
             panel1.Controls.Add(buttonShowHide);
             panel1.Controls.Add(buttonChart);
             panel1.Controls.Add(buttonReset);
-            panel1.Controls.Add(buttonRefresh);
             panel1.Controls.Add(buttonList);
             panel1.Controls.Add(buttonExportToExcel);
             panel1.ForeColor = SystemColors.ActiveCaptionText;
@@ -410,12 +396,51 @@
             panel2.Size = new Size(49, 23);
             panel2.TabIndex = 42;
             // 
+            // pictureBoxLocked
+            // 
+            pictureBoxLocked.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            pictureBoxLocked.BackColor = Color.Transparent;
+            pictureBoxLocked.Image = (Image)resources.GetObject("pictureBoxLocked.Image");
+            pictureBoxLocked.Location = new Point(1238, 638);
+            pictureBoxLocked.Name = "pictureBoxLocked";
+            pictureBoxLocked.Padding = new Padding(2, 2, 0, 0);
+            pictureBoxLocked.Size = new Size(20, 20);
+            pictureBoxLocked.TabIndex = 43;
+            pictureBoxLocked.TabStop = false;
+            // 
+            // pictureBoxUnlocked
+            // 
+            pictureBoxUnlocked.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            pictureBoxUnlocked.BackColor = Color.Transparent;
+            pictureBoxUnlocked.Image = (Image)resources.GetObject("pictureBoxUnlocked.Image");
+            pictureBoxUnlocked.Location = new Point(1238, 638);
+            pictureBoxUnlocked.Name = "pictureBoxUnlocked";
+            pictureBoxUnlocked.Padding = new Padding(2, 2, 0, 0);
+            pictureBoxUnlocked.Size = new Size(20, 20);
+            pictureBoxUnlocked.TabIndex = 44;
+            pictureBoxUnlocked.TabStop = false;
+            pictureBoxUnlocked.Visible = false;
+            // 
+            // labelLockStatus
+            // 
+            labelLockStatus.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            labelLockStatus.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            labelLockStatus.Location = new Point(1098, 643);
+            labelLockStatus.Name = "labelLockStatus";
+            labelLockStatus.Size = new Size(140, 12);
+            labelLockStatus.TabIndex = 45;
+            labelLockStatus.Text = "Data editing is locked";
+            labelLockStatus.TextAlign = ContentAlignment.MiddleRight;
+            // 
             // DataGridForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(242, 242, 242);
             ClientSize = new Size(1280, 660);
+            Controls.Add(labelLockStatus);
+            Controls.Add(pictureBoxUnlocked);
+            Controls.Add(pictureBoxLocked);
             Controls.Add(buttonCard);
             Controls.Add(labelEndDate);
             Controls.Add(labelStartDate);
@@ -436,6 +461,8 @@
             ((System.ComponentModel.ISupportInitialize)dbGrid).EndInit();
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBoxLocked).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxUnlocked).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -454,7 +481,6 @@
         private Label labelStartDate;
         private Label labelEndDate;
         private Button buttonNew;
-        private Button buttonRefresh;
         private Button buttonExportToExcel;
         private Button buttonList;
         private Button buttonChart;
@@ -462,5 +488,8 @@
         private Button buttonShowHide;
         private Panel panel1;
         private Panel panel2;
+        private PictureBox pictureBoxLocked;
+        private PictureBox pictureBoxUnlocked;
+        private Label labelLockStatus;
     }
 }
