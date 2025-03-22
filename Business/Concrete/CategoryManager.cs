@@ -60,5 +60,14 @@ namespace Business.Concrete
                 return new ErrorDataResult<Category>(result, Messages.EmptyData);
         }
 
+        public IDataResult<Category> GetById(int categoryId)
+        {
+            Category result = _categoryDal.Get(c => c.CategoryId == categoryId);
+
+            if (result != null)
+                return new SuccessDataResult<Category>(result, Messages.ProjectListed);
+            else
+                return new ErrorDataResult<Category>(result, Messages.EmptyData);
+        }
     }
 }

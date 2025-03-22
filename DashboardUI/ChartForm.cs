@@ -323,32 +323,51 @@ namespace DashboardUI
             else if (comboBoxPaletteType.Text == "Gradient")
             {
                 //generates gradient type color list
-
-                Color grad1 = _colorDetails.Data[0].GetColorCode;
-                Color grad2 = _colorDetails.Data[1].GetColorCode;
-                Color grad3 = _colorDetails.Data[2].GetColorCode;
-                colorIndex = 0;
-
-                int R1, G1, B1, divider;
-                divider = colorCount / 2;
-                for (int i = 0; i < colorCount; i++)
+                //3 colors gredient
+                if (_colorDetails.Data.Count > 2)
                 {
-                    if (i < colorCount / 2)
+                    Color grad1 = _colorDetails.Data[0].GetColorCode;
+                    Color grad2 = _colorDetails.Data[1].GetColorCode;
+                    Color grad3 = _colorDetails.Data[2].GetColorCode;
+                    colorIndex = 0;
+
+                    int R1, G1, B1, divider;
+                    divider = colorCount / 2;
+                    for (int i = 0; i < colorCount; i++)
                     {
-                        R1 = grad1.R + (i * ((grad2.R - grad1.R) / divider));
-                        G1 = grad1.G + (i * ((grad2.G - grad1.G) / divider));
-                        B1 = grad1.B + (i * ((grad2.B - grad1.B) / divider));
+                        if (i < colorCount / 2)
+                        {
+                            R1 = grad1.R + (i * ((grad2.R - grad1.R) / divider));
+                            G1 = grad1.G + (i * ((grad2.G - grad1.G) / divider));
+                            B1 = grad1.B + (i * ((grad2.B - grad1.B) / divider));
+                        }
+                        else
+                        {
+                            R1 = grad2.R + (colorIndex * ((grad3.R - grad2.R) / divider));
+                            G1 = grad2.G + (colorIndex * ((grad3.G - grad2.G) / divider));
+                            B1 = grad2.B + (colorIndex * ((grad3.B - grad2.B) / divider));
+                            colorIndex++;
+                        }
+                        Debug.Print(R1.ToString() + " " + G1.ToString() + " " + B1.ToString());
+                        _colorList.Add(Color.FromArgb(R1, G1, B1));
                     }
-                    else
-                    {
-                        R1 = grad2.R + (colorIndex * ((grad3.R - grad2.R) / divider));
-                        G1 = grad2.G + (colorIndex * ((grad3.G - grad2.G) / divider));
-                        B1 = grad2.B + (colorIndex * ((grad3.B - grad2.B) / divider));
-                        colorIndex++;
-                    }
-                    Debug.Print(R1.ToString() + " " + G1.ToString() + " " + B1.ToString());
-                    _colorList.Add(Color.FromArgb(R1, G1, B1));
                 }
+                //2 colors gradient
+                else
+                {
+                    Color grad1 = _colorDetails.Data[0].GetColorCode;
+                    Color grad2 = _colorDetails.Data[1].GetColorCode;
+                    int R1, G1, B1;
+                    for (int i = 0; i < colorCount; i++)
+                    {
+                        R1 = grad1.R + (i * ((grad2.R - grad1.R) / colorCount));
+                        G1 = grad1.G + (i * ((grad2.G - grad1.G) / colorCount));
+                        B1 = grad1.B + (i * ((grad2.B - grad1.B) / colorCount));
+
+                        _colorList.Add(Color.FromArgb(R1, G1, B1));
+                    }
+                }
+
             }
             else
             {

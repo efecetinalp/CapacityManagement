@@ -66,9 +66,9 @@ namespace DashboardUI
             Debug.Print("Project created");
         }
 
-        private void lblProjectCreate_Click(object sender, EventArgs e)
+        private void buttonCancel_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
 }

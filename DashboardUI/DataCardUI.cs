@@ -45,9 +45,8 @@ namespace DashboardUI
             lblCategory.Text = _projectDetail.CategoryName;
             lblStartDate.Text = _projectDetail.StartDate.ToString("MMM-yy");
             lblOwner.Text = _projectDetail.UserName;
-            checkBoxIsProgressing.Checked = !_projectDetail.isProgressing;
-
-            if (_projectDetail.isProgressing)
+            checkBoxIsProgressing.Checked = !_projectDetail.IsCompleted;
+            if (_projectDetail.IsCompleted)
             {
                 lblStatus.Text = "Progressing";
                 lblEndDate.Text = "N/A";
@@ -123,7 +122,7 @@ namespace DashboardUI
             checkBoxIsProgressing.Visible = true;
             comboBoxUser.Visible = true;
 
-            if (_projectDetail.isProgressing)
+            if (_projectDetail.IsCompleted)
                 dateTimePickerEnd.Enabled = false;
         }
 

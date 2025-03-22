@@ -34,47 +34,58 @@
             comboBoxCategory = new ComboBox();
             buttonUpdate = new Button();
             buttonCancel = new Button();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            label6 = new Label();
+            labelManagement = new Label();
+            labelDepartment = new Label();
+            labelCategory = new Label();
+            labelProjectName = new Label();
             label7 = new Label();
+            labelUser = new Label();
+            comboBoxUser = new ComboBox();
+            labelEndDate = new Label();
+            labelStartDate = new Label();
+            dateTimePickerStart = new DateTimePicker();
+            dateTimePickerEnd = new DateTimePicker();
+            checkBoxCompleted = new CheckBox();
             SuspendLayout();
             // 
             // textBoxProject
             // 
-            textBoxProject.Location = new Point(50, 260);
-            textBoxProject.Margin = new Padding(2, 2, 2, 2);
+            textBoxProject.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxProject.Location = new Point(29, 69);
+            textBoxProject.Margin = new Padding(2);
             textBoxProject.Name = "textBoxProject";
-            textBoxProject.Size = new Size(260, 23);
+            textBoxProject.Size = new Size(172, 20);
             textBoxProject.TabIndex = 0;
             // 
             // comboBoxManagement
             // 
+            comboBoxManagement.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxManagement.FormattingEnabled = true;
-            comboBoxManagement.Location = new Point(50, 110);
-            comboBoxManagement.Margin = new Padding(2, 2, 2, 2);
+            comboBoxManagement.Location = new Point(29, 114);
+            comboBoxManagement.Margin = new Padding(2);
             comboBoxManagement.Name = "comboBoxManagement";
-            comboBoxManagement.Size = new Size(260, 23);
+            comboBoxManagement.Size = new Size(172, 20);
             comboBoxManagement.TabIndex = 1;
             comboBoxManagement.SelectedIndexChanged += comboBoxManagement_SelectedIndexChanged;
             // 
             // comboBoxDepartment
             // 
+            comboBoxDepartment.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxDepartment.FormattingEnabled = true;
-            comboBoxDepartment.Location = new Point(50, 160);
-            comboBoxDepartment.Margin = new Padding(2, 2, 2, 2);
+            comboBoxDepartment.Location = new Point(29, 159);
+            comboBoxDepartment.Margin = new Padding(2);
             comboBoxDepartment.Name = "comboBoxDepartment";
-            comboBoxDepartment.Size = new Size(260, 23);
+            comboBoxDepartment.Size = new Size(172, 20);
             comboBoxDepartment.TabIndex = 2;
             // 
             // comboBoxCategory
             // 
+            comboBoxCategory.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxCategory.FormattingEnabled = true;
-            comboBoxCategory.Location = new Point(50, 210);
-            comboBoxCategory.Margin = new Padding(2, 2, 2, 2);
+            comboBoxCategory.Location = new Point(29, 204);
+            comboBoxCategory.Margin = new Padding(2);
             comboBoxCategory.Name = "comboBoxCategory";
-            comboBoxCategory.Size = new Size(260, 23);
+            comboBoxCategory.Size = new Size(172, 20);
             comboBoxCategory.TabIndex = 3;
             // 
             // buttonUpdate
@@ -82,11 +93,12 @@
             buttonUpdate.BackColor = Color.FromArgb(58, 154, 193);
             buttonUpdate.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
             buttonUpdate.FlatStyle = FlatStyle.Flat;
+            buttonUpdate.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             buttonUpdate.ForeColor = SystemColors.ButtonHighlight;
-            buttonUpdate.Location = new Point(50, 335);
-            buttonUpdate.Margin = new Padding(2, 2, 2, 2);
+            buttonUpdate.Location = new Point(28, 266);
+            buttonUpdate.Margin = new Padding(2);
             buttonUpdate.Name = "buttonUpdate";
-            buttonUpdate.Size = new Size(113, 32);
+            buttonUpdate.Size = new Size(173, 29);
             buttonUpdate.TabIndex = 6;
             buttonUpdate.Text = "Update";
             buttonUpdate.UseVisualStyleBackColor = false;
@@ -95,80 +107,168 @@
             // buttonCancel
             // 
             buttonCancel.FlatStyle = FlatStyle.Flat;
-            buttonCancel.Location = new Point(197, 335);
-            buttonCancel.Margin = new Padding(2, 2, 2, 2);
+            buttonCancel.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonCancel.Location = new Point(223, 266);
+            buttonCancel.Margin = new Padding(2);
             buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(113, 32);
+            buttonCancel.Size = new Size(172, 29);
             buttonCancel.TabIndex = 7;
             buttonCancel.Text = "Cancel";
             buttonCancel.UseVisualStyleBackColor = true;
             buttonCancel.Click += buttonCancel_Click;
             // 
-            // label1
+            // labelManagement
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label1.Location = new Point(50, 93);
-            label1.Margin = new Padding(2, 0, 2, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(79, 15);
-            label1.TabIndex = 8;
-            label1.Text = "Management";
+            labelManagement.AutoSize = true;
+            labelManagement.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelManagement.Location = new Point(29, 100);
+            labelManagement.Margin = new Padding(2, 0, 2, 0);
+            labelManagement.Name = "labelManagement";
+            labelManagement.Size = new Size(65, 12);
+            labelManagement.TabIndex = 8;
+            labelManagement.Text = "Management";
             // 
-            // label2
+            // labelDepartment
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label2.Location = new Point(50, 143);
-            label2.Margin = new Padding(2, 0, 2, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(73, 15);
-            label2.TabIndex = 9;
-            label2.Text = "Department";
+            labelDepartment.AutoSize = true;
+            labelDepartment.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelDepartment.Location = new Point(29, 145);
+            labelDepartment.Margin = new Padding(2, 0, 2, 0);
+            labelDepartment.Name = "labelDepartment";
+            labelDepartment.Size = new Size(59, 12);
+            labelDepartment.TabIndex = 9;
+            labelDepartment.Text = "Department";
             // 
-            // label3
+            // labelCategory
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label3.Location = new Point(50, 193);
-            label3.Margin = new Padding(2, 0, 2, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(57, 15);
-            label3.TabIndex = 10;
-            label3.Text = "Category";
+            labelCategory.AutoSize = true;
+            labelCategory.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelCategory.Location = new Point(29, 190);
+            labelCategory.Margin = new Padding(2, 0, 2, 0);
+            labelCategory.Name = "labelCategory";
+            labelCategory.Size = new Size(46, 12);
+            labelCategory.TabIndex = 10;
+            labelCategory.Text = "Category";
             // 
-            // label6
+            // labelProjectName
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label6.Location = new Point(50, 243);
-            label6.Margin = new Padding(2, 0, 2, 0);
-            label6.Name = "label6";
-            label6.Size = new Size(80, 15);
-            label6.TabIndex = 13;
-            label6.Text = "Project Name";
+            labelProjectName.AutoSize = true;
+            labelProjectName.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelProjectName.Location = new Point(29, 55);
+            labelProjectName.Margin = new Padding(2, 0, 2, 0);
+            labelProjectName.Name = "labelProjectName";
+            labelProjectName.Size = new Size(67, 12);
+            labelProjectName.TabIndex = 13;
+            labelProjectName.Text = "Project Name";
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label7.Location = new Point(115, 41);
+            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label7.Location = new Point(170, 25);
             label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
-            label7.Size = new Size(127, 19);
+            label7.Size = new Size(87, 15);
             label7.TabIndex = 14;
-            label7.Text = "UPDATE PROJECT";
+            label7.Text = "EDIT PROJECT";
+            // 
+            // labelUser
+            // 
+            labelUser.AutoSize = true;
+            labelUser.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelUser.Location = new Point(222, 190);
+            labelUser.Margin = new Padding(2, 0, 2, 0);
+            labelUser.Name = "labelUser";
+            labelUser.Size = new Size(70, 12);
+            labelUser.TabIndex = 16;
+            labelUser.Text = "Project Owner";
+            // 
+            // comboBoxUser
+            // 
+            comboBoxUser.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxUser.FormattingEnabled = true;
+            comboBoxUser.Location = new Point(223, 204);
+            comboBoxUser.Margin = new Padding(2);
+            comboBoxUser.Name = "comboBoxUser";
+            comboBoxUser.Size = new Size(172, 20);
+            comboBoxUser.TabIndex = 15;
+            // 
+            // labelEndDate
+            // 
+            labelEndDate.AutoSize = true;
+            labelEndDate.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelEndDate.Location = new Point(314, 142);
+            labelEndDate.Margin = new Padding(2, 0, 2, 0);
+            labelEndDate.Name = "labelEndDate";
+            labelEndDate.Size = new Size(46, 12);
+            labelEndDate.TabIndex = 35;
+            labelEndDate.Text = "End Date";
+            // 
+            // labelStartDate
+            // 
+            labelStartDate.AutoSize = true;
+            labelStartDate.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelStartDate.Location = new Point(223, 142);
+            labelStartDate.Margin = new Padding(2, 0, 2, 0);
+            labelStartDate.Name = "labelStartDate";
+            labelStartDate.Size = new Size(50, 12);
+            labelStartDate.TabIndex = 34;
+            labelStartDate.Text = "Start Date";
+            // 
+            // dateTimePickerStart
+            // 
+            dateTimePickerStart.CustomFormat = "MMM-yy";
+            dateTimePickerStart.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            dateTimePickerStart.Format = DateTimePickerFormat.Custom;
+            dateTimePickerStart.ImeMode = ImeMode.NoControl;
+            dateTimePickerStart.Location = new Point(223, 156);
+            dateTimePickerStart.Margin = new Padding(2);
+            dateTimePickerStart.Name = "dateTimePickerStart";
+            dateTimePickerStart.Size = new Size(81, 20);
+            dateTimePickerStart.TabIndex = 32;
+            // 
+            // dateTimePickerEnd
+            // 
+            dateTimePickerEnd.CustomFormat = "MMM-yy";
+            dateTimePickerEnd.Enabled = false;
+            dateTimePickerEnd.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            dateTimePickerEnd.Format = DateTimePickerFormat.Custom;
+            dateTimePickerEnd.ImeMode = ImeMode.NoControl;
+            dateTimePickerEnd.Location = new Point(314, 156);
+            dateTimePickerEnd.Margin = new Padding(2);
+            dateTimePickerEnd.Name = "dateTimePickerEnd";
+            dateTimePickerEnd.Size = new Size(81, 20);
+            dateTimePickerEnd.TabIndex = 33;
+            // 
+            // checkBoxCompleted
+            // 
+            checkBoxCompleted.AutoSize = true;
+            checkBoxCompleted.Font = new Font("Segoe UI Semibold", 6.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            checkBoxCompleted.Location = new Point(223, 113);
+            checkBoxCompleted.Name = "checkBoxCompleted";
+            checkBoxCompleted.Size = new Size(98, 16);
+            checkBoxCompleted.TabIndex = 36;
+            checkBoxCompleted.Text = "Project Completed";
+            checkBoxCompleted.UseVisualStyleBackColor = true;
+            checkBoxCompleted.CheckedChanged += checkBoxCompleted_CheckedChanged;
             // 
             // UpdateProjectForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(360, 415);
+            ClientSize = new Size(426, 326);
+            Controls.Add(checkBoxCompleted);
+            Controls.Add(labelEndDate);
+            Controls.Add(labelStartDate);
+            Controls.Add(dateTimePickerStart);
+            Controls.Add(dateTimePickerEnd);
+            Controls.Add(labelUser);
+            Controls.Add(comboBoxUser);
             Controls.Add(label7);
-            Controls.Add(label6);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
+            Controls.Add(labelProjectName);
+            Controls.Add(labelCategory);
+            Controls.Add(labelDepartment);
+            Controls.Add(labelManagement);
             Controls.Add(buttonCancel);
             Controls.Add(buttonUpdate);
             Controls.Add(comboBoxCategory);
@@ -176,11 +276,13 @@
             Controls.Add(comboBoxManagement);
             Controls.Add(textBoxProject);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "UpdateProjectForm";
-            StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Update Project";
+            TopMost = true;
             Load += UpdateProjectForm_Load;
+            MouseDown += UpdateProjectForm_MouseDown;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -193,10 +295,17 @@
         private ComboBox comboBoxCategory;
         private Button buttonUpdate;
         private Button buttonCancel;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label6;
+        private Label labelManagement;
+        private Label labelDepartment;
+        private Label labelCategory;
+        private Label labelProjectName;
         private Label label7;
+        private Label labelUser;
+        private ComboBox comboBoxUser;
+        private Label labelEndDate;
+        private Label labelStartDate;
+        private DateTimePicker dateTimePickerStart;
+        private DateTimePicker dateTimePickerEnd;
+        private CheckBox checkBoxCompleted;
     }
 }

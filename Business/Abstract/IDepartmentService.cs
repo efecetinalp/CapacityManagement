@@ -17,7 +17,10 @@ namespace Business.Abstract
         IDataResult<List<DepartmentDetailDto>> GetDepartmentDetails();
         IDataResult<List<DepartmentDetailDto>> GetDepartmentDetails(int managementId);
 
+        IDataResult<Department> GetById(int departmentId);
         IDataResult<Department> GetByName(string departmentName);
+        IDataResult<DepartmentDetailDto> GetDepartmentDetail(int departmentId);
+
 
         IResult Add(Department department);
         IResult Update(Department department);

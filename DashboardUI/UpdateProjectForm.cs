@@ -1,5 +1,7 @@
 ﻿using Business.Concrete;
+using Core.Utilities.Results;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,56 +17,172 @@ namespace DashboardUI
 {
     public partial class UpdateProjectForm : Form
     {
+        //Form window drag to move
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        //Class Instances
         ManagementManager _managementManager;
         DepartmentManager _departmentManager;
         CategoryManager _categoryManager;
         ProjectManager _projectManager;
-        string _projectName;
+        UserManager _userManager;
 
-        public UpdateProjectForm(ManagementManager managementManager, DepartmentManager departmentManager, CategoryManager categoryManager, ProjectManager projectManager, string projectName)
+        //Data results
+        IDataResult<ProjectDetailDto> _projectData;
+        IDataResult<List<Management>> _managementData;
+        IDataResult<List<Department>> _departmentData;
+        IDataResult<List<Category>> _categoryData;
+        IDataResult<List<User>> _userData;
+
+        //Global variables
+        int _projectIndex;
+        List<int> managementIndex = new();
+        List<int> departmentIndex = new();
+        List<int> categoryIndex = new();
+        List<int> userIndex = new();
+
+        public UpdateProjectForm(ManagementManager managementManager, DepartmentManager departmentManager, CategoryManager categoryManager, ProjectManager projectManager, UserManager userManager, int index)
         {
             _managementManager = managementManager;
             _departmentManager = departmentManager;
             _categoryManager = categoryManager;
             _projectManager = projectManager;
-            _projectName = projectName;
+            _userManager = userManager;
+            _projectIndex = index;
+
             InitializeComponent();
         }
 
         private void UpdateProjectForm_Load(object sender, EventArgs e)
         {
-            textBoxProject.Text = _projectName;
+            //fetch data from database
+            _managementData = _managementManager.GetAll();
+            _categoryData = _categoryManager.GetAll();
+            _projectData = _projectManager.GetProjectDetail(_projectIndex);
+            _userData = _userManager.GetAll();
 
-            var managementResult = _managementManager.GetAll();
-            var categoryResult = _categoryManager.GetAll();
-
-            foreach (var management in managementResult.Data)
+            #region Project Data
+            if (!_projectData.Success)
             {
-                comboBoxManagement.Items.Add(management.ManagementName);
+                MessageBox.Show(_projectData.Massage, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+            #endregion
 
-            foreach (var category in categoryResult.Data)
+            #region Management Data
+            if (_managementData.Success)
             {
-                comboBoxCategory.Items.Add(category.CategoryName);
+                foreach (var management in _managementData.Data)
+                {
+                    comboBoxManagement.Items.Add(management.ManagementName);
+                    managementIndex.Add(management.ManagementId);
+                }
             }
+            else
+            {
+                MessageBox.Show(_managementData.Massage, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            #endregion
 
+            #region Category Data
+            if (_categoryData.Success)
+            {
+                foreach (var category in _categoryData.Data)
+                {
+                    comboBoxCategory.Items.Add(category.CategoryName);
+                    categoryIndex.Add(category.CategoryId);
+                }
+            }
+            else
+            {
+                MessageBox.Show(_categoryData.Massage, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            #endregion
+
+            #region User Data
+            if (_userData.Success)
+            {
+                foreach (var user in _userData.Data)
+                {
+                    comboBoxUser.Items.Add(user.UserName);
+                    userIndex.Add(user.UserId);
+                }
+            }
+            else
+            {
+                MessageBox.Show(_userData.Massage, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            #endregion
+
+            //update data in form window
+            textBoxProject.Text = _projectData.Data.ProjectName;
+            comboBoxManagement.SelectedText = _projectData.Data.ManagementName;
+            comboBoxDepartment.SelectedText = _projectData.Data.DepartmentName;
+            comboBoxCategory.SelectedText = _projectData.Data.CategoryName;
+            comboBoxUser.SelectedText = _projectData.Data.UserName;
+            dateTimePickerStart.Value = _projectData.Data.StartDate;
+            checkBoxCompleted.Checked = _projectData.Data.IsCompleted;
+            if (checkBoxCompleted.Checked)
+            {
+                dateTimePickerEnd.Enabled = true;
+                dateTimePickerEnd.Value = _projectData.Data.EndDate;
+            }
+        }
+
+        private void UpdateProjectForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
         }
 
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
-            if (comboBoxCategory.SelectedItem.ToString() != "" && comboBoxDepartment.SelectedItem.ToString() != "" && comboBoxManagement.SelectedItem.ToString() != "")
+            if (textBoxProject.Text != "" && comboBoxManagement.SelectedIndex > -1 && comboBoxDepartment.SelectedIndex > -1 && comboBoxCategory.SelectedIndex > -1 && comboBoxUser.SelectedIndex > -1)
             {
-                Project projectToUpdate = _projectManager.GetByName(_projectName).Data;
-                projectToUpdate.ProjectName = textBoxProject.Text;
-                projectToUpdate.ManagementId = _managementManager.GetByName(comboBoxManagement.SelectedItem.ToString()).Data.ManagementId;
-                projectToUpdate.DepartmentId = _departmentManager.GetByName(comboBoxDepartment.SelectedItem.ToString()).Data.DepartmentId;
-                projectToUpdate.CategoryId = _categoryManager.GetByName(comboBoxCategory.SelectedItem.ToString()).Data.CategoryId;
-                _projectManager.Update(projectToUpdate);
-                Debug.Print("Project updated");
+                var projectData = _projectManager.GetById(_projectIndex);
+
+                if (projectData.Success)
+                {
+                    Project projectToUpdate = projectData.Data;
+                    projectToUpdate.ProjectName = textBoxProject.Text;
+                    projectToUpdate.ManagementId = _managementManager.GetById(managementIndex[comboBoxManagement.SelectedIndex]).Data.ManagementId;
+                    projectToUpdate.DepartmentId = _departmentManager.GetById(departmentIndex[comboBoxDepartment.SelectedIndex]).Data.DepartmentId;
+                    projectToUpdate.CategoryId = _categoryManager.GetById(categoryIndex[comboBoxCategory.SelectedIndex]).Data.CategoryId;
+                    projectToUpdate.UserId = _userManager.GetById(userIndex[comboBoxUser.SelectedIndex]).Data.UserId;
+                    projectToUpdate.StartDate = dateTimePickerStart.Value;
+                    projectToUpdate.IsCompleted = checkBoxCompleted.Checked;
+
+                    if (checkBoxCompleted.Checked)
+                        projectToUpdate.EndDate = dateTimePickerEnd.Value;
+
+                    var projectOperation = _projectManager.Update(projectToUpdate);
+                    if (projectOperation.Success)
+                    {
+                        MessageBox.Show(projectOperation.Massage, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
+                    }
+                    else
+                        MessageBox.Show(projectOperation.Massage, "Operation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show(projectData.Massage, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                MessageBox.Show("fill empty selections");
+                MessageBox.Show("Please fill empty selections!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                Debug.Print(comboBoxManagement.SelectedIndex.ToString() + " " + comboBoxDepartment.SelectedIndex.ToString() + " " + comboBoxCategory.SelectedIndex.ToString() + " " + comboBoxUser.SelectedIndex.ToString());
             }
         }
 
@@ -75,12 +193,31 @@ namespace DashboardUI
 
         private void comboBoxManagement_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var departmentResult = _departmentManager.GetAllByManagementId(_managementManager.GetByName(comboBoxManagement.SelectedItem.ToString()).Data.ManagementId);
+            comboBoxDepartment.Items.Clear();
+            comboBoxDepartment.SelectedIndex = -1;
 
-            foreach (var department in departmentResult.Data)
+            #region Department Data
+            _departmentData = _departmentManager.GetAllByManagementId(managementIndex[comboBoxManagement.SelectedIndex]);
+
+            if (_departmentData.Success)
             {
-                comboBoxDepartment.Items.Add(department.DepartmentName);
+                departmentIndex.Clear();
+                foreach (var department in _departmentData.Data)
+                {
+                    comboBoxDepartment.Items.Add(department.DepartmentName);
+                    departmentIndex.Add(department.DepartmentId);
+                }
             }
+            else
+                MessageBox.Show(_departmentData.Massage, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            #endregion
+
+        }
+
+        private void checkBoxCompleted_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxCompleted.Checked) { dateTimePickerEnd.Enabled = true; }
+            else { dateTimePickerEnd.Enabled = false; }
         }
     }
 }

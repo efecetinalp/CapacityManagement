@@ -15,7 +15,7 @@ namespace Entities.DTOs
         public string DepartmentName { get; set; }
         public string ManagementName { get; set; }
         public string UserName { get; set; }
-        public bool isProgressing { get; set; }
+        public bool IsCompleted { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int ManagementId { get; set; }

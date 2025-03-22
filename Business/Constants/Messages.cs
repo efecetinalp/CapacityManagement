@@ -32,6 +32,12 @@ namespace Business.Constants
         public static string ManagementListed = "Management data is listed successfuly!";
         public static string ManagementNameInvalid = "Management name is invalid!";
 
+        public static string UserAdded = "User is added successfuly!";
+        public static string UserUpdated = "User data is updated successfuly!";
+        public static string UserDeleted = "User data is deleted successfuly!";
+        public static string UserListed = "User data is listed successfuly!";
+        public static string UserNameInvalid = "User name is invalid!";
+
         public static string EmptyData = "No data available for this query";
     }
 }

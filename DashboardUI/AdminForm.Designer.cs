@@ -227,7 +227,6 @@
             adminDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             adminDataGrid.Size = new Size(1140, 527);
             adminDataGrid.TabIndex = 55;
-            adminDataGrid.CellContentClick += adminDataGrid_CellContentClick;
             adminDataGrid.CellMouseMove += adminDataGrid_CellMouseMove;
             // 
             // buttonDelete

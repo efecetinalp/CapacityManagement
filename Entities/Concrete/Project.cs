@@ -17,6 +17,6 @@ namespace Entities.Concrete
         public string ProjectName { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public bool IsProgressing { get; set; }
+        public bool IsCompleted { get; set; }
     }
 }

@@ -38,31 +38,32 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI", 10F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label7.Location = new Point(100, 50);
+            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label7.Location = new Point(71, 23);
             label7.Margin = new Padding(2, 0, 2, 0);
             label7.Name = "label7";
-            label7.Size = new Size(166, 19);
+            label7.Size = new Size(120, 15);
             label7.TabIndex = 29;
-            label7.Text = "UPDATE MANAGEMENT";
+            label7.Text = "EDIT MANAGEMENT";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label6.Location = new Point(50, 93);
+            label6.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label6.Location = new Point(24, 66);
             label6.Margin = new Padding(2, 0, 2, 0);
             label6.Name = "label6";
-            label6.Size = new Size(115, 15);
+            label6.Size = new Size(96, 12);
             label6.TabIndex = 28;
             label6.Text = "Management Name";
             // 
             // buttonCancel
             // 
-            buttonCancel.Location = new Point(197, 170);
-            buttonCancel.Margin = new Padding(2, 2, 2, 2);
+            buttonCancel.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonCancel.Location = new Point(152, 131);
+            buttonCancel.Margin = new Padding(2);
             buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(113, 32);
+            buttonCancel.Size = new Size(88, 25);
             buttonCancel.TabIndex = 22;
             buttonCancel.Text = "Cancel";
             buttonCancel.UseVisualStyleBackColor = true;
@@ -73,11 +74,12 @@
             buttonUpdate.BackColor = Color.FromArgb(58, 154, 193);
             buttonUpdate.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
             buttonUpdate.FlatStyle = FlatStyle.Flat;
+            buttonUpdate.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             buttonUpdate.ForeColor = SystemColors.ButtonHighlight;
-            buttonUpdate.Location = new Point(50, 170);
-            buttonUpdate.Margin = new Padding(2, 2, 2, 2);
+            buttonUpdate.Location = new Point(24, 131);
+            buttonUpdate.Margin = new Padding(2);
             buttonUpdate.Name = "buttonUpdate";
-            buttonUpdate.Size = new Size(113, 32);
+            buttonUpdate.Size = new Size(88, 25);
             buttonUpdate.TabIndex = 21;
             buttonUpdate.Text = "Update";
             buttonUpdate.UseVisualStyleBackColor = false;
@@ -85,28 +87,31 @@
             // 
             // textBoxManagement
             // 
-            textBoxManagement.Location = new Point(50, 110);
-            textBoxManagement.Margin = new Padding(2, 2, 2, 2);
+            textBoxManagement.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxManagement.Location = new Point(24, 80);
+            textBoxManagement.Margin = new Padding(2);
             textBoxManagement.Name = "textBoxManagement";
-            textBoxManagement.Size = new Size(260, 23);
+            textBoxManagement.Size = new Size(216, 20);
             textBoxManagement.TabIndex = 15;
             // 
             // UpdateManagementForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(360, 250);
+            ClientSize = new Size(263, 180);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(buttonCancel);
             Controls.Add(buttonUpdate);
             Controls.Add(textBoxManagement);
             FormBorderStyle = FormBorderStyle.None;
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "UpdateManagementForm";
-            StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Update Management";
+            TopMost = true;
             Load += UpdateManagementForm_Load;
+            MouseDown += UpdateManagementForm_MouseDown;
             ResumeLayout(false);
             PerformLayout();
         }

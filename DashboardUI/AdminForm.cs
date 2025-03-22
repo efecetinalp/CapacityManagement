@@ -69,19 +69,19 @@ namespace DashboardUI
                 }
                 else if (isDepartmentActive)
                 {
-                    //_createForm = new DeleteManagementForm(_tableValue);
+                    _createForm = new DeleteDepartmentForm(_departmentManager, _departmentManager.GetById(_tableIndex).Data);
                 }
                 else if (isProjectActive)
                 {
-                   // _createForm = new DeleteManagementForm(_tableValue);
+                    _createForm = new DeleteProject(_projectManager, _projectManager.GetById(_tableIndex).Data);
                 }
                 else if (isCategoryActive)
                 {
-                   // _createForm = new DeleteManagementForm(_tableValue);
+                    _createForm = new DeleteCategoryForm(_categoryManager, _categoryManager.GetById(_tableIndex).Data);
                 }
                 else if (isUserActive)
                 {
-                   // _createForm = new DeleteManagementForm(_tableValue);
+                    _createForm = new DeleteUserForm(_userManager, _userManager.GetById(_tableIndex).Data);
                 }
                 else
                 {
@@ -94,16 +94,6 @@ namespace DashboardUI
             }
             else
                 _createForm.Activate();
-        }
-
-        private void adminDataGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            adminDataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _tempCellValue;
-        }
-
-        private void adminDataGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        {
-            _tempCellValue = adminDataGrid.Rows[e.RowIndex].Cells[1].Value.ToString();
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
@@ -149,23 +139,23 @@ namespace DashboardUI
             {
                 if (isManagementActive)
                 {
-                    _createForm = new UpdateManagementForm(_managementManager, _tableValue);
+                    _createForm = new UpdateManagementForm(_managementManager, _tableIndex);
                 }
                 else if (isDepartmentActive)
                 {
-                    _createForm = new UpdateDepartmentForm(_managementManager, _departmentManager, _tableValue);
+                    _createForm = new UpdateDepartmentForm(_managementManager, _departmentManager, _tableIndex);
                 }
                 else if (isProjectActive)
                 {
-                    _createForm = new UpdateProjectForm(_managementManager, _departmentManager, _categoryManager, _projectManager, _tableValue);
+                    _createForm = new UpdateProjectForm(_managementManager, _departmentManager, _categoryManager, _projectManager, _userManager, _tableIndex);
                 }
                 else if (isCategoryActive)
                 {
-                    _createForm = new UpdateCategoryForm(_categoryManager, _tableValue);
+                    _createForm = new UpdateCategoryForm(_categoryManager, _tableIndex);
                 }
                 else if (isUserActive)
                 {
-                    _createForm = new UpdateUserForm(_userManager, _tableValue);
+                    _createForm = new UpdateUserForm(_userManager, _tableIndex);
                 }
                 else
                 {
@@ -183,37 +173,7 @@ namespace DashboardUI
         private void CreateForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             _createForm = null;
-        }
-
-        private void adminDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (isUserActive)
-            {
-                if (e.ColumnIndex > 1 && e.RowIndex > -1)
-                {
-                    var userIndex = adminDataGrid.Rows[adminDataGrid.CurrentCell.RowIndex].Cells[0].Value;
-                    User userToUpdate = _userManager.GetById(Convert.ToInt32(userIndex)).Data;
-
-                    if (e.ColumnIndex == 2)
-                    {
-                        userToUpdate.Admin = true;
-                        userToUpdate.Author = false;
-                        _userManager.Update(userToUpdate);
-
-                        //notification
-                        _alertbox.SuccessAlert("User set as Admin Role!");
-                    }
-                    else if (e.ColumnIndex == 3)
-                    {
-                        userToUpdate.Admin = false;
-                        userToUpdate.Author = true;
-                        _userManager.Update(userToUpdate);
-
-                        //notification
-                        _alertbox.SuccessAlert("User set as Author Role!");
-                    }
-                }
-            }
+            RefreshDataGridView();
         }
 
         private void adminDataGrid_CellMouseMove(object sender, DataGridViewCellMouseEventArgs e)
@@ -304,6 +264,35 @@ namespace DashboardUI
             adminDataGrid.Columns.Clear();
         }
 
+        private void RefreshDataGridView()
+        {
+            if (isManagementActive)
+            {
+                buttonManagement_Click(default,default);
+            }
+            else if (isDepartmentActive)
+            {
+                buttonDepartment_Click(default, default);
+            }
+            else if (isProjectActive)
+            {
+                buttonProject_Click(default, default);
+            }
+            else if (isCategoryActive)
+            {
+                buttonCategory_Click(default, default);
+            }
+            else if (isUserActive)
+            {
+                buttonUser_Click(default, default);
+            }
+            else
+            {
+                _alertbox.ErrorAlert("No active selection");
+                return;
+            }
+        }
+
         #endregion
 
         #region Change Database Path
@@ -316,7 +305,15 @@ namespace DashboardUI
             openFileDialog.Filter = "Access database (*.accdb)|*.accdb";
             openFileDialog.ShowDialog();
 
+            string tempPath = textBoxPath.Text;
             textBoxPath.Text = openFileDialog.FileName;
+
+            if (textBoxPath.Text == "")
+            {
+                MessageBox.Show("No database selected!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                textBoxPath.Text = tempPath;
+                return;
+            }
 
             var exePath = Path.GetDirectoryName(
                new Uri(System.Reflection.Assembly.GetExecutingAssembly().Location).LocalPath);

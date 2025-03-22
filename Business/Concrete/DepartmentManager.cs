@@ -65,6 +65,16 @@ namespace Business.Concrete
                 return new ErrorDataResult<Department>(result, Messages.EmptyData);
         }
 
+        public IDataResult<Department> GetById(int departmentId)
+        {
+            Department result = _departmentDal.Get(d => d.DepartmentId == departmentId);
+
+            if (result != null)
+                return new SuccessDataResult<Department>(result, Messages.DepartmentListed);
+            else
+                return new ErrorDataResult<Department>(result, Messages.EmptyData);
+        }
+
         public IDataResult<List<DepartmentDetailDto>> GetDepartmentDetails()
         {
             List<DepartmentDetailDto> result = _departmentDal.GetDepartmentDetails();
@@ -83,6 +93,16 @@ namespace Business.Concrete
                 return new ErrorDataResult<List<DepartmentDetailDto>>(result, Messages.EmptyData);
             else
                 return new SuccessDataResult<List<DepartmentDetailDto>>(result, Messages.ProjectListed);
+        }
+
+        public IDataResult<DepartmentDetailDto> GetDepartmentDetail(int departmentId)
+        {
+            DepartmentDetailDto result = _departmentDal.GetDepartmentDetail(d => d.DepartmentId  == departmentId);
+
+            if (result != null)
+                return new SuccessDataResult<DepartmentDetailDto>(result, Messages.DepartmentListed);
+            else
+                return new ErrorDataResult<DepartmentDetailDto>(result, Messages.EmptyData);
         }
     }
 }

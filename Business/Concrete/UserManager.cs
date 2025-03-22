@@ -23,25 +23,29 @@ namespace Business.Concrete
 
         public IResult Add(User user)
         {
-            if (user.UserName.Length <= 2)
+            if (user.UserName.Length <= 4)
             {
-                return new ErrorResult(Messages.ProjectNameInvalid);
+                return new ErrorResult(Messages.UserNameInvalid);
             }
 
             _userDal.Add(user);
-            return new SuccessResult(Messages.ProjectAdded);
+            return new SuccessResult(Messages.UserAdded);
         }
 
         public IResult Update(User user)
         {
+            if (user.UserName.Length <= 4)
+            {
+                return new ErrorResult(Messages.UserNameInvalid);
+            }
             _userDal.Update(user);
-            return new SuccessResult(Messages.ProjectUpdated);
+            return new SuccessResult(Messages.UserUpdated);
         }
 
         public IResult Delete(User user)
         {
             _userDal.Delete(user);
-            return new SuccessResult(Messages.ProjectDeleted);
+            return new SuccessResult(Messages.UserDeleted);
         }
 
         public IDataResult<List<User>> GetAll()
@@ -51,7 +55,7 @@ namespace Business.Concrete
 
         public IDataResult<User> GetById(int id)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u => u.UserId == id), Messages.ProjectListed);
+            return new SuccessDataResult<User>(_userDal.Get(u => u.UserId == id), Messages.UserListed);
         }
 
         public IDataResult<User> GetByUserName(string username)
@@ -59,7 +63,7 @@ namespace Business.Concrete
             User result = _userDal.Get(u => u.UserName == username);
 
             if (result != null)
-                return new SuccessDataResult<User>(result, Messages.ProjectListed);
+                return new SuccessDataResult<User>(result, Messages.UserListed);
             else
                 return new ErrorDataResult<User>(result, Messages.EmptyData);
 

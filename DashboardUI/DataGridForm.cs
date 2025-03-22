@@ -219,7 +219,7 @@ namespace DashboardUI
                     projectRow[0] = projectName.ProjectName;
 
                     //completed project table index list
-                    if (!projectName.IsProgressing)
+                    if (!projectName.IsCompleted)
                         completedProjectList.Add(dataTable.Rows.Count - 1);
 
                     foreach (var projectData in projectDatas.Data)
@@ -448,7 +448,7 @@ namespace DashboardUI
                 isEditing = false;
             }
         }
-
+        //WRONG METHOD
         private void dbGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex > 0 && e.RowIndex > 0)
@@ -465,19 +465,19 @@ namespace DashboardUI
                 }
                 else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Project")
                 {
-                    UpdateProjectForm updateForm = new(managementManager, departmentManager, categoryManager, projectManager, dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    UpdateProjectForm updateForm = new(managementManager, departmentManager, categoryManager, projectManager,userManager,1); //<=== THIS VALUE IS WORNG
                     updateForm.ShowDialog();
 
                 }
                 else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Department")
                 {
-                    UpdateDepartmentForm updateForm = new(managementManager, departmentManager, dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    UpdateDepartmentForm updateForm = new(managementManager, departmentManager, 1);//<=== THIS VALUE IS WORNG
                     updateForm.ShowDialog();
 
                 }
                 else if (dbGrid.Columns[e.ColumnIndex].Name == "Update" && dbGrid.Rows[e.RowIndex].Tag == "Management")
                 {
-                    UpdateManagementForm updateForm = new(managementManager, dbGrid.Rows[e.RowIndex].Cells[0].Value.ToString()); ;
+                    UpdateManagementForm updateForm = new(managementManager, 1); ; //<=== THIS VALUE IS WORNG
                     updateForm.ShowDialog();
                 }
             }
