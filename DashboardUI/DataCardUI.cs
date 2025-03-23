@@ -32,6 +32,7 @@ namespace DashboardUI
         CategoryManager _categoryManager;
         UserManager _userManager;
         ProjectDetailDto _projectDetail;
+        ProjectCapacityManager _projectCapacityManager;
 
         IDataResult<List<Category>> _categoryData;
         IDataResult<List<User>> _userData;
@@ -41,7 +42,8 @@ namespace DashboardUI
 
         Form _deleteForm;
 
-        public DataCardUI(ProjectDetailDto projectDetail, ManagementManager managementManager, DepartmentManager departmentManager, ProjectManager projectManager, CategoryManager categoryManager, UserManager userManager)
+        public DataCardUI(ProjectDetailDto projectDetail, ManagementManager managementManager, DepartmentManager departmentManager, ProjectManager projectManager, CategoryManager categoryManager, 
+            UserManager userManager, ProjectCapacityManager projectCapacityManager)
         {
             _projectDetail = projectDetail;
             InitializeComponent();
@@ -50,6 +52,7 @@ namespace DashboardUI
             _projectManager = projectManager;
             _categoryManager = categoryManager;
             _userManager = userManager;
+            _projectCapacityManager = projectCapacityManager;
         }
 
         private void DataCardUI_Load(object sender, EventArgs e)
@@ -282,7 +285,7 @@ namespace DashboardUI
             if (_deleteForm == null)
             {
                 Project projectToDelete = _projectManager.GetById(_projectDetail.ProjectId).Data;
-                _deleteForm = new DeleteProjectForm(_projectManager, projectToDelete);
+                _deleteForm = new DeleteProjectForm(_projectManager, _projectCapacityManager, projectToDelete);
 
                 _deleteForm.Left = this.Left;
                 _deleteForm.Top = this.Top;
@@ -296,7 +299,6 @@ namespace DashboardUI
         private void DeleteForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             _deleteForm = null;
-            this.Close();
         }
 
         #endregion

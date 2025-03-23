@@ -13,6 +13,7 @@ namespace Business.Abstract
     public interface IProjectService
     {
         IDataResult<List<Project>> GetAll();
+        IDataResult<List<Project>> GetAllByUserId(int userId);
         IDataResult<List<Project>> GetAllByCategoryId(int categoryId);
         IDataResult<List<Project>> GetAllByDepartmentId(int departmentId);
         IDataResult<List<Project>> GetByDate(DateTime date);

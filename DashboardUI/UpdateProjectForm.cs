@@ -125,10 +125,10 @@ namespace DashboardUI
 
             //update data in form window
             textBoxProject.Text = _projectData.Data.ProjectName;
-            comboBoxManagement.SelectedText = _projectData.Data.ManagementName;
-            comboBoxDepartment.SelectedText = _projectData.Data.DepartmentName;
-            comboBoxCategory.SelectedText = _projectData.Data.CategoryName;
-            comboBoxUser.SelectedText = _projectData.Data.UserName;
+            comboBoxManagement.SelectedIndex = comboBoxManagement.Items.IndexOf(_projectData.Data.ManagementName);
+            comboBoxDepartment.SelectedIndex = comboBoxDepartment.Items.IndexOf(_projectData.Data.DepartmentName);
+            comboBoxCategory.SelectedIndex = comboBoxCategory.Items.IndexOf(_projectData.Data.CategoryName);
+            comboBoxUser.SelectedIndex = comboBoxUser.Items.IndexOf(_projectData.Data.UserName);
             dateTimePickerStart.Value = _projectData.Data.StartDate;
             checkBoxCompleted.Checked = _projectData.Data.IsCompleted;
             if (checkBoxCompleted.Checked)

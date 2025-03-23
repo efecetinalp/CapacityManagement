@@ -44,7 +44,7 @@ namespace Business.Concrete
         {
             var result = _projectCapacityDal.GetAll(p => p.ProjectId == id);
 
-            if (result.Count == 0)
+            if (result == null)
                 return new ErrorDataResult<List<ProjectCapacity>>(result, Messages.EmptyData);
             else
                 return new SuccessDataResult<List<ProjectCapacity>>(result, Messages.ProjectListed);

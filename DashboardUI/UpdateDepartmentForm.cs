@@ -77,7 +77,7 @@ namespace DashboardUI
 
             // update data in form window
             textBoxDepartment.Text = _departmentData.Data.DepartmentName;
-            comboBoxManagement.SelectedText = _departmentData.Data.ManagementName;
+            comboBoxManagement.SelectedIndex = comboBoxManagement.Items.IndexOf(_departmentData.Data.ManagementName);
         }
 
         private void UpdateDepartmentForm_MouseDown(object sender, MouseEventArgs e)

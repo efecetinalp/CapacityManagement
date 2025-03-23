@@ -50,6 +50,16 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Project>>(_projectDal.GetAll(), Messages.ProjectListed);
         }
 
+        public IDataResult<List<Project>> GetAllByUserId(int userId)
+        {
+            List<Project> result = _projectDal.GetAll(p => p.UserId == userId);
+
+            if (result == null)
+                return new ErrorDataResult<List<Project>>(result, Messages.EmptyData);
+            else
+                return new SuccessDataResult<List<Project>>(result, Messages.ProjectListed);
+        }
+
         public IDataResult<List<Project>> GetAllByCategoryId(int categoryId)
         {
             return new SuccessDataResult<List<Project>>(_projectDal.GetAll(p => p.ProjectId == categoryId), Messages.ProjectListed);
@@ -149,5 +159,7 @@ namespace Business.Concrete
             else
                 return new ErrorDataResult<ProjectDetailDto>(result, Messages.EmptyData);
         }
+
+        
     }
 }

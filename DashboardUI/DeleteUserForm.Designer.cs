@@ -28,19 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DeleteUserForm));
             buttonCancel = new Button();
             buttonDelete = new Button();
             label2 = new Label();
             textBoxDelete = new TextBox();
             labelDelete = new Label();
+            checkBoxApproval = new CheckBox();
             SuspendLayout();
             // 
             // buttonCancel
             // 
-            buttonCancel.Location = new Point(180, 125);
+            buttonCancel.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonCancel.Location = new Point(250, 189);
             buttonCancel.Margin = new Padding(2);
             buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(143, 32);
+            buttonCancel.Size = new Size(108, 25);
             buttonCancel.TabIndex = 29;
             buttonCancel.Text = "Cancel";
             buttonCancel.UseVisualStyleBackColor = true;
@@ -51,11 +54,12 @@
             buttonDelete.BackColor = Color.FromArgb(58, 154, 193);
             buttonDelete.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
             buttonDelete.FlatStyle = FlatStyle.Flat;
+            buttonDelete.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
             buttonDelete.ForeColor = SystemColors.ButtonHighlight;
-            buttonDelete.Location = new Point(12, 125);
+            buttonDelete.Location = new Point(18, 189);
             buttonDelete.Margin = new Padding(2);
             buttonDelete.Name = "buttonDelete";
-            buttonDelete.Size = new Size(143, 32);
+            buttonDelete.Size = new Size(108, 25);
             buttonDelete.TabIndex = 28;
             buttonDelete.Text = "Delete";
             buttonDelete.UseVisualStyleBackColor = false;
@@ -64,43 +68,66 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(136, 12);
+            label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Image = (Image)resources.GetObject("label2.Image");
+            label2.ImageAlign = ContentAlignment.MiddleLeft;
+            label2.Location = new Point(143, 18);
             label2.Name = "label2";
-            label2.Size = new Size(62, 15);
+            label2.Size = new Size(91, 17);
             label2.TabIndex = 27;
-            label2.Text = "WARNING";
+            label2.Text = "     WARNING";
+            label2.TextAlign = ContentAlignment.MiddleRight;
             // 
             // textBoxDelete
             // 
-            textBoxDelete.Location = new Point(12, 85);
+            textBoxDelete.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxDelete.Location = new Point(18, 150);
             textBoxDelete.Name = "textBoxDelete";
-            textBoxDelete.PlaceholderText = "test";
-            textBoxDelete.Size = new Size(311, 23);
+            textBoxDelete.PlaceholderText = "Delete";
+            textBoxDelete.Size = new Size(141, 22);
             textBoxDelete.TabIndex = 26;
             textBoxDelete.TabStop = false;
             // 
             // labelDelete
             // 
-            labelDelete.Location = new Point(12, 37);
+            labelDelete.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            labelDelete.Location = new Point(18, 43);
             labelDelete.Name = "labelDelete";
-            labelDelete.Size = new Size(312, 45);
+            labelDelete.Size = new Size(340, 81);
             labelDelete.TabIndex = 25;
-            labelDelete.Text = "label1";
-            labelDelete.TextAlign = ContentAlignment.TopCenter;
+            labelDelete.Text = "Delete Label";
+            labelDelete.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // checkBoxApproval
+            // 
+            checkBoxApproval.AutoSize = true;
+            checkBoxApproval.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Bold, GraphicsUnit.Point);
+            checkBoxApproval.Location = new Point(18, 127);
+            checkBoxApproval.Name = "checkBoxApproval";
+            checkBoxApproval.Size = new Size(80, 17);
+            checkBoxApproval.TabIndex = 30;
+            checkBoxApproval.Text = "I am agree";
+            checkBoxApproval.UseVisualStyleBackColor = true;
+            checkBoxApproval.CheckedChanged += checkBoxApproval_CheckedChanged;
             // 
             // DeleteUserForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(336, 178);
+            ClientSize = new Size(377, 238);
+            Controls.Add(checkBoxApproval);
             Controls.Add(buttonCancel);
             Controls.Add(buttonDelete);
             Controls.Add(label2);
             Controls.Add(textBoxDelete);
             Controls.Add(labelDelete);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "DeleteUserForm";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "DeleteUserForm";
+            TopMost = true;
             Load += DeleteUserForm_Load;
+            MouseDown += DeleteUserForm_MouseDown;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -112,5 +139,6 @@
         private Label label2;
         private TextBox textBoxDelete;
         private Label labelDelete;
+        private CheckBox checkBoxApproval;
     }
 }

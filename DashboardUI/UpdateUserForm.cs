@@ -83,7 +83,7 @@ namespace DashboardUI
             {
                 var userData = _userData;
                 User userToUpdate = userData.Data;
-                userToUpdate.UserName = textBoxUserName.Text;
+                userToUpdate.UserName = textBoxUserName.Text.ToUpper();
                 userToUpdate.Author = checkBoxAuthor.Checked;
                 userToUpdate.Admin = checkBoxAdmin.Checked;
 

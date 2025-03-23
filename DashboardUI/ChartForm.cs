@@ -177,6 +177,7 @@ namespace DashboardUI
             chartArea.AxisX.MajorGrid.LineColor = (Color)comboBoxGridColor.SelectedValue;
             chartArea.AxisX.LineColor = (Color)comboBoxGridColor.SelectedValue;
             chartArea.AxisX.MajorGrid.LineDashStyle = (ChartDashStyle)comboBoxGridStyle.SelectedIndex;
+            
             if (checkBoxMinorGrids.Checked)
             {
                 chartArea.AxisX.MinorGrid.Enabled = true;
@@ -186,12 +187,15 @@ namespace DashboardUI
             }
             else
                 chartArea.AxisX.MinorGrid.Enabled = false;
+
             chartArea.AxisX.IntervalType = DateTimeIntervalType.Months;
             chartArea.AxisX.LabelStyle.Format = "MMM-yy";
+
             if (checkBoxValueRotate.Checked)
                 chartArea.AxisX.LabelStyle.Angle = 90;
             else
                 chartArea.AxisX.LabelStyle.Angle = 0;
+
             chartArea.AxisX.LabelStyle.ForeColor = Color.DarkGray;
             chartArea.AxisX.LabelStyle.Font = new Font("Calibri", short.Parse(comboBoxAxisValueSize.Text));
             chartArea.AxisX.Minimum = _chartRequest.Months[0];
@@ -203,6 +207,7 @@ namespace DashboardUI
             chartArea.AxisY.MajorGrid.LineColor = (Color)comboBoxGridColor.SelectedValue;
             chartArea.AxisY.LineColor = (Color)comboBoxGridColor.SelectedValue;
             chartArea.AxisY.MajorGrid.LineDashStyle = (ChartDashStyle)comboBoxGridStyle.SelectedIndex;
+
             if (checkBoxMinorGrids.Checked)
             {
                 chartArea.AxisY.MinorGrid.Enabled = true;
@@ -212,6 +217,7 @@ namespace DashboardUI
             }
             else
                 chartArea.AxisY.MinorGrid.Enabled = false;
+
             chartArea.AxisY.LabelStyle.ForeColor = Color.DarkGray;
             chartArea.AxisY.LabelStyle.Font = new Font("Calibri", short.Parse(comboBoxAxisValueSize.Text));
 

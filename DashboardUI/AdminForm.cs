@@ -16,6 +16,8 @@ namespace DashboardUI
         CategoryManager _categoryManager;
         ProjectManager _projectManager;
         UserManager _userManager;
+        ProjectCapacityManager _projectCapacityManager;
+        DepartmentCapacityManager _departmentCapacityManager;
 
         AlertBox _alertbox;
         ToolTip toolTip;
@@ -32,7 +34,8 @@ namespace DashboardUI
         private string _tableValue;
         private int _tableIndex;
 
-        public AdminForm(Dashboard dashboardForm, ManagementManager managementManager, DepartmentManager departmentManager, CategoryManager categoryManager, ProjectManager projectManager, UserManager userManager)
+        public AdminForm(Dashboard dashboardForm, ManagementManager managementManager, DepartmentManager departmentManager, CategoryManager categoryManager, 
+            ProjectManager projectManager, UserManager userManager, ProjectCapacityManager projectCapacityManager, DepartmentCapacityManager departmentCapacityManager)
         {
             InitializeComponent();
 
@@ -42,6 +45,8 @@ namespace DashboardUI
             _projectManager = projectManager;
             _dashboardForm = dashboardForm;
             _userManager = userManager;
+            _projectCapacityManager = projectCapacityManager;
+            _departmentCapacityManager = departmentCapacityManager;
 
             var exePath = Path.GetDirectoryName(
                new Uri(System.Reflection.Assembly.GetExecutingAssembly().Location).LocalPath);
@@ -73,7 +78,7 @@ namespace DashboardUI
                 }
                 else if (isProjectActive)
                 {
-                    _createForm = new DeleteProjectForm(_projectManager, _projectManager.GetById(_tableIndex).Data);
+                    _createForm = new DeleteProjectForm(_projectManager, _projectCapacityManager, _projectManager.GetById(_tableIndex).Data);
                 }
                 else if (isCategoryActive)
                 {
@@ -81,7 +86,7 @@ namespace DashboardUI
                 }
                 else if (isUserActive)
                 {
-                    _createForm = new DeleteUserForm(_userManager, _userManager.GetById(_tableIndex).Data);
+                    _createForm = new DeleteUserForm(_userManager,_projectManager, _userManager.GetById(_tableIndex).Data);
                 }
                 else
                 {

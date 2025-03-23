@@ -52,7 +52,7 @@ namespace DashboardUI
             if (textBoxUserName.Text != "")
             {
                 User userToCreate = new();
-                userToCreate.UserName = textBoxUserName.Text;
+                userToCreate.UserName = textBoxUserName.Text.ToUpper();
                 userToCreate.Author = checkBoxAuthor.Checked;
                 userToCreate.Admin = checkBoxAdmin.Checked;
 

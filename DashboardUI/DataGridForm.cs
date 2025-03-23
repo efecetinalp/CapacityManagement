@@ -746,7 +746,7 @@ namespace DashboardUI
 
             if (_dataCardForm == null)
             {
-                _dataCardForm = new(projectDetail.Data, managementManager, departmentManager, projectManager, categoryManager, userManager);
+                _dataCardForm = new(projectDetail.Data, managementManager, departmentManager, projectManager, categoryManager, userManager, projectCapacityManager);
                 _dataCardForm.FormClosed += DataGridForm_FormClosed;
                 _dataCardForm.Location = dbGrid.PointToScreen(dbGrid.GetCellDisplayRectangle(0, _rowIndex, false).Location);
                 _dataCardForm.Show();

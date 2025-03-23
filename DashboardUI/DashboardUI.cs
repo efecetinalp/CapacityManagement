@@ -56,12 +56,21 @@ namespace DashboardUI
             //Delete later
             //Start with datagrid form
             UserLogin();
-            MoveSlideBar(panelDataGrid);
-            dataGridForm = new(projectManager, departmentManager, managementManager, categoryManager, departmentCapacityManager, projectCapacityManager, userManager, this);
-            dataGridForm.FormClosed += DataGridForm_FormClosed;
-            dataGridForm.MdiParent = this;
-            dataGridForm.Dock = DockStyle.Fill;
-            dataGridForm.Show();
+
+            MoveSlideBar(panelDashboard);
+            dashboardForm = new(managementManager, departmentManager, projectManager ,categoryManager, userManager ,departmentCapacityManager, projectCapacityManager);
+            dashboardForm.FormClosed += DataGridForm_FormClosed;
+            dashboardForm.MdiParent = this;
+            dashboardForm.Dock = DockStyle.Fill;
+            dashboardForm.Show();
+
+            //DELETE LATER
+            //MoveSlideBar(panelDataGrid);
+            //dataGridForm = new(projectManager, departmentManager, managementManager, categoryManager, departmentCapacityManager, projectCapacityManager, userManager, this);
+            //dataGridForm.FormClosed += DataGridForm_FormClosed;
+            //dataGridForm.MdiParent = this;
+            //dataGridForm.Dock = DockStyle.Fill;
+            //dataGridForm.Show();
         }
 
         private void UserLogin()
@@ -98,7 +107,7 @@ namespace DashboardUI
 
             if (dashboardForm == null)
             {
-                dashboardForm = new();
+                dashboardForm = new(managementManager, departmentManager, projectManager, categoryManager, userManager, departmentCapacityManager, projectCapacityManager);
                 dashboardForm.FormClosed += DashboardForm_FormClosed;
                 dashboardForm.MdiParent = this;
                 dashboardForm.Dock = DockStyle.Fill;
@@ -187,7 +196,7 @@ namespace DashboardUI
 
             if (adminForm == null)
             {
-                adminForm = new(this, managementManager, departmentManager, categoryManager, projectManager, userManager);
+                adminForm = new(this, managementManager, departmentManager, categoryManager, projectManager, userManager, projectCapacityManager, departmentCapacityManager);
                 adminForm.FormClosed += AdminForm_FormClosed;
                 adminForm.MdiParent = this;
                 adminForm.Dock = DockStyle.Fill;

@@ -74,7 +74,7 @@ namespace DataAccess.Concrete.EntityFramework
                 if (filter == null)
                     return result.OrderBy(x => x.ManagementId).ToList();
                 else
-                    return result.Where(filter).OrderBy(x => x.DepartmentId).ToList();
+                    return result.Where(filter).OrderBy(m => m.ManagementId).OrderBy(x => x.DepartmentId).ToList();
             }
         }
     }
