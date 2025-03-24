@@ -87,5 +87,10 @@ namespace DashboardUI
             if (checkBoxAdmin.Checked) { checkBoxAuthor.Checked = false; }
             else if (!checkBoxAuthor.Checked) { checkBoxAdmin.Checked = true; }
         }
+
+        private void buttonQuit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

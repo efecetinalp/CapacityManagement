@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateCategoryForm));
             label7 = new Label();
             label6 = new Label();
             buttonCancel = new Button();
             buttonUpdate = new Button();
             textBoxCategory = new TextBox();
+            buttonQuit = new Button();
             SuspendLayout();
             // 
             // label7
@@ -94,11 +96,26 @@
             textBoxCategory.Size = new Size(213, 20);
             textBoxCategory.TabIndex = 30;
             // 
+            // buttonQuit
+            // 
+            buttonQuit.FlatAppearance.BorderSize = 0;
+            buttonQuit.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonQuit.FlatStyle = FlatStyle.Flat;
+            buttonQuit.Image = (Image)resources.GetObject("buttonQuit.Image");
+            buttonQuit.Location = new Point(241, 3);
+            buttonQuit.Name = "buttonQuit";
+            buttonQuit.Padding = new Padding(0, 0, 1, 1);
+            buttonQuit.Size = new Size(12, 12);
+            buttonQuit.TabIndex = 40;
+            buttonQuit.UseVisualStyleBackColor = true;
+            buttonQuit.Click += buttonQuit_Click;
+            // 
             // UpdateCategoryForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(256, 178);
+            Controls.Add(buttonQuit);
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(buttonCancel);
@@ -122,5 +139,6 @@
         private Button buttonCancel;
         private Button buttonUpdate;
         private TextBox textBoxCategory;
+        private Button buttonQuit;
     }
 }

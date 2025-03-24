@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateDepartmentForm));
             label7 = new Label();
             label2 = new Label();
             label1 = new Label();
@@ -35,6 +36,7 @@
             buttonUpdate = new Button();
             comboBoxManagement = new ComboBox();
             textBoxDepartment = new TextBox();
+            buttonQuit = new Button();
             SuspendLayout();
             // 
             // label7
@@ -117,11 +119,26 @@
             textBoxDepartment.Size = new Size(200, 20);
             textBoxDepartment.TabIndex = 15;
             // 
+            // buttonQuit
+            // 
+            buttonQuit.FlatAppearance.BorderSize = 0;
+            buttonQuit.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonQuit.FlatStyle = FlatStyle.Flat;
+            buttonQuit.Image = (Image)resources.GetObject("buttonQuit.Image");
+            buttonQuit.Location = new Point(231, 3);
+            buttonQuit.Name = "buttonQuit";
+            buttonQuit.Padding = new Padding(0, 0, 1, 1);
+            buttonQuit.Size = new Size(12, 12);
+            buttonQuit.TabIndex = 40;
+            buttonQuit.UseVisualStyleBackColor = true;
+            buttonQuit.Click += buttonQuit_Click;
+            // 
             // UpdateDepartmentForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(246, 229);
+            Controls.Add(buttonQuit);
             Controls.Add(label7);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -150,5 +167,6 @@
         private Button buttonUpdate;
         private ComboBox comboBoxManagement;
         private TextBox textBoxDepartment;
+        private Button buttonQuit;
     }
 }

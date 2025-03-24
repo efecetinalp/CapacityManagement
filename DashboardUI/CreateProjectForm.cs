@@ -234,5 +234,10 @@ namespace DashboardUI
             if (checkBoxCompleted.Checked) { dateTimePickerEnd.Enabled = true; }
             else { dateTimePickerEnd.Enabled = false; }
         }
+
+        private void buttonQuit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

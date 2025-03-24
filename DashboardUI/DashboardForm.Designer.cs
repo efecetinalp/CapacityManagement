@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardForm));
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -48,25 +47,29 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(10D, "10,10");
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(10D, "10,10");
             System.Windows.Forms.DataVisualization.Charting.Title title5 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
             panel1 = new Panel();
             dateTimePickerStart = new DateTimePicker();
             dateTimePickerEnd = new DateTimePicker();
-            button4 = new Button();
-            button3 = new Button();
-            button2 = new Button();
-            button1 = new Button();
-            buttonRefresh = new Button();
+            buttonCustom = new Button();
+            buttonLastYear = new Button();
+            buttonThisYear = new Button();
+            buttonOverall = new Button();
             chartProjects = new System.Windows.Forms.DataVisualization.Charting.Chart();
             chartCapacityPercentage = new System.Windows.Forms.DataVisualization.Charting.Chart();
             chartCapacityAgainstWork = new System.Windows.Forms.DataVisualization.Charting.Chart();
             chartOngoingCompletedProjects = new System.Windows.Forms.DataVisualization.Charting.Chart();
             dataGridViewOngoingProjects = new DataGridView();
             chartCapacity = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            dateTimeChart2 = new DateTimePicker();
+            dateTimeChart3 = new DateTimePicker();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chartProjects).BeginInit();
             ((System.ComponentModel.ISupportInitialize)chartCapacityPercentage).BeginInit();
@@ -81,11 +84,10 @@
             panel1.BackColor = Color.LightSlateGray;
             panel1.Controls.Add(dateTimePickerStart);
             panel1.Controls.Add(dateTimePickerEnd);
-            panel1.Controls.Add(button4);
-            panel1.Controls.Add(button3);
-            panel1.Controls.Add(button2);
-            panel1.Controls.Add(button1);
-            panel1.Controls.Add(buttonRefresh);
+            panel1.Controls.Add(buttonCustom);
+            panel1.Controls.Add(buttonLastYear);
+            panel1.Controls.Add(buttonThisYear);
+            panel1.Controls.Add(buttonOverall);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
@@ -120,67 +122,61 @@
             dateTimePickerEnd.Size = new Size(76, 20);
             dateTimePickerEnd.TabIndex = 25;
             // 
-            // button4
+            // buttonCustom
             // 
-            button4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button4.FlatStyle = FlatStyle.Flat;
-            button4.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            button4.Location = new Point(769, 11);
-            button4.Name = "button4";
-            button4.Size = new Size(75, 30);
-            button4.TabIndex = 2;
-            button4.Text = "Custom";
-            button4.UseVisualStyleBackColor = true;
+            buttonCustom.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonCustom.BackColor = Color.LightSteelBlue;
+            buttonCustom.FlatStyle = FlatStyle.Flat;
+            buttonCustom.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonCustom.Location = new Point(769, 11);
+            buttonCustom.Name = "buttonCustom";
+            buttonCustom.Size = new Size(75, 30);
+            buttonCustom.TabIndex = 2;
+            buttonCustom.Text = "Custom";
+            buttonCustom.UseVisualStyleBackColor = false;
+            buttonCustom.Click += buttonCustom_Click;
             // 
-            // button3
+            // buttonLastYear
             // 
-            button3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            button3.Location = new Point(688, 11);
-            button3.Name = "button3";
-            button3.Size = new Size(75, 30);
-            button3.TabIndex = 3;
-            button3.Text = "Last Year";
-            button3.UseVisualStyleBackColor = true;
+            buttonLastYear.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonLastYear.BackColor = Color.LightSteelBlue;
+            buttonLastYear.FlatStyle = FlatStyle.Flat;
+            buttonLastYear.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonLastYear.Location = new Point(688, 11);
+            buttonLastYear.Name = "buttonLastYear";
+            buttonLastYear.Size = new Size(75, 30);
+            buttonLastYear.TabIndex = 3;
+            buttonLastYear.Text = "Last Year";
+            buttonLastYear.UseVisualStyleBackColor = false;
+            buttonLastYear.Click += buttonLastYear_Click;
             // 
-            // button2
+            // buttonThisYear
             // 
-            button2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.Location = new Point(607, 11);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 30);
-            button2.TabIndex = 2;
-            button2.Text = "This Year";
-            button2.UseVisualStyleBackColor = true;
+            buttonThisYear.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonThisYear.BackColor = Color.LightSteelBlue;
+            buttonThisYear.FlatStyle = FlatStyle.Flat;
+            buttonThisYear.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonThisYear.Location = new Point(607, 11);
+            buttonThisYear.Name = "buttonThisYear";
+            buttonThisYear.Size = new Size(75, 30);
+            buttonThisYear.TabIndex = 2;
+            buttonThisYear.Text = "This Year";
+            buttonThisYear.UseVisualStyleBackColor = false;
+            buttonThisYear.Click += buttonThisYear_Click;
             // 
-            // button1
+            // buttonOverall
             // 
-            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.Location = new Point(526, 11);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 30);
-            button1.TabIndex = 1;
-            button1.Text = "Overall";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // buttonRefresh
-            // 
-            buttonRefresh.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonRefresh.FlatAppearance.BorderSize = 0;
-            buttonRefresh.FlatStyle = FlatStyle.Flat;
-            buttonRefresh.Image = (Image)resources.GetObject("buttonRefresh.Image");
-            buttonRefresh.Location = new Point(1008, 21);
-            buttonRefresh.Name = "buttonRefresh";
-            buttonRefresh.Padding = new Padding(0, 0, 2, 2);
-            buttonRefresh.Size = new Size(20, 20);
-            buttonRefresh.TabIndex = 0;
-            buttonRefresh.UseVisualStyleBackColor = true;
-            buttonRefresh.Click += buttonRefresh_Click;
+            buttonOverall.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonOverall.BackColor = Color.LightSteelBlue;
+            buttonOverall.FlatStyle = FlatStyle.Flat;
+            buttonOverall.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonOverall.Location = new Point(526, 11);
+            buttonOverall.Name = "buttonOverall";
+            buttonOverall.Size = new Size(75, 30);
+            buttonOverall.TabIndex = 1;
+            buttonOverall.Text = "Overall";
+            buttonOverall.UseVisualStyleBackColor = false;
+            buttonOverall.Click += buttonOverall_Click;
             // 
             // chartProjects
             // 
@@ -199,7 +195,7 @@
             series1.BorderWidth = 7;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series1.CustomProperties = "PieLabelStyle=Outside, DoughnutRadius=50, MinimumRelativePieSize=70, PieDrawingStyle=Concave, LabelsRadialLineSize=0.2, LabelsHorizontalLineSize=0.2";
+            series1.CustomProperties = "LabelsRadialLineSize=0.2, LabelsHorizontalLineSize=0.2, PieLabelStyle=Outside, MinimumRelativePieSize=70, DoughnutRadius=50, PieDrawingStyle=Concave";
             series1.IsValueShownAsLabel = true;
             series1.Legend = "Legend1";
             series1.Name = "Series1";
@@ -232,7 +228,7 @@
             legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             legend2.Name = "Legend1";
             chartCapacityPercentage.Legends.Add(legend2);
-            chartCapacityPercentage.Location = new Point(587, 71);
+            chartCapacityPercentage.Location = new Point(755, 357);
             chartCapacityPercentage.Name = "chartCapacityPercentage";
             series2.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
             series2.BackSecondaryColor = Color.RosyBrown;
@@ -240,7 +236,7 @@
             series2.BorderWidth = 2;
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series2.CustomProperties = "PieLabelStyle=Outside, DoughnutRadius=30, CollectedSliceExploded=True, PieDrawingStyle=Concave, LabelsRadialLineSize=0.2, LabelsHorizontalLineSize=0.2";
+            series2.CustomProperties = "CollectedSliceExploded=True, LabelsRadialLineSize=0.2, LabelsHorizontalLineSize=0.2, PieLabelStyle=Outside, DoughnutRadius=30, PieDrawingStyle=Concave";
             series2.IsValueShownAsLabel = true;
             series2.Legend = "Legend1";
             series2.Name = "Series1";
@@ -282,7 +278,7 @@
             series3.BorderWidth = 10;
             series3.ChartArea = "ChartArea1";
             series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.SplineArea;
-            series3.CustomProperties = "PieLabelStyle=Outside, DoughnutRadius=30, CollectedSliceExploded=True, PieDrawingStyle=Concave, LabelsRadialLineSize=0.2, LabelsHorizontalLineSize=0.2";
+            series3.CustomProperties = "CollectedSliceExploded=True, LabelsRadialLineSize=0.2, LabelsHorizontalLineSize=0.2, PieLabelStyle=Outside, DoughnutRadius=30, PieDrawingStyle=Concave";
             series3.IsValueShownAsLabel = true;
             series3.Legend = "Legend1";
             series3.Name = "Series1";
@@ -319,33 +315,59 @@
             // 
             // chartOngoingCompletedProjects
             // 
+            chartArea4.AxisX.LabelStyle.Enabled = false;
+            chartArea4.AxisX.LineColor = Color.Transparent;
+            chartArea4.AxisX.MajorGrid.Enabled = false;
+            chartArea4.AxisX.MajorTickMark.Enabled = false;
+            chartArea4.AxisX.ToolTip = "Ongoing and completed project percentage ";
+            chartArea4.AxisY.LabelStyle.Enabled = false;
+            chartArea4.AxisY.LineColor = Color.Transparent;
+            chartArea4.AxisY.MajorGrid.Enabled = false;
+            chartArea4.AxisY.MajorTickMark.Enabled = false;
             chartArea4.Name = "ChartArea1";
             chartOngoingCompletedProjects.ChartAreas.Add(chartArea4);
             legend4.Alignment = StringAlignment.Center;
             legend4.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend4.Enabled = false;
             legend4.Name = "Legend1";
             chartOngoingCompletedProjects.Legends.Add(legend4);
-            chartOngoingCompletedProjects.Location = new Point(766, 357);
+            chartOngoingCompletedProjects.Location = new Point(583, 272);
             chartOngoingCompletedProjects.Name = "chartOngoingCompletedProjects";
             series7.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
             series7.BackSecondaryColor = Color.RosyBrown;
             series7.BorderColor = Color.White;
             series7.BorderWidth = 0;
             series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedColumn100;
-            series7.CustomProperties = "PieLabelStyle=Outside, DoughnutRadius=30, CollectedSliceExploded=True, PieDrawingStyle=Concave, LabelsRadialLineSize=0.2, LabelsHorizontalLineSize=0.2";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar100;
+            series7.CustomProperties = "MinPixelPointWidth=30";
+            series7.Font = new Font("Segoe UI", 6.75F, FontStyle.Regular, GraphicsUnit.Point);
             series7.IsValueShownAsLabel = true;
+            series7.Label = "Completed projects";
             series7.Legend = "Legend1";
             series7.Name = "Series1";
+            series7.Points.Add(dataPoint1);
             series7.SmartLabelStyle.AllowOutsidePlotArea = System.Windows.Forms.DataVisualization.Charting.LabelOutsidePlotAreaStyle.Yes;
-            series7.SmartLabelStyle.CalloutBackColor = Color.Black;
-            series7.SmartLabelStyle.CalloutLineWidth = 2;
-            series7.SmartLabelStyle.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.LabelCalloutStyle.Box;
+            series7.SmartLabelStyle.CalloutLineAnchorCapStyle = System.Windows.Forms.DataVisualization.Charting.LineAnchorCapStyle.Square;
             series7.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
-            series7.SmartLabelStyle.MaxMovingDistance = 100D;
-            series7.YValuesPerPoint = 2;
+            series7.SmartLabelStyle.MaxMovingDistance = 10D;
+            series7.SmartLabelStyle.MinMovingDistance = 100D;
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar100;
+            series8.CustomProperties = "MinPixelPointWidth=30";
+            series8.Font = new Font("Segoe UI", 6.75F, FontStyle.Regular, GraphicsUnit.Point);
+            series8.IsValueShownAsLabel = true;
+            series8.Label = "Ongoing projects";
+            series8.LabelAngle = 90;
+            series8.Legend = "Legend1";
+            series8.Name = "Series2";
+            series8.Points.Add(dataPoint2);
+            series8.SmartLabelStyle.AllowOutsidePlotArea = System.Windows.Forms.DataVisualization.Charting.LabelOutsidePlotAreaStyle.Yes;
+            series8.SmartLabelStyle.CalloutLineAnchorCapStyle = System.Windows.Forms.DataVisualization.Charting.LineAnchorCapStyle.Square;
+            series8.SmartLabelStyle.MinMovingDistance = 10D;
+            series8.SmartLabelStyle.MovingDirection = System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.Right | System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.Left | System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.TopRight | System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.BottomLeft | System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.BottomRight;
             chartOngoingCompletedProjects.Series.Add(series7);
-            chartOngoingCompletedProjects.Size = new Size(270, 270);
+            chartOngoingCompletedProjects.Series.Add(series8);
+            chartOngoingCompletedProjects.Size = new Size(442, 69);
             chartOngoingCompletedProjects.TabIndex = 3;
             chartOngoingCompletedProjects.Text = "chart2";
             title5.Alignment = ContentAlignment.TopLeft;
@@ -358,10 +380,10 @@
             // 
             dataGridViewOngoingProjects.BackgroundColor = SystemColors.ButtonHighlight;
             dataGridViewOngoingProjects.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewOngoingProjects.Location = new Point(867, 72);
+            dataGridViewOngoingProjects.Location = new Point(583, 71);
             dataGridViewOngoingProjects.Name = "dataGridViewOngoingProjects";
             dataGridViewOngoingProjects.RowTemplate.Height = 25;
-            dataGridViewOngoingProjects.Size = new Size(169, 269);
+            dataGridViewOngoingProjects.Size = new Size(442, 195);
             dataGridViewOngoingProjects.TabIndex = 4;
             // 
             // chartCapacity
@@ -375,23 +397,23 @@
             chartCapacity.Legends.Add(legend5);
             chartCapacity.Location = new Point(307, 71);
             chartCapacity.Name = "chartCapacity";
-            series8.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
-            series8.BackSecondaryColor = Color.RosyBrown;
-            series8.BorderColor = Color.White;
-            series8.BorderWidth = 7;
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series8.CustomProperties = "PieLabelStyle=Outside, DoughnutRadius=50, MinimumRelativePieSize=70, PieDrawingStyle=Concave, LabelsRadialLineSize=0.2, LabelsHorizontalLineSize=0.2";
-            series8.IsValueShownAsLabel = true;
-            series8.Legend = "Legend1";
-            series8.Name = "Series1";
-            series8.SmartLabelStyle.AllowOutsidePlotArea = System.Windows.Forms.DataVisualization.Charting.LabelOutsidePlotAreaStyle.Yes;
-            series8.SmartLabelStyle.CalloutBackColor = Color.Black;
-            series8.SmartLabelStyle.CalloutLineWidth = 2;
-            series8.SmartLabelStyle.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.LabelCalloutStyle.Box;
-            series8.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
-            series8.SmartLabelStyle.MaxMovingDistance = 100D;
-            chartCapacity.Series.Add(series8);
+            series9.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+            series9.BackSecondaryColor = Color.RosyBrown;
+            series9.BorderColor = Color.White;
+            series9.BorderWidth = 7;
+            series9.ChartArea = "ChartArea1";
+            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series9.CustomProperties = "LabelsRadialLineSize=0.2, LabelsHorizontalLineSize=0.2, PieLabelStyle=Outside, MinimumRelativePieSize=70, DoughnutRadius=50, PieDrawingStyle=Concave";
+            series9.IsValueShownAsLabel = true;
+            series9.Legend = "Legend1";
+            series9.Name = "Series1";
+            series9.SmartLabelStyle.AllowOutsidePlotArea = System.Windows.Forms.DataVisualization.Charting.LabelOutsidePlotAreaStyle.Yes;
+            series9.SmartLabelStyle.CalloutBackColor = Color.Black;
+            series9.SmartLabelStyle.CalloutLineWidth = 2;
+            series9.SmartLabelStyle.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.LabelCalloutStyle.Box;
+            series9.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
+            series9.SmartLabelStyle.MaxMovingDistance = 100D;
+            chartCapacity.Series.Add(series9);
             chartCapacity.Size = new Size(270, 270);
             chartCapacity.TabIndex = 5;
             chartCapacity.Text = "ProjectChart";
@@ -406,11 +428,42 @@
             title6.Text = "Assigned capacity per department";
             chartCapacity.Titles.Add(title6);
             // 
+            // dateTimeChart2
+            // 
+            dateTimeChart2.CalendarFont = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            dateTimeChart2.CustomFormat = "MMMM";
+            dateTimeChart2.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            dateTimeChart2.Format = DateTimePickerFormat.Custom;
+            dateTimeChart2.ImeMode = ImeMode.NoControl;
+            dateTimeChart2.Location = new Point(494, 97);
+            dateTimeChart2.Margin = new Padding(2);
+            dateTimeChart2.Name = "dateTimeChart2";
+            dateTimeChart2.Size = new Size(74, 20);
+            dateTimeChart2.TabIndex = 26;
+            dateTimeChart2.ValueChanged += dateTimeChart2_ValueChanged;
+            // 
+            // dateTimeChart3
+            // 
+            dateTimeChart3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            dateTimeChart3.CalendarFont = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            dateTimeChart3.CustomFormat = "MMMM";
+            dateTimeChart3.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            dateTimeChart3.Format = DateTimePickerFormat.Custom;
+            dateTimeChart3.ImeMode = ImeMode.NoControl;
+            dateTimeChart3.Location = new Point(942, 382);
+            dateTimeChart3.Margin = new Padding(2);
+            dateTimeChart3.Name = "dateTimeChart3";
+            dateTimeChart3.Size = new Size(74, 20);
+            dateTimeChart3.TabIndex = 27;
+            dateTimeChart3.ValueChanged += dateTimeChart3_ValueChanged;
+            // 
             // DashboardForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1048, 644);
+            Controls.Add(dateTimeChart3);
+            Controls.Add(dateTimeChart2);
             Controls.Add(chartCapacity);
             Controls.Add(chartProjects);
             Controls.Add(dataGridViewOngoingProjects);
@@ -437,11 +490,10 @@
 
         private Panel panel1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartProjects;
-        private Button buttonRefresh;
-        private Button button4;
-        private Button button3;
-        private Button button2;
-        private Button button1;
+        private Button buttonCustom;
+        private Button buttonLastYear;
+        private Button buttonThisYear;
+        private Button buttonOverall;
         private DateTimePicker dateTimePickerStart;
         private DateTimePicker dateTimePickerEnd;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartCapacityPercentage;
@@ -449,5 +501,7 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chartOngoingCompletedProjects;
         private DataGridView dataGridViewOngoingProjects;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartCapacity;
+        private DateTimePicker dateTimeChart2;
+        private DateTimePicker dateTimeChart3;
     }
 }

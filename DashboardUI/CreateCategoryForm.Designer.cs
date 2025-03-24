@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateCategoryForm));
             label3 = new Label();
             textBoxCategory = new TextBox();
             buttonCreate = new Button();
             label2 = new Label();
             buttonCancel = new Button();
+            buttonQuit = new Button();
             SuspendLayout();
             // 
             // label3
@@ -98,11 +100,26 @@
             buttonCancel.UseVisualStyleBackColor = false;
             buttonCancel.Click += buttonCancel_Click;
             // 
+            // buttonQuit
+            // 
+            buttonQuit.FlatAppearance.BorderSize = 0;
+            buttonQuit.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonQuit.FlatStyle = FlatStyle.Flat;
+            buttonQuit.Image = (Image)resources.GetObject("buttonQuit.Image");
+            buttonQuit.Location = new Point(240, 3);
+            buttonQuit.Name = "buttonQuit";
+            buttonQuit.Padding = new Padding(0, 0, 1, 1);
+            buttonQuit.Size = new Size(12, 12);
+            buttonQuit.TabIndex = 46;
+            buttonQuit.UseVisualStyleBackColor = true;
+            buttonQuit.Click += buttonQuit_Click;
+            // 
             // CreateCategoryForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(255, 178);
+            Controls.Add(buttonQuit);
             Controls.Add(buttonCancel);
             Controls.Add(label3);
             Controls.Add(textBoxCategory);
@@ -126,5 +143,6 @@
         private Button buttonCreate;
         private Label label2;
         private Button buttonCancel;
+        private Button buttonQuit;
     }
 }

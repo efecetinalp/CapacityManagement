@@ -75,6 +75,24 @@ namespace Business.Concrete
             return new SuccessDataResult<List<DepartmentCapacityDetailDto>>(_departmentCapactiyDal.GetDepartmentCapacityDetails());
         }
 
-        
+        public IDataResult<List<DepartmentCapacity>> GetAllByDepartmentId(int departmentId)
+        {
+            var result = _departmentCapactiyDal.GetAll(d => d.DepartmentId == departmentId);
+
+            if (result == null)
+                return new ErrorDataResult<List<DepartmentCapacity>>(result, Messages.EmptyData);
+            else
+                return new SuccessDataResult<List<DepartmentCapacity>>(result, Messages.DepartmentListed);
+        }
+
+        public IDataResult<List<DepartmentCapacityDetailDto>> GetAllByDateBetween(DateTime dateStart, DateTime dateEnd)
+        {
+            var result = _departmentCapactiyDal.GetDepartmentCapacityDetails(d => d.Date >= dateStart && d.Date <= dateEnd);
+
+            if (result == null)
+                return new ErrorDataResult<List<DepartmentCapacityDetailDto>>(result, Messages.EmptyData);
+            else
+                return new SuccessDataResult<List<DepartmentCapacityDetailDto>>(result, Messages.DepartmentListed);
+        }
     }
 }

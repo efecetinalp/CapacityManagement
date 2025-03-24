@@ -41,7 +41,7 @@ namespace DashboardUI
             textBoxDelete.Enabled = false;
 
             var projectCapacityList = _projectCapacityManager.GetAllByProjectId(_projectToDelete.ProjectId);
-            
+
             if (!projectCapacityList.Success)
             {
                 MessageBox.Show(projectCapacityList.Massage, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -93,6 +93,11 @@ namespace DashboardUI
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void buttonQuit_Click(object sender, EventArgs e)
         {
             this.Close();
         }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateUserForm));
             textBoxUserName = new TextBox();
             labelUserName = new Label();
             buttonCreate = new Button();
@@ -35,6 +36,7 @@
             label1 = new Label();
             checkBoxAdmin = new CheckBox();
             checkBoxAuthor = new CheckBox();
+            buttonQuit = new Button();
             SuspendLayout();
             // 
             // textBoxUserName
@@ -129,12 +131,27 @@
             checkBoxAuthor.UseVisualStyleBackColor = true;
             checkBoxAuthor.Click += checkBoxAuthor_CheckedChanged;
             // 
+            // buttonQuit
+            // 
+            buttonQuit.FlatAppearance.BorderSize = 0;
+            buttonQuit.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonQuit.FlatStyle = FlatStyle.Flat;
+            buttonQuit.Image = (Image)resources.GetObject("buttonQuit.Image");
+            buttonQuit.Location = new Point(215, 3);
+            buttonQuit.Name = "buttonQuit";
+            buttonQuit.Padding = new Padding(0, 0, 1, 1);
+            buttonQuit.Size = new Size(12, 12);
+            buttonQuit.TabIndex = 40;
+            buttonQuit.UseVisualStyleBackColor = true;
+            buttonQuit.Click += buttonQuit_Click;
+            // 
             // CreateUserForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(230, 201);
+            Controls.Add(buttonQuit);
             Controls.Add(checkBoxAdmin);
             Controls.Add(checkBoxAuthor);
             Controls.Add(label1);
@@ -163,5 +180,6 @@
         private Label label1;
         private CheckBox checkBoxAdmin;
         private CheckBox checkBoxAuthor;
+        private Button buttonQuit;
     }
 }

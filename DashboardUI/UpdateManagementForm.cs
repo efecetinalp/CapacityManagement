@@ -83,5 +83,10 @@ namespace DashboardUI
             else
                 MessageBox.Show("Please fill empty selections!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
+
+        private void buttonQuit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

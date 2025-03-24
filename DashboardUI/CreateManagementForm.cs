@@ -71,5 +71,10 @@ namespace DashboardUI
         {
 
         }
+
+        private void buttonQuit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

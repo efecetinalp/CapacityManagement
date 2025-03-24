@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateProjectForm));
             buttonCreate = new Button();
             buttonCancel = new Button();
             checkBoxCompleted = new CheckBox();
@@ -46,6 +47,7 @@
             comboBoxDepartment = new ComboBox();
             comboBoxManagement = new ComboBox();
             textBoxProject = new TextBox();
+            buttonQuit = new Button();
             SuspendLayout();
             // 
             // buttonCreate
@@ -254,11 +256,26 @@
             textBoxProject.Size = new Size(172, 20);
             textBoxProject.TabIndex = 37;
             // 
+            // buttonQuit
+            // 
+            buttonQuit.FlatAppearance.BorderSize = 0;
+            buttonQuit.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonQuit.FlatStyle = FlatStyle.Flat;
+            buttonQuit.Image = (Image)resources.GetObject("buttonQuit.Image");
+            buttonQuit.Location = new Point(387, 3);
+            buttonQuit.Name = "buttonQuit";
+            buttonQuit.Padding = new Padding(0, 0, 1, 1);
+            buttonQuit.Size = new Size(12, 12);
+            buttonQuit.TabIndex = 53;
+            buttonQuit.UseVisualStyleBackColor = true;
+            buttonQuit.Click += buttonQuit_Click;
+            // 
             // CreateProjectForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(402, 308);
+            Controls.Add(buttonQuit);
             Controls.Add(checkBoxCompleted);
             Controls.Add(labelEndDate);
             Controls.Add(labelStartDate);
@@ -308,5 +325,6 @@
         private ComboBox comboBoxDepartment;
         private ComboBox comboBoxManagement;
         private TextBox textBoxProject;
+        private Button buttonQuit;
     }
 }

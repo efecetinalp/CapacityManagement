@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateDepartmentForm));
             label4 = new Label();
             textBoxDepartment = new TextBox();
             buttonCreate = new Button();
@@ -35,6 +36,7 @@
             lblManagement = new Label();
             comboBoxManagement = new ComboBox();
             buttonCancel = new Button();
+            buttonQuit = new Button();
             SuspendLayout();
             // 
             // label4
@@ -121,11 +123,26 @@
             buttonCancel.UseVisualStyleBackColor = false;
             buttonCancel.Click += buttonCancel_Click;
             // 
+            // buttonQuit
+            // 
+            buttonQuit.FlatAppearance.BorderSize = 0;
+            buttonQuit.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonQuit.FlatStyle = FlatStyle.Flat;
+            buttonQuit.Image = (Image)resources.GetObject("buttonQuit.Image");
+            buttonQuit.Location = new Point(232, 3);
+            buttonQuit.Name = "buttonQuit";
+            buttonQuit.Padding = new Padding(0, 0, 1, 1);
+            buttonQuit.Size = new Size(12, 12);
+            buttonQuit.TabIndex = 45;
+            buttonQuit.UseVisualStyleBackColor = true;
+            buttonQuit.Click += buttonQuit_Click;
+            // 
             // CreateDepartmentForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(247, 217);
+            Controls.Add(buttonQuit);
             Controls.Add(buttonCancel);
             Controls.Add(label4);
             Controls.Add(textBoxDepartment);
@@ -154,5 +171,6 @@
         private Label lblManagement;
         private ComboBox comboBoxManagement;
         private Button buttonCancel;
+        private Button buttonQuit;
     }
 }

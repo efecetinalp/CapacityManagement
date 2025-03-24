@@ -70,11 +70,11 @@ namespace DashboardUI
             {
                 if (isManagementActive)
                 {
-                    _createForm = new DeleteManagementForm(_managementManager, _managementManager.GetById(_tableIndex).Data);
+                    _createForm = new DeleteManagementForm(_managementManager,_departmentManager, _managementManager.GetById(_tableIndex).Data);
                 }
                 else if (isDepartmentActive)
                 {
-                    _createForm = new DeleteDepartmentForm(_departmentManager, _departmentManager.GetById(_tableIndex).Data);
+                    _createForm = new DeleteDepartmentForm(_departmentManager,_departmentCapacityManager,_projectManager, _departmentManager.GetById(_tableIndex).Data);
                 }
                 else if (isProjectActive)
                 {
@@ -82,7 +82,7 @@ namespace DashboardUI
                 }
                 else if (isCategoryActive)
                 {
-                    _createForm = new DeleteCategoryForm(_categoryManager, _categoryManager.GetById(_tableIndex).Data);
+                    _createForm = new DeleteCategoryForm(_categoryManager,_projectManager, _categoryManager.GetById(_tableIndex).Data);
                 }
                 else if (isUserActive)
                 {

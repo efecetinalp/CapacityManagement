@@ -35,6 +35,7 @@
             textBoxDelete = new TextBox();
             labelDelete = new Label();
             checkBoxApproval = new CheckBox();
+            buttonQuit = new Button();
             SuspendLayout();
             // 
             // buttonCancel
@@ -110,11 +111,26 @@
             checkBoxApproval.UseVisualStyleBackColor = true;
             checkBoxApproval.CheckedChanged += checkBoxApproval_CheckedChanged;
             // 
+            // buttonQuit
+            // 
+            buttonQuit.FlatAppearance.BorderSize = 0;
+            buttonQuit.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonQuit.FlatStyle = FlatStyle.Flat;
+            buttonQuit.Image = (Image)resources.GetObject("buttonQuit.Image");
+            buttonQuit.Location = new Point(362, 3);
+            buttonQuit.Name = "buttonQuit";
+            buttonQuit.Padding = new Padding(0, 0, 1, 1);
+            buttonQuit.Size = new Size(12, 12);
+            buttonQuit.TabIndex = 40;
+            buttonQuit.UseVisualStyleBackColor = true;
+            buttonQuit.Click += buttonQuit_Click;
+            // 
             // DeleteUserForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(377, 238);
+            Controls.Add(buttonQuit);
             Controls.Add(checkBoxApproval);
             Controls.Add(buttonCancel);
             Controls.Add(buttonDelete);
@@ -140,5 +156,6 @@
         private TextBox textBoxDelete;
         private Label labelDelete;
         private CheckBox checkBoxApproval;
+        private Button buttonQuit;
     }
 }

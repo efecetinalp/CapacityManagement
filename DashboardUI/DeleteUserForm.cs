@@ -90,5 +90,10 @@ namespace DashboardUI
             else
                 textBoxDelete.Enabled = false;
         }
+
+        private void buttonQuit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

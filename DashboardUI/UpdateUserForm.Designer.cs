@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UpdateUserForm));
             label7 = new Label();
             label6 = new Label();
             buttonCancel = new Button();
@@ -35,6 +36,7 @@
             textBoxUserName = new TextBox();
             checkBoxAuthor = new CheckBox();
             checkBoxAdmin = new CheckBox();
+            buttonQuit = new Button();
             SuspendLayout();
             // 
             // label7
@@ -120,11 +122,26 @@
             checkBoxAdmin.UseVisualStyleBackColor = true;
             checkBoxAdmin.CheckedChanged += checkBoxAdmin_CheckedChanged;
             // 
+            // buttonQuit
+            // 
+            buttonQuit.FlatAppearance.BorderSize = 0;
+            buttonQuit.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonQuit.FlatStyle = FlatStyle.Flat;
+            buttonQuit.Image = (Image)resources.GetObject("buttonQuit.Image");
+            buttonQuit.Location = new Point(213, 3);
+            buttonQuit.Name = "buttonQuit";
+            buttonQuit.Padding = new Padding(0, 0, 1, 1);
+            buttonQuit.Size = new Size(12, 12);
+            buttonQuit.TabIndex = 40;
+            buttonQuit.UseVisualStyleBackColor = true;
+            buttonQuit.Click += buttonQuit_Click;
+            // 
             // UpdateUserForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(228, 201);
+            Controls.Add(buttonQuit);
             Controls.Add(checkBoxAdmin);
             Controls.Add(checkBoxAuthor);
             Controls.Add(label7);
@@ -152,5 +169,6 @@
         private TextBox textBoxUserName;
         private CheckBox checkBoxAuthor;
         private CheckBox checkBoxAdmin;
+        private Button buttonQuit;
     }
 }

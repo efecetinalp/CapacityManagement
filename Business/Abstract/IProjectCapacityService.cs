@@ -12,8 +12,9 @@ namespace Business.Abstract
     public interface IProjectCapacityService
     {
         IDataResult<List<ProjectCapacityDetailDto>> GetProjectCapacityDetails();
-
+        IDataResult<List<ProjectCapacityDetailDto>> GetAllByDepartmentId(int departmentId);
         IDataResult<List<ProjectCapacityDetailDto>> GetProjectCapacityDetailsByDateBetweenAndDepartmentId(DateTime dateStart, DateTime dateEnd, int departmentId);
+        IDataResult<List<ProjectCapacityDetailDto>> GetProjectCapacityDetailsByDateBetween(DateTime dateStart, DateTime dateEnd);
         IDataResult<List<ProjectCapacityDetailDto>> GetProjectCapacityDetailsByDateAndProjectName(DateTime date, string projectName);
         IDataResult<ProjectCapacity> GetProjectCapacityByDateAndProjectId(DateTime date, int projectId);
 

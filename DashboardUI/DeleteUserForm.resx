@@ -128,4 +128,13 @@
         gg==
 </value>
   </data>
+  <data name="buttonQuit.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAAJ9JREFUKFNjgAFjY2NWKBMDYMiBBITEpNz09Ny4oUJwABITl1awgGsCMUACLGzs
+        Hzi5+fqRNYHYIDFWNvb/IAPhmkASHJw8q5hYWP7DNMEUg8Q4uHjnIBsEBuia8CqGAWRNBBWDAEgSZjLM
+        JrymIzsD3U9QZRCArhjEB2GsmpCCFcPNME2gIMcaF8iKYQAkxi8kGgJXDAMYAkgAIcfAAADLgz3UZPbO
+        owAAAABJRU5ErkJggg==
+</value>
+  </data>
 </root>
