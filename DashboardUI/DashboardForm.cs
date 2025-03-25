@@ -2,6 +2,7 @@
 using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.DTOs;
+using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -52,6 +53,7 @@ namespace DashboardUI
 
         private void DashboardForm_Load(object sender, EventArgs e)
         {
+
             _projectDatas = _projectManager.GetAll();
             _managementDatas = _managementManager.GetAll();
             _departmentDatas = _departmentManager.GetAll();
@@ -60,9 +62,10 @@ namespace DashboardUI
             _departmentCapacityDates = _departmentCapacityManager.GetAllUniqueDate();
 
             UpdateCharts();
+
         }
 
-        private void UpdateCharts()
+        private async void UpdateCharts()
         {
             GenerateProjectsChart();
             GenerateCapacitiesChart(new DateTime(_selectedYear, dateTimeChart2.Value.Month, 1));
@@ -121,16 +124,14 @@ namespace DashboardUI
             double result = _completedProjects.Count * 100 / Math.Abs(_completedProjects.Count + _ongiongProjects.Count);
 
             var newSerie = chartOngoingCompletedProjects.Series["Series1"];
-            newSerie.Points.Clear();
             newSerie.IsValueShownAsLabel = true;
-            newSerie.Points.AddXY("Completed Projects", _completedProjects.Count);
-            newSerie.Label = "Completed project %" + result;
+            newSerie.Points[0].SetValueXY("Completed Projects", _completedProjects.Count);
+            newSerie.Label = "Completed project %" + result + System.Environment.NewLine + "Project number = " + _completedProjects.Count; ;
 
             newSerie = chartOngoingCompletedProjects.Series["Series2"];
-            newSerie.Points.Clear();
             newSerie.IsValueShownAsLabel = true;
-            newSerie.Points.AddXY("Ongoing Projects", _ongiongProjects.Count);
-            newSerie.Label = "Ongoing project %" + (100 - result);
+            newSerie.Points[0].SetValueXY("Ongoing Projects", _ongiongProjects.Count);
+            newSerie.Label = "Ongoing project %" + (100 - result) + System.Environment.NewLine + "Project number = " + _ongiongProjects.Count;
         }
 
         //CHART 4 - NOT WORKED YET
@@ -139,6 +140,12 @@ namespace DashboardUI
             double totalDepartmentCapacity = 0;
             double totalProjectCapacity = 0;
             chartCapacityAgainstWork.Series.Clear();
+
+            chartCapacityAgainstWork.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Months;
+            chartCapacityAgainstWork.ChartAreas[0].AxisX.LabelStyle.Format = "MMM-yy";
+            chartCapacityAgainstWork.ChartAreas[0].AxisX.Minimum = _departmentCapacityDates.Data[0].Date.ToOADate();
+            chartCapacityAgainstWork.ChartAreas[0].AxisX.Maximum = _departmentCapacityDates.Data[_departmentCapacityDates.Data.Count - 1].Date.ToOADate();
+
             var serieSplineArea = chartCapacityAgainstWork.Series.Add("Total Capacity");
             serieSplineArea.ChartType = SeriesChartType.SplineArea;
 
@@ -162,6 +169,7 @@ namespace DashboardUI
             {
                 var newSerie = chartCapacityAgainstWork.Series.Add(management.ManagementName);
                 newSerie.ChartType = SeriesChartType.StackedColumn;
+                //newSerie.CustomProperties = "MaxPixelPointWidth = 5";
 
                 foreach (var date in _departmentCapacityDates.Data)
                 {
@@ -180,7 +188,7 @@ namespace DashboardUI
             }
         }
 
-        //delete later
+        //DELETE LATER
         private void GenerateCapacityAgainstWorkloadChartBACKUP()
         {
             var serieSplineArea = chartCapacityAgainstWork.Series["Series1"];
@@ -193,6 +201,7 @@ namespace DashboardUI
             {
                 var newSerie = chartCapacityAgainstWork.Series.Add(management.ManagementName);
                 newSerie.ChartType = SeriesChartType.StackedColumn;
+
                 foreach (var date in _departmentCapacityDates.Data)
                 {
                     totalDepartmentCapacity = 0;
@@ -228,27 +237,27 @@ namespace DashboardUI
 
             double totalDepartmentCapacity = 0;
             double totalProjectCapacity = 0;
-            foreach (var department in _departmentDatas.Data)
+            //foreach (var department in _departmentDatas.Data)
+            //{
+            foreach (var departmentDetail in _departmentCapacityDetailDatas.Data)
             {
-                foreach (var departmentDetail in _departmentCapacityDetailDatas.Data)
+                if (departmentDetail.Date == time)
                 {
-                    if (departmentDetail.Date == time)
-                    {
-                        totalDepartmentCapacity += departmentDetail.DTotalCapacity;
+                    totalDepartmentCapacity += departmentDetail.DTotalCapacity;
 
-                    }
-                }
-                foreach (var projectDetail in _projectCapacityDetailDatas.Data)
-                {
-                    if (projectDetail.Date == time)
-                    {
-                        totalProjectCapacity += projectDetail.PTotalCapacity;
-                    }
                 }
             }
+            foreach (var projectDetail in _projectCapacityDetailDatas.Data)
+            {
+                if (projectDetail.Date == time)
+                {
+                    totalProjectCapacity += projectDetail.PTotalCapacity;
+                }
+            }
+            //            }
 
             if (totalProjectCapacity >= totalDepartmentCapacity)
-                totalProjectCapacity = totalDepartmentCapacity;
+                totalDepartmentCapacity = totalProjectCapacity;
 
             newSerie.Points[0].SetValueXY("", totalDepartmentCapacity);
             newSerie.Points[1].SetValueXY("", totalProjectCapacity);
@@ -287,12 +296,14 @@ namespace DashboardUI
 
         private void buttonOverall_Click(object sender, EventArgs e)
         {
+            labelDashboard.Text = "DATA RANGE : ALL";
             _selectedYear = DateTime.Now.Year;
             _managementDatas = _managementManager.GetAll();
             _departmentDatas = _departmentManager.GetAll();
             _projectDatas = _projectManager.GetAll();
             _departmentCapacityDetailDatas = _departmentCapacityManager.GetDepartmentCapacityDetails();
             _projectCapacityDetailDatas = _projectCapacityManager.GetProjectCapacityDetails();
+            _departmentCapacityDates = _departmentCapacityManager.GetAllUniqueDate();
             UpdateCharts();
         }
 
@@ -301,13 +312,14 @@ namespace DashboardUI
             DateTime startDate = new DateTime(DateTime.Now.Year, 1, 1);
             DateTime endDate = new DateTime(DateTime.Now.Year, 12, 1);
             _selectedYear = DateTime.Now.Year;
+            labelDashboard.Text = "DATA RANGE : " + _selectedYear;
 
             _managementDatas = _managementManager.GetAll();
             _departmentDatas = _departmentManager.GetAll();
             _projectDatas = _projectManager.GetAllByDateBetween(startDate, endDate);
             _departmentCapacityDetailDatas = _departmentCapacityManager.GetAllByDateBetween(startDate, endDate);
             _projectCapacityDetailDatas = _projectCapacityManager.GetProjectCapacityDetailsByDateBetween(startDate, endDate);
-
+            _departmentCapacityDates = _departmentCapacityManager.GetAllUniqueDateBetween(startDate, endDate);
             UpdateCharts();
         }
 
@@ -316,12 +328,14 @@ namespace DashboardUI
             DateTime startDate = new DateTime(DateTime.Now.Year - 1, 1, 1);
             DateTime endDate = new DateTime(DateTime.Now.Year - 1, 12, 1);
             _selectedYear = DateTime.Now.Year - 1;
+            labelDashboard.Text = "DATA RANGE : " + _selectedYear;
 
             _managementDatas = _managementManager.GetAll();
             _departmentDatas = _departmentManager.GetAll();
             _projectDatas = _projectManager.GetAllByDateBetween(startDate, endDate);
             _departmentCapacityDetailDatas = _departmentCapacityManager.GetAllByDateBetween(startDate, endDate);
             _projectCapacityDetailDatas = _projectCapacityManager.GetProjectCapacityDetailsByDateBetween(startDate, endDate);
+            _departmentCapacityDates = _departmentCapacityManager.GetAllUniqueDateBetween(startDate, endDate);
 
             UpdateCharts();
         }
@@ -341,12 +355,14 @@ namespace DashboardUI
             DateTime startDate = dateTimePickerStart.Value;
             DateTime endDate = dateTimePickerEnd.Value;
             _selectedYear = dateTimePickerEnd.Value.Year;
+            labelDashboard.Text = "DATA RANGE : " + dateTimePickerStart.Value.Year + " - " + dateTimePickerEnd.Value.Year;
 
             _managementDatas = _managementManager.GetAll();
             _departmentDatas = _departmentManager.GetAll();
             _projectDatas = _projectManager.GetAllByDateBetween(startDate, endDate);
             _departmentCapacityDetailDatas = _departmentCapacityManager.GetAllByDateBetween(startDate, endDate);
             _projectCapacityDetailDatas = _projectCapacityManager.GetProjectCapacityDetailsByDateBetween(startDate, endDate);
+            _departmentCapacityDates = _departmentCapacityManager.GetAllUniqueDateBetween(startDate, endDate);
 
             UpdateCharts();
 
@@ -377,5 +393,6 @@ namespace DashboardUI
 
             GenerateDataGridData(_isProgressing);
         }
+
     }
 }

@@ -42,6 +42,8 @@ namespace DashboardUI
             _departmentIndex = index;
 
             InitializeComponent();
+            new DropShadow().ApplyShadows(this);
+
         }
 
         private void UpdateDepartmentForm_Load(object sender, EventArgs e)

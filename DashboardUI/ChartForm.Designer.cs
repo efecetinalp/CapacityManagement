@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChartForm));
             areaChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             buttonSave = new Button();
@@ -49,7 +49,6 @@
             comboBoxGridColor = new ComboBox();
             labelGridWidth = new Label();
             comboBoxGridWidth = new ComboBox();
-            checkBoxValueRotate = new CheckBox();
             labelLineColor = new Label();
             comboBoxLineColor = new ComboBox();
             labelLineWidth = new Label();
@@ -58,11 +57,10 @@
             comboBoxAreaBorderColor = new ComboBox();
             labelAreaBorder = new Label();
             comboBoxAreaBorder = new ComboBox();
-            checkBoxMinorGrids = new CheckBox();
             labelGridStyle = new Label();
             comboBoxGridStyle = new ComboBox();
-            button1 = new Button();
-            button2 = new Button();
+            buttonRotate = new Button();
+            buttonShowHide = new Button();
             ((System.ComponentModel.ISupportInitialize)areaChart).BeginInit();
             SuspendLayout();
             // 
@@ -70,30 +68,30 @@
             // 
             areaChart.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             areaChart.BackgroundImageLayout = ImageLayout.None;
-            chartArea1.AxisX.IsLabelAutoFit = false;
-            chartArea1.AxisX.LabelAutoFitMaxFontSize = 9;
-            chartArea1.AxisX.LabelAutoFitMinFontSize = 8;
-            chartArea1.AxisX.LabelStyle.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            chartArea1.AxisX.TitleFont = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            chartArea1.AxisY.IsLabelAutoFit = false;
-            chartArea1.AxisY.LabelStyle.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            chartArea1.AxisY.TitleFont = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            chartArea1.Name = "ChartArea1";
-            areaChart.ChartAreas.Add(chartArea1);
-            legend1.Alignment = StringAlignment.Center;
-            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend1.Name = "Legend1";
-            areaChart.Legends.Add(legend1);
+            chartArea9.AxisX.IsLabelAutoFit = false;
+            chartArea9.AxisX.LabelAutoFitMaxFontSize = 9;
+            chartArea9.AxisX.LabelAutoFitMinFontSize = 8;
+            chartArea9.AxisX.LabelStyle.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            chartArea9.AxisX.TitleFont = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
+            chartArea9.AxisY.IsLabelAutoFit = false;
+            chartArea9.AxisY.LabelStyle.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            chartArea9.AxisY.TitleFont = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
+            chartArea9.Name = "ChartArea1";
+            areaChart.ChartAreas.Add(chartArea9);
+            legend9.Alignment = StringAlignment.Center;
+            legend9.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend9.Name = "Legend1";
+            areaChart.Legends.Add(legend9);
             areaChart.Location = new Point(21, 122);
             areaChart.Margin = new Padding(2);
             areaChart.Name = "areaChart";
             areaChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Italic, GraphicsUnit.Point);
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            areaChart.Series.Add(series1);
+            series9.ChartArea = "ChartArea1";
+            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series9.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Italic, GraphicsUnit.Point);
+            series9.Legend = "Legend1";
+            series9.Name = "Series1";
+            areaChart.Series.Add(series9);
             areaChart.Size = new Size(1236, 514);
             areaChart.TabIndex = 0;
             areaChart.Text = "Capacity";
@@ -141,6 +139,7 @@
             comboBoxColorPalette.Name = "comboBoxColorPalette";
             comboBoxColorPalette.Size = new Size(124, 20);
             comboBoxColorPalette.TabIndex = 4;
+            comboBoxColorPalette.SelectedIndexChanged += comboBoxColorPalette_SelectedIndexChanged;
             // 
             // labelColorPalette
             // 
@@ -196,8 +195,9 @@
             comboBoxAxisValueSize.Location = new Point(149, 25);
             comboBoxAxisValueSize.Margin = new Padding(4, 3, 4, 3);
             comboBoxAxisValueSize.Name = "comboBoxAxisValueSize";
-            comboBoxAxisValueSize.Size = new Size(124, 20);
+            comboBoxAxisValueSize.Size = new Size(93, 20);
             comboBoxAxisValueSize.TabIndex = 31;
+            comboBoxAxisValueSize.SelectedIndexChanged += comboBoxAxisValueSize_SelectedIndexChanged;
             // 
             // labelXAxisInterval
             // 
@@ -220,6 +220,7 @@
             comboBoxXAxisInterval.Name = "comboBoxXAxisInterval";
             comboBoxXAxisInterval.Size = new Size(96, 20);
             comboBoxXAxisInterval.TabIndex = 33;
+            comboBoxXAxisInterval.SelectedIndexChanged += comboBoxXAxisInterval_SelectedIndexChanged;
             // 
             // labelYAxisInterval
             // 
@@ -242,6 +243,7 @@
             comboBoxYAxisInterval.Name = "comboBoxYAxisInterval";
             comboBoxYAxisInterval.Size = new Size(96, 20);
             comboBoxYAxisInterval.TabIndex = 35;
+            comboBoxYAxisInterval.SelectedIndexChanged += comboBoxYAxisInterval_SelectedIndexChanged;
             // 
             // labelGridColor
             // 
@@ -264,6 +266,7 @@
             comboBoxGridColor.Name = "comboBoxGridColor";
             comboBoxGridColor.Size = new Size(96, 20);
             comboBoxGridColor.TabIndex = 39;
+            comboBoxGridColor.SelectedIndexChanged += comboBoxGridColor_SelectedIndexChanged;
             // 
             // labelGridWidth
             // 
@@ -286,18 +289,7 @@
             comboBoxGridWidth.Name = "comboBoxGridWidth";
             comboBoxGridWidth.Size = new Size(96, 20);
             comboBoxGridWidth.TabIndex = 37;
-            // 
-            // checkBoxValueRotate
-            // 
-            checkBoxValueRotate.AutoSize = true;
-            checkBoxValueRotate.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            checkBoxValueRotate.ForeColor = Color.Black;
-            checkBoxValueRotate.Location = new Point(152, 65);
-            checkBoxValueRotate.Name = "checkBoxValueRotate";
-            checkBoxValueRotate.Size = new Size(81, 16);
-            checkBoxValueRotate.TabIndex = 41;
-            checkBoxValueRotate.Text = "Rotate Dates";
-            checkBoxValueRotate.UseVisualStyleBackColor = true;
+            comboBoxGridWidth.SelectedIndexChanged += comboBoxGridWidth_SelectedIndexChanged;
             // 
             // labelLineColor
             // 
@@ -320,6 +312,7 @@
             comboBoxLineColor.Name = "comboBoxLineColor";
             comboBoxLineColor.Size = new Size(96, 20);
             comboBoxLineColor.TabIndex = 44;
+            comboBoxLineColor.SelectedIndexChanged += comboBoxLineColor_SelectedIndexChanged;
             // 
             // labelLineWidth
             // 
@@ -342,6 +335,7 @@
             comboBoxLineWidth.Name = "comboBoxLineWidth";
             comboBoxLineWidth.Size = new Size(96, 20);
             comboBoxLineWidth.TabIndex = 42;
+            comboBoxLineWidth.SelectedIndexChanged += comboBoxLineWidth_SelectedIndexChanged;
             // 
             // labelAreaBorderColor
             // 
@@ -364,6 +358,7 @@
             comboBoxAreaBorderColor.Name = "comboBoxAreaBorderColor";
             comboBoxAreaBorderColor.Size = new Size(96, 20);
             comboBoxAreaBorderColor.TabIndex = 48;
+            comboBoxAreaBorderColor.SelectedIndexChanged += comboBoxAreaBorderColor_SelectedIndexChanged;
             // 
             // labelAreaBorder
             // 
@@ -386,18 +381,7 @@
             comboBoxAreaBorder.Name = "comboBoxAreaBorder";
             comboBoxAreaBorder.Size = new Size(96, 20);
             comboBoxAreaBorder.TabIndex = 46;
-            // 
-            // checkBoxMinorGrids
-            // 
-            checkBoxMinorGrids.AutoSize = true;
-            checkBoxMinorGrids.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            checkBoxMinorGrids.ForeColor = Color.Black;
-            checkBoxMinorGrids.Location = new Point(489, 63);
-            checkBoxMinorGrids.Name = "checkBoxMinorGrids";
-            checkBoxMinorGrids.Size = new Size(106, 16);
-            checkBoxMinorGrids.TabIndex = 51;
-            checkBoxMinorGrids.Text = "Show Minor Grids";
-            checkBoxMinorGrids.UseVisualStyleBackColor = true;
+            comboBoxAreaBorder.SelectedIndexChanged += comboBoxAreaBorder_SelectedIndexChanged;
             // 
             // labelGridStyle
             // 
@@ -420,47 +404,50 @@
             comboBoxGridStyle.Name = "comboBoxGridStyle";
             comboBoxGridStyle.Size = new Size(96, 20);
             comboBoxGridStyle.TabIndex = 52;
+            comboBoxGridStyle.SelectedIndexChanged += comboBoxGridStyle_SelectedIndexChanged;
             // 
-            // button1
+            // buttonRotate
             // 
-            button1.Cursor = Cursors.Hand;
-            button1.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
-            button1.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(238, 61);
-            button1.Margin = new Padding(2);
-            button1.Name = "button1";
-            button1.Padding = new Padding(0, 0, 1, 1);
-            button1.Size = new Size(20, 20);
-            button1.TabIndex = 54;
-            button1.UseVisualStyleBackColor = true;
+            buttonRotate.Cursor = Cursors.Hand;
+            buttonRotate.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
+            buttonRotate.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonRotate.FlatStyle = FlatStyle.Flat;
+            buttonRotate.Image = (Image)resources.GetObject("buttonRotate.Image");
+            buttonRotate.Location = new Point(248, 25);
+            buttonRotate.Margin = new Padding(2);
+            buttonRotate.Name = "buttonRotate";
+            buttonRotate.Padding = new Padding(0, 0, 1, 1);
+            buttonRotate.Size = new Size(20, 20);
+            buttonRotate.TabIndex = 54;
+            buttonRotate.UseVisualStyleBackColor = true;
+            buttonRotate.Click += buttonRotate_Click;
             // 
-            // button2
+            // buttonShowHide
             // 
-            button2.Cursor = Cursors.Hand;
-            button2.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
-            button2.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Image = (Image)resources.GetObject("button2.Image");
-            button2.Location = new Point(487, 84);
-            button2.Margin = new Padding(2);
-            button2.Name = "button2";
-            button2.Padding = new Padding(0, 0, 1, 1);
-            button2.Size = new Size(20, 20);
-            button2.TabIndex = 55;
-            button2.UseVisualStyleBackColor = true;
+            buttonShowHide.Cursor = Cursors.Hand;
+            buttonShowHide.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
+            buttonShowHide.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonShowHide.FlatStyle = FlatStyle.Flat;
+            buttonShowHide.Image = (Image)resources.GetObject("buttonShowHide.Image");
+            buttonShowHide.Location = new Point(489, 65);
+            buttonShowHide.Margin = new Padding(2);
+            buttonShowHide.Name = "buttonShowHide";
+            buttonShowHide.Padding = new Padding(0, 0, 1, 1);
+            buttonShowHide.Size = new Size(20, 20);
+            buttonShowHide.TabIndex = 55;
+            buttonShowHide.UseVisualStyleBackColor = true;
+            buttonShowHide.Click += buttonShowHide_Click;
             // 
             // ChartForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(242, 242, 242);
             ClientSize = new Size(1280, 660);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(buttonShowHide);
+            Controls.Add(buttonRotate);
             Controls.Add(labelGridStyle);
             Controls.Add(comboBoxGridStyle);
-            Controls.Add(checkBoxMinorGrids);
             Controls.Add(labelAreaBorderColor);
             Controls.Add(comboBoxAreaBorderColor);
             Controls.Add(labelAreaBorder);
@@ -469,7 +456,6 @@
             Controls.Add(comboBoxLineColor);
             Controls.Add(labelLineWidth);
             Controls.Add(comboBoxLineWidth);
-            Controls.Add(checkBoxValueRotate);
             Controls.Add(labelGridColor);
             Controls.Add(comboBoxGridColor);
             Controls.Add(labelGridWidth);
@@ -518,7 +504,6 @@
         private ComboBox comboBoxGridColor;
         private Label labelGridWidth;
         private ComboBox comboBoxGridWidth;
-        private CheckBox checkBoxValueRotate;
         private Label labelLineColor;
         private ComboBox comboBoxLineColor;
         private Label labelLineWidth;
@@ -527,10 +512,9 @@
         private ComboBox comboBoxAreaBorderColor;
         private Label labelAreaBorder;
         private ComboBox comboBoxAreaBorder;
-        private CheckBox checkBoxMinorGrids;
         private Label labelGridStyle;
         private ComboBox comboBoxGridStyle;
-        private Button button1;
-        private Button button2;
+        private Button buttonRotate;
+        private Button buttonShowHide;
     }
 }

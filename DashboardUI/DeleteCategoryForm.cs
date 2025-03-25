@@ -34,6 +34,8 @@ namespace DashboardUI
             _projectManager = projectManager;
             _categoryToDelete = category;
             InitializeComponent();
+            new DropShadow().ApplyShadows(this);
+
         }
 
         private void DeleteCategoryForm_Load(object sender, EventArgs e)

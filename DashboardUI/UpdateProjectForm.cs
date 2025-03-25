@@ -57,6 +57,8 @@ namespace DashboardUI
             _projectIndex = index;
 
             InitializeComponent();
+            new DropShadow().ApplyShadows(this);
+
         }
 
         private void UpdateProjectForm_Load(object sender, EventArgs e)

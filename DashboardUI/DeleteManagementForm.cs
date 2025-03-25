@@ -34,6 +34,8 @@ namespace DashboardUI
             _departmentManager = departmentManager;
             _managementToDelete = management;
             InitializeComponent();
+            new DropShadow().ApplyShadows(this);
+
         }
 
         private void DeleteForm_Load(object sender, EventArgs e)

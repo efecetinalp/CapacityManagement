@@ -171,6 +171,8 @@
             // 
             // comboBoxUser
             // 
+            comboBoxUser.BackColor = SystemColors.Window;
+            comboBoxUser.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxUser.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
             comboBoxUser.FormattingEnabled = true;
             comboBoxUser.Location = new Point(78, 159);
@@ -181,6 +183,8 @@
             // 
             // comboBoxCategory
             // 
+            comboBoxCategory.BackColor = SystemColors.Window;
+            comboBoxCategory.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxCategory.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
             comboBoxCategory.FormattingEnabled = true;
             comboBoxCategory.Location = new Point(78, 138);
@@ -282,22 +286,26 @@
             dateTimePickerStart.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             dateTimePickerStart.Format = DateTimePickerFormat.Custom;
             dateTimePickerStart.ImeMode = ImeMode.NoControl;
-            dateTimePickerStart.Location = new Point(292, 114);
+            dateTimePickerStart.Location = new Point(292, 116);
             dateTimePickerStart.Margin = new Padding(2);
             dateTimePickerStart.Name = "dateTimePickerStart";
+            dateTimePickerStart.ShowUpDown = true;
             dateTimePickerStart.Size = new Size(94, 20);
             dateTimePickerStart.TabIndex = 29;
             dateTimePickerStart.Visible = false;
             // 
             // dateTimePickerEnd
             // 
+            dateTimePickerEnd.AllowDrop = true;
+            dateTimePickerEnd.Checked = false;
             dateTimePickerEnd.CustomFormat = "MMM-yy";
             dateTimePickerEnd.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             dateTimePickerEnd.Format = DateTimePickerFormat.Custom;
             dateTimePickerEnd.ImeMode = ImeMode.NoControl;
-            dateTimePickerEnd.Location = new Point(292, 135);
+            dateTimePickerEnd.Location = new Point(292, 137);
             dateTimePickerEnd.Margin = new Padding(2);
             dateTimePickerEnd.Name = "dateTimePickerEnd";
+            dateTimePickerEnd.ShowUpDown = true;
             dateTimePickerEnd.Size = new Size(94, 20);
             dateTimePickerEnd.TabIndex = 30;
             dateTimePickerEnd.Visible = false;
@@ -398,7 +406,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ControlLightLight;
+            BackColor = Color.White;
             ClientSize = new Size(398, 231);
             Controls.Add(buttonEdit);
             Controls.Add(buttonQuit);

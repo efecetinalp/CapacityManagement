@@ -56,10 +56,10 @@
             // txtAlertBox
             // 
             txtAlertBox.AutoSize = true;
-            txtAlertBox.Font = new Font("Segoe UI", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            txtAlertBox.Location = new Point(73, 15);
+            txtAlertBox.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            txtAlertBox.Location = new Point(69, 15);
             txtAlertBox.Name = "txtAlertBox";
-            txtAlertBox.Size = new Size(58, 12);
+            txtAlertBox.Size = new Size(67, 13);
             txtAlertBox.TabIndex = 1;
             txtAlertBox.Text = "Notification";
             txtAlertBox.TextAlign = ContentAlignment.MiddleCenter;

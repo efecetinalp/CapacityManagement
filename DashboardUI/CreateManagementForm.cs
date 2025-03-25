@@ -30,6 +30,8 @@ namespace DashboardUI
         {
             _managementManager = managementManager;
             InitializeComponent();
+            new DropShadow().ApplyShadows(this);
+
         }
 
         private void CreateManagementForm_MouseDown(object sender, MouseEventArgs e)

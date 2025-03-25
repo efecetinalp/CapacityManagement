@@ -35,6 +35,8 @@ namespace DashboardUI
             _managementManager = managementManager;
 
             InitializeComponent();
+            new DropShadow().ApplyShadows(this);
+
         }
 
         private void UpdateManagementForm_Load(object sender, EventArgs e)

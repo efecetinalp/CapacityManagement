@@ -43,6 +43,10 @@ namespace DashboardUI
         ToolTip _tooltip;
         private Color myColor;
 
+        private bool isRotated;
+        private bool isHiden;
+        private bool isInitial = true;
+
         public ChartForm(DataGridForm dataGridForm, ColorCodeManager colorCodeManager, ColorPaletteManager colorPaletteManager) : base()
         {
             InitializeComponent();
@@ -110,6 +114,8 @@ namespace DashboardUI
             //grid style combobox
             comboBoxGridStyle.Items.AddRange(new string[] { "Not", "Dash", "Dash Dot", "Dash Dot Dot", "Dot", "Solid" });
             comboBoxGridStyle.SelectedIndex = 5;
+
+            isInitial = false;
         }
 
         #region UI Handler
@@ -177,8 +183,8 @@ namespace DashboardUI
             chartArea.AxisX.MajorGrid.LineColor = (Color)comboBoxGridColor.SelectedValue;
             chartArea.AxisX.LineColor = (Color)comboBoxGridColor.SelectedValue;
             chartArea.AxisX.MajorGrid.LineDashStyle = (ChartDashStyle)comboBoxGridStyle.SelectedIndex;
-            
-            if (checkBoxMinorGrids.Checked)
+
+            if (isHiden)
             {
                 chartArea.AxisX.MinorGrid.Enabled = true;
                 chartArea.AxisX.MinorGrid.LineWidth = 1;
@@ -191,7 +197,7 @@ namespace DashboardUI
             chartArea.AxisX.IntervalType = DateTimeIntervalType.Months;
             chartArea.AxisX.LabelStyle.Format = "MMM-yy";
 
-            if (checkBoxValueRotate.Checked)
+            if (isRotated)
                 chartArea.AxisX.LabelStyle.Angle = 90;
             else
                 chartArea.AxisX.LabelStyle.Angle = 0;
@@ -208,7 +214,7 @@ namespace DashboardUI
             chartArea.AxisY.LineColor = (Color)comboBoxGridColor.SelectedValue;
             chartArea.AxisY.MajorGrid.LineDashStyle = (ChartDashStyle)comboBoxGridStyle.SelectedIndex;
 
-            if (checkBoxMinorGrids.Checked)
+            if (isHiden)
             {
                 chartArea.AxisY.MinorGrid.Enabled = true;
                 chartArea.AxisY.MinorGrid.LineWidth = 1;
@@ -389,5 +395,124 @@ namespace DashboardUI
                 }
             }
         }
+
+        #region UI events
+
+        private void buttonShowHide_Click(object sender, EventArgs e)
+        {
+            if (!isInitial)
+            {
+                if (isHiden)
+                    isHiden = false;
+                else
+                    isHiden = true;
+
+                buttonUpdate_Click(sender, e);
+            }
+        }
+
+        private void buttonRotate_Click(object sender, EventArgs e)
+        {
+            if (!isInitial)
+            {
+                if (isRotated)
+                    isRotated = false;
+                else
+                    isRotated = true;
+
+                buttonUpdate_Click(sender, e);
+            }
+        }
+
+        private void comboBoxColorPalette_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!isInitial)
+            {
+                buttonUpdate_Click(sender, e);
+            }
+        }
+
+        private void comboBoxAxisValueSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!isInitial)
+            {
+                buttonUpdate_Click(sender, e);
+            }
+        }
+
+        private void comboBoxXAxisInterval_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!isInitial)
+            {
+                buttonUpdate_Click(sender, e);
+            }
+        }
+
+        private void comboBoxYAxisInterval_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!isInitial)
+            {
+                buttonUpdate_Click(sender, e);
+            }
+        }
+
+        private void comboBoxGridColor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!isInitial)
+            {
+                buttonUpdate_Click(sender, e);
+            }
+        }
+
+        private void comboBoxGridWidth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!isInitial)
+            {
+                buttonUpdate_Click(sender, e);
+            }
+        }
+
+        private void comboBoxGridStyle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!isInitial)
+            {
+                buttonUpdate_Click(sender, e);
+            }
+        }
+
+        private void comboBoxLineWidth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!isInitial)
+            {
+                buttonUpdate_Click(sender, e);
+            }
+        }
+
+        private void comboBoxLineColor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!isInitial)
+            {
+                buttonUpdate_Click(sender, e);
+            }
+        }
+
+        private void comboBoxAreaBorder_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!isInitial)
+            {
+                buttonUpdate_Click(sender, e);
+            }
+        }
+
+        private void comboBoxAreaBorderColor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!isInitial)
+            {
+                buttonUpdate_Click(sender, e);
+            }
+        }
+
+        #endregion
+
     }
 }

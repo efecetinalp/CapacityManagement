@@ -145,6 +145,7 @@
             Name = "ExportImage";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
+            MouseDown += ExportImage_MouseDown;
             ResumeLayout(false);
             PerformLayout();
         }

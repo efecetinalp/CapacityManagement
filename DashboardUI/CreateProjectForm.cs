@@ -58,6 +58,8 @@ namespace DashboardUI
             _userManager = userManager;
 
             InitializeComponent();
+            new DropShadow().ApplyShadows(this);
+
         }
 
         public CreateProjectForm(Management management, Department department, CategoryManager categoryManager, ProjectManager projectManager, UserManager userManager)

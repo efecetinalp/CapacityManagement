@@ -38,6 +38,8 @@ namespace DashboardUI
             _userIndex = index;
 
             InitializeComponent();
+            new DropShadow().ApplyShadows(this);
+
         }
 
         private void UpdateUserForm_Load(object sender, EventArgs e)

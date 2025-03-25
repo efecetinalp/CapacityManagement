@@ -34,6 +34,8 @@ namespace DashboardUI
             _projectCapacityManager = projectCapacityManager;
             _projectToDelete = project;
             InitializeComponent();
+            new DropShadow().ApplyShadows(this);
+
         }
 
         private void DeleteProject_Load(object sender, EventArgs e)

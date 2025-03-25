@@ -34,6 +34,8 @@ namespace DashboardUI
             _categoryManager = categoryManager;
             _categoryIndex = index;
             InitializeComponent();
+            new DropShadow().ApplyShadows(this);
+
         }
 
         private void UpdateCategoryForm_Load(object sender, EventArgs e)

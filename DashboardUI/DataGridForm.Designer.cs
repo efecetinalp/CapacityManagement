@@ -117,7 +117,6 @@
             // 
             // comboBoxDepartment
             // 
-            comboBoxDepartment.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxDepartment.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxDepartment.FormattingEnabled = true;
             comboBoxDepartment.Location = new Point(181, 46);
@@ -125,10 +124,10 @@
             comboBoxDepartment.Name = "comboBoxDepartment";
             comboBoxDepartment.Size = new Size(150, 20);
             comboBoxDepartment.TabIndex = 21;
+            comboBoxDepartment.DropDownStyle = ComboBoxStyle.DropDownList;
             // 
             // comboBoxManagement
             // 
-            comboBoxManagement.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxManagement.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxManagement.FormattingEnabled = true;
             comboBoxManagement.Location = new Point(21, 46);
@@ -137,6 +136,7 @@
             comboBoxManagement.Size = new Size(150, 20);
             comboBoxManagement.TabIndex = 20;
             comboBoxManagement.SelectedIndexChanged += comboBoxManagement_SelectedIndexChanged;
+            comboBoxManagement.DropDownStyle = ComboBoxStyle.DropDownList;
             // 
             // dateTimePickerStart
             // 

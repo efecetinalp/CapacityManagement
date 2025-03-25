@@ -30,6 +30,8 @@ namespace DashboardUI
         {
             _categoryManager = categoryManager;
             InitializeComponent();
+            new DropShadow().ApplyShadows(this);
+
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)

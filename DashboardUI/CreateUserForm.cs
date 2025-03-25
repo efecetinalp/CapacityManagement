@@ -31,6 +31,8 @@ namespace DashboardUI
         {
             _userManager = userManager;
             InitializeComponent();
+            new DropShadow().ApplyShadows(this);
+
         }
 
         private void CreateUser_Load(object sender, EventArgs e)

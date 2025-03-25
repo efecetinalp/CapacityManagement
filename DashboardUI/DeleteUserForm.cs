@@ -34,6 +34,8 @@ namespace DashboardUI
             _projectManager = projectManageer;
             _userToDelete = user;
             InitializeComponent();
+            new DropShadow().ApplyShadows(this);
+
         }
 
         private void DeleteUserForm_Load(object sender, EventArgs e)

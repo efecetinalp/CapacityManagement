@@ -36,6 +36,7 @@ namespace DashboardUI
             _projectManager = projectManager;
             _departmentToDelete = department;
             InitializeComponent();
+            new DropShadow().ApplyShadows(this);
         }
         private void DeleteDepartmentForm_Load(object sender, EventArgs e)
         {

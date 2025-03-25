@@ -36,6 +36,7 @@ namespace DashboardUI
             _managementManager = managementManager;
             _departmentManager = departmentManager;
             InitializeComponent();
+            new DropShadow().ApplyShadows(this);
         }
 
         private void CreateDepartmentForm_Load(object sender, EventArgs e)
