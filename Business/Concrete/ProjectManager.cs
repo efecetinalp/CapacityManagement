@@ -169,5 +169,15 @@ namespace Business.Concrete
             else
                 return new SuccessDataResult<List<ProjectDetailDto>>(result, Messages.ProjectListed);
         }
+
+        public IDataResult<List<Project>> GetAllByDateBetween(DateTime startDate, DateTime endDate)
+        {
+            List<Project> result = _projectDal.GetAll(p => p.StartDate >= startDate && p.EndDate <= endDate);
+
+            if (result == null)
+                return new ErrorDataResult<List<Project>>(result, Messages.EmptyData);
+            else
+                return new SuccessDataResult<List<Project>>(result, Messages.ProjectListed);
+        }
     }
 }

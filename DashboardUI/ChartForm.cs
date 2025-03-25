@@ -239,6 +239,7 @@ namespace DashboardUI
                 areaChart.Legends[i].LegendStyle = LegendStyle.Table;
             }
         }
+
         private void AddSeriaToChartLine(string serieName, List<double> data, List<double> months, SeriesChartType type, int borderWidth = 1)
         {
             System.Windows.Forms.DataVisualization.Charting.Series newSerie = areaChart.Series.Add(serieName);

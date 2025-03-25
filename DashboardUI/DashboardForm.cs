@@ -25,14 +25,15 @@ namespace DashboardUI
         DepartmentCapacityManager _departmentCapacityManager;
         ProjectCapacityManager _projectCapacityManager;
 
-        IDataResult<List<ProjectDetailDto>> _projectDetailDatas;
+        IDataResult<List<Project>> _projectDatas;
         IDataResult<List<Management>> _managementDatas;
         IDataResult<List<Department>> _departmentDatas;
         IDataResult<List<DepartmentCapacityDetailDto>> _departmentCapacityDetailDatas;
         IDataResult<List<ProjectCapacityDetailDto>> _projectCapacityDetailDatas;
+        IDataResult<List<DepartmentCapacity>> _departmentCapacityDates;
 
-        List<ProjectDetailDto> _completedProjects = new();
-        List<ProjectDetailDto> _ongiongProjects = new();
+        List<Project> _completedProjects = new();
+        List<Project> _ongiongProjects = new();
         private bool _isProgressing = false;
         int _selectedYear = DateTime.Now.Year;
 
@@ -51,11 +52,12 @@ namespace DashboardUI
 
         private void DashboardForm_Load(object sender, EventArgs e)
         {
-            _projectDetailDatas = _projectManager.GetProjectDetails();
+            _projectDatas = _projectManager.GetAll();
             _managementDatas = _managementManager.GetAll();
             _departmentDatas = _departmentManager.GetAll();
             _departmentCapacityDetailDatas = _departmentCapacityManager.GetDepartmentCapacityDetails();
             _projectCapacityDetailDatas = _projectCapacityManager.GetProjectCapacityDetails();
+            _departmentCapacityDates = _departmentCapacityManager.GetAllUniqueDate();
 
             UpdateCharts();
         }
@@ -83,7 +85,7 @@ namespace DashboardUI
             foreach (var management in _managementDatas.Data)
             {
                 int i = 0;
-                foreach (var project in _projectDetailDatas.Data)
+                foreach (var project in _projectDatas.Data)
                 {
                     if (project.IsCompleted)
                         _completedProjects.Add(project);
@@ -134,37 +136,95 @@ namespace DashboardUI
         //CHART 4 - NOT WORKED YET
         private void GenerateCapacityAgainstWorkloadChart()
         {
-            //var serieSplineArea = chartCapacityAgainstWork.Series["Series1"];
-            //serieSplineArea.Points.Clear();
-            //serieSplineArea.IsValueShownAsLabel = true;
+            double totalDepartmentCapacity = 0;
+            double totalProjectCapacity = 0;
+            chartCapacityAgainstWork.Series.Clear();
+            var serieSplineArea = chartCapacityAgainstWork.Series.Add("Total Capacity");
+            serieSplineArea.ChartType = SeriesChartType.SplineArea;
 
-            //double totalDepartmentCapacity = 0;
-            //double totalProjectCapacity = 0;
+            foreach (var date in _departmentCapacityDates.Data)
+            {
+                totalDepartmentCapacity = 0;
+                totalProjectCapacity = 0;
 
-            //foreach (var department in _departmentDatas.Data)
-            //{
-            //    _departmentCapacityDetailDatas = _departmentCapacityManager.GetAllByDateBetweenAndDepartmentName(new DateTime(2024, 1, 1), new DateTime(2025, 1, 1), department.DepartmentName);
+                foreach (var departmentDetail in _departmentCapacityDetailDatas.Data)
+                {
+                    if (departmentDetail.Date == date.Date)
+                    {
+                        totalDepartmentCapacity += departmentDetail.DTotalCapacity;
+                    }
+                }
 
-            //    foreach (var departmentDetail in _departmentCapacityDetailDatas.Data)
-            //    {
-            //        totalDepartmentCapacity += departmentDetail.DTotalCapacity;
-            //    }
+                var newDataPoint = serieSplineArea.Points.AddXY(date.Date, totalDepartmentCapacity);
+            }
 
-            //    _projectCapacityDetailDatas = _projectCapacityManager.GetProjectCapacityDetailsByDateBetweenAndDepartmentId(new DateTime(2024, 6, 1), new DateTime(2024, 6, 1), department.DepartmentId);
-            //    foreach (var projectDetail in _projectCapacityDetailDatas.Data)
-            //    {
-            //        totalProjectCapacity += projectDetail.PTotalCapacity;
-            //    }
-            //}
+            foreach (var management in _managementDatas.Data)
+            {
+                var newSerie = chartCapacityAgainstWork.Series.Add(management.ManagementName);
+                newSerie.ChartType = SeriesChartType.StackedColumn;
 
+                foreach (var date in _departmentCapacityDates.Data)
+                {
+                    totalProjectCapacity = 0;
+
+                    foreach (var projectDetail in _projectCapacityDetailDatas.Data)
+                    {
+                        if (projectDetail.Date == date.Date && projectDetail.ManagementId == management.ManagementId)
+                        {
+                            totalProjectCapacity += projectDetail.PTotalCapacity;
+                        }
+                    }
+
+                    var newDataPoint = newSerie.Points.AddXY(date.Date, totalProjectCapacity);
+                }
+            }
+        }
+
+        //delete later
+        private void GenerateCapacityAgainstWorkloadChartBACKUP()
+        {
+            var serieSplineArea = chartCapacityAgainstWork.Series["Series1"];
+
+            double totalDepartmentCapacity = 0;
+            double totalProjectCapacity = 0;
+            int index = 0;
+
+            foreach (var management in _managementDatas.Data)
+            {
+                var newSerie = chartCapacityAgainstWork.Series.Add(management.ManagementName);
+                newSerie.ChartType = SeriesChartType.StackedColumn;
+                foreach (var date in _departmentCapacityDates.Data)
+                {
+                    totalDepartmentCapacity = 0;
+
+                    foreach (var department in _departmentDatas.Data)
+                    {
+                        foreach (var departmentDetail in _departmentCapacityDetailDatas.Data)
+                        {
+                            if (department.ManagementId == management.ManagementId && departmentDetail.Date == date.Date)
+                            {
+                                totalDepartmentCapacity += departmentDetail.DTotalCapacity;
+                            }
+
+                        }
+
+                        //foreach (var projectDetail in _projectCapacityDetailDatas.Data)
+                        //{
+                        //    totalProjectCapacity += projectDetail.PTotalCapacity;
+                        //}
+
+                    }
+
+                    var newDataPoint = serieSplineArea.Points.AddXY(date.Date, totalDepartmentCapacity);
+                }
+            }
         }
 
         //CHART 5 - DONE
         private void GeneratePercentageCapacityChart(DateTime time)
         {
             var newSerie = chartCapacityPercentage.Series["Series1"];
-            newSerie.Points.Clear();
-            newSerie.IsValueShownAsLabel = true;
+            newSerie.IsValueShownAsLabel = false;
 
             double totalDepartmentCapacity = 0;
             double totalProjectCapacity = 0;
@@ -190,9 +250,13 @@ namespace DashboardUI
             if (totalProjectCapacity >= totalDepartmentCapacity)
                 totalProjectCapacity = totalDepartmentCapacity;
 
-            newSerie.Points.AddXY("", totalDepartmentCapacity);
-            newSerie.Points.AddXY("Capacity", totalProjectCapacity);
-            newSerie.Points.AddXY("Available Capacity", totalDepartmentCapacity - totalProjectCapacity);
+            newSerie.Points[0].SetValueXY("", totalDepartmentCapacity);
+            newSerie.Points[1].SetValueXY("", totalProjectCapacity);
+            newSerie.Points[2].SetValueXY("", totalDepartmentCapacity - totalProjectCapacity);
+            labelPercentage.Text = ((totalDepartmentCapacity - totalProjectCapacity) / totalDepartmentCapacity * 100).ToString("0.0") + "%";
+
+            newSerie.Points[0].Color = Color.White;
+            newSerie.Points[0].BackGradientStyle = GradientStyle.None;
         }
 
         //DATAGRID - DONE
@@ -203,15 +267,22 @@ namespace DashboardUI
             dataGridViewOngoingProjects.Columns.Clear();
 
             if (!isProgressing)
+            {
                 dataGridViewOngoingProjects.DataSource = _completedProjects;
+                dataGridViewOngoingProjects.Columns[5].HeaderText = "Completed Projects";
+            }
             else
+            {
                 dataGridViewOngoingProjects.DataSource = _ongiongProjects;
+                dataGridViewOngoingProjects.Columns[5].HeaderText = "Ongoing Projects";
+            }
 
-            dataGridViewOngoingProjects.Columns[0].Visible = false;
-            dataGridViewOngoingProjects.Columns[9].Visible = false;
-            dataGridViewOngoingProjects.Columns[10].Visible = false;
-            dataGridViewOngoingProjects.Columns[11].Visible = false;
-            dataGridViewOngoingProjects.Columns[12].Visible = false;
+            for (int i = 0; i < dataGridViewOngoingProjects.Columns.Count; i++)
+            {
+                if (i != 5)
+                    dataGridViewOngoingProjects.Columns[i].Visible = false;
+            }
+
         }
 
         private void buttonOverall_Click(object sender, EventArgs e)
@@ -219,7 +290,7 @@ namespace DashboardUI
             _selectedYear = DateTime.Now.Year;
             _managementDatas = _managementManager.GetAll();
             _departmentDatas = _departmentManager.GetAll();
-            _projectDetailDatas = _projectManager.GetProjectDetails();
+            _projectDatas = _projectManager.GetAll();
             _departmentCapacityDetailDatas = _departmentCapacityManager.GetDepartmentCapacityDetails();
             _projectCapacityDetailDatas = _projectCapacityManager.GetProjectCapacityDetails();
             UpdateCharts();
@@ -233,7 +304,7 @@ namespace DashboardUI
 
             _managementDatas = _managementManager.GetAll();
             _departmentDatas = _departmentManager.GetAll();
-            _projectDetailDatas = _projectManager.GetProjectDetailsByDateBetween(startDate, endDate);
+            _projectDatas = _projectManager.GetAllByDateBetween(startDate, endDate);
             _departmentCapacityDetailDatas = _departmentCapacityManager.GetAllByDateBetween(startDate, endDate);
             _projectCapacityDetailDatas = _projectCapacityManager.GetProjectCapacityDetailsByDateBetween(startDate, endDate);
 
@@ -248,7 +319,7 @@ namespace DashboardUI
 
             _managementDatas = _managementManager.GetAll();
             _departmentDatas = _departmentManager.GetAll();
-            _projectDetailDatas = _projectManager.GetProjectDetailsByDateBetween(startDate, endDate);
+            _projectDatas = _projectManager.GetAllByDateBetween(startDate, endDate);
             _departmentCapacityDetailDatas = _departmentCapacityManager.GetAllByDateBetween(startDate, endDate);
             _projectCapacityDetailDatas = _projectCapacityManager.GetProjectCapacityDetailsByDateBetween(startDate, endDate);
 
@@ -273,7 +344,7 @@ namespace DashboardUI
 
             _managementDatas = _managementManager.GetAll();
             _departmentDatas = _departmentManager.GetAll();
-            _projectDetailDatas = _projectManager.GetProjectDetailsByDateBetween(startDate, endDate);
+            _projectDatas = _projectManager.GetAllByDateBetween(startDate, endDate);
             _departmentCapacityDetailDatas = _departmentCapacityManager.GetAllByDateBetween(startDate, endDate);
             _projectCapacityDetailDatas = _projectCapacityManager.GetProjectCapacityDetailsByDateBetween(startDate, endDate);
 
@@ -289,6 +360,22 @@ namespace DashboardUI
         private void dateTimeChart3_ValueChanged(object sender, EventArgs e)
         {
             GeneratePercentageCapacityChart(new DateTime(_selectedYear, dateTimeChart3.Value.Month, 1));
+        }
+
+        private void buttonShow_Click(object sender, EventArgs e)
+        {
+            if (!_isProgressing)
+            {
+                buttonShow.Text = "Show Ongoing";
+                _isProgressing = true;
+            }
+            else
+            {
+                buttonShow.Text = "Show Completed";
+                _isProgressing = false;
+            }
+
+            GenerateDataGridData(_isProgressing);
         }
     }
 }

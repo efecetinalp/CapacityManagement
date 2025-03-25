@@ -16,6 +16,7 @@ namespace Business.Abstract
         IDataResult<List<Project>> GetAllByUserId(int userId);
         IDataResult<List<Project>> GetAllByCategoryId(int categoryId);
         IDataResult<List<Project>> GetAllByDepartmentId(int departmentId);
+        IDataResult<List<Project>> GetAllByDateBetween(DateTime startDate, DateTime endDate);
         IDataResult<List<Project>> GetByDate(DateTime date);
         IDataResult<List<Project>> GetByDateBetween(DateTime startDate, DateTime endDate);
         IDataResult<List<ProjectDetailDto>> GetCategoryByProjectName(string projectName);

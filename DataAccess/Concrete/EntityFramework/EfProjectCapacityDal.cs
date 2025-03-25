@@ -19,11 +19,13 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var result = from p in context.ProjectCapacities
                              join pt in context.Projects on p.ProjectId equals pt.ProjectId
+                             join m in context.Managements on pt.ManagementId equals m.ManagementId
                              select new ProjectCapacityDetailDto
                              {
                                  PCapacityId = p.ProjectCapacityId,
                                  ProjectId = pt.DepartmentId,
                                  DepartmentId = pt.DepartmentId,
+                                 ManagementId = m.ManagementId,
                                  ProjectName = pt.ProjectName,
                                  PTotalCapacity = p.PTotalCapacity,
                                  Date = p.Date
@@ -38,11 +40,13 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var result = from p in context.ProjectCapacities
                              join pt in context.Projects on p.ProjectId equals pt.ProjectId
+                             join m in context.Managements on pt.ManagementId equals m.ManagementId
                              select new ProjectCapacityDetailDto
                              {
                                  PCapacityId = p.ProjectCapacityId,
                                  ProjectId = pt.DepartmentId,
                                  DepartmentId = pt.DepartmentId,
+                                 ManagementId = m.ManagementId,
                                  ProjectName = pt.ProjectName,
                                  PTotalCapacity = p.PTotalCapacity,
                                  Date = p.Date
