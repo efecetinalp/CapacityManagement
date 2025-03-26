@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -35,7 +36,7 @@ namespace DashboardUI
 
         List<Project> _completedProjects = new();
         List<Project> _ongiongProjects = new();
-        private bool _isProgressing = false;
+        private bool _isProgressing = true;
         int _selectedYear = DateTime.Now.Year;
 
         public DashboardForm(ManagementManager managementManager, DepartmentManager departmentManager, ProjectManager projectManager, CategoryManager categoryManager,
@@ -62,7 +63,6 @@ namespace DashboardUI
             _departmentCapacityDates = _departmentCapacityManager.GetAllUniqueDate();
 
             UpdateCharts();
-
         }
 
         private async void UpdateCharts()
@@ -116,6 +116,9 @@ namespace DashboardUI
                     newSerie.Points.AddXY(departmentDetail.DepartmentName, departmentDetail.DTotalCapacity);
                 }
             }
+
+
+
         }
 
         //CHART 3 - DONE - CORRECTED
@@ -237,8 +240,7 @@ namespace DashboardUI
 
             double totalDepartmentCapacity = 0;
             double totalProjectCapacity = 0;
-            //foreach (var department in _departmentDatas.Data)
-            //{
+
             foreach (var departmentDetail in _departmentCapacityDetailDatas.Data)
             {
                 if (departmentDetail.Date == time)
@@ -254,15 +256,28 @@ namespace DashboardUI
                     totalProjectCapacity += projectDetail.PTotalCapacity;
                 }
             }
-            //            }
+
+            double tempCapacity = totalDepartmentCapacity;
 
             if (totalProjectCapacity >= totalDepartmentCapacity)
                 totalDepartmentCapacity = totalProjectCapacity;
 
+            double percentage = (totalDepartmentCapacity - totalProjectCapacity) / totalDepartmentCapacity * 100;
             newSerie.Points[0].SetValueXY("", totalDepartmentCapacity);
             newSerie.Points[1].SetValueXY("", totalProjectCapacity);
             newSerie.Points[2].SetValueXY("", totalDepartmentCapacity - totalProjectCapacity);
-            labelPercentage.Text = ((totalDepartmentCapacity - totalProjectCapacity) / totalDepartmentCapacity * 100).ToString("0.0") + "%";
+
+            labelPercentage.Text = percentage.ToString("0.0") + "%";
+
+            if (percentage <= 5 && percentage != 0)
+                labelStatus.Text = "LOW CAPACITY";
+            else if (percentage == 0)
+                labelStatus.Text = "OVER CAPACITY";
+            else
+                labelStatus.Text = "HIGH CAPACITY";
+
+            labelSubStatus.Text = "Total Department Capacity: " + tempCapacity
+                   + System.Environment.NewLine + "Total Assigned Capacity: " + totalProjectCapacity;
 
             newSerie.Points[0].Color = Color.White;
             newSerie.Points[0].BackGradientStyle = GradientStyle.None;
@@ -278,25 +293,40 @@ namespace DashboardUI
             if (!isProgressing)
             {
                 dataGridViewOngoingProjects.DataSource = _completedProjects;
-                dataGridViewOngoingProjects.Columns[5].HeaderText = "Completed Projects";
+                labelDataGridTitle.Text = _selectedYear + " Completed Projects";
+                labelDataGridSubTitle.Text = "Finalized projects based on current year.";
+                dataGridViewOngoingProjects.Columns[5].HeaderText = "Project Name";
+                dataGridViewOngoingProjects.Columns[6].HeaderText = "Start Date";
+                dataGridViewOngoingProjects.Columns[7].HeaderText = "Complete Date";
             }
             else
             {
                 dataGridViewOngoingProjects.DataSource = _ongiongProjects;
-                dataGridViewOngoingProjects.Columns[5].HeaderText = "Ongoing Projects";
+                labelDataGridTitle.Text = _selectedYear + " Ongoing Projects";
+                labelDataGridSubTitle.Text = "Started projects based on current year.";
+                dataGridViewOngoingProjects.Columns[5].HeaderText = "Project Name";
+                dataGridViewOngoingProjects.Columns[6].HeaderText = "Start Date";
+                dataGridViewOngoingProjects.Columns[7].HeaderText = "Complete Date";
+
+                for (int i = 0; i < dataGridViewOngoingProjects.Rows.Count; i++)
+                {
+                    //dataGridViewOngoingProjects.Rows[i].Cells[4].Value = "N/A";
+                }
             }
 
             for (int i = 0; i < dataGridViewOngoingProjects.Columns.Count; i++)
             {
-                if (i != 5)
-                    dataGridViewOngoingProjects.Columns[i].Visible = false;
+                dataGridViewOngoingProjects.Columns[i].Visible = false;
             }
 
+            dataGridViewOngoingProjects.Columns[5].Visible = true;
+            dataGridViewOngoingProjects.Columns[6].Visible = true;
+            dataGridViewOngoingProjects.Columns[7].Visible = true;
         }
 
         private void buttonOverall_Click(object sender, EventArgs e)
         {
-            labelDashboard.Text = "DATA RANGE : ALL";
+            labelDashboard.Text = "DATA RANGE : OVERALL";
             _selectedYear = DateTime.Now.Year;
             _managementDatas = _managementManager.GetAll();
             _departmentDatas = _departmentManager.GetAll();
@@ -382,17 +412,16 @@ namespace DashboardUI
         {
             if (!_isProgressing)
             {
-                buttonShow.Text = "Show Ongoing";
+                buttonShow.Text = "SHOW ONGOING";
                 _isProgressing = true;
             }
             else
             {
-                buttonShow.Text = "Show Completed";
+                buttonShow.Text = "SHOW COMPLETED";
                 _isProgressing = false;
             }
 
             GenerateDataGridData(_isProgressing);
         }
-
     }
 }

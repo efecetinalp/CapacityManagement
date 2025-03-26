@@ -131,6 +131,8 @@ namespace DashboardUI
             //fetches data and format into data grid view
             FetchData();
 
+            _dashboardForm.ActivateChartButton();
+
             if (isDataListed)
                 alertBox.SuccessAlert("Success");
         }

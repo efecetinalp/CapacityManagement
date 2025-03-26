@@ -7,6 +7,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -73,7 +74,7 @@ namespace DashboardUI
             txtAlertBox.ForeColor = Color.DarkGreen;
             lblCloseIcon.ForeColor = Color.DarkGreen;
             AlertDuration.BackColor = Color.DarkGreen;
-            txtAlertBox.Left = (this.Width / 2) - (txtAlertBox.Width /2) + 8;
+            txtAlertBox.Left = (this.Width / 2) - (txtAlertBox.Width / 2) + 8;
             imgSuccess.Left = txtAlertBox.Left - imgSuccess.Width - 2;
             imgSuccess.Visible = true;
             this.Show();

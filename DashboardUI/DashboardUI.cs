@@ -57,20 +57,26 @@ namespace DashboardUI
             //Start with datagrid form
             UserLogin();
 
-            //DELETE LATER
-            //MoveSlideBar(panelDashboard);
-            //dashboardForm = new(managementManager, departmentManager, projectManager ,categoryManager, userManager ,departmentCapacityManager, projectCapacityManager);
-            //dashboardForm.FormClosed += DataGridForm_FormClosed;
-            //dashboardForm.MdiParent = this;
-            //dashboardForm.Dock = DockStyle.Fill;
-            //dashboardForm.Show();
+            buttonChart.Enabled = false;
+            MoveSlideBar(panelDashboard);
+            dashboardForm = new(managementManager, departmentManager, projectManager, categoryManager, userManager, departmentCapacityManager, projectCapacityManager);
+            dashboardForm.FormClosed += DataGridForm_FormClosed;
+            dashboardForm.MdiParent = this;
+            dashboardForm.Dock = DockStyle.Fill;
+            dashboardForm.Show();
 
-            MoveSlideBar(panelDataGrid);
-            dataGridForm = new(projectManager, departmentManager, managementManager, categoryManager, departmentCapacityManager, projectCapacityManager, userManager, this);
-            dataGridForm.FormClosed += DataGridForm_FormClosed;
-            dataGridForm.MdiParent = this;
-            dataGridForm.Dock = DockStyle.Fill;
-            dataGridForm.Show();
+            //DELETE LATER
+            //MoveSlideBar(panelDataGrid);
+            //dataGridForm = new(projectManager, departmentManager, managementManager, categoryManager, departmentCapacityManager, projectCapacityManager, userManager, this);
+            //dataGridForm.FormClosed += DataGridForm_FormClosed;
+            //dataGridForm.MdiParent = this;
+            //dataGridForm.Dock = DockStyle.Fill;
+            //dataGridForm.Show();
+        }
+
+        public void ActivateChartButton()
+        {
+            buttonChart.Enabled = true;
         }
 
         private void UserLogin()

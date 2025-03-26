@@ -49,14 +49,10 @@
             buttonChart = new Button();
             buttonCard = new Button();
             buttonShowHide = new Button();
-            panel1 = new Panel();
-            panel2 = new Panel();
             pictureBoxLocked = new PictureBox();
             pictureBoxUnlocked = new PictureBox();
             labelLockStatus = new Label();
             ((System.ComponentModel.ISupportInitialize)dbGrid).BeginInit();
-            panel1.SuspendLayout();
-            panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLocked).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxUnlocked).BeginInit();
             SuspendLayout();
@@ -74,7 +70,7 @@
             buttonEdit.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             buttonEdit.ForeColor = Color.White;
             buttonEdit.Image = (Image)resources.GetObject("buttonEdit.Image");
-            buttonEdit.Location = new Point(27, 2);
+            buttonEdit.Location = new Point(1235, 47);
             buttonEdit.Margin = new Padding(2);
             buttonEdit.Name = "buttonEdit";
             buttonEdit.Padding = new Padding(0, 0, 1, 1);
@@ -85,6 +81,7 @@
             // 
             // buttonReset
             // 
+            buttonReset.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             buttonReset.BackColor = Color.Transparent;
             buttonReset.Cursor = Cursors.Hand;
             buttonReset.Enabled = false;
@@ -94,7 +91,7 @@
             buttonReset.FlatStyle = FlatStyle.Flat;
             buttonReset.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             buttonReset.Image = (Image)resources.GetObject("buttonReset.Image");
-            buttonReset.Location = new Point(28, 2);
+            buttonReset.Location = new Point(1096, 46);
             buttonReset.Margin = new Padding(2);
             buttonReset.Name = "buttonReset";
             buttonReset.Padding = new Padding(0, 0, 1, 1);
@@ -117,6 +114,7 @@
             // 
             // comboBoxDepartment
             // 
+            comboBoxDepartment.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxDepartment.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxDepartment.FormattingEnabled = true;
             comboBoxDepartment.Location = new Point(181, 46);
@@ -124,10 +122,10 @@
             comboBoxDepartment.Name = "comboBoxDepartment";
             comboBoxDepartment.Size = new Size(150, 20);
             comboBoxDepartment.TabIndex = 21;
-            comboBoxDepartment.DropDownStyle = ComboBoxStyle.DropDownList;
             // 
             // comboBoxManagement
             // 
+            comboBoxManagement.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxManagement.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxManagement.FormattingEnabled = true;
             comboBoxManagement.Location = new Point(21, 46);
@@ -136,7 +134,6 @@
             comboBoxManagement.Size = new Size(150, 20);
             comboBoxManagement.TabIndex = 20;
             comboBoxManagement.SelectedIndexChanged += comboBoxManagement_SelectedIndexChanged;
-            comboBoxManagement.DropDownStyle = ComboBoxStyle.DropDownList;
             // 
             // dateTimePickerStart
             // 
@@ -260,7 +257,7 @@
             buttonNew.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             buttonNew.ForeColor = Color.White;
             buttonNew.Image = (Image)resources.GetObject("buttonNew.Image");
-            buttonNew.Location = new Point(3, 2);
+            buttonNew.Location = new Point(1211, 47);
             buttonNew.Margin = new Padding(2);
             buttonNew.Name = "buttonNew";
             buttonNew.Padding = new Padding(0, 0, 1, 1);
@@ -271,6 +268,7 @@
             // 
             // buttonExportToExcel
             // 
+            buttonExportToExcel.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             buttonExportToExcel.BackColor = Color.Transparent;
             buttonExportToExcel.Cursor = Cursors.Hand;
             buttonExportToExcel.Enabled = false;
@@ -280,7 +278,7 @@
             buttonExportToExcel.FlatStyle = FlatStyle.Flat;
             buttonExportToExcel.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             buttonExportToExcel.Image = (Image)resources.GetObject("buttonExportToExcel.Image");
-            buttonExportToExcel.Location = new Point(124, 2);
+            buttonExportToExcel.Location = new Point(1168, 46);
             buttonExportToExcel.Margin = new Padding(2);
             buttonExportToExcel.Name = "buttonExportToExcel";
             buttonExportToExcel.Padding = new Padding(0, 0, 1, 1);
@@ -291,6 +289,7 @@
             // 
             // buttonList
             // 
+            buttonList.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             buttonList.BackColor = Color.Transparent;
             buttonList.Cursor = Cursors.Hand;
             buttonList.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
@@ -299,7 +298,7 @@
             buttonList.FlatStyle = FlatStyle.Flat;
             buttonList.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             buttonList.Image = (Image)resources.GetObject("buttonList.Image");
-            buttonList.Location = new Point(4, 2);
+            buttonList.Location = new Point(1072, 46);
             buttonList.Margin = new Padding(2);
             buttonList.Name = "buttonList";
             buttonList.Padding = new Padding(0, 0, 1, 1);
@@ -310,6 +309,7 @@
             // 
             // buttonChart
             // 
+            buttonChart.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             buttonChart.BackColor = Color.Transparent;
             buttonChart.Cursor = Cursors.Hand;
             buttonChart.Enabled = false;
@@ -319,7 +319,7 @@
             buttonChart.FlatStyle = FlatStyle.Flat;
             buttonChart.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             buttonChart.Image = (Image)resources.GetObject("buttonChart.Image");
-            buttonChart.Location = new Point(100, 2);
+            buttonChart.Location = new Point(1144, 46);
             buttonChart.Margin = new Padding(2);
             buttonChart.Name = "buttonChart";
             buttonChart.Padding = new Padding(0, 0, 1, 1);
@@ -350,6 +350,7 @@
             // 
             // buttonShowHide
             // 
+            buttonShowHide.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             buttonShowHide.BackColor = Color.Transparent;
             buttonShowHide.Cursor = Cursors.Hand;
             buttonShowHide.Enabled = false;
@@ -360,7 +361,7 @@
             buttonShowHide.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             buttonShowHide.ForeColor = Color.White;
             buttonShowHide.Image = (Image)resources.GetObject("buttonShowHide.Image");
-            buttonShowHide.Location = new Point(52, 2);
+            buttonShowHide.Location = new Point(1120, 46);
             buttonShowHide.Margin = new Padding(2);
             buttonShowHide.Name = "buttonShowHide";
             buttonShowHide.Padding = new Padding(0, 0, 1, 1);
@@ -368,33 +369,6 @@
             buttonShowHide.TabIndex = 41;
             buttonShowHide.UseVisualStyleBackColor = false;
             buttonShowHide.Click += buttonShowHide_Click;
-            // 
-            // panel1
-            // 
-            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            panel1.BackColor = Color.FromArgb(224, 224, 224);
-            panel1.Controls.Add(buttonShowHide);
-            panel1.Controls.Add(buttonChart);
-            panel1.Controls.Add(buttonReset);
-            panel1.Controls.Add(buttonList);
-            panel1.Controls.Add(buttonExportToExcel);
-            panel1.ForeColor = SystemColors.ActiveCaptionText;
-            panel1.Location = new Point(1044, 44);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(150, 23);
-            panel1.TabIndex = 42;
-            // 
-            // panel2
-            // 
-            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            panel2.BackColor = Color.FromArgb(224, 224, 224);
-            panel2.Controls.Add(buttonEdit);
-            panel2.Controls.Add(buttonNew);
-            panel2.ForeColor = SystemColors.ActiveCaptionText;
-            panel2.Location = new Point(1208, 44);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(49, 23);
-            panel2.TabIndex = 42;
             // 
             // pictureBoxLocked
             // 
@@ -438,9 +412,16 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(242, 242, 242);
             ClientSize = new Size(1280, 660);
+            Controls.Add(buttonEdit);
+            Controls.Add(buttonShowHide);
+            Controls.Add(buttonNew);
+            Controls.Add(buttonChart);
             Controls.Add(labelLockStatus);
+            Controls.Add(buttonReset);
             Controls.Add(pictureBoxUnlocked);
+            Controls.Add(buttonList);
             Controls.Add(pictureBoxLocked);
+            Controls.Add(buttonExportToExcel);
             Controls.Add(buttonCard);
             Controls.Add(labelEndDate);
             Controls.Add(labelStartDate);
@@ -451,16 +432,12 @@
             Controls.Add(dateTimePickerStart);
             Controls.Add(dateTimePickerEnd);
             Controls.Add(dbGrid);
-            Controls.Add(panel2);
-            Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(2);
             Name = "DataGridForm";
             Text = "DataGridForm";
             Load += DataGridForm_Load;
             ((System.ComponentModel.ISupportInitialize)dbGrid).EndInit();
-            panel1.ResumeLayout(false);
-            panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBoxLocked).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxUnlocked).EndInit();
             ResumeLayout(false);
@@ -486,8 +463,6 @@
         private Button buttonChart;
         private Button buttonCard;
         private Button buttonShowHide;
-        private Panel panel1;
-        private Panel panel2;
         private PictureBox pictureBoxLocked;
         private PictureBox pictureBoxUnlocked;
         private Label labelLockStatus;
