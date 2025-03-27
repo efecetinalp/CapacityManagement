@@ -90,17 +90,18 @@
             // 
             buttonManagement.BackColor = Color.Transparent;
             buttonManagement.Cursor = Cursors.Hand;
-            buttonManagement.FlatAppearance.BorderColor = SystemColors.ActiveCaptionText;
-            buttonManagement.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonManagement.FlatAppearance.BorderColor = Color.FromArgb(46, 52, 63);
+            buttonManagement.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonManagement.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonManagement.FlatStyle = FlatStyle.Flat;
             buttonManagement.Font = new Font("Calibri", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonManagement.ForeColor = Color.Black;
+            buttonManagement.ForeColor = Color.FromArgb(46, 52, 63);
             buttonManagement.Image = (Image)resources.GetObject("buttonManagement.Image");
             buttonManagement.ImageAlign = ContentAlignment.TopCenter;
             buttonManagement.Location = new Point(70, 11);
             buttonManagement.Margin = new Padding(2);
             buttonManagement.Name = "buttonManagement";
-            buttonManagement.Padding = new Padding(0, 15, 0, 15);
+            buttonManagement.Padding = new Padding(0, 10, 0, 15);
             buttonManagement.Size = new Size(72, 87);
             buttonManagement.TabIndex = 47;
             buttonManagement.Text = "MANAGEMENT";
@@ -112,17 +113,17 @@
             // 
             buttonDepartment.BackColor = Color.Transparent;
             buttonDepartment.Cursor = Cursors.Hand;
-            buttonDepartment.FlatAppearance.BorderColor = SystemColors.ActiveCaptionText;
+            buttonDepartment.FlatAppearance.BorderColor = Color.FromArgb(46, 52, 63);
             buttonDepartment.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
             buttonDepartment.FlatStyle = FlatStyle.Flat;
             buttonDepartment.Font = new Font("Calibri", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonDepartment.ForeColor = Color.Black;
+            buttonDepartment.ForeColor = Color.FromArgb(46, 52, 63);
             buttonDepartment.Image = (Image)resources.GetObject("buttonDepartment.Image");
             buttonDepartment.ImageAlign = ContentAlignment.TopCenter;
             buttonDepartment.Location = new Point(148, 10);
             buttonDepartment.Margin = new Padding(2);
             buttonDepartment.Name = "buttonDepartment";
-            buttonDepartment.Padding = new Padding(0, 15, 0, 15);
+            buttonDepartment.Padding = new Padding(0, 10, 0, 15);
             buttonDepartment.Size = new Size(72, 87);
             buttonDepartment.TabIndex = 48;
             buttonDepartment.Text = "DEPARTMENT";
@@ -134,17 +135,17 @@
             // 
             buttonCategory.BackColor = Color.Transparent;
             buttonCategory.Cursor = Cursors.Hand;
-            buttonCategory.FlatAppearance.BorderColor = SystemColors.ActiveCaptionText;
+            buttonCategory.FlatAppearance.BorderColor = Color.FromArgb(46, 52, 63);
             buttonCategory.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
             buttonCategory.FlatStyle = FlatStyle.Flat;
             buttonCategory.Font = new Font("Calibri", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonCategory.ForeColor = Color.Black;
+            buttonCategory.ForeColor = Color.FromArgb(46, 52, 63);
             buttonCategory.Image = (Image)resources.GetObject("buttonCategory.Image");
             buttonCategory.ImageAlign = ContentAlignment.TopCenter;
             buttonCategory.Location = new Point(304, 11);
             buttonCategory.Margin = new Padding(2);
             buttonCategory.Name = "buttonCategory";
-            buttonCategory.Padding = new Padding(0, 15, 0, 15);
+            buttonCategory.Padding = new Padding(0, 10, 0, 15);
             buttonCategory.Size = new Size(72, 87);
             buttonCategory.TabIndex = 49;
             buttonCategory.Text = "CATEGORY";
@@ -156,17 +157,17 @@
             // 
             buttonUser.BackColor = Color.Transparent;
             buttonUser.Cursor = Cursors.Hand;
-            buttonUser.FlatAppearance.BorderColor = SystemColors.ActiveCaptionText;
+            buttonUser.FlatAppearance.BorderColor = Color.FromArgb(46, 52, 63);
             buttonUser.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
             buttonUser.FlatStyle = FlatStyle.Flat;
             buttonUser.Font = new Font("Calibri", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonUser.ForeColor = Color.Black;
+            buttonUser.ForeColor = Color.FromArgb(46, 52, 63);
             buttonUser.Image = (Image)resources.GetObject("buttonUser.Image");
             buttonUser.ImageAlign = ContentAlignment.TopCenter;
             buttonUser.Location = new Point(382, 11);
             buttonUser.Margin = new Padding(2);
             buttonUser.Name = "buttonUser";
-            buttonUser.Padding = new Padding(0, 15, 0, 15);
+            buttonUser.Padding = new Padding(0, 10, 0, 15);
             buttonUser.Size = new Size(72, 87);
             buttonUser.TabIndex = 50;
             buttonUser.Text = "USER";
@@ -181,6 +182,7 @@
             panel2.Controls.Add(textBoxPath);
             panel2.Controls.Add(labelDatabase);
             panel2.Controls.Add(buttonBrowse);
+            panel2.ForeColor = Color.FromArgb(46, 52, 63);
             panel2.Location = new Point(735, 42);
             panel2.Name = "panel2";
             panel2.Size = new Size(475, 56);
@@ -296,17 +298,17 @@
             // 
             buttonProject.BackColor = Color.Transparent;
             buttonProject.Cursor = Cursors.Hand;
-            buttonProject.FlatAppearance.BorderColor = SystemColors.ActiveCaptionText;
+            buttonProject.FlatAppearance.BorderColor = Color.FromArgb(46, 52, 63);
             buttonProject.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
             buttonProject.FlatStyle = FlatStyle.Flat;
             buttonProject.Font = new Font("Calibri", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonProject.ForeColor = Color.Black;
+            buttonProject.ForeColor = Color.FromArgb(46, 52, 63);
             buttonProject.Image = (Image)resources.GetObject("buttonProject.Image");
             buttonProject.ImageAlign = ContentAlignment.TopCenter;
             buttonProject.Location = new Point(226, 11);
             buttonProject.Margin = new Padding(2);
             buttonProject.Name = "buttonProject";
-            buttonProject.Padding = new Padding(0, 15, 0, 15);
+            buttonProject.Padding = new Padding(0, 10, 0, 15);
             buttonProject.Size = new Size(72, 87);
             buttonProject.TabIndex = 59;
             buttonProject.Text = "PROJECT";

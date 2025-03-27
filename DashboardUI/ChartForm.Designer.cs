@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChartForm));
             areaChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             buttonSave = new Button();
@@ -43,8 +43,6 @@
             comboBoxAxisValueSize = new ComboBox();
             labelXAxisInterval = new Label();
             comboBoxXAxisInterval = new ComboBox();
-            labelYAxisInterval = new Label();
-            comboBoxYAxisInterval = new ComboBox();
             labelGridColor = new Label();
             comboBoxGridColor = new ComboBox();
             labelGridWidth = new Label();
@@ -68,30 +66,30 @@
             // 
             areaChart.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             areaChart.BackgroundImageLayout = ImageLayout.None;
-            chartArea9.AxisX.IsLabelAutoFit = false;
-            chartArea9.AxisX.LabelAutoFitMaxFontSize = 9;
-            chartArea9.AxisX.LabelAutoFitMinFontSize = 8;
-            chartArea9.AxisX.LabelStyle.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            chartArea9.AxisX.TitleFont = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            chartArea9.AxisY.IsLabelAutoFit = false;
-            chartArea9.AxisY.LabelStyle.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            chartArea9.AxisY.TitleFont = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            chartArea9.Name = "ChartArea1";
-            areaChart.ChartAreas.Add(chartArea9);
-            legend9.Alignment = StringAlignment.Center;
-            legend9.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend9.Name = "Legend1";
-            areaChart.Legends.Add(legend9);
+            chartArea1.AxisX.IsLabelAutoFit = false;
+            chartArea1.AxisX.LabelAutoFitMaxFontSize = 9;
+            chartArea1.AxisX.LabelAutoFitMinFontSize = 8;
+            chartArea1.AxisX.LabelStyle.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            chartArea1.AxisX.TitleFont = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
+            chartArea1.AxisY.IsLabelAutoFit = false;
+            chartArea1.AxisY.LabelStyle.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            chartArea1.AxisY.TitleFont = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
+            chartArea1.Name = "ChartArea1";
+            areaChart.ChartAreas.Add(chartArea1);
+            legend1.Alignment = StringAlignment.Center;
+            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend1.Name = "Legend1";
+            areaChart.Legends.Add(legend1);
             areaChart.Location = new Point(21, 122);
             areaChart.Margin = new Padding(2);
             areaChart.Name = "areaChart";
             areaChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            series9.ChartArea = "ChartArea1";
-            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series9.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Italic, GraphicsUnit.Point);
-            series9.Legend = "Legend1";
-            series9.Name = "Series1";
-            areaChart.Series.Add(series9);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Italic, GraphicsUnit.Point);
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            areaChart.Series.Add(series1);
             areaChart.Size = new Size(1236, 514);
             areaChart.TabIndex = 0;
             areaChart.Text = "Capacity";
@@ -221,29 +219,6 @@
             comboBoxXAxisInterval.Size = new Size(96, 20);
             comboBoxXAxisInterval.TabIndex = 33;
             comboBoxXAxisInterval.SelectedIndexChanged += comboBoxXAxisInterval_SelectedIndexChanged;
-            // 
-            // labelYAxisInterval
-            // 
-            labelYAxisInterval.AutoSize = true;
-            labelYAxisInterval.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            labelYAxisInterval.ForeColor = Color.Black;
-            labelYAxisInterval.Location = new Point(281, 50);
-            labelYAxisInterval.Margin = new Padding(2, 0, 2, 0);
-            labelYAxisInterval.Name = "labelYAxisInterval";
-            labelYAxisInterval.Size = new Size(71, 12);
-            labelYAxisInterval.TabIndex = 36;
-            labelYAxisInterval.Text = "Y Axis Interval";
-            // 
-            // comboBoxYAxisInterval
-            // 
-            comboBoxYAxisInterval.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBoxYAxisInterval.FormattingEnabled = true;
-            comboBoxYAxisInterval.Location = new Point(281, 65);
-            comboBoxYAxisInterval.Margin = new Padding(4, 3, 4, 3);
-            comboBoxYAxisInterval.Name = "comboBoxYAxisInterval";
-            comboBoxYAxisInterval.Size = new Size(96, 20);
-            comboBoxYAxisInterval.TabIndex = 35;
-            comboBoxYAxisInterval.SelectedIndexChanged += comboBoxYAxisInterval_SelectedIndexChanged;
             // 
             // labelGridColor
             // 
@@ -460,8 +435,6 @@
             Controls.Add(comboBoxGridColor);
             Controls.Add(labelGridWidth);
             Controls.Add(comboBoxGridWidth);
-            Controls.Add(labelYAxisInterval);
-            Controls.Add(comboBoxYAxisInterval);
             Controls.Add(labelXAxisInterval);
             Controls.Add(comboBoxXAxisInterval);
             Controls.Add(labelAxisValueSize);
@@ -498,8 +471,6 @@
         private ComboBox comboBoxAxisValueSize;
         private Label labelXAxisInterval;
         private ComboBox comboBoxXAxisInterval;
-        private Label labelYAxisInterval;
-        private ComboBox comboBoxYAxisInterval;
         private Label labelGridColor;
         private ComboBox comboBoxGridColor;
         private Label labelGridWidth;

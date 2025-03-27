@@ -43,6 +43,7 @@
             panelChart = new Panel();
             buttonChart = new Button();
             panelDashboard = new Panel();
+            pictureBox2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelMenu.SuspendLayout();
             panelAdmin2.SuspendLayout();
@@ -50,6 +51,7 @@
             panelDataGrid.SuspendLayout();
             panelChart.SuspendLayout();
             panelDashboard.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // buttonDashboard
@@ -111,12 +113,13 @@
             // 
             // panelAdmin2
             // 
+            panelAdmin2.Controls.Add(pictureBox2);
             panelAdmin2.Controls.Add(labelCredential);
             panelAdmin2.Controls.Add(labelActiveUser);
-            panelAdmin2.Location = new Point(58, 168);
+            panelAdmin2.Location = new Point(0, 168);
             panelAdmin2.Margin = new Padding(2);
             panelAdmin2.Name = "panelAdmin2";
-            panelAdmin2.Size = new Size(158, 57);
+            panelAdmin2.Size = new Size(227, 57);
             panelAdmin2.TabIndex = 23;
             // 
             // labelCredential
@@ -126,7 +129,7 @@
             labelCredential.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             labelCredential.ForeColor = SystemColors.ButtonHighlight;
             labelCredential.ImageAlign = ContentAlignment.MiddleLeft;
-            labelCredential.Location = new Point(35, 29);
+            labelCredential.Location = new Point(75, 30);
             labelCredential.Name = "labelCredential";
             labelCredential.Size = new Size(42, 15);
             labelCredential.TabIndex = 22;
@@ -139,13 +142,12 @@
             labelActiveUser.BackColor = Color.Transparent;
             labelActiveUser.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             labelActiveUser.ForeColor = SystemColors.ButtonHighlight;
-            labelActiveUser.Image = (Image)resources.GetObject("labelActiveUser.Image");
             labelActiveUser.ImageAlign = ContentAlignment.MiddleLeft;
-            labelActiveUser.Location = new Point(7, 10);
+            labelActiveUser.Location = new Point(75, 15);
             labelActiveUser.Name = "labelActiveUser";
-            labelActiveUser.Size = new Size(83, 15);
+            labelActiveUser.Size = new Size(56, 15);
             labelActiveUser.TabIndex = 21;
-            labelActiveUser.Text = "         Signing...";
+            labelActiveUser.Text = "Signing...";
             labelActiveUser.TextAlign = ContentAlignment.MiddleRight;
             // 
             // panelAdmin
@@ -242,6 +244,16 @@
             panelDashboard.Size = new Size(228, 32);
             panelDashboard.TabIndex = 20;
             // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(24, 15);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(24, 24);
+            pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBox2.TabIndex = 21;
+            pictureBox2.TabStop = false;
+            // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -265,6 +277,7 @@
             panelDataGrid.ResumeLayout(false);
             panelChart.ResumeLayout(false);
             panelDashboard.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 
@@ -283,5 +296,6 @@
         private Button buttonAdmin;
         private Label labelActiveUser;
         private Label labelCredential;
+        private PictureBox pictureBox2;
     }
 }

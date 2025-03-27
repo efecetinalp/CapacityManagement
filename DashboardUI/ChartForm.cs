@@ -83,10 +83,6 @@ namespace DashboardUI
             comboBoxXAxisInterval.Items.AddRange(new string[] { "1", "2", "3", "4", "5" });
             comboBoxXAxisInterval.SelectedIndex = 0;
 
-            //Y axis interval combobox
-            comboBoxYAxisInterval.Items.AddRange(new string[] { "1", "2", "3", "4", "5" });
-            comboBoxYAxisInterval.SelectedIndex = 0;
-
             //grid width combobox
             comboBoxGridWidth.Items.AddRange(new string[] { "0", "1", "2", "3" });
             comboBoxGridWidth.SelectedIndex = 1;
@@ -202,13 +198,12 @@ namespace DashboardUI
             else
                 chartArea.AxisX.LabelStyle.Angle = 0;
 
-            chartArea.AxisX.LabelStyle.ForeColor = Color.DarkGray;
+            //chartArea.AxisX.LabelStyle.ForeColor = Color.DarkGray;
             chartArea.AxisX.LabelStyle.Font = new Font("Calibri", short.Parse(comboBoxAxisValueSize.Text));
             chartArea.AxisX.Minimum = _chartRequest.Months[0];
             chartArea.AxisX.Maximum = _chartRequest.Months[_chartRequest.Months.Count - 1];
 
             //Axis Y Formating
-            chartArea.AxisY.MajorGrid.LineWidth = short.Parse(comboBoxYAxisInterval.Text);
             chartArea.AxisY.MajorGrid.LineWidth = short.Parse(comboBoxGridWidth.Text);
             chartArea.AxisY.MajorGrid.LineColor = (Color)comboBoxGridColor.SelectedValue;
             chartArea.AxisY.LineColor = (Color)comboBoxGridColor.SelectedValue;
@@ -224,7 +219,7 @@ namespace DashboardUI
             else
                 chartArea.AxisY.MinorGrid.Enabled = false;
 
-            chartArea.AxisY.LabelStyle.ForeColor = Color.DarkGray;
+            //chartArea.AxisY.LabelStyle.ForeColor = Color.DarkGray;
             chartArea.AxisY.LabelStyle.Font = new Font("Calibri", short.Parse(comboBoxAxisValueSize.Text));
 
             for (int i = 1; i < _chartRequest.Legends.Count; i++)
@@ -361,7 +356,6 @@ namespace DashboardUI
                             B1 = grad2.B + (colorIndex * ((grad3.B - grad2.B) / divider));
                             colorIndex++;
                         }
-                        Debug.Print(R1.ToString() + " " + G1.ToString() + " " + B1.ToString());
                         _colorList.Add(Color.FromArgb(R1, G1, B1));
                     }
                 }
@@ -441,14 +435,6 @@ namespace DashboardUI
         }
 
         private void comboBoxXAxisInterval_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!isInitial)
-            {
-                buttonUpdate_Click(sender, e);
-            }
-        }
-
-        private void comboBoxYAxisInterval_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!isInitial)
             {

@@ -59,7 +59,7 @@ namespace DashboardUI
 
             buttonChart.Enabled = false;
             MoveSlideBar(panelDashboard);
-            dashboardForm = new(managementManager, departmentManager, projectManager, categoryManager, userManager, departmentCapacityManager, projectCapacityManager);
+            dashboardForm = new(managementManager, departmentManager, projectManager, categoryManager, userManager, departmentCapacityManager, projectCapacityManager, colorCodeManager, colorPaletteManager);
             dashboardForm.FormClosed += DataGridForm_FormClosed;
             dashboardForm.MdiParent = this;
             dashboardForm.Dock = DockStyle.Fill;
@@ -113,7 +113,7 @@ namespace DashboardUI
 
             if (dashboardForm == null)
             {
-                dashboardForm = new(managementManager, departmentManager, projectManager, categoryManager, userManager, departmentCapacityManager, projectCapacityManager);
+                dashboardForm = new(managementManager, departmentManager, projectManager, categoryManager, userManager, departmentCapacityManager, projectCapacityManager, colorCodeManager, colorPaletteManager);
                 dashboardForm.FormClosed += DashboardForm_FormClosed;
                 dashboardForm.MdiParent = this;
                 dashboardForm.Dock = DockStyle.Fill;

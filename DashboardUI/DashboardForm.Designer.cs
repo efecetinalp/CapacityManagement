@@ -28,158 +28,201 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint1 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(10D, "10,10");
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint2 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(5D, "7,7");
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint3 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(3D, "3,3");
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(10D, "10,10");
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(10D, "10,10");
-            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardForm));
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(10D, "10,10");
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(5D, "7,7");
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint6 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(3D, "3,3");
             System.Windows.Forms.DataVisualization.Charting.Title title5 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title7 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title8 = new System.Windows.Forms.DataVisualization.Charting.Title();
             panelChart1 = new Panel();
-            panelDate = new Panel();
-            dateTimePickerStart = new DateTimePicker();
+            comboBoxPaletteType = new ComboBox();
+            comboBoxColorPalette = new ComboBox();
+            labelColorPalette = new Label();
             dateTimePickerEnd = new DateTimePicker();
+            dateTimePickerStart = new DateTimePicker();
             labelDashboard = new Label();
             buttonCustom = new Button();
             buttonLastYear = new Button();
             buttonThisYear = new Button();
             buttonOverall = new Button();
-            chartProjects = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            chartCapacityPercentage = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            chartCapacityAgainstWork = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            chartOngoingCompletedProjects = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            dateTimeChart2 = new DateTimePicker();
-            dateTimeChart3 = new DateTimePicker();
-            labelPercentage = new Label();
-            buttonShow = new Button();
-            tableLayoutPanel1 = new TableLayoutPanel();
-            panelChart0 = new Panel();
-            button2 = new Button();
+            tableLayoutPanel3 = new TableLayoutPanel();
+            panel1 = new Panel();
+            pictureBoxProject = new PictureBox();
+            labelCompletedProjects = new Label();
+            labelCompletedProjectsSubValue = new Label();
+            labelCompletedProjectsValue = new Label();
+            panel3 = new Panel();
+            pictureBox3 = new PictureBox();
+            labelOngoingProjectsSubValue = new Label();
+            labelOngoingProjectsValue = new Label();
+            labelOngoingProjects = new Label();
+            panel4 = new Panel();
+            pictureBoxDown = new PictureBox();
+            pictureBoxUp = new PictureBox();
+            labelTotalCapacity = new Label();
+            labelTotalCapacitySubValue = new Label();
+            labelTotalCapacityValue = new Label();
+            panel5 = new Panel();
+            pictureBoxDown2 = new PictureBox();
+            pictureBoxUp2 = new PictureBox();
+            labelAssignedCapacity = new Label();
+            labelAssignedCapacitySubValue = new Label();
+            labelAssignedCapacityValue = new Label();
+            tableLayoutPanel4 = new TableLayoutPanel();
             panelChart3 = new Panel();
+            labelPercentage = new Label();
             panelStatus = new Panel();
             labelSubStatus = new Label();
             labelStatus = new Label();
+            dateTimeChart3 = new DateTimePicker();
+            chartCapacityPercentage = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            panelChart0 = new Panel();
+            buttonShowHideProjectChart = new Button();
+            chartProjects = new System.Windows.Forms.DataVisualization.Charting.Chart();
             panelChart2 = new Panel();
-            buttonShowHide = new Button();
+            dateTimeChart2 = new DateTimePicker();
+            buttonShowHideChartCapacity = new Button();
             chartCapacity = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            panelDataGrid = new Panel();
-            panel1 = new Panel();
-            dataGridViewOngoingProjects = new DataGridView();
-            panelDataGridTitle = new Panel();
-            labelDataGridSubTitle = new Label();
-            labelDataGridTitle = new Label();
-            tableLayoutPanel2 = new TableLayoutPanel();
-            panelChart4 = new Panel();
-            button1 = new Button();
+            chartCapacityAgainstWork = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            panel2 = new Panel();
+            comboBoxInterval = new ComboBox();
+            buttonRotate = new Button();
+            buttonShowHideWorkAgainst = new Button();
             panelChart1.SuspendLayout();
-            panelDate.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)chartProjects).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)chartCapacityPercentage).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)chartCapacityAgainstWork).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)chartOngoingCompletedProjects).BeginInit();
-            tableLayoutPanel1.SuspendLayout();
-            panelChart0.SuspendLayout();
+            tableLayoutPanel3.SuspendLayout();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxProject).BeginInit();
+            panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxUp).BeginInit();
+            panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxDown2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxUp2).BeginInit();
+            tableLayoutPanel4.SuspendLayout();
             panelChart3.SuspendLayout();
             panelStatus.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)chartCapacityPercentage).BeginInit();
+            panelChart0.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)chartProjects).BeginInit();
             panelChart2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)chartCapacity).BeginInit();
-            panelDataGrid.SuspendLayout();
-            panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewOngoingProjects).BeginInit();
-            panelDataGridTitle.SuspendLayout();
-            tableLayoutPanel2.SuspendLayout();
-            panelChart4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)chartCapacityAgainstWork).BeginInit();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // panelChart1
             // 
-            panelChart1.BackColor = Color.Gray;
-            panelChart1.Controls.Add(panelDate);
+            panelChart1.BackColor = Color.FromArgb(242, 242, 242);
+            panelChart1.Controls.Add(comboBoxPaletteType);
+            panelChart1.Controls.Add(comboBoxColorPalette);
+            panelChart1.Controls.Add(labelColorPalette);
+            panelChart1.Controls.Add(dateTimePickerEnd);
+            panelChart1.Controls.Add(dateTimePickerStart);
             panelChart1.Controls.Add(labelDashboard);
             panelChart1.Controls.Add(buttonCustom);
             panelChart1.Controls.Add(buttonLastYear);
             panelChart1.Controls.Add(buttonThisYear);
             panelChart1.Controls.Add(buttonOverall);
             panelChart1.Dock = DockStyle.Top;
-            panelChart1.Location = new Point(0, 0);
+            panelChart1.Location = new Point(10, 10);
             panelChart1.Name = "panelChart1";
-            panelChart1.Size = new Size(1048, 65);
-            panelChart1.TabIndex = 0;
+            panelChart1.Size = new Size(958, 63);
+            panelChart1.TabIndex = 36;
             // 
-            // panelDate
+            // comboBoxPaletteType
             // 
-            panelDate.Controls.Add(dateTimePickerStart);
-            panelDate.Controls.Add(dateTimePickerEnd);
-            panelDate.Location = new Point(948, 9);
-            panelDate.Name = "panelDate";
-            panelDate.Size = new Size(81, 47);
-            panelDate.TabIndex = 27;
+            comboBoxPaletteType.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            comboBoxPaletteType.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxPaletteType.FormattingEnabled = true;
+            comboBoxPaletteType.Location = new Point(857, 11);
+            comboBoxPaletteType.Margin = new Padding(4, 3, 4, 3);
+            comboBoxPaletteType.Name = "comboBoxPaletteType";
+            comboBoxPaletteType.Size = new Size(88, 20);
+            comboBoxPaletteType.TabIndex = 33;
+            comboBoxPaletteType.SelectedIndexChanged += comboBoxPaletteType_SelectedIndexChanged;
             // 
-            // dateTimePickerStart
+            // comboBoxColorPalette
             // 
-            dateTimePickerStart.CalendarFont = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            dateTimePickerStart.CalendarMonthBackground = Color.White;
-            dateTimePickerStart.CustomFormat = "MMM-yy";
-            dateTimePickerStart.Dock = DockStyle.Top;
-            dateTimePickerStart.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            dateTimePickerStart.Format = DateTimePickerFormat.Custom;
-            dateTimePickerStart.ImeMode = ImeMode.NoControl;
-            dateTimePickerStart.Location = new Point(0, 0);
-            dateTimePickerStart.Margin = new Padding(2);
-            dateTimePickerStart.MinDate = new DateTime(2010, 1, 1, 0, 0, 0, 0);
-            dateTimePickerStart.Name = "dateTimePickerStart";
-            dateTimePickerStart.ShowUpDown = true;
-            dateTimePickerStart.Size = new Size(81, 20);
-            dateTimePickerStart.TabIndex = 24;
-            dateTimePickerStart.Value = new DateTime(2024, 1, 1, 0, 0, 0, 0);
+            comboBoxColorPalette.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            comboBoxColorPalette.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxColorPalette.FormattingEnabled = true;
+            comboBoxColorPalette.Location = new Point(857, 37);
+            comboBoxColorPalette.Margin = new Padding(4, 3, 4, 3);
+            comboBoxColorPalette.Name = "comboBoxColorPalette";
+            comboBoxColorPalette.Size = new Size(88, 20);
+            comboBoxColorPalette.TabIndex = 31;
+            // 
+            // labelColorPalette
+            // 
+            labelColorPalette.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            labelColorPalette.AutoSize = true;
+            labelColorPalette.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelColorPalette.ForeColor = Color.Black;
+            labelColorPalette.Location = new Point(881, -3);
+            labelColorPalette.Margin = new Padding(2, 0, 2, 0);
+            labelColorPalette.Name = "labelColorPalette";
+            labelColorPalette.Size = new Size(64, 12);
+            labelColorPalette.TabIndex = 32;
+            labelColorPalette.Text = "Color Palette";
             // 
             // dateTimePickerEnd
             // 
+            dateTimePickerEnd.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             dateTimePickerEnd.CalendarFont = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            dateTimePickerEnd.CalendarMonthBackground = Color.White;
             dateTimePickerEnd.CustomFormat = "MMM-yy";
-            dateTimePickerEnd.Dock = DockStyle.Bottom;
             dateTimePickerEnd.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             dateTimePickerEnd.Format = DateTimePickerFormat.Custom;
             dateTimePickerEnd.ImeMode = ImeMode.NoControl;
-            dateTimePickerEnd.Location = new Point(0, 27);
+            dateTimePickerEnd.Location = new Point(764, 35);
             dateTimePickerEnd.Margin = new Padding(2);
             dateTimePickerEnd.MinDate = new DateTime(2010, 1, 1, 0, 0, 0, 0);
             dateTimePickerEnd.Name = "dateTimePickerEnd";
             dateTimePickerEnd.ShowUpDown = true;
-            dateTimePickerEnd.Size = new Size(81, 20);
-            dateTimePickerEnd.TabIndex = 25;
-            dateTimePickerEnd.Value = new DateTime(2025, 3, 25, 0, 0, 0, 0);
+            dateTimePickerEnd.Size = new Size(64, 20);
+            dateTimePickerEnd.TabIndex = 29;
+            dateTimePickerEnd.Value = new DateTime(2025, 3, 26, 0, 0, 0, 0);
+            // 
+            // dateTimePickerStart
+            // 
+            dateTimePickerStart.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            dateTimePickerStart.CalendarFont = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            dateTimePickerStart.CustomFormat = "MMM-yy";
+            dateTimePickerStart.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            dateTimePickerStart.Format = DateTimePickerFormat.Custom;
+            dateTimePickerStart.ImeMode = ImeMode.NoControl;
+            dateTimePickerStart.Location = new Point(764, 8);
+            dateTimePickerStart.Margin = new Padding(2);
+            dateTimePickerStart.MinDate = new DateTime(2010, 1, 1, 0, 0, 0, 0);
+            dateTimePickerStart.Name = "dateTimePickerStart";
+            dateTimePickerStart.ShowUpDown = true;
+            dateTimePickerStart.Size = new Size(64, 20);
+            dateTimePickerStart.TabIndex = 28;
+            dateTimePickerStart.Value = new DateTime(2024, 1, 1, 0, 0, 0, 0);
             // 
             // labelDashboard
             // 
             labelDashboard.AutoSize = true;
-            labelDashboard.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            labelDashboard.ForeColor = Color.White;
-            labelDashboard.Location = new Point(25, 37);
+            labelDashboard.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            labelDashboard.ForeColor = Color.FromArgb(46, 52, 63);
+            labelDashboard.Location = new Point(10, 8);
             labelDashboard.Name = "labelDashboard";
-            labelDashboard.Size = new Size(188, 19);
+            labelDashboard.Size = new Size(170, 19);
             labelDashboard.TabIndex = 26;
             labelDashboard.Text = "DATA RANGE : OVERALL";
             // 
@@ -187,17 +230,21 @@
             // 
             buttonCustom.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             buttonCustom.BackColor = Color.Transparent;
-            buttonCustom.FlatAppearance.BorderColor = Color.DimGray;
-            buttonCustom.FlatAppearance.BorderSize = 0;
-            buttonCustom.FlatAppearance.MouseDownBackColor = Color.MidnightBlue;
+            buttonCustom.FlatAppearance.BorderColor = Color.FromArgb(46, 52, 63);
+            buttonCustom.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonCustom.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonCustom.FlatStyle = FlatStyle.Flat;
-            buttonCustom.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonCustom.ForeColor = Color.White;
-            buttonCustom.Location = new Point(867, 0);
+            buttonCustom.Font = new Font("Calibri", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonCustom.ForeColor = Color.FromArgb(46, 52, 63);
+            buttonCustom.Image = (Image)resources.GetObject("buttonCustom.Image");
+            buttonCustom.ImageAlign = ContentAlignment.TopCenter;
+            buttonCustom.Location = new Point(688, 8);
+            buttonCustom.Margin = new Padding(2);
             buttonCustom.Name = "buttonCustom";
-            buttonCustom.Size = new Size(75, 65);
+            buttonCustom.Size = new Size(72, 47);
             buttonCustom.TabIndex = 2;
-            buttonCustom.Text = "Custom";
+            buttonCustom.Text = "CUSTOM";
+            buttonCustom.TextAlign = ContentAlignment.BottomCenter;
             buttonCustom.UseVisualStyleBackColor = false;
             buttonCustom.Click += buttonCustom_Click;
             // 
@@ -205,17 +252,21 @@
             // 
             buttonLastYear.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             buttonLastYear.BackColor = Color.Transparent;
-            buttonLastYear.FlatAppearance.BorderColor = Color.DimGray;
-            buttonLastYear.FlatAppearance.BorderSize = 0;
-            buttonLastYear.FlatAppearance.MouseDownBackColor = Color.MidnightBlue;
+            buttonLastYear.FlatAppearance.BorderColor = Color.FromArgb(46, 52, 63);
+            buttonLastYear.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonLastYear.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonLastYear.FlatStyle = FlatStyle.Flat;
-            buttonLastYear.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonLastYear.ForeColor = Color.White;
-            buttonLastYear.Location = new Point(786, 0);
+            buttonLastYear.Font = new Font("Calibri", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonLastYear.ForeColor = Color.FromArgb(46, 52, 63);
+            buttonLastYear.Image = (Image)resources.GetObject("buttonLastYear.Image");
+            buttonLastYear.ImageAlign = ContentAlignment.TopCenter;
+            buttonLastYear.Location = new Point(612, 8);
+            buttonLastYear.Margin = new Padding(2);
             buttonLastYear.Name = "buttonLastYear";
-            buttonLastYear.Size = new Size(75, 65);
+            buttonLastYear.Size = new Size(72, 47);
             buttonLastYear.TabIndex = 3;
-            buttonLastYear.Text = "Last Year";
+            buttonLastYear.Text = "LAST YEAR";
+            buttonLastYear.TextAlign = ContentAlignment.BottomCenter;
             buttonLastYear.UseVisualStyleBackColor = false;
             buttonLastYear.Click += buttonLastYear_Click;
             // 
@@ -223,17 +274,21 @@
             // 
             buttonThisYear.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             buttonThisYear.BackColor = Color.Transparent;
-            buttonThisYear.FlatAppearance.BorderColor = Color.DimGray;
-            buttonThisYear.FlatAppearance.BorderSize = 0;
-            buttonThisYear.FlatAppearance.MouseDownBackColor = Color.MidnightBlue;
+            buttonThisYear.FlatAppearance.BorderColor = Color.FromArgb(46, 52, 63);
+            buttonThisYear.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonThisYear.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonThisYear.FlatStyle = FlatStyle.Flat;
-            buttonThisYear.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonThisYear.ForeColor = Color.White;
-            buttonThisYear.Location = new Point(705, 0);
+            buttonThisYear.Font = new Font("Calibri", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonThisYear.ForeColor = Color.FromArgb(46, 52, 63);
+            buttonThisYear.Image = (Image)resources.GetObject("buttonThisYear.Image");
+            buttonThisYear.ImageAlign = ContentAlignment.TopCenter;
+            buttonThisYear.Location = new Point(536, 8);
+            buttonThisYear.Margin = new Padding(2);
             buttonThisYear.Name = "buttonThisYear";
-            buttonThisYear.Size = new Size(75, 65);
+            buttonThisYear.Size = new Size(72, 47);
             buttonThisYear.TabIndex = 2;
-            buttonThisYear.Text = "This Year";
+            buttonThisYear.Text = "THIS YEAR";
+            buttonThisYear.TextAlign = ContentAlignment.BottomCenter;
             buttonThisYear.UseVisualStyleBackColor = false;
             buttonThisYear.Click += buttonThisYear_Click;
             // 
@@ -241,274 +296,391 @@
             // 
             buttonOverall.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             buttonOverall.BackColor = Color.Transparent;
-            buttonOverall.FlatAppearance.BorderColor = Color.DimGray;
-            buttonOverall.FlatAppearance.BorderSize = 0;
-            buttonOverall.FlatAppearance.MouseDownBackColor = Color.MidnightBlue;
+            buttonOverall.FlatAppearance.BorderColor = Color.FromArgb(46, 52, 63);
+            buttonOverall.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonOverall.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonOverall.FlatStyle = FlatStyle.Flat;
-            buttonOverall.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonOverall.ForeColor = Color.White;
-            buttonOverall.Location = new Point(624, 0);
+            buttonOverall.Font = new Font("Calibri", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonOverall.ForeColor = Color.Black;
+            buttonOverall.Image = (Image)resources.GetObject("buttonOverall.Image");
+            buttonOverall.ImageAlign = ContentAlignment.TopCenter;
+            buttonOverall.Location = new Point(460, 8);
+            buttonOverall.Margin = new Padding(2);
             buttonOverall.Name = "buttonOverall";
-            buttonOverall.Size = new Size(75, 65);
+            buttonOverall.Size = new Size(72, 47);
             buttonOverall.TabIndex = 1;
-            buttonOverall.Text = "Overall";
+            buttonOverall.Text = "OVERALL";
+            buttonOverall.TextAlign = ContentAlignment.BottomCenter;
             buttonOverall.UseVisualStyleBackColor = false;
             buttonOverall.Click += buttonOverall_Click;
             // 
-            // chartProjects
+            // tableLayoutPanel3
             // 
-            chartArea1.Name = "ChartArea1";
-            chartArea1.Position.Auto = false;
-            chartArea1.Position.Height = 80F;
-            chartArea1.Position.Width = 94F;
-            chartArea1.Position.X = 3F;
-            chartArea1.Position.Y = 15F;
-            chartProjects.ChartAreas.Add(chartArea1);
-            chartProjects.Dock = DockStyle.Fill;
-            legend1.Alignment = StringAlignment.Center;
-            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend1.Enabled = false;
-            legend1.Name = "Legend1";
-            chartProjects.Legends.Add(legend1);
-            chartProjects.Location = new Point(0, 0);
-            chartProjects.Name = "chartProjects";
-            series1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
-            series1.BackSecondaryColor = Color.RosyBrown;
-            series1.BorderColor = Color.White;
-            series1.BorderWidth = 7;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series1.IsValueShownAsLabel = true;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            series1.SmartLabelStyle.AllowOutsidePlotArea = System.Windows.Forms.DataVisualization.Charting.LabelOutsidePlotAreaStyle.Yes;
-            series1.SmartLabelStyle.CalloutBackColor = Color.Black;
-            series1.SmartLabelStyle.CalloutLineWidth = 2;
-            series1.SmartLabelStyle.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.LabelCalloutStyle.Box;
-            series1.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
-            series1.SmartLabelStyle.MaxMovingDistance = 100D;
-            chartProjects.Series.Add(series1);
-            chartProjects.Size = new Size(371, 279);
-            chartProjects.TabIndex = 0;
-            chartProjects.Text = "ProjectChart";
-            title1.Alignment = ContentAlignment.MiddleLeft;
-            title1.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            title1.Name = "Title1";
-            title1.Position.Auto = false;
-            title1.Position.Height = 6.487398F;
-            title1.Position.Width = 94F;
-            title1.Position.X = 3F;
-            title1.Position.Y = 3F;
-            title1.Text = "Assigned projects per management";
-            chartProjects.Titles.Add(title1);
+            tableLayoutPanel3.ColumnCount = 4;
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel3.Controls.Add(panel1, 0, 0);
+            tableLayoutPanel3.Controls.Add(panel3, 1, 0);
+            tableLayoutPanel3.Controls.Add(panel4, 2, 0);
+            tableLayoutPanel3.Controls.Add(panel5, 3, 0);
+            tableLayoutPanel3.Dock = DockStyle.Top;
+            tableLayoutPanel3.Location = new Point(10, 73);
+            tableLayoutPanel3.Margin = new Padding(0);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.RowCount = 1;
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel3.Size = new Size(958, 77);
+            tableLayoutPanel3.TabIndex = 37;
             // 
-            // chartCapacityPercentage
+            // panel1
             // 
-            chartArea2.BorderWidth = 0;
-            chartArea2.Name = "ChartArea1";
-            chartArea2.Position.Auto = false;
-            chartArea2.Position.Height = 80F;
-            chartArea2.Position.Width = 94F;
-            chartArea2.Position.X = 3F;
-            chartArea2.Position.Y = 20F;
-            chartCapacityPercentage.ChartAreas.Add(chartArea2);
-            chartCapacityPercentage.Dock = DockStyle.Fill;
-            legend2.Alignment = StringAlignment.Center;
-            legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend2.Enabled = false;
-            legend2.Name = "Legend1";
-            chartCapacityPercentage.Legends.Add(legend2);
-            chartCapacityPercentage.Location = new Point(0, 0);
-            chartCapacityPercentage.Name = "chartCapacityPercentage";
-            series2.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalLeft;
-            series2.BackSecondaryColor = Color.MidnightBlue;
-            series2.BorderColor = Color.White;
-            series2.BorderWidth = 2;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series2.CustomProperties = "LabelsRadialLineSize=0.2, CollectedSliceExploded=True, DoughnutRadius=50, LabelsHorizontalLineSize=0.2, MinimumRelativePieSize=70";
-            series2.IsValueShownAsLabel = true;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            dataPoint1.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.None;
-            dataPoint1.BackSecondaryColor = Color.Empty;
-            dataPoint1.Color = Color.White;
-            dataPoint1.IsValueShownAsLabel = false;
-            dataPoint1.IsVisibleInLegend = false;
-            dataPoint2.Color = Color.Linen;
-            dataPoint2.IsValueShownAsLabel = false;
-            dataPoint2.IsVisibleInLegend = false;
-            dataPoint3.Color = Color.RoyalBlue;
-            dataPoint3.IsValueShownAsLabel = false;
-            dataPoint3.IsVisibleInLegend = false;
-            series2.Points.Add(dataPoint1);
-            series2.Points.Add(dataPoint2);
-            series2.Points.Add(dataPoint3);
-            series2.SmartLabelStyle.AllowOutsidePlotArea = System.Windows.Forms.DataVisualization.Charting.LabelOutsidePlotAreaStyle.Yes;
-            series2.SmartLabelStyle.CalloutBackColor = Color.Black;
-            series2.SmartLabelStyle.CalloutLineWidth = 2;
-            series2.SmartLabelStyle.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.LabelCalloutStyle.Box;
-            series2.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
-            series2.SmartLabelStyle.MaxMovingDistance = 100D;
-            chartCapacityPercentage.Series.Add(series2);
-            chartCapacityPercentage.Size = new Size(246, 279);
-            chartCapacityPercentage.TabIndex = 1;
-            chartCapacityPercentage.Text = "chart2";
-            title2.Alignment = ContentAlignment.TopLeft;
-            title2.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            title2.Name = "Title1";
-            title2.Text = "Percentage of capacity available";
-            chartCapacityPercentage.Titles.Add(title2);
+            panel1.BackColor = Color.FromArgb(174, 182, 191);
+            panel1.Controls.Add(pictureBoxProject);
+            panel1.Controls.Add(labelCompletedProjects);
+            panel1.Controls.Add(labelCompletedProjectsSubValue);
+            panel1.Controls.Add(labelCompletedProjectsValue);
+            panel1.Dock = DockStyle.Fill;
+            panel1.ForeColor = Color.White;
+            panel1.Location = new Point(10, 5);
+            panel1.Margin = new Padding(10, 5, 5, 5);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(224, 67);
+            panel1.TabIndex = 0;
             // 
-            // chartCapacityAgainstWork
+            // pictureBoxProject
             // 
-            chartArea3.AxisX.IsLabelAutoFit = false;
-            chartArea3.AxisX.LabelStyle.Font = new Font("Segoe UI", 6.75F, FontStyle.Regular, GraphicsUnit.Point);
-            chartArea3.AxisX.MajorGrid.Enabled = false;
-            chartArea3.AxisX.MajorGrid.Interval = 1D;
-            chartArea3.AxisX.TitleFont = new Font("Segoe UI", 6.75F, FontStyle.Regular, GraphicsUnit.Point);
-            chartArea3.AxisY.IsLabelAutoFit = false;
-            chartArea3.AxisY.LabelStyle.Font = new Font("Segoe UI", 6.75F, FontStyle.Regular, GraphicsUnit.Point);
-            chartArea3.AxisY.MajorGrid.LineColor = Color.Silver;
-            chartArea3.CursorX.IntervalOffset = 1D;
-            chartArea3.Name = "ChartArea1";
-            chartCapacityAgainstWork.ChartAreas.Add(chartArea3);
-            chartCapacityAgainstWork.Dock = DockStyle.Fill;
-            legend3.Alignment = StringAlignment.Center;
-            legend3.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend3.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            legend3.IsTextAutoFit = false;
-            legend3.Name = "Legend1";
-            chartCapacityAgainstWork.Legends.Add(legend3);
-            chartCapacityAgainstWork.Location = new Point(0, 0);
-            chartCapacityAgainstWork.Margin = new Padding(5);
-            chartCapacityAgainstWork.Name = "chartCapacityAgainstWork";
-            series3.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
-            series3.BackSecondaryColor = Color.RosyBrown;
-            series3.BorderColor = Color.White;
-            series3.BorderWidth = 0;
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.SplineArea;
-            series3.CustomProperties = "EmptyPointValue=Zero";
-            series3.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
-            series3.IsValueShownAsLabel = true;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            series3.SmartLabelStyle.CalloutBackColor = Color.Empty;
-            series3.SmartLabelStyle.CalloutLineColor = Color.Empty;
-            series3.SmartLabelStyle.CalloutLineWidth = 0;
-            series3.SmartLabelStyle.MaxMovingDistance = 50D;
-            series3.SmartLabelStyle.MinMovingDistance = 10D;
-            chartCapacityAgainstWork.Series.Add(series3);
-            chartCapacityAgainstWork.Size = new Size(608, 260);
-            chartCapacityAgainstWork.TabIndex = 2;
-            chartCapacityAgainstWork.Text = "chart2";
-            title3.Alignment = ContentAlignment.TopLeft;
-            title3.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            title3.Name = "Title1";
-            title3.Text = "Capacity against workload";
-            chartCapacityAgainstWork.Titles.Add(title3);
+            pictureBoxProject.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBoxProject.Image = (Image)resources.GetObject("pictureBoxProject.Image");
+            pictureBoxProject.Location = new Point(199, 3);
+            pictureBoxProject.Name = "pictureBoxProject";
+            pictureBoxProject.Size = new Size(16, 16);
+            pictureBoxProject.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBoxProject.TabIndex = 3;
+            pictureBoxProject.TabStop = false;
             // 
-            // chartOngoingCompletedProjects
+            // labelCompletedProjects
             // 
-            chartOngoingCompletedProjects.BackColor = Color.FromArgb(234, 242, 248);
-            chartArea4.AxisX.LabelStyle.Enabled = false;
-            chartArea4.AxisX.LineColor = Color.Transparent;
-            chartArea4.AxisX.MajorGrid.Enabled = false;
-            chartArea4.AxisX.MajorTickMark.Enabled = false;
-            chartArea4.AxisX.ToolTip = "Ongoing and completed project percentage ";
-            chartArea4.AxisY.LabelStyle.Enabled = false;
-            chartArea4.AxisY.LineColor = Color.Transparent;
-            chartArea4.AxisY.MajorGrid.Enabled = false;
-            chartArea4.AxisY.MajorTickMark.Enabled = false;
-            chartArea4.Name = "ChartArea1";
-            chartOngoingCompletedProjects.ChartAreas.Add(chartArea4);
-            chartOngoingCompletedProjects.Dock = DockStyle.Bottom;
-            legend4.Alignment = StringAlignment.Center;
-            legend4.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend4.Enabled = false;
-            legend4.Name = "Legend1";
-            chartOngoingCompletedProjects.Legends.Add(legend4);
-            chartOngoingCompletedProjects.Location = new Point(0, 191);
-            chartOngoingCompletedProjects.Name = "chartOngoingCompletedProjects";
-            series4.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
-            series4.BackSecondaryColor = Color.RosyBrown;
-            series4.BorderColor = Color.White;
-            series4.BorderWidth = 0;
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar100;
-            series4.CustomProperties = "MinPixelPointWidth=30";
-            series4.Font = new Font("Century Gothic", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            series4.IsValueShownAsLabel = true;
-            series4.Label = "Completed projects %55";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            dataPoint4.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalRight;
-            dataPoint4.BackSecondaryColor = Color.DarkGray;
-            dataPoint4.Color = Color.AliceBlue;
-            dataPoint4.LabelForeColor = Color.Black;
-            series4.Points.Add(dataPoint4);
-            series4.SmartLabelStyle.AllowOutsidePlotArea = System.Windows.Forms.DataVisualization.Charting.LabelOutsidePlotAreaStyle.Yes;
-            series4.SmartLabelStyle.CalloutLineAnchorCapStyle = System.Windows.Forms.DataVisualization.Charting.LineAnchorCapStyle.Square;
-            series4.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
-            series4.SmartLabelStyle.MaxMovingDistance = 10D;
-            series4.SmartLabelStyle.MinMovingDistance = 100D;
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StackedBar100;
-            series5.CustomProperties = "MinPixelPointWidth=30";
-            series5.Font = new Font("Century Gothic", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            series5.IsValueShownAsLabel = true;
-            series5.Label = "Ongoing projects %45";
-            series5.LabelAngle = 90;
-            series5.Legend = "Legend1";
-            series5.Name = "Series2";
-            dataPoint5.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalLeft;
-            dataPoint5.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.None;
-            dataPoint5.BackSecondaryColor = Color.MidnightBlue;
-            dataPoint5.Color = Color.RoyalBlue;
-            dataPoint5.LabelForeColor = Color.White;
-            series5.Points.Add(dataPoint5);
-            series5.SmartLabelStyle.AllowOutsidePlotArea = System.Windows.Forms.DataVisualization.Charting.LabelOutsidePlotAreaStyle.Yes;
-            series5.SmartLabelStyle.CalloutLineAnchorCapStyle = System.Windows.Forms.DataVisualization.Charting.LineAnchorCapStyle.Square;
-            series5.SmartLabelStyle.MinMovingDistance = 10D;
-            series5.SmartLabelStyle.MovingDirection = System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.Right | System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.Left | System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.TopRight | System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.BottomLeft | System.Windows.Forms.DataVisualization.Charting.LabelAlignmentStyles.BottomRight;
-            chartOngoingCompletedProjects.Series.Add(series4);
-            chartOngoingCompletedProjects.Series.Add(series5);
-            chartOngoingCompletedProjects.Size = new Size(400, 69);
-            chartOngoingCompletedProjects.TabIndex = 3;
-            chartOngoingCompletedProjects.Text = "chart2";
-            title4.Alignment = ContentAlignment.TopLeft;
-            title4.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            title4.Name = "Title1";
-            title4.Text = "Ongoing and completed projects";
-            chartOngoingCompletedProjects.Titles.Add(title4);
+            labelCompletedProjects.AutoSize = true;
+            labelCompletedProjects.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelCompletedProjects.Location = new Point(3, 5);
+            labelCompletedProjects.Name = "labelCompletedProjects";
+            labelCompletedProjects.Size = new Size(133, 16);
+            labelCompletedProjects.TabIndex = 0;
+            labelCompletedProjects.Text = "Completed Projects";
             // 
-            // dateTimeChart2
+            // labelCompletedProjectsSubValue
             // 
-            dateTimeChart2.CalendarFont = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            dateTimeChart2.CustomFormat = "MMM-yy";
-            dateTimeChart2.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            dateTimeChart2.Format = DateTimePickerFormat.Custom;
-            dateTimeChart2.ImeMode = ImeMode.NoControl;
-            dateTimeChart2.Location = new Point(15, 32);
-            dateTimeChart2.Margin = new Padding(2);
-            dateTimeChart2.MinDate = new DateTime(2010, 1, 1, 0, 0, 0, 0);
-            dateTimeChart2.Name = "dateTimeChart2";
-            dateTimeChart2.ShowUpDown = true;
-            dateTimeChart2.Size = new Size(64, 20);
-            dateTimeChart2.TabIndex = 26;
-            dateTimeChart2.Value = new DateTime(2024, 1, 1, 0, 0, 0, 0);
-            dateTimeChart2.ValueChanged += dateTimeChart2_ValueChanged;
+            labelCompletedProjectsSubValue.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            labelCompletedProjectsSubValue.Font = new Font("Calibri", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            labelCompletedProjectsSubValue.Location = new Point(134, 48);
+            labelCompletedProjectsSubValue.Name = "labelCompletedProjectsSubValue";
+            labelCompletedProjectsSubValue.Size = new Size(81, 17);
+            labelCompletedProjectsSubValue.TabIndex = 2;
+            labelCompletedProjectsSubValue.Text = "%99.9 of all";
+            labelCompletedProjectsSubValue.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // labelCompletedProjectsValue
+            // 
+            labelCompletedProjectsValue.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            labelCompletedProjectsValue.Font = new Font("Calibri", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            labelCompletedProjectsValue.Location = new Point(85, 18);
+            labelCompletedProjectsValue.Name = "labelCompletedProjectsValue";
+            labelCompletedProjectsValue.Size = new Size(137, 32);
+            labelCompletedProjectsValue.TabIndex = 1;
+            labelCompletedProjectsValue.Text = "9999";
+            labelCompletedProjectsValue.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.FromArgb(174, 182, 191);
+            panel3.Controls.Add(pictureBox3);
+            panel3.Controls.Add(labelOngoingProjectsSubValue);
+            panel3.Controls.Add(labelOngoingProjectsValue);
+            panel3.Controls.Add(labelOngoingProjects);
+            panel3.Dock = DockStyle.Fill;
+            panel3.ForeColor = Color.White;
+            panel3.Location = new Point(244, 5);
+            panel3.Margin = new Padding(5);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(229, 67);
+            panel3.TabIndex = 1;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(205, 3);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(16, 16);
+            pictureBox3.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBox3.TabIndex = 5;
+            pictureBox3.TabStop = false;
+            // 
+            // labelOngoingProjectsSubValue
+            // 
+            labelOngoingProjectsSubValue.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            labelOngoingProjectsSubValue.Font = new Font("Calibri", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            labelOngoingProjectsSubValue.Location = new Point(140, 48);
+            labelOngoingProjectsSubValue.Name = "labelOngoingProjectsSubValue";
+            labelOngoingProjectsSubValue.Size = new Size(81, 17);
+            labelOngoingProjectsSubValue.TabIndex = 4;
+            labelOngoingProjectsSubValue.Text = "%99.9 of all";
+            labelOngoingProjectsSubValue.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // labelOngoingProjectsValue
+            // 
+            labelOngoingProjectsValue.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            labelOngoingProjectsValue.Font = new Font("Calibri", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            labelOngoingProjectsValue.Location = new Point(79, 18);
+            labelOngoingProjectsValue.Name = "labelOngoingProjectsValue";
+            labelOngoingProjectsValue.Size = new Size(148, 33);
+            labelOngoingProjectsValue.TabIndex = 3;
+            labelOngoingProjectsValue.Text = "9999";
+            labelOngoingProjectsValue.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // labelOngoingProjects
+            // 
+            labelOngoingProjects.AutoSize = true;
+            labelOngoingProjects.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelOngoingProjects.Location = new Point(3, 5);
+            labelOngoingProjects.Name = "labelOngoingProjects";
+            labelOngoingProjects.Size = new Size(118, 16);
+            labelOngoingProjects.TabIndex = 2;
+            labelOngoingProjects.Text = "Ongoing Projects";
+            // 
+            // panel4
+            // 
+            panel4.BackColor = Color.FromArgb(174, 182, 191);
+            panel4.Controls.Add(labelTotalCapacity);
+            panel4.Controls.Add(pictureBoxDown);
+            panel4.Controls.Add(pictureBoxUp);
+            panel4.Controls.Add(labelTotalCapacitySubValue);
+            panel4.Controls.Add(labelTotalCapacityValue);
+            panel4.Dock = DockStyle.Fill;
+            panel4.ForeColor = Color.White;
+            panel4.Location = new Point(483, 5);
+            panel4.Margin = new Padding(5);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(229, 67);
+            panel4.TabIndex = 2;
+            // 
+            // pictureBoxDown
+            // 
+            pictureBoxDown.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBoxDown.Image = (Image)resources.GetObject("pictureBoxDown.Image");
+            pictureBoxDown.Location = new Point(205, 3);
+            pictureBoxDown.Name = "pictureBoxDown";
+            pictureBoxDown.Size = new Size(16, 16);
+            pictureBoxDown.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBoxDown.TabIndex = 4;
+            pictureBoxDown.TabStop = false;
+            pictureBoxDown.Visible = false;
+            // 
+            // pictureBoxUp
+            // 
+            pictureBoxUp.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBoxUp.Image = (Image)resources.GetObject("pictureBoxUp.Image");
+            pictureBoxUp.Location = new Point(205, 3);
+            pictureBoxUp.Name = "pictureBoxUp";
+            pictureBoxUp.Size = new Size(16, 16);
+            pictureBoxUp.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBoxUp.TabIndex = 3;
+            pictureBoxUp.TabStop = false;
+            pictureBoxUp.Visible = false;
+            // 
+            // labelTotalCapacity
+            // 
+            labelTotalCapacity.AutoSize = true;
+            labelTotalCapacity.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelTotalCapacity.Location = new Point(3, 5);
+            labelTotalCapacity.Name = "labelTotalCapacity";
+            labelTotalCapacity.Size = new Size(103, 16);
+            labelTotalCapacity.TabIndex = 2;
+            labelTotalCapacity.Text = "Total Capacity";
+            // 
+            // labelTotalCapacitySubValue
+            // 
+            labelTotalCapacitySubValue.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            labelTotalCapacitySubValue.Font = new Font("Calibri", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            labelTotalCapacitySubValue.Location = new Point(3, 48);
+            labelTotalCapacitySubValue.Name = "labelTotalCapacitySubValue";
+            labelTotalCapacitySubValue.Size = new Size(218, 17);
+            labelTotalCapacitySubValue.TabIndex = 4;
+            labelTotalCapacitySubValue.Text = "from date MMM-yy to MMM-yy";
+            labelTotalCapacitySubValue.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // labelTotalCapacityValue
+            // 
+            labelTotalCapacityValue.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            labelTotalCapacityValue.Font = new Font("Calibri", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            labelTotalCapacityValue.Location = new Point(3, 18);
+            labelTotalCapacityValue.Name = "labelTotalCapacityValue";
+            labelTotalCapacityValue.Size = new Size(225, 33);
+            labelTotalCapacityValue.TabIndex = 3;
+            labelTotalCapacityValue.Text = "15.9%";
+            labelTotalCapacityValue.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // panel5
+            // 
+            panel5.BackColor = Color.FromArgb(174, 182, 191);
+            panel5.Controls.Add(labelAssignedCapacity);
+            panel5.Controls.Add(pictureBoxDown2);
+            panel5.Controls.Add(pictureBoxUp2);
+            panel5.Controls.Add(labelAssignedCapacitySubValue);
+            panel5.Controls.Add(labelAssignedCapacityValue);
+            panel5.Dock = DockStyle.Fill;
+            panel5.ForeColor = Color.White;
+            panel5.Location = new Point(722, 5);
+            panel5.Margin = new Padding(5, 5, 10, 5);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(226, 67);
+            panel5.TabIndex = 3;
+            // 
+            // pictureBoxDown2
+            // 
+            pictureBoxDown2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBoxDown2.Image = (Image)resources.GetObject("pictureBoxDown2.Image");
+            pictureBoxDown2.Location = new Point(198, 3);
+            pictureBoxDown2.Name = "pictureBoxDown2";
+            pictureBoxDown2.Size = new Size(16, 16);
+            pictureBoxDown2.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBoxDown2.TabIndex = 6;
+            pictureBoxDown2.TabStop = false;
+            pictureBoxDown2.Visible = false;
+            // 
+            // pictureBoxUp2
+            // 
+            pictureBoxUp2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBoxUp2.Image = (Image)resources.GetObject("pictureBoxUp2.Image");
+            pictureBoxUp2.Location = new Point(198, 3);
+            pictureBoxUp2.Name = "pictureBoxUp2";
+            pictureBoxUp2.Size = new Size(16, 16);
+            pictureBoxUp2.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBoxUp2.TabIndex = 5;
+            pictureBoxUp2.TabStop = false;
+            pictureBoxUp2.Visible = false;
+            // 
+            // labelAssignedCapacity
+            // 
+            labelAssignedCapacity.AutoSize = true;
+            labelAssignedCapacity.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelAssignedCapacity.Location = new Point(3, 5);
+            labelAssignedCapacity.Name = "labelAssignedCapacity";
+            labelAssignedCapacity.Size = new Size(132, 16);
+            labelAssignedCapacity.TabIndex = 2;
+            labelAssignedCapacity.Text = "Assigned Capacity";
+            // 
+            // labelAssignedCapacitySubValue
+            // 
+            labelAssignedCapacitySubValue.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            labelAssignedCapacitySubValue.Font = new Font("Calibri", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            labelAssignedCapacitySubValue.Location = new Point(3, 48);
+            labelAssignedCapacitySubValue.Name = "labelAssignedCapacitySubValue";
+            labelAssignedCapacitySubValue.Size = new Size(213, 17);
+            labelAssignedCapacitySubValue.TabIndex = 4;
+            labelAssignedCapacitySubValue.Text = "from date MMM-yy to MMM-yy";
+            labelAssignedCapacitySubValue.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // labelAssignedCapacityValue
+            // 
+            labelAssignedCapacityValue.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            labelAssignedCapacityValue.Font = new Font("Calibri", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            labelAssignedCapacityValue.Location = new Point(3, 18);
+            labelAssignedCapacityValue.Name = "labelAssignedCapacityValue";
+            labelAssignedCapacityValue.Size = new Size(221, 32);
+            labelAssignedCapacityValue.TabIndex = 3;
+            labelAssignedCapacityValue.Text = "12.9%";
+            labelAssignedCapacityValue.TextAlign = ContentAlignment.MiddleRight;
+            // 
+            // tableLayoutPanel4
+            // 
+            tableLayoutPanel4.ColumnCount = 3;
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 300F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel4.Controls.Add(panelChart3, 1, 0);
+            tableLayoutPanel4.Controls.Add(panelChart0, 0, 0);
+            tableLayoutPanel4.Controls.Add(panelChart2, 2, 0);
+            tableLayoutPanel4.Dock = DockStyle.Top;
+            tableLayoutPanel4.Location = new Point(10, 150);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RowCount = 1;
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel4.Size = new Size(958, 267);
+            tableLayoutPanel4.TabIndex = 38;
+            // 
+            // panelChart3
+            // 
+            panelChart3.Controls.Add(labelPercentage);
+            panelChart3.Controls.Add(panelStatus);
+            panelChart3.Controls.Add(dateTimeChart3);
+            panelChart3.Controls.Add(chartCapacityPercentage);
+            panelChart3.Dock = DockStyle.Fill;
+            panelChart3.Location = new Point(339, 10);
+            panelChart3.Margin = new Padding(10);
+            panelChart3.Name = "panelChart3";
+            panelChart3.Size = new Size(280, 247);
+            panelChart3.TabIndex = 32;
+            // 
+            // labelPercentage
+            // 
+            labelPercentage.BackColor = Color.White;
+            labelPercentage.FlatStyle = FlatStyle.Flat;
+            labelPercentage.Font = new Font("Segoe UI Black", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            labelPercentage.Location = new Point(101, 122);
+            labelPercentage.Name = "labelPercentage";
+            labelPercentage.Size = new Size(79, 28);
+            labelPercentage.TabIndex = 28;
+            labelPercentage.Text = "30.7%";
+            labelPercentage.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // panelStatus
+            // 
+            panelStatus.Controls.Add(labelSubStatus);
+            panelStatus.Controls.Add(labelStatus);
+            panelStatus.Dock = DockStyle.Bottom;
+            panelStatus.Location = new Point(0, 153);
+            panelStatus.Name = "panelStatus";
+            panelStatus.Size = new Size(280, 94);
+            panelStatus.TabIndex = 30;
+            // 
+            // labelSubStatus
+            // 
+            labelSubStatus.BackColor = Color.White;
+            labelSubStatus.Dock = DockStyle.Fill;
+            labelSubStatus.Font = new Font("Calibri", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
+            labelSubStatus.Location = new Point(0, 22);
+            labelSubStatus.Name = "labelSubStatus";
+            labelSubStatus.Padding = new Padding(0, 5, 0, 0);
+            labelSubStatus.Size = new Size(280, 72);
+            labelSubStatus.TabIndex = 1;
+            labelSubStatus.Text = "Capacity Status";
+            labelSubStatus.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // labelStatus
+            // 
+            labelStatus.BackColor = Color.White;
+            labelStatus.Dock = DockStyle.Top;
+            labelStatus.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            labelStatus.Location = new Point(0, 0);
+            labelStatus.Name = "labelStatus";
+            labelStatus.Padding = new Padding(0, 0, 0, 5);
+            labelStatus.Size = new Size(280, 22);
+            labelStatus.TabIndex = 0;
+            labelStatus.Text = "STATUS";
+            labelStatus.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // dateTimeChart3
             // 
-            dateTimeChart3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             dateTimeChart3.CalendarFont = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
             dateTimeChart3.CustomFormat = "MMM-yy";
             dateTimeChart3.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             dateTimeChart3.Format = DateTimePickerFormat.Custom;
             dateTimeChart3.ImeMode = ImeMode.NoControl;
-            dateTimeChart3.Location = new Point(12, 33);
+            dateTimeChart3.Location = new Point(12, 30);
             dateTimeChart3.Margin = new Padding(2);
             dateTimeChart3.MinDate = new DateTime(2010, 1, 1, 0, 0, 0, 0);
             dateTimeChart3.Name = "dateTimeChart3";
@@ -518,181 +690,121 @@
             dateTimeChart3.Value = new DateTime(2024, 1, 1, 0, 0, 0, 0);
             dateTimeChart3.ValueChanged += dateTimeChart3_ValueChanged;
             // 
-            // labelPercentage
+            // chartCapacityPercentage
             // 
-            labelPercentage.BackColor = Color.White;
-            labelPercentage.FlatStyle = FlatStyle.Flat;
-            labelPercentage.Font = new Font("Segoe UI Black", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            labelPercentage.Location = new Point(86, 142);
-            labelPercentage.Name = "labelPercentage";
-            labelPercentage.Size = new Size(86, 32);
-            labelPercentage.TabIndex = 28;
-            labelPercentage.Text = "30.7%";
-            labelPercentage.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // buttonShow
-            // 
-            buttonShow.BackColor = Color.FromArgb(234, 242, 248);
-            buttonShow.Dock = DockStyle.Right;
-            buttonShow.FlatAppearance.BorderSize = 0;
-            buttonShow.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
-            buttonShow.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
-            buttonShow.FlatStyle = FlatStyle.Flat;
-            buttonShow.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonShow.Location = new Point(273, 0);
-            buttonShow.Name = "buttonShow";
-            buttonShow.Size = new Size(127, 43);
-            buttonShow.TabIndex = 26;
-            buttonShow.Text = "SHOW ONGOING";
-            buttonShow.UseVisualStyleBackColor = false;
-            buttonShow.Click += buttonShow_Click;
-            // 
-            // tableLayoutPanel1
-            // 
-            tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 266F));
-            tableLayoutPanel1.Controls.Add(panelChart0, 0, 0);
-            tableLayoutPanel1.Controls.Add(panelChart3, 2, 0);
-            tableLayoutPanel1.Controls.Add(panelChart2, 1, 0);
-            tableLayoutPanel1.Dock = DockStyle.Top;
-            tableLayoutPanel1.Location = new Point(0, 65);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 1;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new Size(1048, 299);
-            tableLayoutPanel1.TabIndex = 30;
-            // 
-            // panelChart0
-            // 
-            panelChart0.Controls.Add(button2);
-            panelChart0.Controls.Add(chartProjects);
-            panelChart0.Dock = DockStyle.Fill;
-            panelChart0.Location = new Point(10, 10);
-            panelChart0.Margin = new Padding(10);
-            panelChart0.Name = "panelChart0";
-            panelChart0.Size = new Size(371, 279);
-            panelChart0.TabIndex = 28;
-            // 
-            // button2
-            // 
-            button2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button2.BackColor = Color.White;
-            button2.Cursor = Cursors.Hand;
-            button2.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatAppearance.MouseOverBackColor = Color.FromArgb(127, 179, 213);
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            button2.ForeColor = Color.White;
-            button2.Image = (Image)resources.GetObject("button2.Image");
-            button2.Location = new Point(338, 33);
-            button2.Margin = new Padding(2);
-            button2.Name = "button2";
-            button2.Padding = new Padding(0, 0, 1, 1);
-            button2.Size = new Size(20, 20);
-            button2.TabIndex = 44;
-            button2.UseVisualStyleBackColor = false;
-            // 
-            // panelChart3
-            // 
-            panelChart3.Controls.Add(labelPercentage);
-            panelChart3.Controls.Add(panelStatus);
-            panelChart3.Controls.Add(dateTimeChart3);
-            panelChart3.Controls.Add(chartCapacityPercentage);
-            panelChart3.Dock = DockStyle.Fill;
-            panelChart3.Location = new Point(792, 10);
-            panelChart3.Margin = new Padding(10);
-            panelChart3.Name = "panelChart3";
-            panelChart3.Size = new Size(246, 279);
-            panelChart3.TabIndex = 32;
-            // 
-            // panelStatus
-            // 
-            panelStatus.Controls.Add(labelSubStatus);
-            panelStatus.Controls.Add(labelStatus);
-            panelStatus.Dock = DockStyle.Bottom;
-            panelStatus.Location = new Point(0, 172);
-            panelStatus.Name = "panelStatus";
-            panelStatus.Size = new Size(246, 107);
-            panelStatus.TabIndex = 30;
-            // 
-            // labelSubStatus
-            // 
-            labelSubStatus.BackColor = Color.White;
-            labelSubStatus.Dock = DockStyle.Fill;
-            labelSubStatus.Font = new Font("Segoe UI", 8.25F, FontStyle.Italic, GraphicsUnit.Point);
-            labelSubStatus.Location = new Point(0, 34);
-            labelSubStatus.Name = "labelSubStatus";
-            labelSubStatus.Size = new Size(246, 73);
-            labelSubStatus.TabIndex = 1;
-            labelSubStatus.Text = "Capacity Status";
-            labelSubStatus.TextAlign = ContentAlignment.TopCenter;
-            // 
-            // labelStatus
-            // 
-            labelStatus.BackColor = Color.White;
-            labelStatus.Dock = DockStyle.Top;
-            labelStatus.Font = new Font("Century Gothic", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            labelStatus.Location = new Point(0, 0);
-            labelStatus.Name = "labelStatus";
-            labelStatus.Size = new Size(246, 34);
-            labelStatus.TabIndex = 0;
-            labelStatus.Text = "STATUS";
-            labelStatus.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // panelChart2
-            // 
-            panelChart2.Controls.Add(buttonShowHide);
-            panelChart2.Controls.Add(dateTimeChart2);
-            panelChart2.Controls.Add(chartCapacity);
-            panelChart2.Dock = DockStyle.Fill;
-            panelChart2.Location = new Point(401, 10);
-            panelChart2.Margin = new Padding(10);
-            panelChart2.Name = "panelChart2";
-            panelChart2.Size = new Size(371, 279);
-            panelChart2.TabIndex = 31;
-            // 
-            // buttonShowHide
-            // 
-            buttonShowHide.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonShowHide.BackColor = Color.White;
-            buttonShowHide.Cursor = Cursors.Hand;
-            buttonShowHide.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
-            buttonShowHide.FlatAppearance.BorderSize = 0;
-            buttonShowHide.FlatAppearance.MouseOverBackColor = Color.FromArgb(127, 179, 213);
-            buttonShowHide.FlatStyle = FlatStyle.Flat;
-            buttonShowHide.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonShowHide.ForeColor = Color.White;
-            buttonShowHide.Image = (Image)resources.GetObject("buttonShowHide.Image");
-            buttonShowHide.Location = new Point(339, 32);
-            buttonShowHide.Margin = new Padding(2);
-            buttonShowHide.Name = "buttonShowHide";
-            buttonShowHide.Padding = new Padding(0, 0, 1, 1);
-            buttonShowHide.Size = new Size(20, 20);
-            buttonShowHide.TabIndex = 42;
-            buttonShowHide.UseVisualStyleBackColor = false;
-            // 
-            // chartCapacity
-            // 
+            chartArea5.BorderWidth = 0;
             chartArea5.Name = "ChartArea1";
             chartArea5.Position.Auto = false;
             chartArea5.Position.Height = 80F;
             chartArea5.Position.Width = 94F;
             chartArea5.Position.X = 3F;
-            chartArea5.Position.Y = 15F;
-            chartCapacity.ChartAreas.Add(chartArea5);
-            chartCapacity.Dock = DockStyle.Fill;
+            chartArea5.Position.Y = 20F;
+            chartCapacityPercentage.ChartAreas.Add(chartArea5);
+            chartCapacityPercentage.Dock = DockStyle.Fill;
             legend5.Alignment = StringAlignment.Center;
             legend5.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             legend5.Enabled = false;
             legend5.Name = "Legend1";
-            chartCapacity.Legends.Add(legend5);
-            chartCapacity.Location = new Point(0, 0);
-            chartCapacity.Margin = new Padding(5);
-            chartCapacity.Name = "chartCapacity";
+            chartCapacityPercentage.Legends.Add(legend5);
+            chartCapacityPercentage.Location = new Point(0, 0);
+            chartCapacityPercentage.Name = "chartCapacityPercentage";
+            series5.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalLeft;
+            series5.BackSecondaryColor = Color.MidnightBlue;
+            series5.BorderColor = Color.White;
+            series5.BorderWidth = 5;
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series5.CustomProperties = "LabelsRadialLineSize=0.2, CollectedSliceExploded=True, DoughnutRadius=50, MinimumRelativePieSize=70, LabelsHorizontalLineSize=0.2";
+            series5.IsValueShownAsLabel = true;
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            dataPoint4.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.None;
+            dataPoint4.BackSecondaryColor = Color.Empty;
+            dataPoint4.Color = Color.White;
+            dataPoint4.IsValueShownAsLabel = false;
+            dataPoint4.IsVisibleInLegend = false;
+            dataPoint5.Color = Color.Linen;
+            dataPoint5.IsValueShownAsLabel = false;
+            dataPoint5.IsVisibleInLegend = false;
+            dataPoint6.Color = Color.RoyalBlue;
+            dataPoint6.IsValueShownAsLabel = false;
+            dataPoint6.IsVisibleInLegend = false;
+            series5.Points.Add(dataPoint4);
+            series5.Points.Add(dataPoint5);
+            series5.Points.Add(dataPoint6);
+            series5.SmartLabelStyle.AllowOutsidePlotArea = System.Windows.Forms.DataVisualization.Charting.LabelOutsidePlotAreaStyle.Yes;
+            series5.SmartLabelStyle.CalloutBackColor = Color.Black;
+            series5.SmartLabelStyle.CalloutLineWidth = 2;
+            series5.SmartLabelStyle.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.LabelCalloutStyle.Box;
+            series5.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
+            series5.SmartLabelStyle.MaxMovingDistance = 100D;
+            chartCapacityPercentage.Series.Add(series5);
+            chartCapacityPercentage.Size = new Size(280, 247);
+            chartCapacityPercentage.TabIndex = 1;
+            chartCapacityPercentage.Text = "chart2";
+            title5.Alignment = ContentAlignment.TopLeft;
+            title5.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            title5.Name = "Title1";
+            title5.Text = "Percentage of capacity available";
+            chartCapacityPercentage.Titles.Add(title5);
+            // 
+            // panelChart0
+            // 
+            panelChart0.Controls.Add(buttonShowHideProjectChart);
+            panelChart0.Controls.Add(chartProjects);
+            panelChart0.Dock = DockStyle.Fill;
+            panelChart0.Location = new Point(10, 10);
+            panelChart0.Margin = new Padding(10);
+            panelChart0.Name = "panelChart0";
+            panelChart0.Size = new Size(309, 247);
+            panelChart0.TabIndex = 28;
+            // 
+            // buttonShowHideProjectChart
+            // 
+            buttonShowHideProjectChart.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonShowHideProjectChart.BackColor = Color.White;
+            buttonShowHideProjectChart.Cursor = Cursors.Hand;
+            buttonShowHideProjectChart.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
+            buttonShowHideProjectChart.FlatAppearance.BorderSize = 0;
+            buttonShowHideProjectChart.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonShowHideProjectChart.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
+            buttonShowHideProjectChart.FlatStyle = FlatStyle.Flat;
+            buttonShowHideProjectChart.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonShowHideProjectChart.ForeColor = Color.White;
+            buttonShowHideProjectChart.Image = (Image)resources.GetObject("buttonShowHideProjectChart.Image");
+            buttonShowHideProjectChart.Location = new Point(281, 7);
+            buttonShowHideProjectChart.Margin = new Padding(2);
+            buttonShowHideProjectChart.Name = "buttonShowHideProjectChart";
+            buttonShowHideProjectChart.Padding = new Padding(0, 0, 1, 1);
+            buttonShowHideProjectChart.Size = new Size(20, 20);
+            buttonShowHideProjectChart.TabIndex = 44;
+            buttonShowHideProjectChart.UseVisualStyleBackColor = false;
+            buttonShowHideProjectChart.Click += buttonShowHideProjectChart_Click;
+            // 
+            // chartProjects
+            // 
+            chartArea6.Name = "ChartArea1";
+            chartArea6.Position.Auto = false;
+            chartArea6.Position.Height = 80F;
+            chartArea6.Position.Width = 94F;
+            chartArea6.Position.X = 3F;
+            chartArea6.Position.Y = 15F;
+            chartProjects.ChartAreas.Add(chartArea6);
+            chartProjects.Dock = DockStyle.Fill;
+            legend6.Alignment = StringAlignment.Far;
+            legend6.BackColor = Color.Transparent;
+            legend6.BackImageAlignment = System.Windows.Forms.DataVisualization.Charting.ChartImageAlignmentStyle.Center;
+            legend6.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Left;
+            legend6.Enabled = false;
+            legend6.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
+            legend6.IsDockedInsideChartArea = false;
+            legend6.IsEquallySpacedItems = true;
+            legend6.IsTextAutoFit = false;
+            legend6.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Column;
+            legend6.Name = "Legend1";
+            chartProjects.Legends.Add(legend6);
+            chartProjects.Location = new Point(0, 0);
+            chartProjects.Name = "chartProjects";
             series6.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
             series6.BackSecondaryColor = Color.RosyBrown;
             series6.BorderColor = Color.White;
@@ -708,220 +820,346 @@
             series6.SmartLabelStyle.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.LabelCalloutStyle.Box;
             series6.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
             series6.SmartLabelStyle.MaxMovingDistance = 100D;
-            chartCapacity.Series.Add(series6);
-            chartCapacity.Size = new Size(371, 279);
+            chartProjects.Series.Add(series6);
+            chartProjects.Size = new Size(309, 247);
+            chartProjects.TabIndex = 0;
+            chartProjects.Text = "ProjectChart";
+            title6.Alignment = ContentAlignment.MiddleLeft;
+            title6.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            title6.Name = "Title1";
+            title6.Position.Auto = false;
+            title6.Position.Height = 6.487398F;
+            title6.Position.Width = 94F;
+            title6.Position.X = 3F;
+            title6.Position.Y = 3F;
+            title6.Text = "Assigned projects per management";
+            chartProjects.Titles.Add(title6);
+            // 
+            // panelChart2
+            // 
+            panelChart2.Controls.Add(dateTimeChart2);
+            panelChart2.Controls.Add(buttonShowHideChartCapacity);
+            panelChart2.Controls.Add(chartCapacity);
+            panelChart2.Dock = DockStyle.Fill;
+            panelChart2.Location = new Point(639, 10);
+            panelChart2.Margin = new Padding(10);
+            panelChart2.Name = "panelChart2";
+            panelChart2.Size = new Size(309, 247);
+            panelChart2.TabIndex = 31;
+            // 
+            // dateTimeChart2
+            // 
+            dateTimeChart2.CalendarFont = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            dateTimeChart2.CustomFormat = "MMM-yy";
+            dateTimeChart2.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            dateTimeChart2.Format = DateTimePickerFormat.Custom;
+            dateTimeChart2.ImeMode = ImeMode.NoControl;
+            dateTimeChart2.Location = new Point(11, 30);
+            dateTimeChart2.Margin = new Padding(2);
+            dateTimeChart2.MinDate = new DateTime(2010, 1, 1, 0, 0, 0, 0);
+            dateTimeChart2.Name = "dateTimeChart2";
+            dateTimeChart2.ShowUpDown = true;
+            dateTimeChart2.Size = new Size(64, 20);
+            dateTimeChart2.TabIndex = 26;
+            dateTimeChart2.Value = new DateTime(2024, 1, 1, 0, 0, 0, 0);
+            dateTimeChart2.ValueChanged += dateTimeChart2_ValueChanged;
+            // 
+            // buttonShowHideChartCapacity
+            // 
+            buttonShowHideChartCapacity.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonShowHideChartCapacity.BackColor = Color.White;
+            buttonShowHideChartCapacity.Cursor = Cursors.Hand;
+            buttonShowHideChartCapacity.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
+            buttonShowHideChartCapacity.FlatAppearance.BorderSize = 0;
+            buttonShowHideChartCapacity.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonShowHideChartCapacity.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
+            buttonShowHideChartCapacity.FlatStyle = FlatStyle.Flat;
+            buttonShowHideChartCapacity.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonShowHideChartCapacity.ForeColor = Color.White;
+            buttonShowHideChartCapacity.Image = (Image)resources.GetObject("buttonShowHideChartCapacity.Image");
+            buttonShowHideChartCapacity.Location = new Point(281, 7);
+            buttonShowHideChartCapacity.Margin = new Padding(2);
+            buttonShowHideChartCapacity.Name = "buttonShowHideChartCapacity";
+            buttonShowHideChartCapacity.Padding = new Padding(0, 0, 1, 1);
+            buttonShowHideChartCapacity.Size = new Size(20, 20);
+            buttonShowHideChartCapacity.TabIndex = 44;
+            buttonShowHideChartCapacity.UseVisualStyleBackColor = false;
+            buttonShowHideChartCapacity.Click += buttonShowHideChartCapacity_Click;
+            // 
+            // chartCapacity
+            // 
+            chartArea7.Name = "ChartArea1";
+            chartArea7.Position.Auto = false;
+            chartArea7.Position.Height = 80F;
+            chartArea7.Position.Width = 94F;
+            chartArea7.Position.X = 3F;
+            chartArea7.Position.Y = 15F;
+            chartCapacity.ChartAreas.Add(chartArea7);
+            chartCapacity.Dock = DockStyle.Fill;
+            legend7.Alignment = StringAlignment.Far;
+            legend7.BackColor = Color.Transparent;
+            legend7.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Left;
+            legend7.Enabled = false;
+            legend7.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
+            legend7.IsTextAutoFit = false;
+            legend7.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Column;
+            legend7.Name = "Legend1";
+            chartCapacity.Legends.Add(legend7);
+            chartCapacity.Location = new Point(0, 0);
+            chartCapacity.Margin = new Padding(5);
+            chartCapacity.Name = "chartCapacity";
+            series7.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+            series7.BackSecondaryColor = Color.RosyBrown;
+            series7.BorderColor = Color.White;
+            series7.BorderWidth = 7;
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series7.IsValueShownAsLabel = true;
+            series7.Legend = "Legend1";
+            series7.Name = "Series1";
+            series7.SmartLabelStyle.AllowOutsidePlotArea = System.Windows.Forms.DataVisualization.Charting.LabelOutsidePlotAreaStyle.Yes;
+            series7.SmartLabelStyle.CalloutBackColor = Color.Black;
+            series7.SmartLabelStyle.CalloutLineWidth = 2;
+            series7.SmartLabelStyle.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.LabelCalloutStyle.Box;
+            series7.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
+            series7.SmartLabelStyle.MaxMovingDistance = 100D;
+            chartCapacity.Series.Add(series7);
+            chartCapacity.Size = new Size(309, 247);
             chartCapacity.TabIndex = 27;
             chartCapacity.Text = "ProjectChart";
-            title5.Alignment = ContentAlignment.MiddleLeft;
-            title5.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            title5.Name = "Title1";
-            title5.Position.Auto = false;
-            title5.Position.Height = 6.487398F;
-            title5.Position.Width = 94F;
-            title5.Position.X = 3F;
-            title5.Position.Y = 3F;
-            title5.Text = "Assigned capacity per department";
-            chartCapacity.Titles.Add(title5);
+            title7.Alignment = ContentAlignment.MiddleLeft;
+            title7.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            title7.Name = "Title1";
+            title7.Position.Auto = false;
+            title7.Position.Height = 6.487398F;
+            title7.Position.Width = 94F;
+            title7.Position.X = 3F;
+            title7.Position.Y = 3F;
+            title7.Text = "Assigned capacity per department";
+            chartCapacity.Titles.Add(title7);
             // 
-            // panelDataGrid
+            // chartCapacityAgainstWork
             // 
-            panelDataGrid.Controls.Add(panel1);
-            panelDataGrid.Controls.Add(panelDataGridTitle);
-            panelDataGrid.Controls.Add(chartOngoingCompletedProjects);
-            panelDataGrid.Dock = DockStyle.Fill;
-            panelDataGrid.Location = new Point(638, 10);
-            panelDataGrid.Margin = new Padding(10);
-            panelDataGrid.Name = "panelDataGrid";
-            panelDataGrid.Size = new Size(400, 260);
-            panelDataGrid.TabIndex = 31;
+            chartCapacityAgainstWork.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            chartArea8.AxisX.Interval = 1D;
+            chartArea8.AxisX.IsLabelAutoFit = false;
+            chartArea8.AxisX.LabelStyle.Font = new Font("Segoe UI", 6.75F, FontStyle.Regular, GraphicsUnit.Point);
+            chartArea8.AxisX.MajorGrid.Enabled = false;
+            chartArea8.AxisX.MajorGrid.Interval = 1D;
+            chartArea8.AxisX.TitleFont = new Font("Segoe UI", 6.75F, FontStyle.Regular, GraphicsUnit.Point);
+            chartArea8.AxisY.IsLabelAutoFit = false;
+            chartArea8.AxisY.LabelStyle.Font = new Font("Segoe UI", 6.75F, FontStyle.Regular, GraphicsUnit.Point);
+            chartArea8.AxisY.MajorGrid.LineColor = Color.Silver;
+            chartArea8.CursorX.IntervalOffset = 1D;
+            chartArea8.Name = "ChartArea1";
+            chartCapacityAgainstWork.ChartAreas.Add(chartArea8);
+            legend8.Alignment = StringAlignment.Center;
+            legend8.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend8.Font = new Font("Segoe UI", 6F, FontStyle.Italic, GraphicsUnit.Point);
+            legend8.IsTextAutoFit = false;
+            legend8.Name = "Legend1";
+            chartCapacityAgainstWork.Legends.Add(legend8);
+            chartCapacityAgainstWork.Location = new Point(10, 10);
+            chartCapacityAgainstWork.Margin = new Padding(5);
+            chartCapacityAgainstWork.Name = "chartCapacityAgainstWork";
+            series8.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.BackwardDiagonal;
+            series8.BorderColor = Color.White;
+            series8.BorderWidth = 0;
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.SplineArea;
+            series8.Color = Color.FromArgb(100, 142, 68, 173);
+            series8.CustomProperties = "EmptyPointValue=Zero";
+            series8.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            series8.IsValueShownAsLabel = true;
+            series8.Legend = "Legend1";
+            series8.MarkerColor = Color.FromArgb(21, 67, 96);
+            series8.MarkerSize = 10;
+            series8.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Cross;
+            series8.Name = "Total Capacity";
+            series8.SmartLabelStyle.CalloutBackColor = Color.Empty;
+            series8.SmartLabelStyle.CalloutLineColor = Color.Empty;
+            series8.SmartLabelStyle.CalloutLineWidth = 0;
+            series8.SmartLabelStyle.MaxMovingDistance = 50D;
+            series8.SmartLabelStyle.MinMovingDistance = 10D;
+            chartCapacityAgainstWork.Series.Add(series8);
+            chartCapacityAgainstWork.Size = new Size(938, 197);
+            chartCapacityAgainstWork.TabIndex = 2;
+            chartCapacityAgainstWork.Text = "chart2";
+            title8.Alignment = ContentAlignment.TopLeft;
+            title8.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            title8.Name = "Title1";
+            title8.Text = "Capacity against workload";
+            chartCapacityAgainstWork.Titles.Add(title8);
             // 
-            // panel1
+            // panel2
             // 
-            panel1.Controls.Add(dataGridViewOngoingProjects);
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 43);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(400, 148);
-            panel1.TabIndex = 28;
+            panel2.Controls.Add(comboBoxInterval);
+            panel2.Controls.Add(buttonRotate);
+            panel2.Controls.Add(buttonShowHideWorkAgainst);
+            panel2.Controls.Add(chartCapacityAgainstWork);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(10, 417);
+            panel2.Name = "panel2";
+            panel2.Padding = new Padding(10);
+            panel2.Size = new Size(958, 217);
+            panel2.TabIndex = 39;
             // 
-            // dataGridViewOngoingProjects
+            // comboBoxInterval
             // 
-            dataGridViewOngoingProjects.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewOngoingProjects.BackgroundColor = Color.White;
-            dataGridViewOngoingProjects.BorderStyle = BorderStyle.None;
-            dataGridViewOngoingProjects.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewOngoingProjects.ColumnHeadersVisible = false;
-            dataGridViewOngoingProjects.Dock = DockStyle.Fill;
-            dataGridViewOngoingProjects.EnableHeadersVisualStyles = false;
-            dataGridViewOngoingProjects.GridColor = Color.White;
-            dataGridViewOngoingProjects.Location = new Point(0, 0);
-            dataGridViewOngoingProjects.Name = "dataGridViewOngoingProjects";
-            dataGridViewOngoingProjects.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.White;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI Semibold", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(127, 179, 213);
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridViewOngoingProjects.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewOngoingProjects.RowHeadersVisible = false;
-            dataGridViewOngoingProjects.RowTemplate.Height = 25;
-            dataGridViewOngoingProjects.Size = new Size(400, 148);
-            dataGridViewOngoingProjects.TabIndex = 0;
+            comboBoxInterval.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            comboBoxInterval.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxInterval.FormattingEnabled = true;
+            comboBoxInterval.Location = new Point(860, 17);
+            comboBoxInterval.Name = "comboBoxInterval";
+            comboBoxInterval.Size = new Size(33, 20);
+            comboBoxInterval.TabIndex = 47;
+            comboBoxInterval.SelectedIndexChanged += comboBoxInterval_SelectedIndexChanged;
             // 
-            // panelDataGridTitle
+            // buttonRotate
             // 
-            panelDataGridTitle.BackColor = Color.FromArgb(234, 242, 248);
-            panelDataGridTitle.Controls.Add(labelDataGridSubTitle);
-            panelDataGridTitle.Controls.Add(labelDataGridTitle);
-            panelDataGridTitle.Controls.Add(buttonShow);
-            panelDataGridTitle.Dock = DockStyle.Top;
-            panelDataGridTitle.Location = new Point(0, 0);
-            panelDataGridTitle.Name = "panelDataGridTitle";
-            panelDataGridTitle.Size = new Size(400, 43);
-            panelDataGridTitle.TabIndex = 27;
+            buttonRotate.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonRotate.BackColor = Color.White;
+            buttonRotate.Cursor = Cursors.Hand;
+            buttonRotate.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
+            buttonRotate.FlatAppearance.BorderSize = 0;
+            buttonRotate.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonRotate.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
+            buttonRotate.FlatStyle = FlatStyle.Flat;
+            buttonRotate.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonRotate.ForeColor = Color.White;
+            buttonRotate.Image = (Image)resources.GetObject("buttonRotate.Image");
+            buttonRotate.Location = new Point(898, 17);
+            buttonRotate.Margin = new Padding(2);
+            buttonRotate.Name = "buttonRotate";
+            buttonRotate.Padding = new Padding(0, 0, 1, 1);
+            buttonRotate.Size = new Size(20, 20);
+            buttonRotate.TabIndex = 46;
+            buttonRotate.UseVisualStyleBackColor = false;
+            buttonRotate.Click += buttonRotate_Click;
             // 
-            // labelDataGridSubTitle
+            // buttonShowHideWorkAgainst
             // 
-            labelDataGridSubTitle.AutoSize = true;
-            labelDataGridSubTitle.Font = new Font("Segoe UI", 8.25F, FontStyle.Italic, GraphicsUnit.Point);
-            labelDataGridSubTitle.Location = new Point(13, 23);
-            labelDataGridSubTitle.Name = "labelDataGridSubTitle";
-            labelDataGridSubTitle.Size = new Size(96, 13);
-            labelDataGridSubTitle.TabIndex = 28;
-            labelDataGridSubTitle.Text = "DataGrid Sub Title";
-            // 
-            // labelDataGridTitle
-            // 
-            labelDataGridTitle.AutoSize = true;
-            labelDataGridTitle.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelDataGridTitle.Location = new Point(13, 5);
-            labelDataGridTitle.Name = "labelDataGridTitle";
-            labelDataGridTitle.Size = new Size(97, 16);
-            labelDataGridTitle.TabIndex = 27;
-            labelDataGridTitle.Text = "DataGrid Title";
-            // 
-            // tableLayoutPanel2
-            // 
-            tableLayoutPanel2.ColumnCount = 2;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
-            tableLayoutPanel2.Controls.Add(panelChart4, 0, 0);
-            tableLayoutPanel2.Controls.Add(panelDataGrid, 1, 0);
-            tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(0, 364);
-            tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 1;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(1048, 280);
-            tableLayoutPanel2.TabIndex = 31;
-            // 
-            // panelChart4
-            // 
-            panelChart4.Controls.Add(button1);
-            panelChart4.Controls.Add(chartCapacityAgainstWork);
-            panelChart4.Dock = DockStyle.Fill;
-            panelChart4.Location = new Point(10, 10);
-            panelChart4.Margin = new Padding(10);
-            panelChart4.Name = "panelChart4";
-            panelChart4.Size = new Size(608, 260);
-            panelChart4.TabIndex = 28;
-            // 
-            // button1
-            // 
-            button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            button1.BackColor = Color.White;
-            button1.Cursor = Cursors.Hand;
-            button1.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatAppearance.MouseOverBackColor = Color.FromArgb(127, 179, 213);
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.ForeColor = Color.White;
-            button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(573, 8);
-            button1.Margin = new Padding(2);
-            button1.Name = "button1";
-            button1.Padding = new Padding(0, 0, 1, 1);
-            button1.Size = new Size(20, 20);
-            button1.TabIndex = 43;
-            button1.UseVisualStyleBackColor = false;
+            buttonShowHideWorkAgainst.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonShowHideWorkAgainst.BackColor = Color.White;
+            buttonShowHideWorkAgainst.Cursor = Cursors.Hand;
+            buttonShowHideWorkAgainst.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
+            buttonShowHideWorkAgainst.FlatAppearance.BorderSize = 0;
+            buttonShowHideWorkAgainst.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonShowHideWorkAgainst.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
+            buttonShowHideWorkAgainst.FlatStyle = FlatStyle.Flat;
+            buttonShowHideWorkAgainst.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonShowHideWorkAgainst.ForeColor = Color.White;
+            buttonShowHideWorkAgainst.Image = (Image)resources.GetObject("buttonShowHideWorkAgainst.Image");
+            buttonShowHideWorkAgainst.Location = new Point(920, 17);
+            buttonShowHideWorkAgainst.Margin = new Padding(2);
+            buttonShowHideWorkAgainst.Name = "buttonShowHideWorkAgainst";
+            buttonShowHideWorkAgainst.Padding = new Padding(0, 0, 1, 1);
+            buttonShowHideWorkAgainst.Size = new Size(20, 20);
+            buttonShowHideWorkAgainst.TabIndex = 46;
+            buttonShowHideWorkAgainst.UseVisualStyleBackColor = false;
+            buttonShowHideWorkAgainst.Click += buttonShowHideWorkAgainst_Click;
             // 
             // DashboardForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(242, 242, 242);
-            ClientSize = new Size(1048, 644);
-            Controls.Add(tableLayoutPanel2);
-            Controls.Add(tableLayoutPanel1);
+            ClientSize = new Size(978, 644);
+            Controls.Add(panel2);
+            Controls.Add(tableLayoutPanel4);
+            Controls.Add(tableLayoutPanel3);
             Controls.Add(panelChart1);
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(2);
             Name = "DashboardForm";
+            Padding = new Padding(10);
             Text = "DashboardForm";
             Load += DashboardForm_Load;
             panelChart1.ResumeLayout(false);
             panelChart1.PerformLayout();
-            panelDate.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)chartProjects).EndInit();
-            ((System.ComponentModel.ISupportInitialize)chartCapacityPercentage).EndInit();
-            ((System.ComponentModel.ISupportInitialize)chartCapacityAgainstWork).EndInit();
-            ((System.ComponentModel.ISupportInitialize)chartOngoingCompletedProjects).EndInit();
-            tableLayoutPanel1.ResumeLayout(false);
-            panelChart0.ResumeLayout(false);
+            tableLayoutPanel3.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxProject).EndInit();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxUp).EndInit();
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxDown2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxUp2).EndInit();
+            tableLayoutPanel4.ResumeLayout(false);
             panelChart3.ResumeLayout(false);
             panelStatus.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)chartCapacityPercentage).EndInit();
+            panelChart0.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)chartProjects).EndInit();
             panelChart2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)chartCapacity).EndInit();
-            panelDataGrid.ResumeLayout(false);
-            panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridViewOngoingProjects).EndInit();
-            panelDataGridTitle.ResumeLayout(false);
-            panelDataGridTitle.PerformLayout();
-            tableLayoutPanel2.ResumeLayout(false);
-            panelChart4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)chartCapacityAgainstWork).EndInit();
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
         private Panel panelChart1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chartProjects;
+        private Label labelDashboard;
         private Button buttonCustom;
         private Button buttonLastYear;
         private Button buttonThisYear;
         private Button buttonOverall;
-        private DateTimePicker dateTimePickerStart;
-        private DateTimePicker dateTimePickerEnd;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chartCapacityPercentage;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chartCapacityAgainstWork;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chartOngoingCompletedProjects;
-        private DateTimePicker dateTimeChart2;
-        private DateTimePicker dateTimeChart3;
-        private Label labelPercentage;
-        private Button buttonShow;
-        private Label labelDashboard;
-        private TableLayoutPanel tableLayoutPanel1;
-        private Panel panelChart2;
-        private Panel panelDataGrid;
-        private TableLayoutPanel tableLayoutPanel2;
+        private TableLayoutPanel tableLayoutPanel3;
+        private TableLayoutPanel tableLayoutPanel4;
         private Panel panelChart3;
-        private Panel panelDataGridTitle;
+        private Label labelPercentage;
         private Panel panelStatus;
-        private Label labelDataGridSubTitle;
-        private Label labelDataGridTitle;
-        private Label labelStatus;
         private Label labelSubStatus;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chartCapacity;
-        private Panel panel1;
-        private DataGridView dataGridViewOngoingProjects;
-        private Panel panelDate;
-        private Button buttonShowHide;
+        private Label labelStatus;
+        private DateTimePicker dateTimeChart3;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartCapacityPercentage;
         private Panel panelChart0;
-        private Button button2;
-        private Panel panelChart4;
-        private Button button1;
+        private Button buttonShowHideChartCapacity;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartProjects;
+        private Panel panelChart2;
+        private DateTimePicker dateTimeChart2;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartCapacity;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartCapacityAgainstWork;
+        private Button buttonShowHideProjectChart;
+        private Panel panel1;
+        private Panel panel3;
+        private Panel panel4;
+        private Panel panel5;
+        private DateTimePicker dateTimePickerEnd;
+        private DateTimePicker dateTimePickerStart;
+        private Panel panel2;
+        private Button buttonRotate;
+        private Button buttonShowHideWorkAgainst;
+        private ComboBox comboBoxInterval;
+        private Label labelCompletedProjectsValue;
+        private Label labelCompletedProjects;
+        private Label labelOngoingProjects;
+        private Label labelOngoingProjectsValue;
+        private Label labelTotalCapacityValue;
+        private Label labelTotalCapacity;
+        private Label labelAssignedCapacityValue;
+        private Label labelAssignedCapacity;
+        private ComboBox comboBoxPaletteType;
+        private ComboBox comboBoxColorPalette;
+        private Label labelColorPalette;
+        private Label labelCompletedProjectsSubValue;
+        private Label labelOngoingProjectsSubValue;
+        private Label labelTotalCapacitySubValue;
+        private Label labelAssignedCapacitySubValue;
+        private PictureBox pictureBoxDown;
+        private PictureBox pictureBoxUp;
+        private PictureBox pictureBoxDown2;
+        private PictureBox pictureBoxUp2;
+        private PictureBox pictureBoxProject;
+        private PictureBox pictureBox3;
     }
 }
