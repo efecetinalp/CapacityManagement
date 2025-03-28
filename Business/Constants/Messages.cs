@@ -38,6 +38,18 @@ namespace Business.Constants
         public static string UserListed = "User data is listed successfuly!";
         public static string UserNameInvalid = "User name is invalid!";
 
+        public static string ProjectCapacityAdded = "Project Capacity is added successfuly!";
+        public static string ProjectCapacityUpdated = "Project Capacity data is updated successfuly!";
+        public static string ProjectCapacityDeleted = "Project Capacity data is deleted successfuly!";
+        public static string ProjectCapacityListed = "Project Capacity data is listed successfuly!";
+        public static string ProjectCapacityNameInvalid = "Project Capacity name is invalid!";
+
+        public static string DepartmentCapacityAdded = "Department Capacity is added successfuly!";
+        public static string DepartmentCapacityUpdated = "Department Capacity  data is updated successfuly!";
+        public static string DepartmentCapacityDeleted = "Department Capacity  data is deleted successfuly!";
+        public static string DepartmentCapacityListed = "Department Capacity  data is listed successfuly!";
+        public static string DepartmentCapacityNameInvalid = "Department Capacity  name is invalid!";
+
         public static string EmptyData = "No data available for this query";
     }
 }

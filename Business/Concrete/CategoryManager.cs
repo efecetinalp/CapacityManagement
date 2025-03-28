@@ -41,13 +41,22 @@ namespace Business.Concrete
 
         public IDataResult<List<Category>> GetAll()
         {
-            return new SuccessDataResult<List<Category>>(_categoryDal.GetAll());
+            List<Category> result = _categoryDal.GetAll();
+
+            if (result != null)
+                return new SuccessDataResult<List<Category>>(result, Messages.CategoryListed);
+            else
+                return new ErrorDataResult<List<Category>>(result, Messages.EmptyData);
         }
 
         public IDataResult<List<Category>> GetAllById(int id)
         {
-            return new SuccessDataResult<List<Category>>(_categoryDal.GetAll(c => c.CategoryId == id));
+            List<Category> result = new List<Category>(_categoryDal.GetAll(c => c.CategoryId == id));
 
+            if (result != null)
+                return new SuccessDataResult<List<Category>>(result, Messages.CategoryListed);
+            else
+                return new ErrorDataResult<List<Category>>(result, Messages.EmptyData);
         }
 
         public IDataResult<Category> GetByName(string name)
@@ -55,7 +64,7 @@ namespace Business.Concrete
             Category result = _categoryDal.Get(c => c.CategoryName == name);
 
             if (result != null)
-                return new SuccessDataResult<Category>(result, Messages.ProjectListed);
+                return new SuccessDataResult<Category>(result, Messages.CategoryListed);
             else
                 return new ErrorDataResult<Category>(result, Messages.EmptyData);
         }
@@ -65,7 +74,7 @@ namespace Business.Concrete
             Category result = _categoryDal.Get(c => c.CategoryId == categoryId);
 
             if (result != null)
-                return new SuccessDataResult<Category>(result, Messages.ProjectListed);
+                return new SuccessDataResult<Category>(result, Messages.CategoryListed);
             else
                 return new ErrorDataResult<Category>(result, Messages.EmptyData);
         }

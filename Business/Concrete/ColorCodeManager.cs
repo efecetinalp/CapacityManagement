@@ -44,20 +44,20 @@ namespace Business.Concrete
         {
             List<ColorCode> result = _colorCodeDal.GetAll();
 
-            if (result.Count == 0)
-                return new ErrorDataResult<List<ColorCode>>(result);
-            else
+            if (result != null)
                 return new SuccessDataResult<List<ColorCode>>(result);
+            else
+                return new ErrorDataResult<List<ColorCode>>(result);
         }
 
         public IDataResult<List<ColorCode>> GetAllById(int id)
         {
             List<ColorCode> result = _colorCodeDal.GetAll(cc => cc.ColorId == id);
 
-            if (result.Count == 0)
-                return new ErrorDataResult<List<ColorCode>>(result);
-            else
+            if (result != null)
                 return new SuccessDataResult<List<ColorCode>>(result);
+            else
+                return new ErrorDataResult<List<ColorCode>>(result);
         }
 
         public IDataResult<ColorCode> GetByName(string name)
@@ -65,39 +65,39 @@ namespace Business.Concrete
             ColorCode result = _colorCodeDal.Get(cc => cc.ColorDesignation == name);
 
             if (result != null)
-                return new ErrorDataResult<ColorCode>(result);
-            else
                 return new SuccessDataResult<ColorCode>(result);
+            else
+                return new ErrorDataResult<ColorCode>(result);
         }
 
         public IDataResult<List<ColorCodeDetailDto>> GetColorCodeDetails()
         {
             List<ColorCodeDetailDto> result = _colorCodeDal.GetColorCodeDetails();
 
-            if (result.Count == 0)
-                return new ErrorDataResult<List<ColorCodeDetailDto>>(result);
-            else
+            if (result != null)
                 return new SuccessDataResult<List<ColorCodeDetailDto>>(result);
+            else
+                return new ErrorDataResult<List<ColorCodeDetailDto>>(result);
         }
 
         public IDataResult<List<ColorCodeDetailDto>> GetColorCodeDetailsByPaletteId(int paletteId)
         {
             List<ColorCodeDetailDto> result = _colorCodeDal.GetColorCodeDetails(cc => cc.ColorPaletteId == paletteId);
 
-            if (result.Count == 0)
-                return new ErrorDataResult<List<ColorCodeDetailDto>>(result);
-            else
+            if (result != null)
                 return new SuccessDataResult<List<ColorCodeDetailDto>>(result);
+            else
+                return new ErrorDataResult<List<ColorCodeDetailDto>>(result);
         }
 
         public IDataResult<List<ColorCodeDetailDto>> GetColorCodeDetailsByPaletteName(string paletteName)
         {
             List<ColorCodeDetailDto> result = _colorCodeDal.GetColorCodeDetails(cc => cc.PaletteDesignation == paletteName);
 
-            if (result.Count == 0)
-                return new ErrorDataResult<List<ColorCodeDetailDto>>(result);
-            else
+            if (result != null)
                 return new SuccessDataResult<List<ColorCodeDetailDto>>(result);
+            else
+                return new ErrorDataResult<List<ColorCodeDetailDto>>(result);
         }
     }
 }

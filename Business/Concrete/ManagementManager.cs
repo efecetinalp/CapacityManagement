@@ -41,12 +41,22 @@ namespace Business.Concrete
 
         public IDataResult<List<Management>> GetAll()
         {
-            return new SuccessDataResult<List<Management>>(_managementDal.GetAll());
+            var result = _managementDal.GetAll();
+
+            if (result != null)
+                return new SuccessDataResult<List<Management>>(result, Messages.ManagementListed);
+            else
+                return new ErrorDataResult<List<Management>>(result, Messages.EmptyData);
         }
 
         public IDataResult<List<Management>> GetAllById(int managementId)
         {
-            return new SuccessDataResult<List<Management>>(_managementDal.GetAll(m => m.ManagementId == managementId));
+            var result = _managementDal.GetAll(m => m.ManagementId == managementId);
+
+            if (result != null)
+                return new SuccessDataResult<List<Management>>(result, Messages.ManagementListed);
+            else
+                return new ErrorDataResult<List<Management>>(result, Messages.EmptyData);
         }
 
         public IDataResult<Management> GetByName(string managementName)
@@ -54,7 +64,7 @@ namespace Business.Concrete
             Management result = _managementDal.Get(m => m.ManagementName == managementName);
 
             if (result != null)
-                return new SuccessDataResult<Management>(result, Messages.ProjectListed);
+                return new SuccessDataResult<Management>(result, Messages.ManagementListed);
             else
                 return new ErrorDataResult<Management>(result, Messages.EmptyData);
         }
@@ -64,7 +74,7 @@ namespace Business.Concrete
             Management result = _managementDal.Get(m => m.ManagementId == managementId);
 
             if (result != null)
-                return new SuccessDataResult<Management>(result, Messages.ProjectListed);
+                return new SuccessDataResult<Management>(result, Messages.ManagementListed);
             else
                 return new ErrorDataResult<Management>(result, Messages.EmptyData);
         }

@@ -43,20 +43,20 @@ namespace Business.Concrete
         {
             List<ColorPalette> result = _colorPaletteDal.GetAll();
 
-            if (result.Count == 0)
-                return new ErrorDataResult<List<ColorPalette>>(result);
-            else
+            if (result != null)
                 return new SuccessDataResult<List<ColorPalette>>(result);
+            else
+                return new ErrorDataResult<List<ColorPalette>>(result);
         }
 
         public IDataResult<List<ColorPalette>> GetAllById(int id)
         {
             List<ColorPalette> result = _colorPaletteDal.GetAll(cp => cp.ColorPaletteId == id);
 
-            if (result.Count == 0)
-                return new ErrorDataResult<List<ColorPalette>>(result);
-            else
+            if (result != null)
                 return new SuccessDataResult<List<ColorPalette>>(result);
+            else
+                return new ErrorDataResult<List<ColorPalette>>(result);
         }
 
         public IDataResult<ColorPalette> GetByName(string name)
@@ -64,9 +64,9 @@ namespace Business.Concrete
             ColorPalette result = _colorPaletteDal.Get(cp => cp.PaletteDesignation == name);
 
             if (result != null)
-                return new ErrorDataResult<ColorPalette>(result);
-            else
                 return new SuccessDataResult<ColorPalette>(result);
+            else
+                return new ErrorDataResult<ColorPalette>(result);
         }
     }
 }

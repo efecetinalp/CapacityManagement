@@ -26,7 +26,7 @@ namespace Business.Concrete
         {
             _departmentDal.Add(department);
             return new SuccessResult(Messages.DepartmentAdded);
-        }   
+        }
 
         public IResult Update(Department department)
         {
@@ -42,17 +42,32 @@ namespace Business.Concrete
 
         public IDataResult<List<Department>> GetAll()
         {
-            return new SuccessDataResult<List<Department>>(_departmentDal.GetAll());
+            var result = _departmentDal.GetAll();
+
+            if (result != null)
+                return new SuccessDataResult<List<Department>>(result, Messages.DepartmentListed);
+            else
+                return new ErrorDataResult<List<Department>>(result, Messages.EmptyData);
         }
 
         public IDataResult<List<Department>> GetAllByManagementId(int id)
         {
-            return new SuccessDataResult<List<Department>>(_departmentDal.GetAll(d => d.ManagementId == id));
+            var result = _departmentDal.GetAll(d => d.ManagementId == id);
+
+            if (result != null)
+                return new SuccessDataResult<List<Department>>(result, Messages.DepartmentListed);
+            else
+                return new ErrorDataResult<List<Department>>(result, Messages.EmptyData);
         }
 
         public IDataResult<List<Department>> GetAllById(int id)
         {
-            return new SuccessDataResult<List<Department>>(_departmentDal.GetAll(d => d.DepartmentId == id));
+            var result = _departmentDal.GetAll(d => d.DepartmentId == id);
+
+            if (result != null)
+                return new SuccessDataResult<List<Department>>(result, Messages.DepartmentListed);
+            else
+                return new ErrorDataResult<List<Department>>(result, Messages.EmptyData);
         }
 
         public IDataResult<Department> GetByName(string departmentName)
@@ -79,25 +94,25 @@ namespace Business.Concrete
         {
             List<DepartmentDetailDto> result = _departmentDal.GetDepartmentDetails();
 
-            if (result.Count == 0)
-                return new ErrorDataResult<List<DepartmentDetailDto>>(result, Messages.EmptyData);
+            if (result != null)
+                return new SuccessDataResult<List<DepartmentDetailDto>>(result, Messages.DepartmentListed);
             else
-                return new SuccessDataResult<List<DepartmentDetailDto>>(result, Messages.ProjectListed);
+                return new ErrorDataResult<List<DepartmentDetailDto>>(result, Messages.EmptyData);
         }
 
         public IDataResult<List<DepartmentDetailDto>> GetDepartmentDetails(int managementId)
         {
             List<DepartmentDetailDto> result = _departmentDal.GetDepartmentDetails(d => d.ManagementId == managementId);
 
-            if (result.Count == 0)
-                return new ErrorDataResult<List<DepartmentDetailDto>>(result, Messages.EmptyData);
+            if (result != null)
+                return new SuccessDataResult<List<DepartmentDetailDto>>(result, Messages.DepartmentListed);
             else
-                return new SuccessDataResult<List<DepartmentDetailDto>>(result, Messages.ProjectListed);
+                return new ErrorDataResult<List<DepartmentDetailDto>>(result, Messages.EmptyData);
         }
 
         public IDataResult<DepartmentDetailDto> GetDepartmentDetail(int departmentId)
         {
-            DepartmentDetailDto result = _departmentDal.GetDepartmentDetail(d => d.DepartmentId  == departmentId);
+            DepartmentDetailDto result = _departmentDal.GetDepartmentDetail(d => d.DepartmentId == departmentId);
 
             if (result != null)
                 return new SuccessDataResult<DepartmentDetailDto>(result, Messages.DepartmentListed);
