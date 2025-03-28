@@ -29,25 +29,25 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DashboardForm));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint4 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(10D, "10,10");
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(5D, "7,7");
-            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint6 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(3D, "3,3");
-            System.Windows.Forms.DataVisualization.Charting.Title title5 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title7 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title8 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint7 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(10D, "10,10");
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint8 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(5D, "7,7");
+            System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint9 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(3D, "3,3");
+            System.Windows.Forms.DataVisualization.Charting.Title title9 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title10 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title11 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title12 = new System.Windows.Forms.DataVisualization.Charting.Title();
             panelChart1 = new Panel();
             comboBoxPaletteType = new ComboBox();
             comboBoxColorPalette = new ComboBox();
@@ -61,25 +61,23 @@
             buttonOverall = new Button();
             tableLayoutPanel3 = new TableLayoutPanel();
             panel1 = new Panel();
-            pictureBoxProject = new PictureBox();
             labelCompletedProjects = new Label();
             labelCompletedProjectsSubValue = new Label();
             labelCompletedProjectsValue = new Label();
             panel3 = new Panel();
-            pictureBox3 = new PictureBox();
             labelOngoingProjectsSubValue = new Label();
             labelOngoingProjectsValue = new Label();
             labelOngoingProjects = new Label();
             panel4 = new Panel();
+            labelTotalCapacity = new Label();
             pictureBoxDown = new PictureBox();
             pictureBoxUp = new PictureBox();
-            labelTotalCapacity = new Label();
             labelTotalCapacitySubValue = new Label();
             labelTotalCapacityValue = new Label();
             panel5 = new Panel();
+            labelAssignedCapacity = new Label();
             pictureBoxDown2 = new PictureBox();
             pictureBoxUp2 = new PictureBox();
-            labelAssignedCapacity = new Label();
             labelAssignedCapacitySubValue = new Label();
             labelAssignedCapacityValue = new Label();
             tableLayoutPanel4 = new TableLayoutPanel();
@@ -102,12 +100,12 @@
             comboBoxInterval = new ComboBox();
             buttonRotate = new Button();
             buttonShowHideWorkAgainst = new Button();
+            buttonListOngoing = new Button();
+            buttonCompleted = new Button();
             panelChart1.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBoxProject).BeginInit();
             panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxDown).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxUp).BeginInit();
@@ -167,6 +165,7 @@
             comboBoxColorPalette.Name = "comboBoxColorPalette";
             comboBoxColorPalette.Size = new Size(88, 20);
             comboBoxColorPalette.TabIndex = 31;
+            comboBoxColorPalette.SelectedIndexChanged += comboBoxColorPalette_SelectedIndexChanged;
             // 
             // labelColorPalette
             // 
@@ -174,7 +173,7 @@
             labelColorPalette.AutoSize = true;
             labelColorPalette.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             labelColorPalette.ForeColor = Color.Black;
-            labelColorPalette.Location = new Point(881, -3);
+            labelColorPalette.Location = new Point(858, -3);
             labelColorPalette.Margin = new Padding(2, 0, 2, 0);
             labelColorPalette.Name = "labelColorPalette";
             labelColorPalette.Size = new Size(64, 12);
@@ -337,10 +336,10 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.FromArgb(174, 182, 191);
-            panel1.Controls.Add(pictureBoxProject);
-            panel1.Controls.Add(labelCompletedProjects);
+            panel1.BackColor = Color.FromArgb(52, 73, 94);
+            panel1.Controls.Add(buttonCompleted);
             panel1.Controls.Add(labelCompletedProjectsSubValue);
+            panel1.Controls.Add(labelCompletedProjects);
             panel1.Controls.Add(labelCompletedProjectsValue);
             panel1.Dock = DockStyle.Fill;
             panel1.ForeColor = Color.White;
@@ -349,17 +348,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(224, 67);
             panel1.TabIndex = 0;
-            // 
-            // pictureBoxProject
-            // 
-            pictureBoxProject.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            pictureBoxProject.Image = (Image)resources.GetObject("pictureBoxProject.Image");
-            pictureBoxProject.Location = new Point(199, 3);
-            pictureBoxProject.Name = "pictureBoxProject";
-            pictureBoxProject.Size = new Size(16, 16);
-            pictureBoxProject.SizeMode = PictureBoxSizeMode.AutoSize;
-            pictureBoxProject.TabIndex = 3;
-            pictureBoxProject.TabStop = false;
             // 
             // labelCompletedProjects
             // 
@@ -386,7 +374,7 @@
             // 
             labelCompletedProjectsValue.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             labelCompletedProjectsValue.Font = new Font("Calibri", 20F, FontStyle.Bold, GraphicsUnit.Point);
-            labelCompletedProjectsValue.Location = new Point(85, 18);
+            labelCompletedProjectsValue.Location = new Point(58, 16);
             labelCompletedProjectsValue.Name = "labelCompletedProjectsValue";
             labelCompletedProjectsValue.Size = new Size(137, 32);
             labelCompletedProjectsValue.TabIndex = 1;
@@ -395,11 +383,11 @@
             // 
             // panel3
             // 
-            panel3.BackColor = Color.FromArgb(174, 182, 191);
-            panel3.Controls.Add(pictureBox3);
+            panel3.BackColor = Color.FromArgb(52, 73, 94);
             panel3.Controls.Add(labelOngoingProjectsSubValue);
-            panel3.Controls.Add(labelOngoingProjectsValue);
             panel3.Controls.Add(labelOngoingProjects);
+            panel3.Controls.Add(buttonListOngoing);
+            panel3.Controls.Add(labelOngoingProjectsValue);
             panel3.Dock = DockStyle.Fill;
             panel3.ForeColor = Color.White;
             panel3.Location = new Point(244, 5);
@@ -407,17 +395,6 @@
             panel3.Name = "panel3";
             panel3.Size = new Size(229, 67);
             panel3.TabIndex = 1;
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(205, 3);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(16, 16);
-            pictureBox3.SizeMode = PictureBoxSizeMode.AutoSize;
-            pictureBox3.TabIndex = 5;
-            pictureBox3.TabStop = false;
             // 
             // labelOngoingProjectsSubValue
             // 
@@ -434,7 +411,7 @@
             // 
             labelOngoingProjectsValue.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             labelOngoingProjectsValue.Font = new Font("Calibri", 20F, FontStyle.Bold, GraphicsUnit.Point);
-            labelOngoingProjectsValue.Location = new Point(79, 18);
+            labelOngoingProjectsValue.Location = new Point(53, 16);
             labelOngoingProjectsValue.Name = "labelOngoingProjectsValue";
             labelOngoingProjectsValue.Size = new Size(148, 33);
             labelOngoingProjectsValue.TabIndex = 3;
@@ -453,7 +430,7 @@
             // 
             // panel4
             // 
-            panel4.BackColor = Color.FromArgb(174, 182, 191);
+            panel4.BackColor = Color.FromArgb(52, 73, 94);
             panel4.Controls.Add(labelTotalCapacity);
             panel4.Controls.Add(pictureBoxDown);
             panel4.Controls.Add(pictureBoxUp);
@@ -466,6 +443,16 @@
             panel4.Name = "panel4";
             panel4.Size = new Size(229, 67);
             panel4.TabIndex = 2;
+            // 
+            // labelTotalCapacity
+            // 
+            labelTotalCapacity.AutoSize = true;
+            labelTotalCapacity.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelTotalCapacity.Location = new Point(3, 5);
+            labelTotalCapacity.Name = "labelTotalCapacity";
+            labelTotalCapacity.Size = new Size(103, 16);
+            labelTotalCapacity.TabIndex = 2;
+            labelTotalCapacity.Text = "Total Capacity";
             // 
             // pictureBoxDown
             // 
@@ -491,16 +478,6 @@
             pictureBoxUp.TabStop = false;
             pictureBoxUp.Visible = false;
             // 
-            // labelTotalCapacity
-            // 
-            labelTotalCapacity.AutoSize = true;
-            labelTotalCapacity.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelTotalCapacity.Location = new Point(3, 5);
-            labelTotalCapacity.Name = "labelTotalCapacity";
-            labelTotalCapacity.Size = new Size(103, 16);
-            labelTotalCapacity.TabIndex = 2;
-            labelTotalCapacity.Text = "Total Capacity";
-            // 
             // labelTotalCapacitySubValue
             // 
             labelTotalCapacitySubValue.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -525,7 +502,7 @@
             // 
             // panel5
             // 
-            panel5.BackColor = Color.FromArgb(174, 182, 191);
+            panel5.BackColor = Color.FromArgb(52, 73, 94);
             panel5.Controls.Add(labelAssignedCapacity);
             panel5.Controls.Add(pictureBoxDown2);
             panel5.Controls.Add(pictureBoxUp2);
@@ -538,6 +515,16 @@
             panel5.Name = "panel5";
             panel5.Size = new Size(226, 67);
             panel5.TabIndex = 3;
+            // 
+            // labelAssignedCapacity
+            // 
+            labelAssignedCapacity.AutoSize = true;
+            labelAssignedCapacity.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            labelAssignedCapacity.Location = new Point(3, 5);
+            labelAssignedCapacity.Name = "labelAssignedCapacity";
+            labelAssignedCapacity.Size = new Size(132, 16);
+            labelAssignedCapacity.TabIndex = 2;
+            labelAssignedCapacity.Text = "Assigned Capacity";
             // 
             // pictureBoxDown2
             // 
@@ -562,16 +549,6 @@
             pictureBoxUp2.TabIndex = 5;
             pictureBoxUp2.TabStop = false;
             pictureBoxUp2.Visible = false;
-            // 
-            // labelAssignedCapacity
-            // 
-            labelAssignedCapacity.AutoSize = true;
-            labelAssignedCapacity.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelAssignedCapacity.Location = new Point(3, 5);
-            labelAssignedCapacity.Name = "labelAssignedCapacity";
-            labelAssignedCapacity.Size = new Size(132, 16);
-            labelAssignedCapacity.TabIndex = 2;
-            labelAssignedCapacity.Text = "Assigned Capacity";
             // 
             // labelAssignedCapacitySubValue
             // 
@@ -642,9 +619,9 @@
             panelStatus.Controls.Add(labelSubStatus);
             panelStatus.Controls.Add(labelStatus);
             panelStatus.Dock = DockStyle.Bottom;
-            panelStatus.Location = new Point(0, 153);
+            panelStatus.Location = new Point(0, 150);
             panelStatus.Name = "panelStatus";
-            panelStatus.Size = new Size(280, 94);
+            panelStatus.Size = new Size(280, 97);
             panelStatus.TabIndex = 30;
             // 
             // labelSubStatus
@@ -655,7 +632,7 @@
             labelSubStatus.Location = new Point(0, 22);
             labelSubStatus.Name = "labelSubStatus";
             labelSubStatus.Padding = new Padding(0, 5, 0, 0);
-            labelSubStatus.Size = new Size(280, 72);
+            labelSubStatus.Size = new Size(280, 75);
             labelSubStatus.TabIndex = 1;
             labelSubStatus.Text = "Capacity Status";
             labelSubStatus.TextAlign = ContentAlignment.TopCenter;
@@ -692,61 +669,61 @@
             // 
             // chartCapacityPercentage
             // 
-            chartArea5.BorderWidth = 0;
-            chartArea5.Name = "ChartArea1";
-            chartArea5.Position.Auto = false;
-            chartArea5.Position.Height = 80F;
-            chartArea5.Position.Width = 94F;
-            chartArea5.Position.X = 3F;
-            chartArea5.Position.Y = 20F;
-            chartCapacityPercentage.ChartAreas.Add(chartArea5);
+            chartArea9.BorderWidth = 0;
+            chartArea9.Name = "ChartArea1";
+            chartArea9.Position.Auto = false;
+            chartArea9.Position.Height = 80F;
+            chartArea9.Position.Width = 94F;
+            chartArea9.Position.X = 3F;
+            chartArea9.Position.Y = 20F;
+            chartCapacityPercentage.ChartAreas.Add(chartArea9);
             chartCapacityPercentage.Dock = DockStyle.Fill;
-            legend5.Alignment = StringAlignment.Center;
-            legend5.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend5.Enabled = false;
-            legend5.Name = "Legend1";
-            chartCapacityPercentage.Legends.Add(legend5);
+            legend9.Alignment = StringAlignment.Center;
+            legend9.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend9.Enabled = false;
+            legend9.Name = "Legend1";
+            chartCapacityPercentage.Legends.Add(legend9);
             chartCapacityPercentage.Location = new Point(0, 0);
             chartCapacityPercentage.Name = "chartCapacityPercentage";
-            series5.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalLeft;
-            series5.BackSecondaryColor = Color.MidnightBlue;
-            series5.BorderColor = Color.White;
-            series5.BorderWidth = 5;
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series5.CustomProperties = "LabelsRadialLineSize=0.2, CollectedSliceExploded=True, DoughnutRadius=50, MinimumRelativePieSize=70, LabelsHorizontalLineSize=0.2";
-            series5.IsValueShownAsLabel = true;
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            dataPoint4.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.None;
-            dataPoint4.BackSecondaryColor = Color.Empty;
-            dataPoint4.Color = Color.White;
-            dataPoint4.IsValueShownAsLabel = false;
-            dataPoint4.IsVisibleInLegend = false;
-            dataPoint5.Color = Color.Linen;
-            dataPoint5.IsValueShownAsLabel = false;
-            dataPoint5.IsVisibleInLegend = false;
-            dataPoint6.Color = Color.RoyalBlue;
-            dataPoint6.IsValueShownAsLabel = false;
-            dataPoint6.IsVisibleInLegend = false;
-            series5.Points.Add(dataPoint4);
-            series5.Points.Add(dataPoint5);
-            series5.Points.Add(dataPoint6);
-            series5.SmartLabelStyle.AllowOutsidePlotArea = System.Windows.Forms.DataVisualization.Charting.LabelOutsidePlotAreaStyle.Yes;
-            series5.SmartLabelStyle.CalloutBackColor = Color.Black;
-            series5.SmartLabelStyle.CalloutLineWidth = 2;
-            series5.SmartLabelStyle.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.LabelCalloutStyle.Box;
-            series5.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
-            series5.SmartLabelStyle.MaxMovingDistance = 100D;
-            chartCapacityPercentage.Series.Add(series5);
+            series9.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.DiagonalLeft;
+            series9.BackSecondaryColor = Color.MidnightBlue;
+            series9.BorderColor = Color.White;
+            series9.BorderWidth = 5;
+            series9.ChartArea = "ChartArea1";
+            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series9.CustomProperties = "LabelsRadialLineSize=0.2, DoughnutRadius=50, CollectedSliceExploded=True, LabelsHorizontalLineSize=0.2, MinimumRelativePieSize=70";
+            series9.IsValueShownAsLabel = true;
+            series9.Legend = "Legend1";
+            series9.Name = "Series1";
+            dataPoint7.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.None;
+            dataPoint7.BackSecondaryColor = Color.Empty;
+            dataPoint7.Color = Color.White;
+            dataPoint7.IsValueShownAsLabel = false;
+            dataPoint7.IsVisibleInLegend = false;
+            dataPoint8.Color = Color.Linen;
+            dataPoint8.IsValueShownAsLabel = false;
+            dataPoint8.IsVisibleInLegend = false;
+            dataPoint9.Color = Color.RoyalBlue;
+            dataPoint9.IsValueShownAsLabel = false;
+            dataPoint9.IsVisibleInLegend = false;
+            series9.Points.Add(dataPoint7);
+            series9.Points.Add(dataPoint8);
+            series9.Points.Add(dataPoint9);
+            series9.SmartLabelStyle.AllowOutsidePlotArea = System.Windows.Forms.DataVisualization.Charting.LabelOutsidePlotAreaStyle.Yes;
+            series9.SmartLabelStyle.CalloutBackColor = Color.Black;
+            series9.SmartLabelStyle.CalloutLineWidth = 2;
+            series9.SmartLabelStyle.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.LabelCalloutStyle.Box;
+            series9.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
+            series9.SmartLabelStyle.MaxMovingDistance = 100D;
+            chartCapacityPercentage.Series.Add(series9);
             chartCapacityPercentage.Size = new Size(280, 247);
             chartCapacityPercentage.TabIndex = 1;
             chartCapacityPercentage.Text = "chart2";
-            title5.Alignment = ContentAlignment.TopLeft;
-            title5.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            title5.Name = "Title1";
-            title5.Text = "Percentage of capacity available";
-            chartCapacityPercentage.Titles.Add(title5);
+            title9.Alignment = ContentAlignment.TopLeft;
+            title9.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            title9.Name = "Title1";
+            title9.Text = "Percentage of capacity available";
+            chartCapacityPercentage.Titles.Add(title9);
             // 
             // panelChart0
             // 
@@ -783,57 +760,57 @@
             // 
             // chartProjects
             // 
-            chartArea6.Name = "ChartArea1";
-            chartArea6.Position.Auto = false;
-            chartArea6.Position.Height = 80F;
-            chartArea6.Position.Width = 94F;
-            chartArea6.Position.X = 3F;
-            chartArea6.Position.Y = 15F;
-            chartProjects.ChartAreas.Add(chartArea6);
+            chartArea10.Name = "ChartArea1";
+            chartArea10.Position.Auto = false;
+            chartArea10.Position.Height = 80F;
+            chartArea10.Position.Width = 94F;
+            chartArea10.Position.X = 3F;
+            chartArea10.Position.Y = 15F;
+            chartProjects.ChartAreas.Add(chartArea10);
             chartProjects.Dock = DockStyle.Fill;
-            legend6.Alignment = StringAlignment.Far;
-            legend6.BackColor = Color.Transparent;
-            legend6.BackImageAlignment = System.Windows.Forms.DataVisualization.Charting.ChartImageAlignmentStyle.Center;
-            legend6.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Left;
-            legend6.Enabled = false;
-            legend6.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
-            legend6.IsDockedInsideChartArea = false;
-            legend6.IsEquallySpacedItems = true;
-            legend6.IsTextAutoFit = false;
-            legend6.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Column;
-            legend6.Name = "Legend1";
-            chartProjects.Legends.Add(legend6);
+            legend10.Alignment = StringAlignment.Far;
+            legend10.BackColor = Color.Transparent;
+            legend10.BackImageAlignment = System.Windows.Forms.DataVisualization.Charting.ChartImageAlignmentStyle.Center;
+            legend10.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Left;
+            legend10.Enabled = false;
+            legend10.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
+            legend10.IsDockedInsideChartArea = false;
+            legend10.IsEquallySpacedItems = true;
+            legend10.IsTextAutoFit = false;
+            legend10.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Column;
+            legend10.Name = "Legend1";
+            chartProjects.Legends.Add(legend10);
             chartProjects.Location = new Point(0, 0);
             chartProjects.Name = "chartProjects";
-            series6.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
-            series6.BackSecondaryColor = Color.RosyBrown;
-            series6.BorderColor = Color.White;
-            series6.BorderWidth = 7;
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series6.IsValueShownAsLabel = true;
-            series6.Legend = "Legend1";
-            series6.Name = "Series1";
-            series6.SmartLabelStyle.AllowOutsidePlotArea = System.Windows.Forms.DataVisualization.Charting.LabelOutsidePlotAreaStyle.Yes;
-            series6.SmartLabelStyle.CalloutBackColor = Color.Black;
-            series6.SmartLabelStyle.CalloutLineWidth = 2;
-            series6.SmartLabelStyle.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.LabelCalloutStyle.Box;
-            series6.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
-            series6.SmartLabelStyle.MaxMovingDistance = 100D;
-            chartProjects.Series.Add(series6);
+            series10.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+            series10.BackSecondaryColor = Color.RosyBrown;
+            series10.BorderColor = Color.White;
+            series10.BorderWidth = 7;
+            series10.ChartArea = "ChartArea1";
+            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series10.IsValueShownAsLabel = true;
+            series10.Legend = "Legend1";
+            series10.Name = "Series1";
+            series10.SmartLabelStyle.AllowOutsidePlotArea = System.Windows.Forms.DataVisualization.Charting.LabelOutsidePlotAreaStyle.Yes;
+            series10.SmartLabelStyle.CalloutBackColor = Color.Black;
+            series10.SmartLabelStyle.CalloutLineWidth = 2;
+            series10.SmartLabelStyle.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.LabelCalloutStyle.Box;
+            series10.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
+            series10.SmartLabelStyle.MaxMovingDistance = 100D;
+            chartProjects.Series.Add(series10);
             chartProjects.Size = new Size(309, 247);
             chartProjects.TabIndex = 0;
             chartProjects.Text = "ProjectChart";
-            title6.Alignment = ContentAlignment.MiddleLeft;
-            title6.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            title6.Name = "Title1";
-            title6.Position.Auto = false;
-            title6.Position.Height = 6.487398F;
-            title6.Position.Width = 94F;
-            title6.Position.X = 3F;
-            title6.Position.Y = 3F;
-            title6.Text = "Assigned projects per management";
-            chartProjects.Titles.Add(title6);
+            title10.Alignment = ContentAlignment.MiddleLeft;
+            title10.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            title10.Name = "Title1";
+            title10.Position.Auto = false;
+            title10.Position.Height = 6.487398F;
+            title10.Position.Width = 94F;
+            title10.Position.X = 3F;
+            title10.Position.Y = 3F;
+            title10.Text = "Assigned projects per management";
+            chartProjects.Titles.Add(title10);
             // 
             // panelChart2
             // 
@@ -888,108 +865,108 @@
             // 
             // chartCapacity
             // 
-            chartArea7.Name = "ChartArea1";
-            chartArea7.Position.Auto = false;
-            chartArea7.Position.Height = 80F;
-            chartArea7.Position.Width = 94F;
-            chartArea7.Position.X = 3F;
-            chartArea7.Position.Y = 15F;
-            chartCapacity.ChartAreas.Add(chartArea7);
+            chartArea11.Name = "ChartArea1";
+            chartArea11.Position.Auto = false;
+            chartArea11.Position.Height = 80F;
+            chartArea11.Position.Width = 94F;
+            chartArea11.Position.X = 3F;
+            chartArea11.Position.Y = 15F;
+            chartCapacity.ChartAreas.Add(chartArea11);
             chartCapacity.Dock = DockStyle.Fill;
-            legend7.Alignment = StringAlignment.Far;
-            legend7.BackColor = Color.Transparent;
-            legend7.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Left;
-            legend7.Enabled = false;
-            legend7.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
-            legend7.IsTextAutoFit = false;
-            legend7.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Column;
-            legend7.Name = "Legend1";
-            chartCapacity.Legends.Add(legend7);
+            legend11.Alignment = StringAlignment.Far;
+            legend11.BackColor = Color.Transparent;
+            legend11.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Left;
+            legend11.Enabled = false;
+            legend11.Font = new Font("Segoe UI", 6F, FontStyle.Regular, GraphicsUnit.Point);
+            legend11.IsTextAutoFit = false;
+            legend11.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Column;
+            legend11.Name = "Legend1";
+            chartCapacity.Legends.Add(legend11);
             chartCapacity.Location = new Point(0, 0);
             chartCapacity.Margin = new Padding(5);
             chartCapacity.Name = "chartCapacity";
-            series7.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
-            series7.BackSecondaryColor = Color.RosyBrown;
-            series7.BorderColor = Color.White;
-            series7.BorderWidth = 7;
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series7.IsValueShownAsLabel = true;
-            series7.Legend = "Legend1";
-            series7.Name = "Series1";
-            series7.SmartLabelStyle.AllowOutsidePlotArea = System.Windows.Forms.DataVisualization.Charting.LabelOutsidePlotAreaStyle.Yes;
-            series7.SmartLabelStyle.CalloutBackColor = Color.Black;
-            series7.SmartLabelStyle.CalloutLineWidth = 2;
-            series7.SmartLabelStyle.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.LabelCalloutStyle.Box;
-            series7.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
-            series7.SmartLabelStyle.MaxMovingDistance = 100D;
-            chartCapacity.Series.Add(series7);
+            series11.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.TopBottom;
+            series11.BackSecondaryColor = Color.RosyBrown;
+            series11.BorderColor = Color.White;
+            series11.BorderWidth = 7;
+            series11.ChartArea = "ChartArea1";
+            series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series11.IsValueShownAsLabel = true;
+            series11.Legend = "Legend1";
+            series11.Name = "Series1";
+            series11.SmartLabelStyle.AllowOutsidePlotArea = System.Windows.Forms.DataVisualization.Charting.LabelOutsidePlotAreaStyle.Yes;
+            series11.SmartLabelStyle.CalloutBackColor = Color.Black;
+            series11.SmartLabelStyle.CalloutLineWidth = 2;
+            series11.SmartLabelStyle.CalloutStyle = System.Windows.Forms.DataVisualization.Charting.LabelCalloutStyle.Box;
+            series11.SmartLabelStyle.IsMarkerOverlappingAllowed = true;
+            series11.SmartLabelStyle.MaxMovingDistance = 100D;
+            chartCapacity.Series.Add(series11);
             chartCapacity.Size = new Size(309, 247);
             chartCapacity.TabIndex = 27;
             chartCapacity.Text = "ProjectChart";
-            title7.Alignment = ContentAlignment.MiddleLeft;
-            title7.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            title7.Name = "Title1";
-            title7.Position.Auto = false;
-            title7.Position.Height = 6.487398F;
-            title7.Position.Width = 94F;
-            title7.Position.X = 3F;
-            title7.Position.Y = 3F;
-            title7.Text = "Assigned capacity per department";
-            chartCapacity.Titles.Add(title7);
+            title11.Alignment = ContentAlignment.MiddleLeft;
+            title11.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            title11.Name = "Title1";
+            title11.Position.Auto = false;
+            title11.Position.Height = 6.487398F;
+            title11.Position.Width = 94F;
+            title11.Position.X = 3F;
+            title11.Position.Y = 3F;
+            title11.Text = "Assigned capacity per department";
+            chartCapacity.Titles.Add(title11);
             // 
             // chartCapacityAgainstWork
             // 
             chartCapacityAgainstWork.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            chartArea8.AxisX.Interval = 1D;
-            chartArea8.AxisX.IsLabelAutoFit = false;
-            chartArea8.AxisX.LabelStyle.Font = new Font("Segoe UI", 6.75F, FontStyle.Regular, GraphicsUnit.Point);
-            chartArea8.AxisX.MajorGrid.Enabled = false;
-            chartArea8.AxisX.MajorGrid.Interval = 1D;
-            chartArea8.AxisX.TitleFont = new Font("Segoe UI", 6.75F, FontStyle.Regular, GraphicsUnit.Point);
-            chartArea8.AxisY.IsLabelAutoFit = false;
-            chartArea8.AxisY.LabelStyle.Font = new Font("Segoe UI", 6.75F, FontStyle.Regular, GraphicsUnit.Point);
-            chartArea8.AxisY.MajorGrid.LineColor = Color.Silver;
-            chartArea8.CursorX.IntervalOffset = 1D;
-            chartArea8.Name = "ChartArea1";
-            chartCapacityAgainstWork.ChartAreas.Add(chartArea8);
-            legend8.Alignment = StringAlignment.Center;
-            legend8.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend8.Font = new Font("Segoe UI", 6F, FontStyle.Italic, GraphicsUnit.Point);
-            legend8.IsTextAutoFit = false;
-            legend8.Name = "Legend1";
-            chartCapacityAgainstWork.Legends.Add(legend8);
+            chartArea12.AxisX.Interval = 1D;
+            chartArea12.AxisX.IsLabelAutoFit = false;
+            chartArea12.AxisX.LabelStyle.Font = new Font("Segoe UI", 6.75F, FontStyle.Regular, GraphicsUnit.Point);
+            chartArea12.AxisX.MajorGrid.Enabled = false;
+            chartArea12.AxisX.MajorGrid.Interval = 1D;
+            chartArea12.AxisX.TitleFont = new Font("Segoe UI", 6.75F, FontStyle.Regular, GraphicsUnit.Point);
+            chartArea12.AxisY.IsLabelAutoFit = false;
+            chartArea12.AxisY.LabelStyle.Font = new Font("Segoe UI", 6.75F, FontStyle.Regular, GraphicsUnit.Point);
+            chartArea12.AxisY.MajorGrid.LineColor = Color.Silver;
+            chartArea12.CursorX.IntervalOffset = 1D;
+            chartArea12.Name = "ChartArea1";
+            chartCapacityAgainstWork.ChartAreas.Add(chartArea12);
+            legend12.Alignment = StringAlignment.Center;
+            legend12.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend12.Font = new Font("Segoe UI", 6F, FontStyle.Italic, GraphicsUnit.Point);
+            legend12.IsTextAutoFit = false;
+            legend12.Name = "Legend1";
+            chartCapacityAgainstWork.Legends.Add(legend12);
             chartCapacityAgainstWork.Location = new Point(10, 10);
             chartCapacityAgainstWork.Margin = new Padding(5);
             chartCapacityAgainstWork.Name = "chartCapacityAgainstWork";
-            series8.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.BackwardDiagonal;
-            series8.BorderColor = Color.White;
-            series8.BorderWidth = 0;
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.SplineArea;
-            series8.Color = Color.FromArgb(100, 142, 68, 173);
-            series8.CustomProperties = "EmptyPointValue=Zero";
-            series8.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            series8.IsValueShownAsLabel = true;
-            series8.Legend = "Legend1";
-            series8.MarkerColor = Color.FromArgb(21, 67, 96);
-            series8.MarkerSize = 10;
-            series8.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Cross;
-            series8.Name = "Total Capacity";
-            series8.SmartLabelStyle.CalloutBackColor = Color.Empty;
-            series8.SmartLabelStyle.CalloutLineColor = Color.Empty;
-            series8.SmartLabelStyle.CalloutLineWidth = 0;
-            series8.SmartLabelStyle.MaxMovingDistance = 50D;
-            series8.SmartLabelStyle.MinMovingDistance = 10D;
-            chartCapacityAgainstWork.Series.Add(series8);
+            series12.BackHatchStyle = System.Windows.Forms.DataVisualization.Charting.ChartHatchStyle.BackwardDiagonal;
+            series12.BorderColor = Color.White;
+            series12.BorderWidth = 0;
+            series12.ChartArea = "ChartArea1";
+            series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.SplineArea;
+            series12.Color = Color.FromArgb(100, 142, 68, 173);
+            series12.CustomProperties = "EmptyPointValue=Zero";
+            series12.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            series12.IsValueShownAsLabel = true;
+            series12.Legend = "Legend1";
+            series12.MarkerColor = Color.FromArgb(21, 67, 96);
+            series12.MarkerSize = 10;
+            series12.MarkerStyle = System.Windows.Forms.DataVisualization.Charting.MarkerStyle.Cross;
+            series12.Name = "Total Capacity";
+            series12.SmartLabelStyle.CalloutBackColor = Color.Empty;
+            series12.SmartLabelStyle.CalloutLineColor = Color.Empty;
+            series12.SmartLabelStyle.CalloutLineWidth = 0;
+            series12.SmartLabelStyle.MaxMovingDistance = 50D;
+            series12.SmartLabelStyle.MinMovingDistance = 10D;
+            chartCapacityAgainstWork.Series.Add(series12);
             chartCapacityAgainstWork.Size = new Size(938, 197);
             chartCapacityAgainstWork.TabIndex = 2;
             chartCapacityAgainstWork.Text = "chart2";
-            title8.Alignment = ContentAlignment.TopLeft;
-            title8.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            title8.Name = "Title1";
-            title8.Text = "Capacity against workload";
-            chartCapacityAgainstWork.Titles.Add(title8);
+            title12.Alignment = ContentAlignment.TopLeft;
+            title12.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            title12.Name = "Title1";
+            title12.Text = "Capacity against workload";
+            chartCapacityAgainstWork.Titles.Add(title12);
             // 
             // panel2
             // 
@@ -1059,6 +1036,50 @@
             buttonShowHideWorkAgainst.UseVisualStyleBackColor = false;
             buttonShowHideWorkAgainst.Click += buttonShowHideWorkAgainst_Click;
             // 
+            // buttonListOngoing
+            // 
+            buttonListOngoing.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonListOngoing.BackColor = Color.Transparent;
+            buttonListOngoing.FlatAppearance.BorderColor = Color.FromArgb(46, 52, 63);
+            buttonListOngoing.FlatAppearance.BorderSize = 0;
+            buttonListOngoing.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonListOngoing.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
+            buttonListOngoing.FlatStyle = FlatStyle.Flat;
+            buttonListOngoing.Font = new Font("Calibri", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonListOngoing.ForeColor = Color.Black;
+            buttonListOngoing.Image = (Image)resources.GetObject("buttonListOngoing.Image");
+            buttonListOngoing.Location = new Point(197, 22);
+            buttonListOngoing.Margin = new Padding(2);
+            buttonListOngoing.Name = "buttonListOngoing";
+            buttonListOngoing.Padding = new Padding(0, 0, 2, 2);
+            buttonListOngoing.Size = new Size(24, 24);
+            buttonListOngoing.TabIndex = 6;
+            buttonListOngoing.TextAlign = ContentAlignment.BottomCenter;
+            buttonListOngoing.UseVisualStyleBackColor = false;
+            buttonListOngoing.Click += buttonListOngoing_Click;
+            // 
+            // buttonCompleted
+            // 
+            buttonCompleted.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonCompleted.BackColor = Color.Transparent;
+            buttonCompleted.FlatAppearance.BorderColor = Color.FromArgb(46, 52, 63);
+            buttonCompleted.FlatAppearance.BorderSize = 0;
+            buttonCompleted.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonCompleted.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
+            buttonCompleted.FlatStyle = FlatStyle.Flat;
+            buttonCompleted.Font = new Font("Calibri", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonCompleted.ForeColor = Color.Black;
+            buttonCompleted.Image = (Image)resources.GetObject("buttonCompleted.Image");
+            buttonCompleted.Location = new Point(191, 22);
+            buttonCompleted.Margin = new Padding(2);
+            buttonCompleted.Name = "buttonCompleted";
+            buttonCompleted.Padding = new Padding(0, 0, 2, 2);
+            buttonCompleted.Size = new Size(24, 24);
+            buttonCompleted.TabIndex = 7;
+            buttonCompleted.TextAlign = ContentAlignment.BottomCenter;
+            buttonCompleted.UseVisualStyleBackColor = false;
+            buttonCompleted.Click += buttonCompleted_Click;
+            // 
             // DashboardForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1080,10 +1101,8 @@
             tableLayoutPanel3.ResumeLayout(false);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBoxProject).EndInit();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxDown).EndInit();
@@ -1159,7 +1178,7 @@
         private PictureBox pictureBoxUp;
         private PictureBox pictureBoxDown2;
         private PictureBox pictureBoxUp2;
-        private PictureBox pictureBoxProject;
-        private PictureBox pictureBox3;
+        private Button buttonCompleted;
+        private Button buttonListOngoing;
     }
 }

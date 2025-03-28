@@ -43,6 +43,9 @@ namespace DashboardUI
         List<Project> _completedProjects = new();
         List<Project> _ongiongProjects = new();
 
+        ProjectListUI _listForm;
+
+        private bool _isInitial = true;
         private bool _isRotated = true;
         private bool _isProgressing = true;
         private bool _isHiddenWorkAgainstChart = true;
@@ -82,7 +85,7 @@ namespace DashboardUI
                 paletteTypes.Add(colorPalette.PaletteType);
 
             comboBoxPaletteType.Items.AddRange(paletteTypes.Distinct().ToArray());
-            comboBoxPaletteType.SelectedIndex = 1;
+            comboBoxPaletteType.SelectedIndex = 2;
 
             comboBoxInterval.Items.AddRange(new string[] { "Auto", "1", "2", "3", "4", "5", "6" });
 
@@ -94,6 +97,7 @@ namespace DashboardUI
             _departmentCapacityDates = _departmentCapacityManager.GetAllUniqueDate();
 
             UpdateCharts();
+            _isInitial = false;
         }
 
         private async void UpdateCharts()
@@ -105,7 +109,8 @@ namespace DashboardUI
             GenerateInfoCards();
         }
 
-        //CHART 1 - DONE
+        #region Charts
+
         private void GenerateProjectsChart()
         {
             var newSerie = chartProjects.Series["Series1"];
@@ -132,9 +137,11 @@ namespace DashboardUI
                 }
                 newSerie.Points.AddXY(management.ManagementName, i);
             }
+
+            _ongiongProjects = _ongiongProjects.Distinct().ToList();
+            _completedProjects = _completedProjects.Distinct().ToList();
         }
 
-        //CHART 2 - DONE
         private void GenerateCapacitiesChart(DateTime time)
         {
             var newSerie = chartCapacity.Series["Series1"];
@@ -151,7 +158,6 @@ namespace DashboardUI
 
         }
 
-        //CHART 3 - DONE - CORRECTED
         private void GenerateInfoCards()
         {
             //_assignedCapacityStart = 10;
@@ -189,7 +195,6 @@ namespace DashboardUI
 
         }
 
-        //CHART 4 - NOT WORKED YET
         private void GenerateCapacityAgainstWorkloadChart()
         {
             double totalDepartmentCapacity = 0;
@@ -280,48 +285,6 @@ namespace DashboardUI
             chartCapacityAgainstWork.Series.Insert(chartCapacityAgainstWork.Series.Count, serieSplineArea);
         }
 
-        //DELETE LATER
-        private void GenerateCapacityAgainstWorkloadChartBACKUP()
-        {
-            var serieSplineArea = chartCapacityAgainstWork.Series["Series1"];
-
-            double totalDepartmentCapacity = 0;
-            double totalProjectCapacity = 0;
-            int index = 0;
-
-            foreach (var management in _managementDatas.Data)
-            {
-                var newSerie = chartCapacityAgainstWork.Series.Add(management.ManagementName);
-                newSerie.ChartType = SeriesChartType.StackedColumn;
-
-                foreach (var date in _departmentCapacityDates.Data)
-                {
-                    totalDepartmentCapacity = 0;
-
-                    foreach (var department in _departmentDatas.Data)
-                    {
-                        foreach (var departmentDetail in _departmentCapacityDetailDatas.Data)
-                        {
-                            if (department.ManagementId == management.ManagementId && departmentDetail.Date == date.Date)
-                            {
-                                totalDepartmentCapacity += departmentDetail.DTotalCapacity;
-                            }
-
-                        }
-
-                        //foreach (var projectDetail in _projectCapacityDetailDatas.Data)
-                        //{
-                        //    totalProjectCapacity += projectDetail.PTotalCapacity;
-                        //}
-
-                    }
-
-                    var newDataPoint = serieSplineArea.Points.AddXY(date.Date, totalDepartmentCapacity);
-                }
-            }
-        }
-
-        //CHART 5 - DONE
         private void GeneratePercentageCapacityChart(DateTime time)
         {
             var newSerie = chartCapacityPercentage.Series["Series1"];
@@ -369,6 +332,10 @@ namespace DashboardUI
             newSerie.Points[0].Color = Color.White;
             newSerie.Points[0].BackGradientStyle = GradientStyle.None;
         }
+
+        #endregion
+
+        #region Button Events
 
         private void buttonOverall_Click(object sender, EventArgs e)
         {
@@ -517,6 +484,41 @@ namespace DashboardUI
             }
         }
 
+        private void buttonListOngoing_Click(object sender, EventArgs e)
+        {
+            if (_listForm == null)
+            {
+                _listForm = new(_ongiongProjects, "Ongoing Projects");
+                _listForm.FormClosed += ListForm_FormClosed;
+                _listForm.Location = panel3.PointToScreen(buttonListOngoing.Location);
+                _listForm.Left += 25;
+                _listForm.Show();
+            }
+            else
+                _listForm.Activate();
+        }
+
+        private void buttonCompleted_Click(object sender, EventArgs e)
+        {
+            if (_listForm == null)
+            {
+                _listForm = new(_completedProjects, "Completed Projects");
+                _listForm.FormClosed += ListForm_FormClosed;
+                _listForm.Location = panel1.PointToScreen(buttonCompleted.Location);
+                _listForm.Left += 25;
+                _listForm.Show();
+            }
+            else
+                _listForm.Activate();
+        }
+
+        private void ListForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _listForm = null;
+        }
+
+        #endregion
+
         #region Color Palette Selection
 
         private void comboBoxPaletteType_SelectedIndexChanged(object sender, EventArgs e)
@@ -627,6 +629,46 @@ namespace DashboardUI
                     _colorList.Add(_colorDetails.Data[colorIndex].GetColorCode);
                     colorIndex++;
                 }
+            }
+        }
+
+        private void comboBoxColorPalette_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!_isInitial)
+                UpdateChartColors();
+        }
+
+        private async void UpdateChartColors()
+        {
+            //generate color list for Chart1
+            GenerateColorList(chartProjects.Series[0].Points.Count);
+            for (int i = 0; i < chartProjects.Series[0].Points.Count; i++)
+            {
+                chartProjects.Series[0].Points[i].BackGradientStyle = GradientStyle.None;
+                chartProjects.Series[0].Points[i].Color = _colorList[i];
+            }
+
+            //generate color list for Chart2
+            GenerateColorList(chartCapacityPercentage.Series[0].Points.Count);
+            for (int i = 0; i < chartCapacityPercentage.Series[0].Points.Count; i++)
+            {
+                chartCapacityPercentage.Series[0].Points[i].BackGradientStyle = GradientStyle.None;
+                chartCapacityPercentage.Series[0].Points[i].Color = _colorList[i];
+            }
+
+            //generate color list for Chart3
+            GenerateColorList(chartCapacity.Series[0].Points.Count);
+            for (int i = 0; i < chartCapacity.Series[0].Points.Count; i++)
+            {
+                chartCapacity.Series[0].Points[i].BackGradientStyle = GradientStyle.None;
+                chartCapacity.Series[0].Points[i].Color = _colorList[i];
+            }
+
+            //generate color list for Chart4
+            GenerateColorList(chartCapacityAgainstWork.Series.Count);
+            for (int i = 0; i < chartCapacityAgainstWork.Series.Count - 1; i++)
+            {
+                chartCapacityAgainstWork.Series[i].Color = _colorList[i];
             }
         }
 
