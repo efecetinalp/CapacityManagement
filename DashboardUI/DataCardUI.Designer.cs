@@ -65,16 +65,17 @@
             // 
             imgProjectPicture.BackColor = Color.Transparent;
             imgProjectPicture.Image = (Image)resources.GetObject("imgProjectPicture.Image");
-            imgProjectPicture.Location = new Point(13, 25);
+            imgProjectPicture.Location = new Point(17, 30);
             imgProjectPicture.Name = "imgProjectPicture";
-            imgProjectPicture.Size = new Size(32, 32);
+            imgProjectPicture.Size = new Size(24, 24);
             imgProjectPicture.SizeMode = PictureBoxSizeMode.AutoSize;
             imgProjectPicture.TabIndex = 0;
             imgProjectPicture.TabStop = false;
             // 
             // panelSeperator
             // 
-            panelSeperator.BackColor = SystemColors.ControlDarkDark;
+            panelSeperator.BackColor = Color.FromArgb(52, 73, 94);
+            panelSeperator.ForeColor = Color.FromArgb(52, 73, 94);
             panelSeperator.Location = new Point(9, 59);
             panelSeperator.Name = "panelSeperator";
             panelSeperator.Size = new Size(380, 1);
@@ -84,10 +85,10 @@
             // 
             labelProjectDetails.AutoSize = true;
             labelProjectDetails.BackColor = Color.Transparent;
-            labelProjectDetails.Font = new Font("Calibri", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelProjectDetails.Location = new Point(13, 76);
+            labelProjectDetails.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            labelProjectDetails.Location = new Point(17, 67);
             labelProjectDetails.Name = "labelProjectDetails";
-            labelProjectDetails.Size = new Size(86, 15);
+            labelProjectDetails.Size = new Size(89, 16);
             labelProjectDetails.TabIndex = 3;
             labelProjectDetails.Text = "Project Details";
             // 
@@ -95,10 +96,10 @@
             // 
             labelManagement.AutoSize = true;
             labelManagement.BackColor = Color.Transparent;
-            labelManagement.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelManagement.Location = new Point(8, 100);
+            labelManagement.Font = new Font("Century Gothic", 7F, FontStyle.Bold, GraphicsUnit.Point);
+            labelManagement.Location = new Point(25, 98);
             labelManagement.Name = "labelManagement";
-            labelManagement.Size = new Size(64, 11);
+            labelManagement.Size = new Size(77, 14);
             labelManagement.TabIndex = 4;
             labelManagement.Text = "Management:";
             // 
@@ -106,10 +107,10 @@
             // 
             labelDepartment.AutoSize = true;
             labelDepartment.BackColor = Color.Transparent;
-            labelDepartment.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelDepartment.Location = new Point(12, 121);
+            labelDepartment.Font = new Font("Century Gothic", 7F, FontStyle.Bold, GraphicsUnit.Point);
+            labelDepartment.Location = new Point(34, 119);
             labelDepartment.Name = "labelDepartment";
-            labelDepartment.Size = new Size(60, 11);
+            labelDepartment.Size = new Size(68, 14);
             labelDepartment.TabIndex = 5;
             labelDepartment.Text = "Department:";
             // 
@@ -117,10 +118,10 @@
             // 
             labelCategory.AutoSize = true;
             labelCategory.BackColor = Color.Transparent;
-            labelCategory.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelCategory.Location = new Point(23, 142);
+            labelCategory.Font = new Font("Century Gothic", 7F, FontStyle.Bold, GraphicsUnit.Point);
+            labelCategory.Location = new Point(46, 140);
             labelCategory.Name = "labelCategory";
-            labelCategory.Size = new Size(49, 11);
+            labelCategory.Size = new Size(56, 14);
             labelCategory.TabIndex = 6;
             labelCategory.Text = "Category:";
             // 
@@ -128,10 +129,10 @@
             // 
             labelStartDate.AutoSize = true;
             labelStartDate.BackColor = Color.Transparent;
-            labelStartDate.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelStartDate.Location = new Point(234, 120);
+            labelStartDate.Font = new Font("Century Gothic", 7F, FontStyle.Bold, GraphicsUnit.Point);
+            labelStartDate.Location = new Point(220, 120);
             labelStartDate.Name = "labelStartDate";
-            labelStartDate.Size = new Size(52, 11);
+            labelStartDate.Size = new Size(57, 14);
             labelStartDate.TabIndex = 7;
             labelStartDate.Text = "Start Date:";
             // 
@@ -139,10 +140,10 @@
             // 
             labelEndDate.AutoSize = true;
             labelEndDate.BackColor = Color.Transparent;
-            labelEndDate.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelEndDate.Location = new Point(226, 141);
+            labelEndDate.Font = new Font("Century Gothic", 7F, FontStyle.Bold, GraphicsUnit.Point);
+            labelEndDate.Location = new Point(216, 141);
             labelEndDate.Name = "labelEndDate";
-            labelEndDate.Size = new Size(60, 11);
+            labelEndDate.Size = new Size(61, 14);
             labelEndDate.TabIndex = 8;
             labelEndDate.Text = "Finish Date:";
             // 
@@ -150,20 +151,24 @@
             // 
             labelOwner.AutoSize = true;
             labelOwner.BackColor = Color.Transparent;
-            labelOwner.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelOwner.Location = new Point(35, 163);
+            labelOwner.Font = new Font("Century Gothic", 7F, FontStyle.Bold, GraphicsUnit.Point);
+            labelOwner.Location = new Point(61, 161);
             labelOwner.Name = "labelOwner";
-            labelOwner.Size = new Size(37, 11);
+            labelOwner.Size = new Size(41, 14);
             labelOwner.TabIndex = 11;
             labelOwner.Text = "Owner:";
             // 
             // buttonClose
             // 
+            buttonClose.FlatAppearance.BorderColor = Color.FromArgb(52, 73, 94);
+            buttonClose.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonClose.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonClose.FlatStyle = FlatStyle.Flat;
-            buttonClose.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            buttonClose.Location = new Point(311, 196);
+            buttonClose.Font = new Font("Calibri", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonClose.ForeColor = Color.Black;
+            buttonClose.Location = new Point(302, 186);
             buttonClose.Name = "buttonClose";
-            buttonClose.Size = new Size(75, 23);
+            buttonClose.Size = new Size(90, 25);
             buttonClose.TabIndex = 13;
             buttonClose.Text = "Close";
             buttonClose.UseVisualStyleBackColor = true;
@@ -175,9 +180,9 @@
             comboBoxUser.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxUser.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
             comboBoxUser.FormattingEnabled = true;
-            comboBoxUser.Location = new Point(78, 159);
+            comboBoxUser.Location = new Point(107, 159);
             comboBoxUser.Name = "comboBoxUser";
-            comboBoxUser.Size = new Size(126, 20);
+            comboBoxUser.Size = new Size(89, 20);
             comboBoxUser.TabIndex = 16;
             comboBoxUser.Visible = false;
             // 
@@ -187,18 +192,18 @@
             comboBoxCategory.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxCategory.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
             comboBoxCategory.FormattingEnabled = true;
-            comboBoxCategory.Location = new Point(78, 138);
+            comboBoxCategory.Location = new Point(107, 138);
             comboBoxCategory.Name = "comboBoxCategory";
-            comboBoxCategory.Size = new Size(126, 20);
+            comboBoxCategory.Size = new Size(89, 20);
             comboBoxCategory.TabIndex = 19;
             comboBoxCategory.Visible = false;
             // 
             // txtProjectName
             // 
-            txtProjectName.Font = new Font("Calibri", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            txtProjectName.Location = new Point(44, 27);
+            txtProjectName.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            txtProjectName.Location = new Point(44, 29);
             txtProjectName.Name = "txtProjectName";
-            txtProjectName.Size = new Size(342, 31);
+            txtProjectName.Size = new Size(342, 27);
             txtProjectName.TabIndex = 21;
             txtProjectName.Visible = false;
             // 
@@ -207,7 +212,7 @@
             lblManagement.AutoSize = true;
             lblManagement.BackColor = Color.Transparent;
             lblManagement.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            lblManagement.Location = new Point(78, 100);
+            lblManagement.Location = new Point(107, 100);
             lblManagement.Name = "lblManagement";
             lblManagement.Size = new Size(61, 12);
             lblManagement.TabIndex = 22;
@@ -218,7 +223,7 @@
             lblDepartment.AutoSize = true;
             lblDepartment.BackColor = Color.Transparent;
             lblDepartment.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            lblDepartment.Location = new Point(78, 121);
+            lblDepartment.Location = new Point(107, 121);
             lblDepartment.Name = "lblDepartment";
             lblDepartment.Size = new Size(56, 12);
             lblDepartment.TabIndex = 23;
@@ -229,7 +234,7 @@
             lblCategory.AutoSize = true;
             lblCategory.BackColor = Color.Transparent;
             lblCategory.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            lblCategory.Location = new Point(78, 142);
+            lblCategory.Location = new Point(107, 142);
             lblCategory.Name = "lblCategory";
             lblCategory.Size = new Size(45, 12);
             lblCategory.TabIndex = 24;
@@ -240,7 +245,7 @@
             lblStartDate.AutoSize = true;
             lblStartDate.BackColor = Color.Transparent;
             lblStartDate.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            lblStartDate.Location = new Point(292, 120);
+            lblStartDate.Location = new Point(280, 122);
             lblStartDate.Name = "lblStartDate";
             lblStartDate.Size = new Size(28, 12);
             lblStartDate.TabIndex = 25;
@@ -251,7 +256,7 @@
             lblEndDate.AutoSize = true;
             lblEndDate.BackColor = Color.Transparent;
             lblEndDate.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            lblEndDate.Location = new Point(292, 141);
+            lblEndDate.Location = new Point(280, 143);
             lblEndDate.Name = "lblEndDate";
             lblEndDate.Size = new Size(28, 12);
             lblEndDate.TabIndex = 26;
@@ -262,7 +267,7 @@
             lblOwner.AutoSize = true;
             lblOwner.BackColor = Color.Transparent;
             lblOwner.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            lblOwner.Location = new Point(78, 163);
+            lblOwner.Location = new Point(107, 163);
             lblOwner.Name = "lblOwner";
             lblOwner.Size = new Size(27, 12);
             lblOwner.TabIndex = 27;
@@ -272,10 +277,10 @@
             // 
             lblProjectName.AutoSize = true;
             lblProjectName.BackColor = Color.Transparent;
-            lblProjectName.Font = new Font("Calibri", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            lblProjectName.Location = new Point(47, 30);
+            lblProjectName.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblProjectName.Location = new Point(47, 33);
             lblProjectName.Name = "lblProjectName";
-            lblProjectName.Size = new Size(118, 23);
+            lblProjectName.Size = new Size(114, 19);
             lblProjectName.TabIndex = 28;
             lblProjectName.Text = "Project Name";
             lblProjectName.TextAlign = ContentAlignment.MiddleCenter;
@@ -286,11 +291,11 @@
             dateTimePickerStart.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             dateTimePickerStart.Format = DateTimePickerFormat.Custom;
             dateTimePickerStart.ImeMode = ImeMode.NoControl;
-            dateTimePickerStart.Location = new Point(292, 116);
+            dateTimePickerStart.Location = new Point(280, 118);
             dateTimePickerStart.Margin = new Padding(2);
             dateTimePickerStart.Name = "dateTimePickerStart";
             dateTimePickerStart.ShowUpDown = true;
-            dateTimePickerStart.Size = new Size(94, 20);
+            dateTimePickerStart.Size = new Size(78, 20);
             dateTimePickerStart.TabIndex = 29;
             dateTimePickerStart.Visible = false;
             // 
@@ -302,11 +307,11 @@
             dateTimePickerEnd.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             dateTimePickerEnd.Format = DateTimePickerFormat.Custom;
             dateTimePickerEnd.ImeMode = ImeMode.NoControl;
-            dateTimePickerEnd.Location = new Point(292, 137);
+            dateTimePickerEnd.Location = new Point(280, 139);
             dateTimePickerEnd.Margin = new Padding(2);
             dateTimePickerEnd.Name = "dateTimePickerEnd";
             dateTimePickerEnd.ShowUpDown = true;
-            dateTimePickerEnd.Size = new Size(94, 20);
+            dateTimePickerEnd.Size = new Size(78, 20);
             dateTimePickerEnd.TabIndex = 30;
             dateTimePickerEnd.Visible = false;
             // 
@@ -314,7 +319,7 @@
             // 
             checkBoxCompleted.AutoSize = true;
             checkBoxCompleted.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            checkBoxCompleted.Location = new Point(292, 97);
+            checkBoxCompleted.Location = new Point(280, 99);
             checkBoxCompleted.Name = "checkBoxCompleted";
             checkBoxCompleted.Size = new Size(94, 16);
             checkBoxCompleted.TabIndex = 31;
@@ -327,10 +332,10 @@
             // 
             labelStatus.AutoSize = true;
             labelStatus.BackColor = Color.Transparent;
-            labelStatus.Font = new Font("Arial", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
-            labelStatus.Location = new Point(250, 100);
+            labelStatus.Font = new Font("Century Gothic", 7F, FontStyle.Bold, GraphicsUnit.Point);
+            labelStatus.Location = new Point(239, 100);
             labelStatus.Name = "labelStatus";
-            labelStatus.Size = new Size(36, 11);
+            labelStatus.Size = new Size(38, 14);
             labelStatus.TabIndex = 32;
             labelStatus.Text = "Status:";
             // 
@@ -339,7 +344,7 @@
             lblStatus.AutoSize = true;
             lblStatus.BackColor = Color.Transparent;
             lblStatus.Font = new Font("Segoe UI", 6.75F, FontStyle.Italic, GraphicsUnit.Point);
-            lblStatus.Location = new Point(292, 99);
+            lblStatus.Location = new Point(280, 101);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(34, 12);
             lblStatus.TabIndex = 33;
@@ -348,10 +353,11 @@
             // buttonSave
             // 
             buttonSave.FlatAppearance.BorderSize = 0;
-            buttonSave.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonSave.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonSave.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonSave.FlatStyle = FlatStyle.Flat;
             buttonSave.Image = (Image)resources.GetObject("buttonSave.Image");
-            buttonSave.Location = new Point(366, 63);
+            buttonSave.Location = new Point(365, 63);
             buttonSave.Name = "buttonSave";
             buttonSave.Padding = new Padding(0, 0, 1, 1);
             buttonSave.Size = new Size(20, 20);
@@ -363,10 +369,11 @@
             // buttonDelete
             // 
             buttonDelete.FlatAppearance.BorderSize = 0;
-            buttonDelete.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonDelete.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonDelete.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonDelete.FlatStyle = FlatStyle.Flat;
             buttonDelete.Image = (Image)resources.GetObject("buttonDelete.Image");
-            buttonDelete.Location = new Point(8, 200);
+            buttonDelete.Location = new Point(9, 190);
             buttonDelete.Name = "buttonDelete";
             buttonDelete.Padding = new Padding(0, 0, 1, 1);
             buttonDelete.Size = new Size(20, 20);
@@ -377,7 +384,8 @@
             // buttonQuit
             // 
             buttonQuit.FlatAppearance.BorderSize = 0;
-            buttonQuit.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonQuit.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonQuit.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonQuit.FlatStyle = FlatStyle.Flat;
             buttonQuit.Image = (Image)resources.GetObject("buttonQuit.Image");
             buttonQuit.Location = new Point(380, 5);
@@ -391,10 +399,11 @@
             // buttonEdit
             // 
             buttonEdit.FlatAppearance.BorderSize = 0;
-            buttonEdit.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonEdit.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonEdit.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonEdit.FlatStyle = FlatStyle.Flat;
             buttonEdit.Image = (Image)resources.GetObject("buttonEdit.Image");
-            buttonEdit.Location = new Point(366, 63);
+            buttonEdit.Location = new Point(365, 63);
             buttonEdit.Name = "buttonEdit";
             buttonEdit.Padding = new Padding(0, 0, 1, 1);
             buttonEdit.Size = new Size(20, 20);
@@ -407,7 +416,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(398, 231);
+            ClientSize = new Size(398, 218);
             Controls.Add(buttonEdit);
             Controls.Add(buttonQuit);
             Controls.Add(buttonDelete);

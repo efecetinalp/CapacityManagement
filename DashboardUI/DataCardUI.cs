@@ -55,7 +55,7 @@ namespace DashboardUI
 
         Form _deleteForm;
 
-        public DataCardUI(ProjectDetailDto projectDetail, ManagementManager managementManager, DepartmentManager departmentManager, ProjectManager projectManager, CategoryManager categoryManager, 
+        public DataCardUI(ProjectDetailDto projectDetail, ManagementManager managementManager, DepartmentManager departmentManager, ProjectManager projectManager, CategoryManager categoryManager,
             UserManager userManager, ProjectCapacityManager projectCapacityManager)
         {
             _projectDetail = projectDetail;
@@ -83,7 +83,7 @@ namespace DashboardUI
                 float i = 13;
                 do
                 {
-                    lblProjectName.Font = new Font("Calibri", i);
+                    lblProjectName.Font = new Font("Century Gothic", i, FontStyle.Bold);
                     i--;
                 } while (lblProjectName.Width > 340);
             }

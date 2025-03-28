@@ -34,6 +34,7 @@
             panelMenu = new Panel();
             panelSideBar = new Panel();
             panelAdmin2 = new Panel();
+            pictureBox2 = new PictureBox();
             labelCredential = new Label();
             labelActiveUser = new Label();
             panelAdmin = new Panel();
@@ -43,15 +44,14 @@
             panelChart = new Panel();
             buttonChart = new Button();
             panelDashboard = new Panel();
-            pictureBox2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panelMenu.SuspendLayout();
             panelAdmin2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panelAdmin.SuspendLayout();
             panelDataGrid.SuspendLayout();
             panelChart.SuspendLayout();
             panelDashboard.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // buttonDashboard
@@ -121,6 +121,16 @@
             panelAdmin2.Name = "panelAdmin2";
             panelAdmin2.Size = new Size(227, 57);
             panelAdmin2.TabIndex = 23;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(24, 18);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(24, 24);
+            pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBox2.TabIndex = 21;
+            pictureBox2.TabStop = false;
             // 
             // labelCredential
             // 
@@ -244,16 +254,6 @@
             panelDashboard.Size = new Size(228, 32);
             panelDashboard.TabIndex = 20;
             // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(24, 15);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(24, 24);
-            pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
-            pictureBox2.TabIndex = 21;
-            pictureBox2.TabStop = false;
-            // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -273,11 +273,11 @@
             panelMenu.ResumeLayout(false);
             panelAdmin2.ResumeLayout(false);
             panelAdmin2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             panelAdmin.ResumeLayout(false);
             panelDataGrid.ResumeLayout(false);
             panelChart.ResumeLayout(false);
             panelDashboard.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 

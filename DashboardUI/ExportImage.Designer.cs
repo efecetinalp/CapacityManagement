@@ -57,7 +57,7 @@
             // 
             labelFileName.AutoSize = true;
             labelFileName.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            labelFileName.Location = new Point(41, 97);
+            labelFileName.Location = new Point(41, 94);
             labelFileName.Margin = new Padding(2, 0, 2, 0);
             labelFileName.Name = "labelFileName";
             labelFileName.Size = new Size(52, 12);
@@ -68,7 +68,7 @@
             // 
             labelExportPath.AutoSize = true;
             labelExportPath.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            labelExportPath.Location = new Point(41, 61);
+            labelExportPath.Location = new Point(41, 58);
             labelExportPath.Margin = new Padding(2, 0, 2, 0);
             labelExportPath.Name = "labelExportPath";
             labelExportPath.Size = new Size(58, 12);
@@ -77,14 +77,14 @@
             // 
             // buttonExport
             // 
-            buttonExport.BackColor = Color.FromArgb(58, 154, 193);
+            buttonExport.BackColor = Color.FromArgb(52, 73, 94);
             buttonExport.FlatAppearance.BorderSize = 0;
             buttonExport.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
             buttonExport.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonExport.FlatStyle = FlatStyle.Flat;
             buttonExport.Font = new Font("Calibri", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             buttonExport.ForeColor = SystemColors.ButtonHighlight;
-            buttonExport.Location = new Point(74, 156);
+            buttonExport.Location = new Point(97, 156);
             buttonExport.Margin = new Padding(2);
             buttonExport.Name = "buttonExport";
             buttonExport.Size = new Size(89, 25);
@@ -96,7 +96,7 @@
             // textBoxFileName
             // 
             textBoxFileName.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxFileName.Location = new Point(41, 109);
+            textBoxFileName.Location = new Point(41, 106);
             textBoxFileName.Margin = new Padding(2);
             textBoxFileName.Name = "textBoxFileName";
             textBoxFileName.Size = new Size(222, 20);
@@ -105,7 +105,7 @@
             // textBoxExportPath
             // 
             textBoxExportPath.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxExportPath.Location = new Point(41, 73);
+            textBoxExportPath.Location = new Point(41, 70);
             textBoxExportPath.Margin = new Padding(2);
             textBoxExportPath.Name = "textBoxExportPath";
             textBoxExportPath.Size = new Size(222, 20);
@@ -119,7 +119,7 @@
             buttonBrowse.FlatStyle = FlatStyle.Flat;
             buttonBrowse.ForeColor = SystemColors.ButtonHighlight;
             buttonBrowse.Image = (Image)resources.GetObject("buttonBrowse.Image");
-            buttonBrowse.Location = new Point(13, 71);
+            buttonBrowse.Location = new Point(268, 70);
             buttonBrowse.Margin = new Padding(2);
             buttonBrowse.Name = "buttonBrowse";
             buttonBrowse.Padding = new Padding(0, 0, 2, 2);
@@ -146,7 +146,7 @@
             buttonQuit.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonQuit.FlatStyle = FlatStyle.Flat;
             buttonQuit.Image = (Image)resources.GetObject("buttonQuit.Image");
-            buttonQuit.Location = new Point(276, 5);
+            buttonQuit.Location = new Point(296, 5);
             buttonQuit.Name = "buttonQuit";
             buttonQuit.Padding = new Padding(0, 0, 1, 1);
             buttonQuit.Size = new Size(12, 12);
@@ -157,13 +157,13 @@
             // buttonCancel
             // 
             buttonCancel.BackColor = Color.White;
-            buttonCancel.FlatAppearance.BorderColor = Color.FromArgb(46, 52, 63);
+            buttonCancel.FlatAppearance.BorderColor = Color.FromArgb(52, 73, 94);
             buttonCancel.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
             buttonCancel.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonCancel.FlatStyle = FlatStyle.Flat;
             buttonCancel.Font = new Font("Calibri", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             buttonCancel.ForeColor = Color.Black;
-            buttonCancel.Location = new Point(174, 156);
+            buttonCancel.Location = new Point(199, 156);
             buttonCancel.Margin = new Padding(2);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(89, 25);
@@ -177,7 +177,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(295, 192);
+            ClientSize = new Size(315, 192);
             Controls.Add(buttonCancel);
             Controls.Add(buttonQuit);
             Controls.Add(pictureBox1);

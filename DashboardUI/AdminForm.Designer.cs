@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminForm));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             textBoxPath = new TextBox();
             buttonBrowse = new Button();
             labelDatabase = new Label();
@@ -62,7 +62,8 @@
             buttonBrowse.BackColor = Color.Transparent;
             buttonBrowse.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
             buttonBrowse.FlatAppearance.BorderSize = 0;
-            buttonBrowse.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonBrowse.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonBrowse.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonBrowse.FlatStyle = FlatStyle.Flat;
             buttonBrowse.ForeColor = SystemColors.ControlLightLight;
             buttonBrowse.Image = (Image)resources.GetObject("buttonBrowse.Image");
@@ -78,19 +79,19 @@
             // labelDatabase
             // 
             labelDatabase.AutoSize = true;
-            labelDatabase.Font = new Font("Segoe UI Semibold", 6.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            labelDatabase.Font = new Font("Calibri", 7F, FontStyle.Bold, GraphicsUnit.Point);
             labelDatabase.Location = new Point(11, 8);
             labelDatabase.Margin = new Padding(2, 0, 2, 0);
             labelDatabase.Name = "labelDatabase";
-            labelDatabase.Size = new Size(64, 12);
+            labelDatabase.Size = new Size(72, 13);
             labelDatabase.TabIndex = 40;
-            labelDatabase.Text = "Database Path";
+            labelDatabase.Text = "DATABASE PATH";
             // 
             // buttonManagement
             // 
             buttonManagement.BackColor = Color.Transparent;
             buttonManagement.Cursor = Cursors.Hand;
-            buttonManagement.FlatAppearance.BorderColor = Color.FromArgb(46, 52, 63);
+            buttonManagement.FlatAppearance.BorderColor = Color.FromArgb(52, 73, 94);
             buttonManagement.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
             buttonManagement.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonManagement.FlatStyle = FlatStyle.Flat;
@@ -113,8 +114,9 @@
             // 
             buttonDepartment.BackColor = Color.Transparent;
             buttonDepartment.Cursor = Cursors.Hand;
-            buttonDepartment.FlatAppearance.BorderColor = Color.FromArgb(46, 52, 63);
-            buttonDepartment.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonDepartment.FlatAppearance.BorderColor = Color.FromArgb(52, 73, 94);
+            buttonDepartment.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonDepartment.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonDepartment.FlatStyle = FlatStyle.Flat;
             buttonDepartment.Font = new Font("Calibri", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
             buttonDepartment.ForeColor = Color.FromArgb(46, 52, 63);
@@ -135,8 +137,9 @@
             // 
             buttonCategory.BackColor = Color.Transparent;
             buttonCategory.Cursor = Cursors.Hand;
-            buttonCategory.FlatAppearance.BorderColor = Color.FromArgb(46, 52, 63);
-            buttonCategory.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonCategory.FlatAppearance.BorderColor = Color.FromArgb(52, 73, 94);
+            buttonCategory.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonCategory.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonCategory.FlatStyle = FlatStyle.Flat;
             buttonCategory.Font = new Font("Calibri", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
             buttonCategory.ForeColor = Color.FromArgb(46, 52, 63);
@@ -157,8 +160,9 @@
             // 
             buttonUser.BackColor = Color.Transparent;
             buttonUser.Cursor = Cursors.Hand;
-            buttonUser.FlatAppearance.BorderColor = Color.FromArgb(46, 52, 63);
-            buttonUser.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonUser.FlatAppearance.BorderColor = Color.FromArgb(52, 73, 94);
+            buttonUser.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonUser.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonUser.FlatStyle = FlatStyle.Flat;
             buttonUser.Font = new Font("Calibri", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
             buttonUser.ForeColor = Color.FromArgb(46, 52, 63);
@@ -195,36 +199,39 @@
             adminDataGrid.BackgroundColor = SystemColors.ButtonHighlight;
             adminDataGrid.BorderStyle = BorderStyle.None;
             adminDataGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.MidnightBlue;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.Window;
-            dataGridViewCellStyle1.SelectionBackColor = Color.LightSteelBlue;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            adminDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            adminDataGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.AliceBlue;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = Color.LightSteelBlue;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            adminDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(52, 73, 94);
+            dataGridViewCellStyle4.Font = new Font("Century Gothic", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(169, 204, 227);
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            adminDataGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            adminDataGrid.ColumnHeadersHeight = 30;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.AliceBlue;
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle5.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = Color.LightSteelBlue;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
+            adminDataGrid.DefaultCellStyle = dataGridViewCellStyle5;
+            adminDataGrid.EnableHeadersVisualStyles = false;
+            adminDataGrid.GridColor = Color.FromArgb(52, 73, 94);
             adminDataGrid.Location = new Point(70, 113);
             adminDataGrid.Margin = new Padding(2);
             adminDataGrid.Name = "adminDataGrid";
             adminDataGrid.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = SystemColors.Control;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            adminDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            adminDataGrid.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            adminDataGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = SystemColors.Control;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.True;
+            adminDataGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            adminDataGrid.RowHeadersVisible = false;
             adminDataGrid.RowTemplate.Height = 25;
             adminDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             adminDataGrid.Size = new Size(1140, 527);
@@ -237,7 +244,8 @@
             buttonDelete.Cursor = Cursors.Hand;
             buttonDelete.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
             buttonDelete.FlatAppearance.BorderSize = 0;
-            buttonDelete.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonDelete.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonDelete.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonDelete.FlatStyle = FlatStyle.Flat;
             buttonDelete.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             buttonDelete.ForeColor = Color.White;
@@ -258,7 +266,8 @@
             buttonCreate.Cursor = Cursors.Hand;
             buttonCreate.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
             buttonCreate.FlatAppearance.BorderSize = 0;
-            buttonCreate.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonCreate.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonCreate.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonCreate.FlatStyle = FlatStyle.Flat;
             buttonCreate.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             buttonCreate.ForeColor = Color.White;
@@ -279,7 +288,8 @@
             buttonEdit.Cursor = Cursors.Hand;
             buttonEdit.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
             buttonEdit.FlatAppearance.BorderSize = 0;
-            buttonEdit.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonEdit.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonEdit.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonEdit.FlatStyle = FlatStyle.Flat;
             buttonEdit.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             buttonEdit.ForeColor = Color.White;
@@ -298,8 +308,9 @@
             // 
             buttonProject.BackColor = Color.Transparent;
             buttonProject.Cursor = Cursors.Hand;
-            buttonProject.FlatAppearance.BorderColor = Color.FromArgb(46, 52, 63);
-            buttonProject.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonProject.FlatAppearance.BorderColor = Color.FromArgb(52, 73, 94);
+            buttonProject.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonProject.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonProject.FlatStyle = FlatStyle.Flat;
             buttonProject.Font = new Font("Calibri", 6.75F, FontStyle.Bold, GraphicsUnit.Point);
             buttonProject.ForeColor = Color.FromArgb(46, 52, 63);

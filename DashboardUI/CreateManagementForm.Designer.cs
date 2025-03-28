@@ -35,13 +35,15 @@
             label2 = new Label();
             buttonCancel = new Button();
             buttonQuit = new Button();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label3.Location = new Point(21, 60);
+            label3.Location = new Point(41, 56);
             label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
             label3.Size = new Size(96, 12);
@@ -51,7 +53,7 @@
             // textBoxManagement
             // 
             textBoxManagement.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxManagement.Location = new Point(21, 74);
+            textBoxManagement.Location = new Point(41, 70);
             textBoxManagement.Margin = new Padding(2);
             textBoxManagement.Name = "textBoxManagement";
             textBoxManagement.Size = new Size(200, 20);
@@ -59,15 +61,17 @@
             // 
             // buttonCreate
             // 
-            buttonCreate.BackColor = Color.FromArgb(58, 154, 193);
-            buttonCreate.FlatAppearance.BorderColor = Color.FromArgb(58, 154, 193);
+            buttonCreate.BackColor = Color.FromArgb(52, 73, 94);
+            buttonCreate.FlatAppearance.BorderSize = 0;
+            buttonCreate.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonCreate.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonCreate.FlatStyle = FlatStyle.Flat;
-            buttonCreate.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonCreate.Font = new Font("Calibri", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
             buttonCreate.ForeColor = SystemColors.ControlLightLight;
-            buttonCreate.Location = new Point(21, 121);
+            buttonCreate.Location = new Point(41, 121);
             buttonCreate.Margin = new Padding(2);
             buttonCreate.Name = "buttonCreate";
-            buttonCreate.Size = new Size(86, 24);
+            buttonCreate.Size = new Size(90, 25);
             buttonCreate.TabIndex = 37;
             buttonCreate.Text = "Create";
             buttonCreate.UseVisualStyleBackColor = false;
@@ -76,24 +80,27 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label2.Location = new Point(64, 26);
+            label2.Font = new Font("Century Gothic", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(41, 20);
             label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(122, 15);
+            label2.Size = new Size(174, 16);
             label2.TabIndex = 36;
-            label2.Text = "NEW MANAGEMENT";
+            label2.Text = "Create New Management";
             // 
             // buttonCancel
             // 
-            buttonCancel.BackColor = Color.Silver;
+            buttonCancel.BackColor = Color.White;
+            buttonCancel.FlatAppearance.BorderColor = Color.FromArgb(52, 73, 94);
+            buttonCancel.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonCancel.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonCancel.FlatStyle = FlatStyle.Flat;
-            buttonCancel.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonCancel.ForeColor = SystemColors.ActiveCaptionText;
-            buttonCancel.Location = new Point(135, 121);
+            buttonCancel.Font = new Font("Calibri", 8.25F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonCancel.ForeColor = Color.Black;
+            buttonCancel.Location = new Point(151, 121);
             buttonCancel.Margin = new Padding(2);
             buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(86, 24);
+            buttonCancel.Size = new Size(90, 25);
             buttonCancel.TabIndex = 40;
             buttonCancel.Text = "Cancel";
             buttonCancel.UseVisualStyleBackColor = false;
@@ -101,11 +108,13 @@
             // 
             // buttonQuit
             // 
+            buttonQuit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             buttonQuit.FlatAppearance.BorderSize = 0;
-            buttonQuit.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonQuit.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonQuit.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
             buttonQuit.FlatStyle = FlatStyle.Flat;
             buttonQuit.Image = (Image)resources.GetObject("buttonQuit.Image");
-            buttonQuit.Location = new Point(236, 3);
+            buttonQuit.Location = new Point(265, 4);
             buttonQuit.Name = "buttonQuit";
             buttonQuit.Padding = new Padding(0, 0, 1, 1);
             buttonQuit.Size = new Size(12, 12);
@@ -113,11 +122,23 @@
             buttonQuit.UseVisualStyleBackColor = true;
             buttonQuit.Click += buttonQuit_Click;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(12, 16);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(24, 24);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 42;
+            pictureBox1.TabStop = false;
+            // 
             // CreateManagementForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(251, 174);
+            BackColor = Color.White;
+            ClientSize = new Size(281, 157);
+            Controls.Add(pictureBox1);
             Controls.Add(buttonQuit);
             Controls.Add(buttonCancel);
             Controls.Add(label3);
@@ -132,6 +153,7 @@
             TopMost = true;
             Load += CreateManagementForm_Load;
             MouseDown += CreateManagementForm_MouseDown;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -144,5 +166,6 @@
         private Label label2;
         private Button buttonCancel;
         private Button buttonQuit;
+        private PictureBox pictureBox1;
     }
 }
