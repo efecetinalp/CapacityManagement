@@ -86,7 +86,6 @@ namespace DashboardUI
                     _alertbox.ErrorAlert("No active selection");
                     return;
                 }
-                _createForm.Location = adminDataGrid.PointToScreen(adminDataGrid.GetCellDisplayRectangle(1, _rowIndex, false).Location);
                 _createForm.FormClosed += CreateForm_FormClosed;
                 _createForm.ShowDialog();
             }
@@ -123,7 +122,6 @@ namespace DashboardUI
                     _alertbox.ErrorAlert("No active selection");
                     return;
                 }
-                _createForm.Location = adminDataGrid.PointToScreen(adminDataGrid.GetCellDisplayRectangle(1, _rowIndex, false).Location);
                 _createForm.FormClosed += CreateForm_FormClosed;
                 _createForm.ShowDialog();
             }
@@ -160,7 +158,6 @@ namespace DashboardUI
                     _alertbox.ErrorAlert("No active selection");
                     return;
                 }
-                _createForm.Location = adminDataGrid.PointToScreen(adminDataGrid.GetCellDisplayRectangle(1, _rowIndex, false).Location);
                 _createForm.FormClosed += CreateForm_FormClosed;
                 _createForm.ShowDialog();
             }

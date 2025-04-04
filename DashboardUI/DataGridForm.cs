@@ -27,7 +27,7 @@ namespace DashboardUI
         DepartmentCapacityManager departmentCapacityManager;
 
         //UI Form Referances
-        Form createForm;
+        CreateProjectForm createForm;
         Dashboard _dashboardForm;
         DataCardUI _dataCardForm;
 
@@ -46,7 +46,7 @@ namespace DashboardUI
         public bool isDataListed = false;
         private int _rowIndex;
         private int _departmentIndex;
-        private List<int> _projectIndex = new();
+        private List<int> _projectIndexes = new();
         private List<int> completedProjectList = new();
 
         public DataGridForm(ProjectManager projectManager, DepartmentManager departmentManager, ManagementManager managementManager, CategoryManager categoryManager,
@@ -197,7 +197,7 @@ namespace DashboardUI
             //int departmentId = departmentManager.GetByName(comboBoxDepartment.Text).Data.DepartmentId;
             var projectNames = projectManager.GetAllByDepartmentId(_departmentIndex);
             var projectDatas = projectCapacityManager.GetProjectCapacityDetailsByDateBetweenAndDepartmentId(_startDate, _endDate, _departmentIndex);
-            _projectIndex.Clear();
+            _projectIndexes.Clear();
 
             if (projectNames.Success)
             {
@@ -206,7 +206,7 @@ namespace DashboardUI
                 {
                     DataRow projectRow = dataTable.Rows.Add();
                     projectRow[0] = projectName.ProjectName;
-                    _projectIndex.Add(projectName.ProjectId);
+                    _projectIndexes.Add(projectName.ProjectId);
 
                     //completed project table index list
                     if (projectName.IsCompleted)
@@ -433,6 +433,9 @@ namespace DashboardUI
 
         private void CreateForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            if (createForm.ChangeAction)
+                buttonList_Click(sender, e);
+
             createForm = null;
         }
 
@@ -525,7 +528,7 @@ namespace DashboardUI
                     }
 
                     //fetch current project data to edit
-                    var projectData = projectManager.GetById(_projectIndex[cell.RowIndex - 3]);
+                    var projectData = projectManager.GetById(_projectIndexes[cell.RowIndex - 3]);
                     if (!projectData.Success)
                     {
                         alertBox.ErrorAlert("Could not find project data");
@@ -726,25 +729,35 @@ namespace DashboardUI
         {
             try
             {
-                int iFail = 0;
-                int iRow = dbGrid.CurrentCell.RowIndex;
-                int iCol = dbGrid.CurrentCell.ColumnIndex;
-                DataGridViewCell oCell;
-                oCell = dbGrid[iCol, iRow];
-
-                if (oCell == null) { return; }
-
-                _cellValueBegin = oCell.Value.ToString();
-                if (!oCell.ReadOnly)
+                if (dbGrid.SelectedCells.Count == 0)
                 {
-                    oCell.Value = "";
-                    EditCell(oCell);
+                    return;
                 }
-                else
-                    iFail++;
 
-                if (iFail > 0)
-                    MessageBox.Show(string.Format("Data table is not in edit mode!" + Environment.NewLine + "{0} updates failed due to read only cell setting", iFail), "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                int failedOperations = 0;
+                for (int i = 0; i < dbGrid.SelectedCells.Count; i++)
+                {
+                    DataGridViewCell selectedCell = dbGrid.SelectedCells[i];
+
+                    if (selectedCell.ColumnIndex < 1 || selectedCell.RowIndex < 2)
+                    {
+                        return;
+                    }
+
+                    if (selectedCell == null) { return; }
+
+                    _cellValueBegin = selectedCell.Value.ToString();
+                    if (!selectedCell.ReadOnly)
+                    {
+                        selectedCell.Value = "";
+                        EditCell(selectedCell);
+                    }
+                    else
+                        failedOperations++;
+                }
+
+                if (failedOperations > 0)
+                    MessageBox.Show(string.Format("Data table is not in edit mode!" + Environment.NewLine + "{0} updates failed due to read only cell setting", failedOperations), "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             catch (FormatException)
             {
@@ -853,8 +866,10 @@ namespace DashboardUI
                 return;
             }
 
+            buttonCard.Visible = false;
+
             //REFACTOR THIS
-            var projectNames = projectManager.GetByName(dbGrid.Rows[_rowIndex].Cells[0].Value.ToString());
+            var projectNames = projectManager.GetById(_projectIndexes[_rowIndex - 3]);
             var projectDetail = projectManager.GetProjectDetail(projectNames.Data.ProjectId);
 
             if (_dataCardForm == null)
@@ -870,6 +885,9 @@ namespace DashboardUI
 
         private void DataGridForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            if (_dataCardForm.ChangeAction)
+                buttonList_Click(sender, e);
+
             _dataCardForm = null;
         }
 

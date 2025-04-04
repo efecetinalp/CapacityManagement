@@ -16,18 +16,6 @@ namespace DashboardUI
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
 
-        //Form wind rounded corner
-        //[DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        //private static extern IntPtr CreateRoundRectRgn
-        //(
-        //    int nLeftRect,     // x-coordinate of upper-left corner
-        //    int nTopRect,      // y-coordinate of upper-left corner
-        //    int nRightRect,    // x-coordinate of lower-right corner
-        //    int nBottomRect,   // y-coordinate of lower-right corner
-        //    int nWidthEllipse, // width of ellipse
-        //    int nHeightEllipse // height of ellipse
-        //);
-
         //Class Instances
         ManagementManager _managementManager;
         DepartmentManager _departmentManager;
@@ -43,7 +31,9 @@ namespace DashboardUI
         List<int> _categoryIndexes = new();
         List<int> _userIndexes = new();
 
-        Form _deleteForm;
+        DeleteProjectForm _deleteForm;
+
+        public bool ChangeAction { get; private set; } = false;
 
         public DataCardUI(ProjectDetailDto projectDetail, ManagementManager managementManager, DepartmentManager departmentManager, ProjectManager projectManager, CategoryManager categoryManager,
             UserManager userManager, ProjectCapacityManager projectCapacityManager)
@@ -98,8 +88,6 @@ namespace DashboardUI
             //Project Card Edit Information
             txtProjectName.Text = _projectDetail.ProjectName;
             checkBoxCompleted.Checked = _projectDetail.IsCompleted;
-            dateTimePickerStart.Value = _projectDetail.StartDate;
-            dateTimePickerEnd.Value = _projectDetail.EndDate;
 
             _categoryData = _categoryManager.GetAll();
             _userData = _userManager.GetAll();
@@ -168,6 +156,7 @@ namespace DashboardUI
             buttonEdit.Visible = false;
             buttonSave.Visible = true;
             buttonDelete.Visible = false;
+            buttonClose.Visible = false;
 
             lblProjectName.Visible = false;
             lblCategory.Visible = false;
@@ -183,6 +172,11 @@ namespace DashboardUI
             checkBoxCompleted.Visible = true;
             comboBoxUser.Visible = true;
 
+            comboBoxUser.SelectedIndex = comboBoxUser.Items.IndexOf(_projectDetail.UserName);
+            comboBoxCategory.SelectedIndex = comboBoxCategory.Items.IndexOf(_projectDetail.CategoryName);
+            dateTimePickerStart.Value = _projectDetail.StartDate;
+            dateTimePickerEnd.Value = _projectDetail.EndDate;
+
             if (!_projectDetail.IsCompleted)
                 dateTimePickerEnd.Enabled = false;
         }
@@ -192,6 +186,7 @@ namespace DashboardUI
             buttonEdit.Visible = true;
             buttonSave.Visible = false;
             buttonDelete.Visible = true;
+            buttonClose.Visible = true;
 
             lblProjectName.Visible = true;
             lblCategory.Visible = true;
@@ -243,6 +238,7 @@ namespace DashboardUI
                     if (projectOperation.Success)
                     {
                         //UI change
+                        ChangeAction = true;
                         RefreshCard();
                         QuitEditMode();
                         MessageBox.Show(projectOperation.Massage, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -307,6 +303,7 @@ namespace DashboardUI
 
         private void DeleteForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            ChangeAction = _deleteForm.ChangeAction;
             _deleteForm = null;
         }
 

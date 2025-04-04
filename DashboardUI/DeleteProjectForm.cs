@@ -18,6 +18,8 @@ namespace DashboardUI
         private ProjectCapacityManager _projectCapacityManager;
         private Project _projectToDelete;
 
+        public bool ChangeAction { get; private set; } = false;
+
         public DeleteProjectForm(ProjectManager projectManager, ProjectCapacityManager projectCapacityManager, Project project)
         {
             _projectManager = projectManager;
@@ -65,6 +67,7 @@ namespace DashboardUI
                 if (projectOperation.Success)
                 {
                     MessageBox.Show(projectOperation.Massage, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ChangeAction = true;
                     this.Close();
                 }
                 else

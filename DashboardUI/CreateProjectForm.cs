@@ -38,6 +38,7 @@ namespace DashboardUI
         List<int> _categoryIndexes = new();
         List<int> _userIndexes = new();
         bool isRestriced = false;
+        public bool ChangeAction { get; private set; } = false;
 
         public CreateProjectForm(ManagementManager managementManager, DepartmentManager departmentManager, CategoryManager categoryManager, ProjectManager projectManager, UserManager userManager)
         {
@@ -62,6 +63,7 @@ namespace DashboardUI
             isRestriced = true;
 
             InitializeComponent();
+            new DropShadow().ApplyShadows(this);
         }
 
         private void CreateProjectForm_Load(object sender, EventArgs e)
@@ -205,6 +207,7 @@ namespace DashboardUI
                 if (projectOperation.Success)
                 {
                     MessageBox.Show(projectOperation.Massage, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ChangeAction = true;
                     this.Close();
                 }
                 else

@@ -41,7 +41,7 @@ namespace DashboardUI
             }
 
             labelDelete.Text = "You are going to delete " + _managementToDelete.ManagementName + " permanently!"
-                + Environment.NewLine + departmentList.Data.Count + " project capacities will effect by this action and effected datas will be lost! "
+                + Environment.NewLine + departmentList.Data.Count + " department will effect by this action and effected datas will be lost! "
                 + Environment.NewLine + "Type: DELETE MANAGEMENT for approval";
 
             //Delete Confirmation
