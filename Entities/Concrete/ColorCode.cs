@@ -1,9 +1,5 @@
 ﻿using Core.Entities;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Drawing;
 
 namespace Entities.Concrete
 {

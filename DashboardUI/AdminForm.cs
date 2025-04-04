@@ -1,11 +1,4 @@
 ﻿using Business.Concrete;
-using DataAccess.Concrete.EntityFramework;
-using Entities.Concrete;
-using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
-using System.IO;
-using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 
 namespace DashboardUI
 {

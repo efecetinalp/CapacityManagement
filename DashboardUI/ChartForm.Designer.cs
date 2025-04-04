@@ -77,6 +77,7 @@
             chartArea1.Name = "ChartArea1";
             areaChart.ChartAreas.Add(chartArea1);
             legend1.Alignment = StringAlignment.Center;
+            legend1.BackImageWrapMode = System.Windows.Forms.DataVisualization.Charting.ChartImageWrapMode.Scaled;
             legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             legend1.Name = "Legend1";
             areaChart.Legends.Add(legend1);

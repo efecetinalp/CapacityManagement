@@ -1,6 +1,3 @@
-using Business.Concrete;
-using DataAccess.Concrete.EntityFramework;
-
 namespace DashboardUI
 {
     internal static class Program

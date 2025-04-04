@@ -1,30 +1,17 @@
 ﻿using Business.Concrete;
-using Core.Utilities.Results;
-using DashboardUI.Properties;
-using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
-using Entities.DTOs;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Office.Interop.Excel;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using DataTable = System.Data.DataTable;
 using System.Diagnostics;
-using System.Drawing;
 using Font = System.Drawing.Font;
 using Rectangle = System.Drawing.Rectangle;
-using Point = System.Drawing.Point;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using System.Windows.Forms.DataVisualization.Charting;
-using Microsoft.VisualBasic.Devices;
 using System.Globalization;
+using Microsoft.Office.Interop.Excel;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Windows.Forms;
+using System.Xml.Linq;
+using System.Reflection;
 
 namespace DashboardUI
 {
@@ -46,7 +33,6 @@ namespace DashboardUI
 
         //Class Referances
         AlertBox alertBox;
-        ToolTip _toolTip;
 
         //Properties
         private string _cellValueBegin;
@@ -63,7 +49,7 @@ namespace DashboardUI
         private List<int> _projectIndex = new();
         private List<int> completedProjectList = new();
 
-        public DataGridForm(ProjectManager projectManager, DepartmentManager departmentManager, ManagementManager managementManager, CategoryManager categoryManager, 
+        public DataGridForm(ProjectManager projectManager, DepartmentManager departmentManager, ManagementManager managementManager, CategoryManager categoryManager,
             DepartmentCapacityManager departmentCapacityManager, ProjectCapacityManager projectCapacityManager, UserManager userManager, Dashboard dashboardForm)
         {
             this.projectManager = projectManager;
@@ -120,6 +106,8 @@ namespace DashboardUI
 
         private void buttonList_Click(object sender, EventArgs e)
         {
+            dbGrid.SuspendLayout();
+
             ResetGridView();
 
             if (comboBoxManagement.Text == "" || comboBoxDepartment.Text == "")
@@ -135,6 +123,9 @@ namespace DashboardUI
 
             if (isDataListed)
                 alertBox.SuccessAlert("Success");
+
+            dbGrid.ResumeLayout();
+            dbGrid.Refresh();
         }
 
         private async void FetchData()
@@ -176,11 +167,14 @@ namespace DashboardUI
             DataRow departmentRow = dataTable.Rows.Add();
             departmentRow[0] = comboBoxDepartment.Text;
 
-            var departmentDatas = departmentCapacityManager.GetAllByDateBetweenAndDepartmentName(_startDate, _endDate, comboBoxDepartment.Text);
+            //REFACTOR THIS IMMEDIATELY
+            _departmentIndex = departmentManager.GetByName(comboBoxDepartment.Text).Data.DepartmentId;
+
+            var departmentDatas = departmentCapacityManager.GetAllByDateBetweenAndDepartmentId(_startDate, _endDate, _departmentIndex);
 
             if (departmentDatas.Success)
             {
-                _departmentIndex = departmentDatas.Data[0].DepartmentId;
+                //_departmentIndex = departmentDatas.Data[0].DepartmentId;
                 foreach (var departmentData in departmentDatas.Data)
                 {
                     for (int i = 0; i <= monthCalulate; i++)
@@ -192,11 +186,17 @@ namespace DashboardUI
                     }
                 }
             }
+            else
+            {
+                alertBox.ErrorAlert(departmentDatas.Massage);
+                return;
+            }
+
 
             //project name and capacity placed into row
-            int departmentId = departmentManager.GetByName(comboBoxDepartment.Text).Data.DepartmentId;
-            var projectNames = projectManager.GetAllByDepartmentId(departmentId);
-            var projectDatas = projectCapacityManager.GetProjectCapacityDetailsByDateBetweenAndDepartmentId(_startDate, _endDate, departmentId);
+            //int departmentId = departmentManager.GetByName(comboBoxDepartment.Text).Data.DepartmentId;
+            var projectNames = projectManager.GetAllByDepartmentId(_departmentIndex);
+            var projectDatas = projectCapacityManager.GetProjectCapacityDetailsByDateBetweenAndDepartmentId(_startDate, _endDate, _departmentIndex);
             _projectIndex.Clear();
 
             if (projectNames.Success)
@@ -249,6 +249,13 @@ namespace DashboardUI
             }
 
             //data grid view style
+            dbGrid.Columns[0].Frozen = true;
+
+            for (int i = 1; i < dbGrid.Columns.Count; i++)
+            {
+                dbGrid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+
             FormatDataGridView();
         }
 
@@ -477,22 +484,31 @@ namespace DashboardUI
 
         private void dbGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            EditCell(dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex]);
+        }
 
-            string cellValue = dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+        private void dbGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            _cellValueBegin = dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+        }
 
-            DateTime cellDate = _startDate.AddMonths(e.ColumnIndex - 1);
+        private void EditCell(DataGridViewCell cell)
+        {
+            string cellValue = cell.Value.ToString();
+
+            DateTime cellDate = _startDate.AddMonths(cell.ColumnIndex - 1);
             cellDate = new DateTime(cellDate.Year, cellDate.Month, 01);
 
             //editting project rows
-            if (dbGrid.Rows[e.RowIndex].Tag == "Project")
+            if (dbGrid.Rows[cell.RowIndex].Tag == "Project")
             {
                 //check if cell value is changed
                 if (_cellValueBegin != cellValue)
                 {
                     //project name is editing
-                    if (e.ColumnIndex == 0)
+                    if (cell.ColumnIndex == 0)
                     {
-                        dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
+                        cell.Value = _cellValueBegin;
                         return;
                     }
 
@@ -502,14 +518,14 @@ namespace DashboardUI
                     {
                         if (!IsNumeric(cellValue))
                         {
-                            dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
+                            cell.Value = _cellValueBegin;
                             alertBox.WarningAlert("Non-numeric value");
                             return;
                         }
                     }
 
                     //fetch current project data to edit
-                    var projectData = projectManager.GetById(_projectIndex[e.RowIndex - 3]);
+                    var projectData = projectManager.GetById(_projectIndex[cell.RowIndex - 3]);
                     if (!projectData.Success)
                     {
                         alertBox.ErrorAlert("Could not find project data");
@@ -520,7 +536,7 @@ namespace DashboardUI
                     Project cellProject = projectData.Data;
 
                     //new capacity value added
-                    if (_cellValueBegin == "" && e.ColumnIndex > 0)
+                    if (_cellValueBegin == "" && cell.ColumnIndex > 0)
                     {
                         //new capacity data
                         ProjectCapacity projectCapacityToAdd = new ProjectCapacity();
@@ -581,15 +597,15 @@ namespace DashboardUI
                     Debug.Print("No change action");
             }
             //editing department rows
-            else if (dbGrid.Rows[e.RowIndex].Tag == "Department")
+            else if (dbGrid.Rows[cell.RowIndex].Tag == "Department")
             {
                 //check if cell value is changed
                 if (_cellValueBegin != cellValue)
                 {
                     //department name is editing
-                    if (e.ColumnIndex == 0)
+                    if (cell.ColumnIndex == 0)
                     {
-                        dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
+                        cell.Value = _cellValueBegin;
                         return;
                     }
 
@@ -599,7 +615,7 @@ namespace DashboardUI
                     {
                         if (!IsNumeric(cellValue))
                         {
-                            dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
+                            cell.Value = _cellValueBegin;
                             alertBox.WarningAlert("Non-numeric value");
                             return;
                         }
@@ -617,7 +633,7 @@ namespace DashboardUI
                     Department cellDepartment = departmentData.Data;
 
                     //new department capacity value added
-                    if (_cellValueBegin == "" && e.ColumnIndex > 0)
+                    if (_cellValueBegin == "" && cell.ColumnIndex > 0)
                     {
                         //new department capacity data
                         DepartmentCapacity departmentCapacityToAdd = new DepartmentCapacity();
@@ -683,16 +699,111 @@ namespace DashboardUI
                 //check if cell value is changed
                 if (_cellValueBegin != cellValue)
                 {
-                    dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = _cellValueBegin;
+                    cell.Value = _cellValueBegin;
                     return;
                 }
             }
         }
 
-        private void dbGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        #region Copy Paste Delete Key Down
+
+        //On keydown events
+        //When Ctrl+V pressed paste clipboard into datagrid view
+        //When Delete or backspace pressed Delete Cell values
+        private void dbGrid_KeyDown(object sender, KeyEventArgs e)
         {
-            _cellValueBegin = dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+            if (e.KeyCode == Keys.V && e.Modifiers == Keys.Control)
+            {
+                PasteClipboard();
+            }
+            else if (e.KeyCode == Keys.Delete || e.KeyCode == Keys.Back)
+            {
+                DeleteCell();
+            }
         }
+
+        private void DeleteCell()
+        {
+            try
+            {
+                int iFail = 0;
+                int iRow = dbGrid.CurrentCell.RowIndex;
+                int iCol = dbGrid.CurrentCell.ColumnIndex;
+                DataGridViewCell oCell;
+                oCell = dbGrid[iCol, iRow];
+
+                if (oCell == null) { return; }
+
+                _cellValueBegin = oCell.Value.ToString();
+                if (!oCell.ReadOnly)
+                {
+                    oCell.Value = "";
+                    EditCell(oCell);
+                }
+                else
+                    iFail++;
+
+                if (iFail > 0)
+                    MessageBox.Show(string.Format("Data table is not in edit mode!" + Environment.NewLine + "{0} updates failed due to read only cell setting", iFail), "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("The data is not editable!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+        }
+
+        private void PasteClipboard()
+        {
+            try
+            {
+                string s = Clipboard.GetText();
+                string[] lines = s.Split('\n');
+                int iFail = 0;
+                int iRow = dbGrid.CurrentCell.RowIndex;
+                int iCol = dbGrid.CurrentCell.ColumnIndex;
+                DataGridViewCell oCell;
+                foreach (string line in lines)
+                {
+                    if (iRow < dbGrid.RowCount && line.Length > 0)
+                    {
+                        string[] sCells = line.Split('\t');
+                        for (int i = 0; i < sCells.GetLength(0); ++i)
+                        {
+                            if (iCol + i < this.dbGrid.ColumnCount)
+                            {
+                                oCell = dbGrid[iCol + i, iRow];
+                                _cellValueBegin = oCell.Value.ToString();
+                                if (!oCell.ReadOnly)
+                                {
+                                    oCell.Value = Convert.ChangeType(sCells[i], oCell.ValueType);
+                                    EditCell(oCell);
+                                }
+                                else
+                                    iFail++;
+                                //only traps a fail if the data has changed 
+                                //and you are pasting into a read only cell
+                            }
+                            else
+                            { break; }
+                        }
+                        iRow++;
+                    }
+                    else
+                    { break; }
+
+                    if (iFail > 0)
+                        MessageBox.Show(string.Format("Data table is not in edit mode!" + Environment.NewLine + "{0} updates failed due to read only cell setting", iFail), "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("The data you pasted is in the wrong format for the cell", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+        }
+
+        #endregion
 
         #endregion
 
@@ -838,6 +949,8 @@ namespace DashboardUI
         }
 
         #endregion
+
+
 
     }
 }

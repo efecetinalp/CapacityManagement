@@ -2,14 +2,8 @@
 using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Entities.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrete
 {
@@ -53,6 +47,16 @@ namespace Business.Concrete
         public IDataResult<List<DepartmentCapacityDetailDto>> GetAllByDateBetweenAndDepartmentName(DateTime dateStart, DateTime dateEnd, string departmentName)
         {
             var result = _departmentCapactiyDal.GetDepartmentCapacityDetails(d => d.Date >= dateStart && d.Date <= dateEnd && d.DepartmentName == departmentName);
+
+            if (result != null)
+                return new SuccessDataResult<List<DepartmentCapacityDetailDto>>(result, Messages.DepartmentCapacityListed);
+            else
+                return new ErrorDataResult<List<DepartmentCapacityDetailDto>>(result, Messages.EmptyData);
+        }
+
+        public IDataResult<List<DepartmentCapacityDetailDto>> GetAllByDateBetweenAndDepartmentId(DateTime dateStart, DateTime dateEnd, int departmentId)
+        {
+            var result = _departmentCapactiyDal.GetDepartmentCapacityDetails(d => d.Date >= dateStart && d.Date <= dateEnd && d.DepartmentId == departmentId);
 
             if (result != null)
                 return new SuccessDataResult<List<DepartmentCapacityDetailDto>>(result, Messages.DepartmentCapacityListed);
@@ -119,5 +123,7 @@ namespace Business.Concrete
             else
                 return new ErrorDataResult<List<DepartmentCapacity>>(result, Messages.EmptyData);
         }
+
+
     }
 }

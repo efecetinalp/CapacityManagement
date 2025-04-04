@@ -1,25 +1,10 @@
 ﻿using Business.Concrete;
 using Core.Utilities.Results;
 using Entities.DTOs;
-using Microsoft.Office.Interop.Excel;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Windows.Forms;
 using Font = System.Drawing.Font;
-using Series = System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms.DataVisualization.Charting;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using ToolTip = System.Windows.Forms.ToolTip;
-using System.Diagnostics;
 
 namespace DashboardUI
 {

@@ -1,11 +1,6 @@
 ﻿using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
@@ -16,6 +11,7 @@ namespace Business.Abstract
 
         IDataResult<List<DepartmentCapacityDetailDto>> GetAllByDateAndDepartmentName(DateTime date, string departmentName);
         IDataResult<List<DepartmentCapacityDetailDto>> GetAllByDateBetweenAndDepartmentName(DateTime dateStart, DateTime dateEnd, string departmentName);
+        IDataResult<List<DepartmentCapacityDetailDto>> GetAllByDateBetweenAndDepartmentId(DateTime dateStart, DateTime dateEnd, int departmentId);
         IDataResult<List<DepartmentCapacityDetailDto>> GetAllByDateBetween(DateTime dateStart, DateTime dateEnd);
         IDataResult<List<DepartmentCapacity>> GetAllByDepartmentId(int departmentId);
         IDataResult<List<DepartmentCapacity>> GetAllUniqueDate();

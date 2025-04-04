@@ -1,17 +1,6 @@
 using Business.Concrete;
-using Core.Utilities.Results;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
-using Entities.DTOs;
-using Microsoft.Data.SqlClient.Server;
-using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
-using Microsoft.VisualBasic;
-using System;
-using System.Data;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Runtime.Serialization;
-using System.Windows.Forms;
 
 namespace DashboardUI
 {

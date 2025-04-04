@@ -2,17 +2,6 @@
 using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.DTOs;
-using Microsoft.Office.Interop.Excel;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace DashboardUI
@@ -56,6 +45,7 @@ namespace DashboardUI
         private double _totalCapacityEnd;
         private double _assignedCapacityStart;
         private double _assignedCapacityEnd;
+        private double _timerStep = 0;
         private DateTime _startDate;
         private DateTime _endDate;
 
@@ -160,15 +150,6 @@ namespace DashboardUI
 
         private void GenerateInfoCards()
         {
-            //_assignedCapacityStart = 10;
-            //_assignedCapacityEnd = 40;
-
-            //_totalCapacityStart = 30;
-            //_totalCapacityEnd = 10;
-
-            //_startDate = DateTime.Now;
-            //_endDate = DateTime.Now.AddMonths(5);
-
             double result = _completedProjects.Count * 100 / Math.Abs(_completedProjects.Count + _ongiongProjects.Count);
 
             //Completed Projects
