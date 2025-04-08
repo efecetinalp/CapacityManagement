@@ -4,7 +4,7 @@ using Entities.DTOs;
 
 namespace Business.Abstract
 {
-    public interface IProjectService
+    public interface IProjectService : IManager
     {
         IDataResult<List<Project>> GetAll();
         IDataResult<List<Project>> GetAllByUserId(int userId);

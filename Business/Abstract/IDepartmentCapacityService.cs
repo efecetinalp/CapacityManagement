@@ -4,7 +4,7 @@ using Entities.DTOs;
 
 namespace Business.Abstract
 {
-    public interface IDepartmentCapacityService
+    public interface IDepartmentCapacityService : IManager
     {
         IDataResult<List<DepartmentCapacityDetailDto>> GetDepartmentCapacityDetails();
 

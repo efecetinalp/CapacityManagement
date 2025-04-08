@@ -4,7 +4,7 @@ using Entities.DTOs;
 
 namespace Business.Abstract
 {
-    public interface IColorCodeService
+    public interface IColorCodeService : IManager
     {
         IDataResult<List<ColorCode>> GetAll();
         IDataResult<List<ColorCode>> GetAllById(int id);

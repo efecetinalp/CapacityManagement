@@ -3,7 +3,7 @@ using Entities.Concrete;
 
 namespace Business.Abstract
 {
-    public interface IColorPaletteService
+    public interface IColorPaletteService : IManager
     {
         IDataResult<List<ColorPalette>> GetAll();
         IDataResult<List<ColorPalette>> GetAllById(int id);

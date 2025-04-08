@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataGridForm));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle7 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle8 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle9 = new DataGridViewCellStyle();
             buttonEdit = new Button();
             buttonReset = new Button();
             dateTimePickerEnd = new DateTimePicker();
@@ -52,6 +52,7 @@
             pictureBoxLocked = new PictureBox();
             pictureBoxUnlocked = new PictureBox();
             labelLockStatus = new Label();
+            buttonSave = new Button();
             ((System.ComponentModel.ISupportInitialize)dbGrid).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLocked).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxUnlocked).BeginInit();
@@ -158,24 +159,24 @@
             dbGrid.BackgroundColor = Color.White;
             dbGrid.BorderStyle = BorderStyle.None;
             dbGrid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(46, 52, 63);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(88, 183, 213);
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dbGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = Color.FromArgb(46, 52, 63);
+            dataGridViewCellStyle7.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle7.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = Color.FromArgb(88, 183, 213);
+            dataGridViewCellStyle7.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = DataGridViewTriState.True;
+            dbGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             dbGrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dbGrid.ColumnHeadersVisible = false;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(88, 183, 213);
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dbGrid.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = SystemColors.Window;
+            dataGridViewCellStyle8.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle8.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = Color.FromArgb(88, 183, 213);
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
+            dbGrid.DefaultCellStyle = dataGridViewCellStyle8;
             dbGrid.EnableHeadersVisualStyles = false;
             dbGrid.GridColor = SystemColors.ActiveCaption;
             dbGrid.Location = new Point(21, 79);
@@ -183,14 +184,14 @@
             dbGrid.Name = "dbGrid";
             dbGrid.ReadOnly = true;
             dbGrid.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(46, 52, 63);
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(88, 183, 213);
-            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
-            dbGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = Color.FromArgb(46, 52, 63);
+            dataGridViewCellStyle9.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = Color.FromArgb(88, 183, 213);
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            dbGrid.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             dbGrid.RowHeadersVisible = false;
             dbGrid.RowHeadersWidth = 62;
             dbGrid.RowTemplate.Height = 33;
@@ -413,12 +414,36 @@
             labelLockStatus.Text = "Data editing is locked";
             labelLockStatus.TextAlign = ContentAlignment.MiddleRight;
             // 
+            // buttonSave
+            // 
+            buttonSave.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonSave.BackColor = Color.Transparent;
+            buttonSave.Cursor = Cursors.Hand;
+            buttonSave.Enabled = false;
+            buttonSave.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
+            buttonSave.FlatAppearance.BorderSize = 0;
+            buttonSave.FlatAppearance.MouseDownBackColor = Color.FromArgb(169, 204, 227);
+            buttonSave.FlatAppearance.MouseOverBackColor = Color.FromArgb(169, 204, 227);
+            buttonSave.FlatStyle = FlatStyle.Flat;
+            buttonSave.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonSave.ForeColor = Color.White;
+            buttonSave.Image = (Image)resources.GetObject("buttonSave.Image");
+            buttonSave.Location = new Point(1235, 23);
+            buttonSave.Margin = new Padding(2);
+            buttonSave.Name = "buttonSave";
+            buttonSave.Padding = new Padding(0, 0, 1, 1);
+            buttonSave.Size = new Size(20, 20);
+            buttonSave.TabIndex = 46;
+            buttonSave.UseVisualStyleBackColor = false;
+            buttonSave.Click += buttonSave_Click;
+            // 
             // DataGridForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(242, 242, 242);
             ClientSize = new Size(1280, 660);
+            Controls.Add(buttonSave);
             Controls.Add(buttonEdit);
             Controls.Add(buttonShowHide);
             Controls.Add(buttonNew);
@@ -474,5 +499,6 @@
         private PictureBox pictureBoxLocked;
         private PictureBox pictureBoxUnlocked;
         private Label labelLockStatus;
+        private Button buttonSave;
     }
 }

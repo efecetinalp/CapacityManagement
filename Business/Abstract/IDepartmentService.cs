@@ -4,7 +4,7 @@ using Entities.DTOs;
 
 namespace Business.Abstract
 {
-    public interface IDepartmentService
+    public interface IDepartmentService : IManager
     {
         IDataResult<List<Department>> GetAll();
         IDataResult<List<Department>> GetAllByManagementId(int id);

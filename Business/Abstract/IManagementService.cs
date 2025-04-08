@@ -3,7 +3,7 @@ using Entities.Concrete;
 
 namespace Business.Abstract
 {
-    public interface IManagementService
+    public interface IManagementService : IManager
     {
         IDataResult<List<Management>> GetAll();
         IDataResult<List<Management>> GetAllById(int managementId);

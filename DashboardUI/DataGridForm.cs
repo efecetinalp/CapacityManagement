@@ -12,6 +12,10 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Reflection;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using Core.Entities;
+using DashboardUI.Utilities;
+using DatabaseOperation = DashboardUI.Utilities.DatabaseOperation;
 
 namespace DashboardUI
 {
@@ -46,8 +50,13 @@ namespace DashboardUI
         public bool isDataListed = false;
         private int _rowIndex;
         private int _departmentIndex;
-        private List<int> _projectIndexes = new();
-        private List<int> completedProjectList = new();
+        private List<Project> _listedProjects = new();
+        private List<int> _completedProjectList = new();
+
+        //CRUD operation list
+        private Project _currentEditingProject;
+        private int _currentEditingRow;
+        private List<DatabaseOperation> _databaseOperations = new();
 
         public DataGridForm(ProjectManager projectManager, DepartmentManager departmentManager, ManagementManager managementManager, CategoryManager categoryManager,
             DepartmentCapacityManager departmentCapacityManager, ProjectCapacityManager projectCapacityManager, UserManager userManager, Dashboard dashboardForm)
@@ -197,7 +206,7 @@ namespace DashboardUI
             //int departmentId = departmentManager.GetByName(comboBoxDepartment.Text).Data.DepartmentId;
             var projectNames = projectManager.GetAllByDepartmentId(_departmentIndex);
             var projectDatas = projectCapacityManager.GetProjectCapacityDetailsByDateBetweenAndDepartmentId(_startDate, _endDate, _departmentIndex);
-            _projectIndexes.Clear();
+            _listedProjects.Clear();
 
             if (projectNames.Success)
             {
@@ -206,11 +215,11 @@ namespace DashboardUI
                 {
                     DataRow projectRow = dataTable.Rows.Add();
                     projectRow[0] = projectName.ProjectName;
-                    _projectIndexes.Add(projectName.ProjectId);
+                    _listedProjects.Add(projectName);
 
                     //completed project table index list
                     if (projectName.IsCompleted)
-                        completedProjectList.Add(dataTable.Rows.Count - 1);
+                        _completedProjectList.Add(dataTable.Rows.Count - 1);
 
                     if (projectDatas.Success)
                     {
@@ -460,6 +469,7 @@ namespace DashboardUI
                 pictureBoxLocked.Visible = false;
                 pictureBoxUnlocked.Visible = true;
                 labelLockStatus.Text = "Data editing is unlocked";
+                _databaseOperations.Clear();
             }
         }
 
@@ -492,29 +502,24 @@ namespace DashboardUI
 
         private void dbGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
+            Debug.Print(_databaseOperations.Count.ToString());
             _cellValueBegin = dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
         }
 
         private void EditCell(DataGridViewCell cell)
         {
+
             string cellValue = cell.Value.ToString();
 
             DateTime cellDate = _startDate.AddMonths(cell.ColumnIndex - 1);
             cellDate = new DateTime(cellDate.Year, cellDate.Month, 01);
 
             //editting project rows
-            if (dbGrid.Rows[cell.RowIndex].Tag == "Project")
+            if (cell.RowIndex > 2)
             {
                 //check if cell value is changed
                 if (_cellValueBegin != cellValue)
                 {
-                    //project name is editing
-                    if (cell.ColumnIndex == 0)
-                    {
-                        cell.Value = _cellValueBegin;
-                        return;
-                    }
-
                     //editing project capacity data
                     //check if cell value is numaric
                     if (cellValue != "")
@@ -528,15 +533,17 @@ namespace DashboardUI
                     }
 
                     //fetch current project data to edit
-                    var projectData = projectManager.GetById(_projectIndexes[cell.RowIndex - 3]);
-                    if (!projectData.Success)
+                    Project cellProject;
+                    if (cell.RowIndex == _currentEditingRow)
                     {
-                        alertBox.ErrorAlert("Could not find project data");
-                        return;
+                        cellProject = _currentEditingProject;
                     }
-
-                    //project on data grid view
-                    Project cellProject = projectData.Data;
+                    else
+                    {
+                        _currentEditingRow = cell.RowIndex;
+                        cellProject = _listedProjects[cell.RowIndex - 3];
+                        _currentEditingProject = cellProject;
+                    }
 
                     //new capacity value added
                     if (_cellValueBegin == "" && cell.ColumnIndex > 0)
@@ -547,25 +554,27 @@ namespace DashboardUI
                         projectCapacityToAdd.PTotalCapacity = Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1);
                         projectCapacityToAdd.Date = cellDate;
 
-                        if (projectCapacityManager.Add(projectCapacityToAdd).Success)
-                            Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "CREATE" + " - " + "Project Capacity" + " - " + projectCapacityToAdd.ProjectCapacityId + "Project capacity cell value added");
-                        else
-                        {
-                            Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + projectCapacityToAdd.ProjectCapacityId + "Error when adding data into database");
-                            alertBox.ErrorAlert("Error when adding data into database");
-                        }
+                        _databaseOperations.Add(new CreateOperation(projectCapacityToAdd, projectCapacityManager, cell.ColumnIndex, cell.RowIndex));
+
+                        //if (projectCapacityManager.Add(projectCapacityToAdd).Success)
+                        //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "CREATE" + " - " + "Project Capacity" + " - " + projectCapacityToAdd.ProjectCapacityId + "Project capacity cell value added");
+                        //else
+                        //{
+                        //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + projectCapacityToAdd.ProjectCapacityId + "Error when adding data into database");
+                        //    alertBox.ErrorAlert("Error when adding data into database");
+                        //}
                     }
                     //current capacity value editing
                     else
                     {
                         //fetch project capacity data from data grid view
                         var projectCapacityData = projectCapacityManager.GetProjectCapacityByDateAndProjectId(cellDate, cellProject.ProjectId);
-                        if (!projectCapacityData.Success)
-                        {
-                            Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Could not find project capacity data");
-                            alertBox.ErrorAlert("Could not find project capacity data");
-                            return;
-                        }
+                        //if (!projectCapacityData.Success)
+                        //{
+                        //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Could not find project capacity data");
+                        //    alertBox.ErrorAlert("Could not find project capacity data");
+                        //    return;
+                        //}
 
                         //project capacity on data grid view
                         ProjectCapacity projectCapacityToUpdate = projectCapacityData.Data;
@@ -573,26 +582,31 @@ namespace DashboardUI
                         //new value is null or 0 incase delete data
                         if (cellValue == "" || Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1) == 0)
                         {
-                            if (projectCapacityManager.Delete(projectCapacityToUpdate).Success)
-                                Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "DELETE" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Project capacity data deleted");
-                            else
-                            {
-                                Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Error when deleting data from database");
-                                alertBox.ErrorAlert("Error when deleting data from database");
-                            }
+                            _databaseOperations.Add(new DeleteOperation(projectCapacityToUpdate, projectCapacityManager, cell.ColumnIndex, cell.RowIndex));
+
+
+                            //if (projectCapacityManager.Delete(projectCapacityToUpdate).Success)
+                            //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "DELETE" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Project capacity data deleted");
+                            //else
+                            //{
+                            //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Error when deleting data from database");
+                            //    alertBox.ErrorAlert("Error when deleting data from database");
+                            //}
                         }
                         //new value will update on current data
                         else
                         {
                             projectCapacityToUpdate.PTotalCapacity = Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1);
 
-                            if (projectCapacityManager.Update(projectCapacityToUpdate).Success)
-                                Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "UPDATE" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Project capacity data updated");
-                            else
-                            {
-                                Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Error when updating data in database");
-                                alertBox.ErrorAlert("Error when updating data in database");
-                            }
+                            _databaseOperations.Add(new UpdateOperation(projectCapacityToUpdate, projectCapacityManager, cell.ColumnIndex, cell.RowIndex));
+
+                            //if (projectCapacityManager.Update(projectCapacityToUpdate).Success)
+                            //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "UPDATE" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Project capacity data updated");
+                            //else
+                            //{
+                            //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Error when updating data in database");
+                            //    alertBox.ErrorAlert("Error when updating data in database");
+                            //}
                         }
                     }
                 }
@@ -600,18 +614,11 @@ namespace DashboardUI
                     Debug.Print("No change action");
             }
             //editing department rows
-            else if (dbGrid.Rows[cell.RowIndex].Tag == "Department")
+            else if (cell.RowIndex == 2)
             {
                 //check if cell value is changed
                 if (_cellValueBegin != cellValue)
                 {
-                    //department name is editing
-                    if (cell.ColumnIndex == 0)
-                    {
-                        cell.Value = _cellValueBegin;
-                        return;
-                    }
-
                     //editing department capacity data
                     //check if cell value is numeric
                     if (cellValue != "")
@@ -718,10 +725,13 @@ namespace DashboardUI
             if (e.KeyCode == Keys.V && e.Modifiers == Keys.Control)
             {
                 PasteClipboard();
+                Debug.Print(_databaseOperations.Count.ToString());
+
             }
             else if (e.KeyCode == Keys.Delete || e.KeyCode == Keys.Back)
             {
                 DeleteCell();
+                Debug.Print(_databaseOperations.Count.ToString());
             }
         }
 
@@ -750,7 +760,7 @@ namespace DashboardUI
                     if (!selectedCell.ReadOnly)
                     {
                         selectedCell.Value = "";
-                        EditCell(selectedCell);
+                        //EditCell(selectedCell);
                     }
                     else
                         failedOperations++;
@@ -869,8 +879,7 @@ namespace DashboardUI
             buttonCard.Visible = false;
 
             //REFACTOR THIS
-            var projectNames = projectManager.GetById(_projectIndexes[_rowIndex - 3]);
-            var projectDetail = projectManager.GetProjectDetail(projectNames.Data.ProjectId);
+            var projectDetail = projectManager.GetProjectDetail(_listedProjects[_rowIndex - 3].ProjectId);
 
             if (_dataCardForm == null)
             {
@@ -954,21 +963,27 @@ namespace DashboardUI
             {
                 //hide
                 isHidden = true;
-                foreach (var projectIndex in completedProjectList)
+                foreach (var projectIndex in _completedProjectList)
                     dbGrid.Rows[projectIndex].Visible = false;
             }
             else
             {
                 //unhide
                 isHidden = false;
-                foreach (var projectIndex in completedProjectList)
+                foreach (var projectIndex in _completedProjectList)
                     dbGrid.Rows[projectIndex].Visible = true;
             }
         }
 
         #endregion
 
+        #region Button Save Function
 
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        #endregion
     }
 }

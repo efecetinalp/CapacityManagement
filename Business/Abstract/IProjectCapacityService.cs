@@ -4,7 +4,7 @@ using Entities.DTOs;
 
 namespace Business.Abstract
 {
-    public interface IProjectCapacityService
+    public interface IProjectCapacityService : IManager
     {
         IDataResult<List<ProjectCapacityDetailDto>> GetProjectCapacityDetails();
         IDataResult<List<ProjectCapacityDetailDto>> GetAllByDepartmentId(int departmentId);
