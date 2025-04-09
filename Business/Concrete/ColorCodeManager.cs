@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Entities;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -15,21 +16,21 @@ namespace Business.Concrete
             _colorCodeDal = colorCodeDal;
         }
 
-        public IResult Add(ColorCode colorCode)
+        public IResult Add(IEntity colorCode)
         {
-            _colorCodeDal.Add(colorCode);
+            _colorCodeDal.Add(colorCode as ColorCode);
             return new SuccessResult();
         }
 
-        public IResult Update(ColorCode colorCode)
+        public IResult Update(IEntity colorCode)
         {
-            _colorCodeDal.Update(colorCode);
+            _colorCodeDal.Update(colorCode as ColorCode);
             return new SuccessResult();
         }
 
-        public IResult Delete(ColorCode colorCode)
+        public IResult Delete(IEntity colorCode)
         {
-            _colorCodeDal.Delete(colorCode);
+            _colorCodeDal.Delete(colorCode as ColorCode);
             return new SuccessResult();
         }
 

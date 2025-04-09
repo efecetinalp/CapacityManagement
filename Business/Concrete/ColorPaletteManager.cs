@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Entities;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -14,21 +15,21 @@ namespace Business.Concrete
             _colorPaletteDal = colorPaletteDal;
         }
 
-        public IResult Add(ColorPalette colorPalette)
+        public IResult Add(IEntity colorPalette)
         {
-            _colorPaletteDal.Add(colorPalette);
+            _colorPaletteDal.Add(colorPalette as ColorPalette);
             return new SuccessResult();
         }
 
-        public IResult Update(ColorPalette colorPalette)
+        public IResult Update(IEntity colorPalette)
         {
-            _colorPaletteDal.Update(colorPalette);
+            _colorPaletteDal.Update(colorPalette as ColorPalette);
             return new SuccessResult();
         }
 
-        public IResult Delete(ColorPalette colorPalette)
+        public IResult Delete(IEntity colorPalette)
         {
-            _colorPaletteDal.Delete(colorPalette);
+            _colorPaletteDal.Delete(colorPalette as ColorPalette);
             return new SuccessResult();
         }
 

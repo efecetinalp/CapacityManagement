@@ -16,6 +16,9 @@ using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Core.Entities;
 using DashboardUI.Utilities;
 using DatabaseOperation = DashboardUI.Utilities.DatabaseOperation;
+using Core.Utilities.Results;
+using Entities.DTOs;
+using Business.Abstract;
 
 namespace DashboardUI
 {
@@ -115,7 +118,7 @@ namespace DashboardUI
 
         private void buttonList_Click(object sender, EventArgs e)
         {
-            dbGrid.SuspendLayout();
+            //dbGrid.SuspendLayout();
 
             ResetGridView();
 
@@ -133,11 +136,11 @@ namespace DashboardUI
             if (isDataListed)
                 alertBox.SuccessAlert("Success");
 
-            dbGrid.ResumeLayout();
-            dbGrid.Refresh();
+            //dbGrid.ResumeLayout();
+            //dbGrid.Refresh();
         }
 
-        private async void FetchData()
+        private void FetchData()
         {
             DataTable dataTable = new DataTable();
             _startDate = dateTimePickerStart.Value;
@@ -148,10 +151,10 @@ namespace DashboardUI
             DataColumn initialColumn = dataTable.Columns.Add("Initial");
 
             //date columns will add to data table
-            int monthCalulate = (_endDate.Year - _startDate.Year) * 12
+            int monthCalculate = (_endDate.Year - _startDate.Year) * 12
                 + (_endDate.Month - _startDate.Month);
 
-            for (int i = 0; i <= monthCalulate; i++)
+            for (int i = 0; i <= monthCalculate; i++)
             {
                 DateTime tempMonth;
                 tempMonth = _startDate.AddMonths(i);
@@ -161,7 +164,7 @@ namespace DashboardUI
             //Rows placement
             //dates placed into row
             DataRow dateRow = dataTable.Rows.Add();
-            for (int i = 0; i <= monthCalulate; i++)
+            for (int i = 0; i <= monthCalculate; i++)
             {
                 DateTime tempMonth;
                 tempMonth = _startDate.AddMonths(i);
@@ -186,7 +189,7 @@ namespace DashboardUI
                 //_departmentIndex = departmentDatas.Data[0].DepartmentId;
                 foreach (var departmentData in departmentDatas.Data)
                 {
-                    for (int i = 0; i <= monthCalulate; i++)
+                    for (int i = 0; i <= monthCalculate; i++)
                     {
                         if (dateRow[i + 1].ToString() == departmentData.Date.ToString("MMM-yy"))
                         {
@@ -225,7 +228,7 @@ namespace DashboardUI
                     {
                         foreach (var projectData in projectDatas.Data)
                         {
-                            for (int i = 0; i <= monthCalulate; i++)
+                            for (int i = 0; i <= monthCalculate; i++)
                             {
                                 if (dateRow[i + 1].ToString() == projectData.Date.ToString("MMM-yy"))
                                 {
@@ -461,6 +464,7 @@ namespace DashboardUI
                 pictureBoxLocked.Visible = true;
                 pictureBoxUnlocked.Visible = false;
                 labelLockStatus.Text = "Data editing is locked";
+                buttonSave.Enabled = false;
             }
             else
             {
@@ -469,6 +473,7 @@ namespace DashboardUI
                 pictureBoxLocked.Visible = false;
                 pictureBoxUnlocked.Visible = true;
                 labelLockStatus.Text = "Data editing is unlocked";
+                buttonSave.Enabled = true;
                 _databaseOperations.Clear();
             }
         }
@@ -497,46 +502,184 @@ namespace DashboardUI
 
         private void dbGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            Debug.Print("Cell end edit event");
             EditCell(dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex]);
         }
 
         private void dbGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            Debug.Print(_databaseOperations.Count.ToString());
+            Debug.Print("Cell begin edit event");
             _cellValueBegin = dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
         }
+
+        #region Database Operation List Update
+
+        private Tuple<bool, int> CheckOperationList(DataGridViewCell activeCell)
+        {
+            for (int i = 0; i < _databaseOperations.Count; i++)
+            {
+                if (_databaseOperations[i].DataCell == activeCell)
+                {
+                    return Tuple.Create(true, i);
+                }
+            }
+            return Tuple.Create(false, -1);
+        }
+
+        private void UpdateOperationList(int listIndex, DataGridViewCell cell, string cellValue, DateTime cellDate)
+        {
+            var currentOperation = _databaseOperations[listIndex];
+
+            //updated value removed
+            if (currentOperation.OperationType == "Update" && cellValue == "")
+            {
+                //change as delete operation
+                DeleteOperation newDeleteOperation = new DeleteOperation(currentOperation.Data, currentOperation.Manager, currentOperation.DataCell, currentOperation.CellFirstValue, cellValue);
+                _databaseOperations[listIndex] = newDeleteOperation;
+            }
+            //deleted value changed
+            else if (currentOperation.OperationType == "Delete" && cellValue != "")
+            {
+                //change as update operation
+                UpdateOperation newUpdateOperation = new UpdateOperation(currentOperation.Data, currentOperation.Manager, currentOperation.DataCell, currentOperation.CellFirstValue, cellValue);
+                _databaseOperations[listIndex] = newUpdateOperation;
+            }
+            //value changed
+            else if (currentOperation.CellFirstValue != cellValue)
+            {
+                //update create operation
+                currentOperation.CellCurrentValue = cellValue;
+                _databaseOperations[listIndex] = currentOperation;
+            }
+            //value revert to value before edit
+            else if (currentOperation.CellFirstValue == cellValue)
+            {
+                //remove operation from the list
+                _databaseOperations.Remove(currentOperation);
+            }
+            //invalid operation
+            else
+            {
+                Debug.Print("invalid operation");
+            }
+
+        }
+
+        //Project Capacity Overload
+        private void AddIntoOperationList(Project cellProject, DataGridViewCell cell, string cellValue, DateTime cellDate)
+        {
+            if (_cellValueBegin == "")
+            {
+                //new capacity data
+                ProjectCapacity projectCapacityToAdd = new ProjectCapacity();
+                projectCapacityToAdd.ProjectId = cellProject.ProjectId;
+                projectCapacityToAdd.PTotalCapacity = Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1);
+                projectCapacityToAdd.Date = cellDate;
+
+                _databaseOperations.Add(new CreateOperation(projectCapacityToAdd, projectCapacityManager, cell, _cellValueBegin, cellValue));
+            }
+            //current capacity value editing
+            else
+            {
+                //fetch project capacity data from data grid view
+                var projectCapacityData = projectCapacityManager.GetProjectCapacityByDateAndProjectId(cellDate, cellProject.ProjectId);
+
+                //project capacity on data grid view
+                ProjectCapacity projectCapacityToUpdate = projectCapacityData.Data;
+
+                //new value is null or 0 incase delete data
+                if (cellValue == "" || Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1) == 0)
+                {
+                    _databaseOperations.Add(new DeleteOperation(projectCapacityToUpdate, projectCapacityManager, cell, _cellValueBegin, cellValue));
+                }
+                //new value will update on current data
+                else
+                {
+                    projectCapacityToUpdate.PTotalCapacity = Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1);
+                    _databaseOperations.Add(new UpdateOperation(projectCapacityToUpdate, projectCapacityManager, cell, _cellValueBegin, cellValue));
+                }
+            }
+        }
+
+        //Department Capacity Overload
+        private void AddIntoOperationList(Department cellDepartment, DataGridViewCell cell, string cellValue, DateTime cellDate)
+        {
+            if (_cellValueBegin == "")
+            {
+                //new department capacity data
+                DepartmentCapacity departmentCapacityToAdd = new DepartmentCapacity();
+                departmentCapacityToAdd.DepartmentId = cellDepartment.DepartmentId;
+                departmentCapacityToAdd.DTotalCapacity = Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1);
+                departmentCapacityToAdd.Date = cellDate;
+
+                _databaseOperations.Add(new CreateOperation(departmentCapacityToAdd, departmentCapacityManager, cell, _cellValueBegin, cellValue));
+
+            }
+            //current department capacity value editing
+            else
+            {
+                //fetch department capacity data from data grid view
+                var departmentCapacityData = departmentCapacityManager.GetDepartmentCapacityByDateAndDepartmentId(cellDate, cellDepartment.DepartmentId);
+                //department capacity on data grid view
+                DepartmentCapacity departmentCapacityToUpdate = departmentCapacityData.Data;
+
+                //new value is null or 0 incase delete data
+                if (cellValue == "" || Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1) == 0)
+                {
+                    _databaseOperations.Add(new DeleteOperation(departmentCapacityToUpdate, departmentCapacityManager, cell, _cellValueBegin, cellValue));
+                }
+                //new value will update on current data
+                else
+                {
+                    departmentCapacityToUpdate.DTotalCapacity = Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1);
+                    _databaseOperations.Add(new UpdateOperation(departmentCapacityToUpdate, departmentCapacityManager, cell, _cellValueBegin, cellValue));
+                }
+            }
+        }
+
+        #endregion
 
         private void EditCell(DataGridViewCell cell)
         {
 
             string cellValue = cell.Value.ToString();
 
+            //check cell value in correct format
+            if (cellValue != "")
+            {
+                if (!IsNumeric(cellValue))
+                {
+                    cell.Value = _cellValueBegin;
+                    alertBox.WarningAlert("Non-numeric value");
+                    return;
+                }
+            }
+
             DateTime cellDate = _startDate.AddMonths(cell.ColumnIndex - 1);
-            cellDate = new DateTime(cellDate.Year, cellDate.Month, 01);
+
+            Tuple<bool, int> checkOperationList = CheckOperationList(cell);
 
             //editting project rows
-            if (cell.RowIndex > 2)
+            if (cell.RowIndex > 2 && cell.ColumnIndex > 0)
             {
                 //check if cell value is changed
                 if (_cellValueBegin != cellValue)
                 {
-                    //editing project capacity data
-                    //check if cell value is numaric
-                    if (cellValue != "")
-                    {
-                        if (!IsNumeric(cellValue))
-                        {
-                            cell.Value = _cellValueBegin;
-                            alertBox.WarningAlert("Non-numeric value");
-                            return;
-                        }
-                    }
 
                     //fetch current project data to edit
-                    Project cellProject;
-                    if (cell.RowIndex == _currentEditingRow)
+                    Project cellProject = _currentEditingProject;
+                    if (cellProject != null)
                     {
-                        cellProject = _currentEditingProject;
+                        if (cell.RowIndex == _currentEditingRow)
+                        {
+                            cellProject = _currentEditingProject;
+                        }
+                        else
+                        {
+                            _currentEditingRow = cell.RowIndex;
+                            cellProject = _listedProjects[cell.RowIndex - 3];
+                            _currentEditingProject = cellProject;
+                        }
                     }
                     else
                     {
@@ -545,159 +688,46 @@ namespace DashboardUI
                         _currentEditingProject = cellProject;
                     }
 
-                    //new capacity value added
-                    if (_cellValueBegin == "" && cell.ColumnIndex > 0)
+                    //Check if cell edited before
+                    if (checkOperationList.Item1)
                     {
-                        //new capacity data
-                        ProjectCapacity projectCapacityToAdd = new ProjectCapacity();
-                        projectCapacityToAdd.ProjectId = cellProject.ProjectId;
-                        projectCapacityToAdd.PTotalCapacity = Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1);
-                        projectCapacityToAdd.Date = cellDate;
-
-                        _databaseOperations.Add(new CreateOperation(projectCapacityToAdd, projectCapacityManager, cell.ColumnIndex, cell.RowIndex));
-
-                        //if (projectCapacityManager.Add(projectCapacityToAdd).Success)
-                        //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "CREATE" + " - " + "Project Capacity" + " - " + projectCapacityToAdd.ProjectCapacityId + "Project capacity cell value added");
-                        //else
-                        //{
-                        //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + projectCapacityToAdd.ProjectCapacityId + "Error when adding data into database");
-                        //    alertBox.ErrorAlert("Error when adding data into database");
-                        //}
+                        //in case cell edited before
+                        //update operatlion list
+                        UpdateOperationList(checkOperationList.Item2, cell, cellValue, cellDate);
                     }
-                    //current capacity value editing
                     else
                     {
-                        //fetch project capacity data from data grid view
-                        var projectCapacityData = projectCapacityManager.GetProjectCapacityByDateAndProjectId(cellDate, cellProject.ProjectId);
-                        //if (!projectCapacityData.Success)
-                        //{
-                        //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Could not find project capacity data");
-                        //    alertBox.ErrorAlert("Could not find project capacity data");
-                        //    return;
-                        //}
-
-                        //project capacity on data grid view
-                        ProjectCapacity projectCapacityToUpdate = projectCapacityData.Data;
-
-                        //new value is null or 0 incase delete data
-                        if (cellValue == "" || Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1) == 0)
-                        {
-                            _databaseOperations.Add(new DeleteOperation(projectCapacityToUpdate, projectCapacityManager, cell.ColumnIndex, cell.RowIndex));
-
-
-                            //if (projectCapacityManager.Delete(projectCapacityToUpdate).Success)
-                            //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "DELETE" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Project capacity data deleted");
-                            //else
-                            //{
-                            //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Error when deleting data from database");
-                            //    alertBox.ErrorAlert("Error when deleting data from database");
-                            //}
-                        }
-                        //new value will update on current data
-                        else
-                        {
-                            projectCapacityToUpdate.PTotalCapacity = Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1);
-
-                            _databaseOperations.Add(new UpdateOperation(projectCapacityToUpdate, projectCapacityManager, cell.ColumnIndex, cell.RowIndex));
-
-                            //if (projectCapacityManager.Update(projectCapacityToUpdate).Success)
-                            //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "UPDATE" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Project capacity data updated");
-                            //else
-                            //{
-                            //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + projectCapacityData.Data.ProjectCapacityId + "Error when updating data in database");
-                            //    alertBox.ErrorAlert("Error when updating data in database");
-                            //}
-                        }
+                        //first time editing
+                        //add into operation list
+                        AddIntoOperationList(cellProject, cell, cellValue, cellDate);
                     }
                 }
                 else
                     Debug.Print("No change action");
             }
             //editing department rows
-            else if (cell.RowIndex == 2)
+            else if (cell.RowIndex == 2 && cell.ColumnIndex > 0)
             {
                 //check if cell value is changed
                 if (_cellValueBegin != cellValue)
                 {
-                    //editing department capacity data
-                    //check if cell value is numeric
-                    if (cellValue != "")
-                    {
-                        if (!IsNumeric(cellValue))
-                        {
-                            cell.Value = _cellValueBegin;
-                            alertBox.WarningAlert("Non-numeric value");
-                            return;
-                        }
-                    }
-
                     //fetch current departmet data to edit
                     var departmentData = departmentManager.GetById(_departmentIndex);
-                    if (!departmentData.Success)
-                    {
-                        alertBox.ErrorAlert("Could not find department data");
-                        return;
-                    }
-
                     //department data on data grid view
                     Department cellDepartment = departmentData.Data;
 
-                    //new department capacity value added
-                    if (_cellValueBegin == "" && cell.ColumnIndex > 0)
+                    //Check if cell edited before
+                    if (checkOperationList.Item1)
                     {
-                        //new department capacity data
-                        DepartmentCapacity departmentCapacityToAdd = new DepartmentCapacity();
-                        departmentCapacityToAdd.DepartmentId = cellDepartment.DepartmentId;
-                        departmentCapacityToAdd.DTotalCapacity = Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1);
-                        departmentCapacityToAdd.Date = cellDate;
-
-                        if (departmentCapacityManager.Add(departmentCapacityToAdd).Success)
-                            Debug.Print("Department capacity cell value added");
-                        else
-                        {
-                            Debug.Print("Error when adding data into database");
-                            alertBox.ErrorAlert("Error when adding data into database");
-                        }
+                        //in case cell edited before
+                        //update operatlion list
+                        UpdateOperationList(checkOperationList.Item2, cell, cellValue, cellDate);
                     }
-                    //current department capacity value editing
                     else
                     {
-                        //fetch department capacity data from data grid view
-                        var departmentCapacityData = departmentCapacityManager.GetDepartmentCapacityByDateAndDepartmentId(cellDate, cellDepartment.DepartmentId);
-                        if (!departmentCapacityData.Success)
-                        {
-                            Debug.Print("Could not find department capacity data");
-                            alertBox.ErrorAlert("Could not find department capacity data");
-                            return;
-                        }
-
-                        //department capacity on data grid view
-                        DepartmentCapacity departmentCapacityToUpdate = departmentCapacityData.Data;
-
-                        //new value is null or 0 incase delete data
-                        if (cellValue == "" || Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1) == 0)
-                        {
-                            if (departmentCapacityManager.Delete(departmentCapacityToUpdate).Success)
-                                Debug.Print("Department capacity data deleted");
-                            else
-                            {
-                                Debug.Print("Error when deleting data from database");
-                                alertBox.ErrorAlert("Error when deleting data from database");
-                            }
-                        }
-                        //new value will update on current data
-                        else
-                        {
-                            departmentCapacityToUpdate.DTotalCapacity = Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1);
-
-                            if (departmentCapacityManager.Update(departmentCapacityToUpdate).Success)
-                                Debug.Print("Department capacity data updated");
-                            else
-                            {
-                                Debug.Print("Error when updatig data in database");
-                                alertBox.ErrorAlert("Error when updatig data in database");
-                            }
-                        }
+                        //first time editing
+                        //add into operation list
+                        AddIntoOperationList(cellDepartment, cell, cellValue, cellDate);
                     }
                 }
                 else
@@ -710,9 +740,9 @@ namespace DashboardUI
                 if (_cellValueBegin != cellValue)
                 {
                     cell.Value = _cellValueBegin;
-                    return;
                 }
             }
+
         }
 
         #region Copy Paste Delete Key Down
@@ -720,22 +750,22 @@ namespace DashboardUI
         //On keydown events
         //When Ctrl+V pressed paste clipboard into datagrid view
         //When Delete or backspace pressed Delete Cell values
-        private void dbGrid_KeyDown(object sender, KeyEventArgs e)
+        private async void dbGrid_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.V && e.Modifiers == Keys.Control)
             {
-                PasteClipboard();
+                await PasteClipboardAsync();
                 Debug.Print(_databaseOperations.Count.ToString());
 
             }
             else if (e.KeyCode == Keys.Delete || e.KeyCode == Keys.Back)
             {
-                DeleteCell();
+                await DeleteCellAsync();
                 Debug.Print(_databaseOperations.Count.ToString());
             }
         }
 
-        private void DeleteCell()
+        private async Task DeleteCellAsync()
         {
             try
             {
@@ -745,6 +775,7 @@ namespace DashboardUI
                 }
 
                 int failedOperations = 0;
+                List<Task> tasks = new();
                 for (int i = 0; i < dbGrid.SelectedCells.Count; i++)
                 {
                     DataGridViewCell selectedCell = dbGrid.SelectedCells[i];
@@ -760,11 +791,13 @@ namespace DashboardUI
                     if (!selectedCell.ReadOnly)
                     {
                         selectedCell.Value = "";
-                        //EditCell(selectedCell);
+                        tasks.Add(Task.Run(() => EditCell(selectedCell)));
                     }
                     else
                         failedOperations++;
                 }
+
+                await Task.WhenAll(tasks);
 
                 if (failedOperations > 0)
                     MessageBox.Show(string.Format("Data table is not in edit mode!" + Environment.NewLine + "{0} updates failed due to read only cell setting", failedOperations), "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -776,7 +809,7 @@ namespace DashboardUI
             }
         }
 
-        private void PasteClipboard()
+        private async Task PasteClipboardAsync()
         {
             try
             {
@@ -786,6 +819,7 @@ namespace DashboardUI
                 int iRow = dbGrid.CurrentCell.RowIndex;
                 int iCol = dbGrid.CurrentCell.ColumnIndex;
                 DataGridViewCell oCell;
+                List<Task> tasks = new();
                 foreach (string line in lines)
                 {
                     if (iRow < dbGrid.RowCount && line.Length > 0)
@@ -800,7 +834,7 @@ namespace DashboardUI
                                 if (!oCell.ReadOnly)
                                 {
                                     oCell.Value = Convert.ChangeType(sCells[i], oCell.ValueType);
-                                    EditCell(oCell);
+                                    tasks.Add(Task.Run(() => EditCell(oCell)));
                                 }
                                 else
                                     iFail++;
@@ -811,6 +845,8 @@ namespace DashboardUI
                             { break; }
                         }
                         iRow++;
+
+                        await Task.WhenAll(tasks);
                     }
                     else
                     { break; }
@@ -981,7 +1017,16 @@ namespace DashboardUI
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
+            Debug.Print(_databaseOperations.Count.ToString());
 
+            foreach (var operation in _databaseOperations)
+            {
+                operation.WriteOnDatabase();
+            }
+
+            _databaseOperations.Clear();
+
+            alertBox.SuccessAlert("Saved");
         }
 
         #endregion

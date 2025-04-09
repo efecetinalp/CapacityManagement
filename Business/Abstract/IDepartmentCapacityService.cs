@@ -19,8 +19,8 @@ namespace Business.Abstract
         IDataResult<DepartmentCapacity> GetDepartmentCapacityByDateAndDepartmentId(DateTime date, int departmentId);
 
 
-        IResult Add(DepartmentCapacity departmentCapacity);
-        IResult Update(DepartmentCapacity departmentCapacity);
-        IResult Delete(DepartmentCapacity departmentCapacity);
+        //IResult Add(DepartmentCapacity departmentCapacity);
+        //IResult Update(DepartmentCapacity departmentCapacity);
+        //IResult Delete(DepartmentCapacity departmentCapacity);
     }
 }

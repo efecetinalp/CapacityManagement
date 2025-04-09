@@ -11,11 +11,12 @@ namespace DashboardUI.Utilities
 {
     public class UpdateOperation : DatabaseOperation
     {
-        public UpdateOperation(IEntity data, IManager manager, int cellColumnIndex, int cellRowIndex) : base(data, manager, cellColumnIndex, cellRowIndex)
+        public UpdateOperation(IEntity data, IManager manager, DataGridViewCell dataCell, string cellFirstValue, string cellCurrentValue) 
+            : base(data, manager, dataCell, cellFirstValue, cellCurrentValue, "Update")
         {
         }
 
-        public override void Operation(IEntity data, IManager manager, int cellColumnIndex, int cellRowIndex)
+        public override void WriteOnDatabase()
         {
             Debug.Print("Update operation test worked");
 

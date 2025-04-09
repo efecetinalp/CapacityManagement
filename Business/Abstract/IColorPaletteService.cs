@@ -9,8 +9,8 @@ namespace Business.Abstract
         IDataResult<List<ColorPalette>> GetAllById(int id);
         IDataResult<ColorPalette> GetByName(string name);
 
-        IResult Add(ColorPalette colorPalette);
-        IResult Update(ColorPalette colorPalette);
-        IResult Delete(ColorPalette colorPalette);
+        //IResult Add(ColorPalette colorPalette);
+        //IResult Update(ColorPalette colorPalette);
+        //IResult Delete(ColorPalette colorPalette);
     }
 }

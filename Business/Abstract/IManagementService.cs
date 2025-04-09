@@ -10,8 +10,8 @@ namespace Business.Abstract
         IDataResult<Management> GetByName(string managementName);
         IDataResult<Management> GetById(int managementId);
 
-        IResult Add(Management management);
-        IResult Update(Management management);
-        IResult Delete(Management management);
+        //IResult Add(Management management);
+        //IResult Update(Management management);
+        //IResult Delete(Management management);
     }
 }

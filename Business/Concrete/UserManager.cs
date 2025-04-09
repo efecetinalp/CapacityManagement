@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Entities;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -15,30 +16,21 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
-        public IResult Add(User user)
+        public IResult Add(IEntity user)
         {
-            if (user.UserName.Length <= 4)
-            {
-                return new ErrorResult(Messages.UserNameInvalid);
-            }
-
-            _userDal.Add(user);
+            _userDal.Add(user as User);
             return new SuccessResult(Messages.UserAdded);
         }
 
-        public IResult Update(User user)
+        public IResult Update(IEntity user)
         {
-            if (user.UserName.Length <= 4)
-            {
-                return new ErrorResult(Messages.UserNameInvalid);
-            }
-            _userDal.Update(user);
+            _userDal.Update(user as User);
             return new SuccessResult(Messages.UserUpdated);
         }
 
-        public IResult Delete(User user)
+        public IResult Delete(IEntity user)
         {
-            _userDal.Delete(user);
+            _userDal.Delete(user as User);
             return new SuccessResult(Messages.UserDeleted);
         }
 

@@ -25,8 +25,8 @@ namespace Business.Abstract
         IDataResult<ProjectDetailDto> GetProjectDetail(int projectId);
 
 
-        IResult Add(Project project);
-        IResult Update(Project project);
-        IResult Delete(Project project);
+        //IResult Add(Project project);
+        //IResult Update(Project project);
+        //IResult Delete(Project project);
     }
 }

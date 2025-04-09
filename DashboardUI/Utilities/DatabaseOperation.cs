@@ -10,20 +10,26 @@ namespace DashboardUI.Utilities
 {
     public class DatabaseOperation
     {
-        public DatabaseOperation(IEntity data, IManager manager, int cellColumnIndex, int cellRowIndex)
+
+
+        public DatabaseOperation(IEntity data, IManager manager, DataGridViewCell dataCell, string cellFirstValue, string cellCurrentValue, string operationType)
         {
             Data = data;
             Manager = manager;
-            CellColumnIndex = cellColumnIndex;
-            CellRowIndex = cellRowIndex;
+            DataCell = dataCell;
+            CellFirstValue = cellFirstValue;
+            CellCurrentValue = cellCurrentValue;
+            OperationType = operationType;
         }
 
         public IEntity Data { get; }
         public IManager Manager { get; }
-        public int CellColumnIndex { get; }
-        public int CellRowIndex { get; }
+        public DataGridViewCell DataCell { get; }
+        public string CellFirstValue { get; }
+        public string CellCurrentValue { get; set; }
+        public string OperationType { get; }
 
-        public virtual void Operation(IEntity data, IManager manager, int cellColumnIndex, int cellRowIndex)
+        public virtual void WriteOnDatabase()
         {
         }
     }

@@ -11,16 +11,22 @@ namespace DashboardUI.Utilities
 {
     public class CreateOperation : DatabaseOperation
     {
-        public CreateOperation(IEntity data, IManager manager, int cellColumnIndex, int cellRowIndex) : base(data, manager, cellColumnIndex, cellRowIndex)
+        IManager _manager;
+        IEntity _entity;
+
+        public CreateOperation(IEntity data, IManager manager, DataGridViewCell dataCell, string cellFirstValue, string cellCurrentValue) 
+            : base(data, manager, dataCell, cellFirstValue, cellCurrentValue, "Create")
         {
+            _manager = manager;
+            _entity = data;
         }
 
-        public override void Operation(IEntity data, IManager manager, int cellColumnIndex, int cellRowIndex)
+        public override void WriteOnDatabase()
         {
             Debug.Print("Create operation test worked");
 
-            //if (manager.Add(data).Success)
-            //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "CREATE" + " - " + "Project Capacity" + " - "  + "Project capacity cell value added");
+            //if (_manager.Add(_entity).Success)
+            //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "CREATE" + " - " + "Project Capacity" + " - " + "Project capacity cell value added");
             //else
             //{
             //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + "Error when adding data into database");

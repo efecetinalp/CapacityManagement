@@ -11,11 +11,12 @@ namespace DashboardUI.Utilities
 {
     public class DeleteOperation : DatabaseOperation
     {
-        public DeleteOperation(IEntity data, IManager manager, int cellColumnIndex, int cellRowIndex) : base(data, manager, cellColumnIndex, cellRowIndex)
+        public DeleteOperation(IEntity data, IManager manager, DataGridViewCell dataCell, string cellFirstValue, string cellCurrentValue) 
+            : base(data, manager, dataCell, cellFirstValue, cellCurrentValue, "Delete")
         {
         }
 
-        public override void Operation(IEntity data, IManager manager, int cellColumnIndex, int cellRowIndex)
+        public override void WriteOnDatabase()
         {
             Debug.Print("Delete operation test worked");
 

@@ -10,9 +10,9 @@ namespace Business.Abstract
         IDataResult<List<ColorCode>> GetAllById(int id);
         IDataResult<ColorCode> GetByName(string name);
 
-        IResult Add(ColorCode colorCode);
-        IResult Update(ColorCode colorCode);
-        IResult Delete(ColorCode colorCode);
+        //IResult Add(ColorCode colorCode);
+        //IResult Update(ColorCode colorCode);
+        //IResult Delete(ColorCode colorCode);
 
         IDataResult<List<ColorCodeDetailDto>> GetColorCodeDetails();
         IDataResult<List<ColorCodeDetailDto>> GetColorCodeDetailsByPaletteId(int paletteId);

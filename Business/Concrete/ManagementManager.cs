@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Entities;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -15,21 +16,21 @@ namespace Business.Concrete
             _managementDal = managementDal;
         }
 
-        public IResult Add(Management management)
+        public IResult Add(IEntity management)
         {
-            _managementDal.Add(management);
+            _managementDal.Add(management as Management);
             return new SuccessResult(Messages.ManagementAdded);
         }
 
-        public IResult Update(Management management)
+        public IResult Update(IEntity management)
         {
-            _managementDal.Update(management);
+            _managementDal.Update(management as Management);
             return new SuccessResult(Messages.ManagementUpdated);
         }
 
-        public IResult Delete(Management management)
+        public IResult Delete(IEntity management)
         {
-            _managementDal.Delete(management);
+            _managementDal.Delete(management as Management);
             return new SuccessResult(Messages.ManagementDeleted);
         }
 

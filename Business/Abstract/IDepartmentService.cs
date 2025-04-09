@@ -17,8 +17,8 @@ namespace Business.Abstract
         IDataResult<DepartmentDetailDto> GetDepartmentDetail(int departmentId);
 
 
-        IResult Add(Department department);
-        IResult Update(Department department);
-        IResult Delete(Department department);
+        //IResult Add(Department department);
+        //IResult Update(Department department);
+        //IResult Delete(Department department);
     }
 }

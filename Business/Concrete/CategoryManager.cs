@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Entities;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -15,21 +16,21 @@ namespace Business.Concrete
             _categoryDal = categoryDal;
         }
 
-        public IResult Add(Category category)
+        public IResult Add(IEntity category)
         {
-            _categoryDal.Add(category);
+            _categoryDal.Add(category as Category);
             return new SuccessResult(Messages.CategoryAdded);
         }
 
-        public IResult Update(Category category)
+        public IResult Update(IEntity category)
         {
-            _categoryDal.Update(category);
+            _categoryDal.Update(category as Category);
             return new SuccessResult(Messages.CategoryUpdated);
         }
 
-        public IResult Delete(Category category)
+        public IResult Delete(IEntity category)
         {
-            _categoryDal.Delete(category);
+            _categoryDal.Delete(category as Category);
             return new SuccessResult(Messages.CategoryDeleted);
         }
 

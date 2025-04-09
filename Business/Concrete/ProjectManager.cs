@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Entities;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -16,26 +17,21 @@ namespace Business.Concrete
             _projectDal = projectDal;
         }
 
-        public IResult Add(Project project)
+        public IResult Add(IEntity project)
         {
-            if (project.ProjectName.Length <= 2)
-            {
-                return new ErrorResult(Messages.ProjectNameInvalid);
-            }
-
-            _projectDal.Add(project);
+            _projectDal.Add(project as Project);
             return new SuccessResult(Messages.ProjectAdded);
         }
 
-        public IResult Update(Project project)
+        public IResult Update(IEntity project)
         {
-            _projectDal.Update(project);
+            _projectDal.Update(project as Project);
             return new SuccessResult(Messages.ProjectUpdated);
         }
 
-        public IResult Delete(Project project)
+        public IResult Delete(IEntity project)
         {
-            _projectDal.Delete(project);
+            _projectDal.Delete(project as Project);
             return new SuccessResult(Messages.ProjectDeleted);
         }
 

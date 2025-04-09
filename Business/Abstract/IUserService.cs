@@ -9,8 +9,8 @@ namespace Business.Abstract
         IDataResult<User> GetById(int id);
         IDataResult<User> GetByUserName(string username);
 
-        IResult Add(User user);
-        IResult Update(User user);
-        IResult Delete(User user);
+        //IResult Add(User user);
+        //IResult Update(User user);
+        //IResult Delete(User user);
     }
 }

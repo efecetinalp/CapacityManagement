@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Entities;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -16,21 +17,21 @@ namespace Business.Concrete
             _projectCapacityDal = projectCapacityDal;
         }
 
-        public IResult Add(ProjectCapacity projectCapacity)
+        public IResult Add(IEntity projectCapacity)
         {
-            _projectCapacityDal.Add(projectCapacity);
+            _projectCapacityDal.Add(projectCapacity as ProjectCapacity);
             return new SuccessResult(Messages.ProjectCapacityAdded);
         }
 
-        public IResult Update(ProjectCapacity projectCapacity)
+        public IResult Update(IEntity projectCapacity)
         {
-            _projectCapacityDal.Update(projectCapacity);
+            _projectCapacityDal.Update(projectCapacity as ProjectCapacity);
             return new SuccessResult(Messages.ProjectCapacityUpdated);
         }
 
-        public IResult Delete(ProjectCapacity projectCapacity)
+        public IResult Delete(IEntity projectCapacity)
         {
-            _projectCapacityDal.Delete(projectCapacity);
+            _projectCapacityDal.Delete(projectCapacity as ProjectCapacity);
             return new SuccessResult(Messages.ProjectCapacityDeleted);
         }
 

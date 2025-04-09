@@ -16,8 +16,8 @@ namespace Business.Abstract
 
         IDataResult<List<ProjectCapacity>> GetAllByProjectId(int id);
 
-        IResult Add(ProjectCapacity projectCapacity);
-        IResult Update(ProjectCapacity projectCapacity);
-        IResult Delete(ProjectCapacity projectCapacity);
+        //IResult Add(ProjectCapacity projectCapacity);
+        //IResult Update(ProjectCapacity projectCapacity);
+        //IResult Delete(ProjectCapacity projectCapacity);
     }
 }
