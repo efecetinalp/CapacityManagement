@@ -319,5 +319,9 @@ namespace DashboardUI
             this.Close();
         }
 
+        private void dateTimePickerStart_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePickerEnd.MinDate = dateTimePickerStart.Value;
+        }
     }
 }

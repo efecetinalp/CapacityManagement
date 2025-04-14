@@ -307,8 +307,8 @@ namespace DashboardUI
             else
                 labelStatus.Text = "CAPACITY AVAILABLE";
 
-            labelSubStatus.Text = "Total Department Capacity: " + tempCapacity
-                   + System.Environment.NewLine + "Total Assigned Capacity: " + totalProjectCapacity;
+            labelSubStatus.Text = "Total Department Capacity: " + tempCapacity.ToString("0.0")
+                   + System.Environment.NewLine + "Total Assigned Capacity: " + totalProjectCapacity.ToString("0.0");
 
             newSerie.Points[0].Color = Color.White;
             newSerie.Points[0].BackGradientStyle = GradientStyle.None;

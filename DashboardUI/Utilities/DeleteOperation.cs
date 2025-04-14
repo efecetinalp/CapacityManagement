@@ -11,21 +11,33 @@ namespace DashboardUI.Utilities
 {
     public class DeleteOperation : DatabaseOperation
     {
-        public DeleteOperation(IEntity data, IManager manager, DataGridViewCell dataCell, string cellFirstValue, string cellCurrentValue) 
+        IManager _manager;
+        IEntity _entity;
+        DataGridViewCell _cell;
+        string _firstValue;
+        string _currentValue;
+
+        public DeleteOperation(IEntity data, IManager manager, DataGridViewCell dataCell, string cellFirstValue, string cellCurrentValue)
             : base(data, manager, dataCell, cellFirstValue, cellCurrentValue, "Delete")
         {
+            _manager = manager;
+            _entity = data;
+            _cell = dataCell;
+            _firstValue = cellFirstValue;
+            _currentValue = cellCurrentValue;
         }
 
         public override void WriteOnDatabase()
         {
-            Debug.Print("Delete operation test worked");
+            Debug.Print("DELETE OPERATION - Cell: " + _cell.ColumnIndex + "-" + _cell.RowIndex + " - First Val: " + _firstValue + " - Current Val: " + _currentValue);
 
-            //if (manager.Delete(data).Success)
-            //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "DELETE" + " - " + "Project Capacity" + " - " + "Project capacity cell value deleted");
-            //else
-            //{
-            //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + "Error when adding data into database");
-            //}
+
+            if (_manager.Delete(_entity).Success)
+                Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "DELETE" + " - " + "Project Capacity" + " - " + "Project capacity cell value deleted");
+            else
+            {
+                Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + "Error when adding data into database");
+            }
         }
     }
 }

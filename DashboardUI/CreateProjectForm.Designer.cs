@@ -134,6 +134,7 @@
             dateTimePickerStart.ShowUpDown = true;
             dateTimePickerStart.Size = new Size(81, 20);
             dateTimePickerStart.TabIndex = 48;
+            dateTimePickerStart.ValueChanged += dateTimePickerStart_ValueChanged;
             // 
             // dateTimePickerEnd
             // 

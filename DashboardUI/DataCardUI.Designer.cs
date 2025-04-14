@@ -298,6 +298,7 @@
             dateTimePickerStart.Size = new Size(78, 20);
             dateTimePickerStart.TabIndex = 29;
             dateTimePickerStart.Visible = false;
+            dateTimePickerStart.ValueChanged += dateTimePickerStart_ValueChanged;
             // 
             // dateTimePickerEnd
             // 

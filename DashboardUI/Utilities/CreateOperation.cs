@@ -13,24 +13,30 @@ namespace DashboardUI.Utilities
     {
         IManager _manager;
         IEntity _entity;
+        DataGridViewCell _cell;
+        string _firstValue;
+        string _currentValue;
 
-        public CreateOperation(IEntity data, IManager manager, DataGridViewCell dataCell, string cellFirstValue, string cellCurrentValue) 
+        public CreateOperation(IEntity data, IManager manager, DataGridViewCell dataCell, string cellFirstValue, string cellCurrentValue)
             : base(data, manager, dataCell, cellFirstValue, cellCurrentValue, "Create")
         {
             _manager = manager;
             _entity = data;
+            _cell = dataCell;
+            _firstValue = cellFirstValue;
+            _currentValue = cellCurrentValue;
         }
 
         public override void WriteOnDatabase()
         {
-            Debug.Print("Create operation test worked");
+            Debug.Print("CREATE OPERATION - Cell: " + _cell.ColumnIndex + "-" + _cell.RowIndex + " - First Val: " + _firstValue + " - Current Val: " + _currentValue);
 
-            //if (_manager.Add(_entity).Success)
-            //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "CREATE" + " - " + "Project Capacity" + " - " + "Project capacity cell value added");
-            //else
-            //{
-            //    Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + "Error when adding data into database");
-            //}
+            if (_manager.Add(_entity).Success)
+                Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "CREATE" + " - " + "Project Capacity" + " - " + "Project capacity cell value added");
+            else
+            {
+                Debug.Print(DateTime.Now + " - " + Environment.UserName + " - " + "ERROR" + " - " + "Project Capacity" + " - " + "Error when adding data into database");
+            }
         }
     }
 }

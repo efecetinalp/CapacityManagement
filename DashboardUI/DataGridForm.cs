@@ -54,6 +54,8 @@ namespace DashboardUI
         private int _rowIndex;
         private int _departmentIndex;
         private List<Project> _listedProjects = new();
+        private List<Management> _listedManagements = new();
+        private List<Department> _listedDepartments = new();
         private List<int> _completedProjectList = new();
 
         //CRUD operation list
@@ -74,23 +76,25 @@ namespace DashboardUI
 
             _dashboardForm = dashboardForm;
             InitializeComponent();
+
+            typeof(DataGridView).InvokeMember("DoubleBuffered",
+            BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty,
+            null, dbGrid, new object[] { true });
         }
 
         private void DataGridForm_Load(object sender, EventArgs e)
         {
-            //form initialize options
+            //notification alerts
             alertBox = new AlertBox(_dashboardForm);
 
-            foreach (var management in managementManager.GetAll().Data)
+            //management combobox
+            _listedManagements = managementManager.GetAll().Data;
+            foreach (var management in _listedManagements)
             {
                 comboBoxManagement.Items.Add(management.ManagementName);
             }
 
-            foreach (var department in departmentManager.GetAll().Data)
-            {
-                comboBoxDepartment.Items.Add(department.DepartmentName);
-            }
-
+            //date time picker
             dateTimePickerStart.Format = DateTimePickerFormat.Custom;
             dateTimePickerStart.CustomFormat = "MM/yyyy";
             dateTimePickerStart.ShowUpDown = true;
@@ -102,10 +106,21 @@ namespace DashboardUI
             dateTimePickerEnd.Value = dateTimePickerStart.Value.AddMonths(23);
 
             CheckUserCredential();
+        }
 
-            //DELETE LATER
-            comboBoxManagement.SelectedIndex = 0;
-            comboBoxDepartment.SelectedIndex = 0;
+        private void DataGridForm_Activated(object sender, EventArgs e)
+        {
+            comboBoxManagement.Items.Clear();
+
+            _listedManagements.Clear();
+            _listedManagements = managementManager.GetAll().Data;
+            foreach (var management in _listedManagements)
+            {
+                comboBoxManagement.Items.Add(management.ManagementName);
+            }
+
+            comboBoxManagement.SelectedIndex = -1;
+            comboBoxDepartment.SelectedIndex = -1;
         }
 
         private void CheckUserCredential()
@@ -179,9 +194,6 @@ namespace DashboardUI
             DataRow departmentRow = dataTable.Rows.Add();
             departmentRow[0] = comboBoxDepartment.Text;
 
-            //REFACTOR THIS IMMEDIATELY
-            _departmentIndex = departmentManager.GetByName(comboBoxDepartment.Text).Data.DepartmentId;
-
             var departmentDatas = departmentCapacityManager.GetAllByDateBetweenAndDepartmentId(_startDate, _endDate, _departmentIndex);
 
             if (departmentDatas.Success)
@@ -210,6 +222,7 @@ namespace DashboardUI
             var projectNames = projectManager.GetAllByDepartmentId(_departmentIndex);
             var projectDatas = projectCapacityManager.GetProjectCapacityDetailsByDateBetweenAndDepartmentId(_startDate, _endDate, _departmentIndex);
             _listedProjects.Clear();
+            _completedProjectList.Clear();
 
             if (projectNames.Success)
             {
@@ -263,10 +276,12 @@ namespace DashboardUI
             //data grid view style
             dbGrid.Columns[0].Frozen = true;
 
-            for (int i = 1; i < dbGrid.Columns.Count; i++)
-            {
-                dbGrid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            }
+            //for (int i = 1; i < dbGrid.Columns.Count; i++)
+            //{
+            //    dbGrid.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            //}
+            dbGrid.AllowUserToResizeColumns = false;
+            dbGrid.AllowUserToResizeRows = false;
 
             FormatDataGridView();
         }
@@ -503,7 +518,7 @@ namespace DashboardUI
         private void dbGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             Debug.Print("Cell end edit event");
-            EditCell(dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex]);
+            EditCell(dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex], _cellValueBegin);
         }
 
         private void dbGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -538,7 +553,7 @@ namespace DashboardUI
                 _databaseOperations[listIndex] = newDeleteOperation;
             }
             //deleted value changed
-            else if (currentOperation.OperationType == "Delete" && cellValue != "")
+            else if (currentOperation.OperationType == "Delete" && cellValue != "" && currentOperation.CellFirstValue != cellValue)
             {
                 //change as update operation
                 UpdateOperation newUpdateOperation = new UpdateOperation(currentOperation.Data, currentOperation.Manager, currentOperation.DataCell, currentOperation.CellFirstValue, cellValue);
@@ -566,9 +581,9 @@ namespace DashboardUI
         }
 
         //Project Capacity Overload
-        private void AddIntoOperationList(Project cellProject, DataGridViewCell cell, string cellValue, DateTime cellDate)
+        private void AddIntoOperationList(Project cellProject, DataGridViewCell cell, string cellValue, DateTime cellDate, string cellValueBegin)
         {
-            if (_cellValueBegin == "")
+            if (cellValueBegin == "")
             {
                 //new capacity data
                 ProjectCapacity projectCapacityToAdd = new ProjectCapacity();
@@ -576,7 +591,7 @@ namespace DashboardUI
                 projectCapacityToAdd.PTotalCapacity = Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1);
                 projectCapacityToAdd.Date = cellDate;
 
-                _databaseOperations.Add(new CreateOperation(projectCapacityToAdd, projectCapacityManager, cell, _cellValueBegin, cellValue));
+                _databaseOperations.Add(new CreateOperation(projectCapacityToAdd, projectCapacityManager, cell, cellValueBegin, cellValue));
             }
             //current capacity value editing
             else
@@ -590,21 +605,21 @@ namespace DashboardUI
                 //new value is null or 0 incase delete data
                 if (cellValue == "" || Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1) == 0)
                 {
-                    _databaseOperations.Add(new DeleteOperation(projectCapacityToUpdate, projectCapacityManager, cell, _cellValueBegin, cellValue));
+                    _databaseOperations.Add(new DeleteOperation(projectCapacityToUpdate, projectCapacityManager, cell, cellValueBegin, cellValue));
                 }
                 //new value will update on current data
                 else
                 {
                     projectCapacityToUpdate.PTotalCapacity = Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1);
-                    _databaseOperations.Add(new UpdateOperation(projectCapacityToUpdate, projectCapacityManager, cell, _cellValueBegin, cellValue));
+                    _databaseOperations.Add(new UpdateOperation(projectCapacityToUpdate, projectCapacityManager, cell, cellValueBegin, cellValue));
                 }
             }
         }
 
         //Department Capacity Overload
-        private void AddIntoOperationList(Department cellDepartment, DataGridViewCell cell, string cellValue, DateTime cellDate)
+        private void AddIntoOperationList(Department cellDepartment, DataGridViewCell cell, string cellValue, DateTime cellDate, string cellValueBegin)
         {
-            if (_cellValueBegin == "")
+            if (cellValueBegin == "")
             {
                 //new department capacity data
                 DepartmentCapacity departmentCapacityToAdd = new DepartmentCapacity();
@@ -612,7 +627,7 @@ namespace DashboardUI
                 departmentCapacityToAdd.DTotalCapacity = Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1);
                 departmentCapacityToAdd.Date = cellDate;
 
-                _databaseOperations.Add(new CreateOperation(departmentCapacityToAdd, departmentCapacityManager, cell, _cellValueBegin, cellValue));
+                _databaseOperations.Add(new CreateOperation(departmentCapacityToAdd, departmentCapacityManager, cell, cellValueBegin, cellValue));
 
             }
             //current department capacity value editing
@@ -626,22 +641,21 @@ namespace DashboardUI
                 //new value is null or 0 incase delete data
                 if (cellValue == "" || Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1) == 0)
                 {
-                    _databaseOperations.Add(new DeleteOperation(departmentCapacityToUpdate, departmentCapacityManager, cell, _cellValueBegin, cellValue));
+                    _databaseOperations.Add(new DeleteOperation(departmentCapacityToUpdate, departmentCapacityManager, cell, cellValueBegin, cellValue));
                 }
                 //new value will update on current data
                 else
                 {
                     departmentCapacityToUpdate.DTotalCapacity = Math.Round(Convert.ToDouble(CheckDecimalSeperator(cellValue)), 1);
-                    _databaseOperations.Add(new UpdateOperation(departmentCapacityToUpdate, departmentCapacityManager, cell, _cellValueBegin, cellValue));
+                    _databaseOperations.Add(new UpdateOperation(departmentCapacityToUpdate, departmentCapacityManager, cell, cellValueBegin, cellValue));
                 }
             }
         }
 
         #endregion
 
-        private void EditCell(DataGridViewCell cell)
+        private void EditCell(DataGridViewCell cell, string cellValueBegin)
         {
-
             string cellValue = cell.Value.ToString();
 
             //check cell value in correct format
@@ -649,7 +663,7 @@ namespace DashboardUI
             {
                 if (!IsNumeric(cellValue))
                 {
-                    cell.Value = _cellValueBegin;
+                    cell.Value = cellValueBegin;
                     alertBox.WarningAlert("Non-numeric value");
                     return;
                 }
@@ -663,7 +677,7 @@ namespace DashboardUI
             if (cell.RowIndex > 2 && cell.ColumnIndex > 0)
             {
                 //check if cell value is changed
-                if (_cellValueBegin != cellValue)
+                if (cellValueBegin != cellValue)
                 {
 
                     //fetch current project data to edit
@@ -699,7 +713,7 @@ namespace DashboardUI
                     {
                         //first time editing
                         //add into operation list
-                        AddIntoOperationList(cellProject, cell, cellValue, cellDate);
+                        AddIntoOperationList(cellProject, cell, cellValue, cellDate, cellValueBegin);
                     }
                 }
                 else
@@ -709,7 +723,7 @@ namespace DashboardUI
             else if (cell.RowIndex == 2 && cell.ColumnIndex > 0)
             {
                 //check if cell value is changed
-                if (_cellValueBegin != cellValue)
+                if (cellValueBegin != cellValue)
                 {
                     //fetch current departmet data to edit
                     var departmentData = departmentManager.GetById(_departmentIndex);
@@ -727,7 +741,7 @@ namespace DashboardUI
                     {
                         //first time editing
                         //add into operation list
-                        AddIntoOperationList(cellDepartment, cell, cellValue, cellDate);
+                        AddIntoOperationList(cellDepartment, cell, cellValue, cellDate, cellValueBegin);
                     }
                 }
                 else
@@ -737,9 +751,9 @@ namespace DashboardUI
             else
             {
                 //check if cell value is changed
-                if (_cellValueBegin != cellValue)
+                if (cellValueBegin != cellValue)
                 {
-                    cell.Value = _cellValueBegin;
+                    cell.Value = cellValueBegin;
                 }
             }
 
@@ -775,7 +789,7 @@ namespace DashboardUI
                 }
 
                 int failedOperations = 0;
-                List<Task> tasks = new();
+                //List<Task> tasks = new();
                 for (int i = 0; i < dbGrid.SelectedCells.Count; i++)
                 {
                     DataGridViewCell selectedCell = dbGrid.SelectedCells[i];
@@ -791,13 +805,14 @@ namespace DashboardUI
                     if (!selectedCell.ReadOnly)
                     {
                         selectedCell.Value = "";
-                        tasks.Add(Task.Run(() => EditCell(selectedCell)));
+                        await Task.Run(() => EditCell(selectedCell, _cellValueBegin));
+                        //tasks.Add(Task.Run(() => EditCell(selectedCell, _cellValueBegin)));
                     }
                     else
                         failedOperations++;
                 }
 
-                await Task.WhenAll(tasks);
+                //await Task.WhenAll(tasks);
 
                 if (failedOperations > 0)
                     MessageBox.Show(string.Format("Data table is not in edit mode!" + Environment.NewLine + "{0} updates failed due to read only cell setting", failedOperations), "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -819,7 +834,7 @@ namespace DashboardUI
                 int iRow = dbGrid.CurrentCell.RowIndex;
                 int iCol = dbGrid.CurrentCell.ColumnIndex;
                 DataGridViewCell oCell;
-                List<Task> tasks = new();
+                //List<Task> tasks = new();
                 foreach (string line in lines)
                 {
                     if (iRow < dbGrid.RowCount && line.Length > 0)
@@ -830,11 +845,22 @@ namespace DashboardUI
                             if (iCol + i < this.dbGrid.ColumnCount)
                             {
                                 oCell = dbGrid[iCol + i, iRow];
-                                _cellValueBegin = oCell.Value.ToString();
+                                string cellValueBegin = oCell.Value.ToString();
+
                                 if (!oCell.ReadOnly)
                                 {
-                                    oCell.Value = Convert.ChangeType(sCells[i], oCell.ValueType);
-                                    tasks.Add(Task.Run(() => EditCell(oCell)));
+                                    if (sCells[i].ToString().Contains("\r"))
+                                        sCells[i] = sCells[i].Split("\r")[0];
+
+                                    if (IsNumeric(sCells[i]))
+                                    {
+                                        if (Math.Round(Convert.ToDouble(CheckDecimalSeperator(sCells[i])), 1) == 0)
+                                            sCells[i] = "";
+                                    }
+
+                                    oCell.Value = sCells[i].ToString();
+                                    //tasks.Add(Task.Run(() => EditCell(oCell, cellValueBegin, value)));
+                                    await Task.Run(() => EditCell(oCell, cellValueBegin));
                                 }
                                 else
                                     iFail++;
@@ -845,8 +871,8 @@ namespace DashboardUI
                             { break; }
                         }
                         iRow++;
+                        //await Task.WhenAll(tasks);
 
-                        await Task.WhenAll(tasks);
                     }
                     else
                     { break; }
@@ -872,18 +898,28 @@ namespace DashboardUI
 
         private void comboBoxManagement_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBoxManagement.Text != "")
+            if (comboBoxManagement.SelectedIndex >= 0)
             {
+                var managementId = _listedManagements[comboBoxManagement.SelectedIndex].ManagementId;
+
                 //update department comboBox
                 comboBoxDepartment.Items.Clear();
-                comboBoxDepartment.ResetText();
+                comboBoxManagement.ResetText();
                 comboBoxDepartment.SelectedIndex = -1;
 
-                var managementId = managementManager.GetByName(comboBoxManagement.SelectedItem.ToString()).Data.ManagementId;
-                foreach (var department in departmentManager.GetAllByManagementId(managementId).Data)
+                _listedDepartments = departmentManager.GetAllByManagementId(managementId).Data;
+                foreach (var department in _listedDepartments)
                 {
                     comboBoxDepartment.Items.Add(department.DepartmentName);
                 }
+            }
+        }
+
+        private void comboBoxDepartment_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxDepartment.SelectedIndex >= 0)
+            {
+                _departmentIndex = _listedDepartments[comboBoxDepartment.SelectedIndex].DepartmentId;
             }
         }
 
@@ -1015,20 +1051,56 @@ namespace DashboardUI
 
         #region Button Save Function
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private async void buttonSave_Click(object sender, EventArgs e)
         {
             Debug.Print(_databaseOperations.Count.ToString());
 
+            await WriteOnDatabaseAsync();
+
+            labelStatus.Text = "Done";
+
+            //alertBox.SuccessAlert("Saved");
+        }
+
+        private async Task WriteOnDatabaseAsync()
+        {
+            int progress = 0;
             foreach (var operation in _databaseOperations)
             {
-                operation.WriteOnDatabase();
+                await Task.Run(() => operation.WriteOnDatabase());
+                
+                progress++;
+                labelStatus.Text = progress.ToString() + " - " + _databaseOperations.Count.ToString();
             }
 
             _databaseOperations.Clear();
-
-            alertBox.SuccessAlert("Saved");
         }
 
         #endregion
+
+        #region Date Picker Events
+
+        private void buttonToday_Click(object sender, EventArgs e)
+        {
+            DateTime thisMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+
+            if (thisMonth > dateTimePickerStart.Value)
+            {
+                dateTimePickerEnd.Value = thisMonth;
+            }
+            else
+            {
+                MessageBox.Show("Start date cannot be later then today!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+        }
+
+        private void dateTimePickerStart_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePickerEnd.MinDate = dateTimePickerStart.Value;
+        }
+
+        #endregion
+
     }
 }
