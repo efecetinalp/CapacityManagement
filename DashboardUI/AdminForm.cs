@@ -1,4 +1,8 @@
 ﻿using Business.Concrete;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace DashboardUI
 {
@@ -24,10 +28,11 @@ namespace DashboardUI
         private bool isProjectActive;
         private bool isCategoryActive;
         private bool isUserActive;
+        private bool isSorted;
         private string _tableValue;
         private int _tableIndex;
 
-        public AdminForm(Dashboard dashboardForm, ManagementManager managementManager, DepartmentManager departmentManager, CategoryManager categoryManager, 
+        public AdminForm(Dashboard dashboardForm, ManagementManager managementManager, DepartmentManager departmentManager, CategoryManager categoryManager,
             ProjectManager projectManager, UserManager userManager, ProjectCapacityManager projectCapacityManager, DepartmentCapacityManager departmentCapacityManager)
         {
             InitializeComponent();
@@ -63,11 +68,11 @@ namespace DashboardUI
             {
                 if (isManagementActive)
                 {
-                    _createForm = new DeleteManagementForm(_managementManager,_departmentManager, _managementManager.GetById(_tableIndex).Data);
+                    _createForm = new DeleteManagementForm(_managementManager, _departmentManager, _managementManager.GetById(_tableIndex).Data);
                 }
                 else if (isDepartmentActive)
                 {
-                    _createForm = new DeleteDepartmentForm(_departmentManager,_departmentCapacityManager,_projectManager, _departmentManager.GetById(_tableIndex).Data);
+                    _createForm = new DeleteDepartmentForm(_departmentManager, _departmentCapacityManager, _projectManager, _departmentManager.GetById(_tableIndex).Data);
                 }
                 else if (isProjectActive)
                 {
@@ -75,11 +80,11 @@ namespace DashboardUI
                 }
                 else if (isCategoryActive)
                 {
-                    _createForm = new DeleteCategoryForm(_categoryManager,_projectManager, _categoryManager.GetById(_tableIndex).Data);
+                    _createForm = new DeleteCategoryForm(_categoryManager, _projectManager, _categoryManager.GetById(_tableIndex).Data);
                 }
                 else if (isUserActive)
                 {
-                    _createForm = new DeleteUserForm(_userManager,_projectManager, _userManager.GetById(_tableIndex).Data);
+                    _createForm = new DeleteUserForm(_userManager, _projectManager, _userManager.GetById(_tableIndex).Data);
                 }
                 else
                 {
@@ -202,7 +207,6 @@ namespace DashboardUI
             ResetDataGridView();
             isManagementActive = true;
             adminDataGrid.DataSource = _managementManager.GetAll().Data;
-            adminDataGrid.Columns["ManagementName"].HeaderText = "Management Name";
             adminDataGrid.Columns[0].Visible = false;
         }
 
@@ -211,7 +215,6 @@ namespace DashboardUI
             ResetDataGridView();
             isDepartmentActive = true;
             adminDataGrid.DataSource = _departmentManager.GetDepartmentDetails().Data;
-            adminDataGrid.Columns[1].HeaderText = "Department Name";
             adminDataGrid.Columns[0].Visible = false;
             adminDataGrid.Columns[3].Visible = false;
         }
@@ -229,7 +232,6 @@ namespace DashboardUI
             ResetDataGridView();
             isProjectActive = true;
             adminDataGrid.DataSource = _projectManager.GetProjectDetails().Data;
-            adminDataGrid.Columns[1].HeaderText = "Project Name";
             adminDataGrid.Columns[0].Visible = false;
             adminDataGrid.Columns[9].Visible = false;
             adminDataGrid.Columns[10].Visible = false;
@@ -242,7 +244,6 @@ namespace DashboardUI
             ResetDataGridView();
             isUserActive = true;
             adminDataGrid.DataSource = _userManager.GetAll().Data;
-            adminDataGrid.Columns[1].HeaderText = "User Name";
             adminDataGrid.Columns[0].Visible = false;
         }
 
@@ -322,6 +323,104 @@ namespace DashboardUI
 
         #endregion
 
+        private void adminDataGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex == -1)
+            {
+                string clickedCell = adminDataGrid.Columns[e.ColumnIndex].HeaderText.Trim();
+                
+                if (isManagementActive)
+                {
+                    ResetDataGridView();
+                    if (!isSorted)
+                    {
+                        adminDataGrid.DataSource = _managementManager.GetAll().Data.OrderBy(x => x.GetType().GetProperty(clickedCell).GetValue(x, null)).ToArray();
+                        isSorted = true;
+                    }
+                    else
+                    {
+                        adminDataGrid.DataSource = _managementManager.GetAll().Data.OrderByDescending(x => x.GetType().GetProperty(clickedCell).GetValue(x, null)).ToArray();
+                        isSorted = false;
+                    }
+
+                    isManagementActive = true;
+                    adminDataGrid.Columns[0].Visible = false;
+                }
+                else if (isDepartmentActive)
+                {
+                    ResetDataGridView();
+                    if (!isSorted)
+                    {
+                        adminDataGrid.DataSource = _departmentManager.GetDepartmentDetails().Data.OrderBy(x => x.GetType().GetProperty(clickedCell).GetValue(x, null)).ToArray();
+                        isSorted = true;
+                    }
+                    else
+                    {
+                        adminDataGrid.DataSource = _departmentManager.GetDepartmentDetails().Data.OrderByDescending(x => x.GetType().GetProperty(clickedCell).GetValue(x, null)).ToArray();
+                        isSorted = false;
+                    }
+
+                    isDepartmentActive = true;
+                    adminDataGrid.Columns[0].Visible = false;
+                    adminDataGrid.Columns[3].Visible = false;
+                }
+                else if (isProjectActive)
+                {
+                    ResetDataGridView();
+                    if (!isSorted)
+                    {
+                        adminDataGrid.DataSource = _projectManager.GetProjectDetails().Data.OrderBy(x => x.GetType().GetProperty(clickedCell).GetValue(x, null)).ToArray();
+                        isSorted = true;
+                    }
+                    else
+                    {
+                        adminDataGrid.DataSource = _projectManager.GetProjectDetails().Data.OrderByDescending(x => x.GetType().GetProperty(clickedCell).GetValue(x, null)).ToArray();
+                        isSorted = false;
+                    }
+
+                    isProjectActive = true;
+                    adminDataGrid.Columns[0].Visible = false;
+                    adminDataGrid.Columns[9].Visible = false;
+                    adminDataGrid.Columns[10].Visible = false;
+                    adminDataGrid.Columns[11].Visible = false;
+                    adminDataGrid.Columns[12].Visible = false;
+                }
+                else if (isCategoryActive)
+                {
+                    ResetDataGridView();
+                    if (!isSorted)
+                    {
+                        adminDataGrid.DataSource = _categoryManager.GetAll().Data.OrderBy(x => x.GetType().GetProperty(clickedCell).GetValue(x, null)).ToArray();
+                        isSorted = true;
+                    }
+                    else
+                    {
+                        adminDataGrid.DataSource = _categoryManager.GetAll().Data.OrderByDescending(x => x.GetType().GetProperty(clickedCell).GetValue(x, null)).ToArray();
+                        isSorted = false;
+                    }
+
+                    isCategoryActive = true;
+                    adminDataGrid.Columns[0].Visible = false;
+                }
+                else if (isUserActive)
+                {
+                    ResetDataGridView();
+                    if (!isSorted)
+                    {
+                        adminDataGrid.DataSource = _userManager.GetAll().Data.OrderBy(x => x.GetType().GetProperty(clickedCell).GetValue(x, null)).ToArray();
+                        isSorted = true;
+                    }
+                    else
+                    {
+                        adminDataGrid.DataSource = _userManager.GetAll().Data.OrderByDescending(x => x.GetType().GetProperty(clickedCell).GetValue(x, null)).ToArray();
+                        isSorted = false;
+                    }
+
+                    isUserActive = true;
+                    adminDataGrid.Columns[0].Visible = false;
+                }
+            }
+        }
     }
 }
 

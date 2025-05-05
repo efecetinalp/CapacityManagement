@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChartForm));
             areaChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             buttonSave = new Button();
@@ -59,6 +59,7 @@
             comboBoxGridStyle = new ComboBox();
             buttonRotate = new Button();
             buttonShowHide = new Button();
+            buttonFilterSeries = new Button();
             ((System.ComponentModel.ISupportInitialize)areaChart).BeginInit();
             SuspendLayout();
             // 
@@ -66,32 +67,32 @@
             // 
             areaChart.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             areaChart.BackgroundImageLayout = ImageLayout.None;
-            chartArea1.AxisX.IsLabelAutoFit = false;
-            chartArea1.AxisX.LabelAutoFitMaxFontSize = 9;
-            chartArea1.AxisX.LabelAutoFitMinFontSize = 8;
-            chartArea1.AxisX.LabelStyle.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            chartArea1.AxisX.TitleFont = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            chartArea1.AxisY.IsLabelAutoFit = false;
-            chartArea1.AxisY.LabelStyle.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            chartArea1.AxisY.TitleFont = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
-            chartArea1.Name = "ChartArea1";
-            areaChart.ChartAreas.Add(chartArea1);
-            legend1.Alignment = StringAlignment.Center;
-            legend1.BackImageWrapMode = System.Windows.Forms.DataVisualization.Charting.ChartImageWrapMode.Scaled;
-            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend1.Name = "Legend1";
-            areaChart.Legends.Add(legend1);
-            areaChart.Location = new Point(21, 122);
+            chartArea3.AxisX.IsLabelAutoFit = false;
+            chartArea3.AxisX.LabelAutoFitMaxFontSize = 9;
+            chartArea3.AxisX.LabelAutoFitMinFontSize = 8;
+            chartArea3.AxisX.LabelStyle.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            chartArea3.AxisX.TitleFont = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
+            chartArea3.AxisY.IsLabelAutoFit = false;
+            chartArea3.AxisY.LabelStyle.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            chartArea3.AxisY.TitleFont = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point);
+            chartArea3.Name = "ChartArea1";
+            areaChart.ChartAreas.Add(chartArea3);
+            legend3.Alignment = StringAlignment.Center;
+            legend3.BackImageWrapMode = System.Windows.Forms.DataVisualization.Charting.ChartImageWrapMode.Scaled;
+            legend3.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend3.Name = "Legend1";
+            areaChart.Legends.Add(legend3);
+            areaChart.Location = new Point(21, 105);
             areaChart.Margin = new Padding(2);
             areaChart.Name = "areaChart";
             areaChart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Italic, GraphicsUnit.Point);
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            areaChart.Series.Add(series1);
-            areaChart.Size = new Size(1236, 514);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Italic, GraphicsUnit.Point);
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            areaChart.Series.Add(series3);
+            areaChart.Size = new Size(1236, 531);
             areaChart.TabIndex = 0;
             areaChart.Text = "Capacity";
             // 
@@ -103,7 +104,7 @@
             buttonSave.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
             buttonSave.FlatStyle = FlatStyle.Flat;
             buttonSave.Image = (Image)resources.GetObject("buttonSave.Image");
-            buttonSave.Location = new Point(1203, 53);
+            buttonSave.Location = new Point(1237, 65);
             buttonSave.Margin = new Padding(2);
             buttonSave.Name = "buttonSave";
             buttonSave.Padding = new Padding(0, 0, 1, 1);
@@ -120,7 +121,7 @@
             buttonUpdate.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
             buttonUpdate.FlatStyle = FlatStyle.Flat;
             buttonUpdate.Image = (Image)resources.GetObject("buttonUpdate.Image");
-            buttonUpdate.Location = new Point(1179, 53);
+            buttonUpdate.Location = new Point(1213, 65);
             buttonUpdate.Margin = new Padding(2);
             buttonUpdate.Name = "buttonUpdate";
             buttonUpdate.Padding = new Padding(0, 0, 1, 1);
@@ -414,12 +415,32 @@
             buttonShowHide.UseVisualStyleBackColor = true;
             buttonShowHide.Click += buttonShowHide_Click;
             // 
+            // buttonFilterSeries
+            // 
+            buttonFilterSeries.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonFilterSeries.BackColor = Color.White;
+            buttonFilterSeries.Cursor = Cursors.Hand;
+            buttonFilterSeries.FlatAppearance.BorderColor = Color.FromArgb(242, 242, 242);
+            buttonFilterSeries.FlatAppearance.BorderSize = 0;
+            buttonFilterSeries.FlatAppearance.MouseOverBackColor = Color.LightSteelBlue;
+            buttonFilterSeries.FlatStyle = FlatStyle.Flat;
+            buttonFilterSeries.Image = (Image)resources.GetObject("buttonFilterSeries.Image");
+            buttonFilterSeries.Location = new Point(1237, 105);
+            buttonFilterSeries.Margin = new Padding(2);
+            buttonFilterSeries.Name = "buttonFilterSeries";
+            buttonFilterSeries.Padding = new Padding(0, 0, 1, 1);
+            buttonFilterSeries.Size = new Size(20, 20);
+            buttonFilterSeries.TabIndex = 56;
+            buttonFilterSeries.UseVisualStyleBackColor = false;
+            buttonFilterSeries.Click += buttonFilterSeries_Click;
+            // 
             // ChartForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(242, 242, 242);
             ClientSize = new Size(1280, 660);
+            Controls.Add(buttonFilterSeries);
             Controls.Add(buttonShowHide);
             Controls.Add(buttonRotate);
             Controls.Add(labelGridStyle);
@@ -488,5 +509,6 @@
         private ComboBox comboBoxGridStyle;
         private Button buttonRotate;
         private Button buttonShowHide;
+        private Button buttonFilterSeries;
     }
 }

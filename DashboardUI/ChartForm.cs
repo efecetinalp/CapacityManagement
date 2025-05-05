@@ -21,6 +21,7 @@ namespace DashboardUI
 
         //UI Referances
         DataGridForm _dataGridForm;
+        FilterSeriesForm filterSeriesForm;
         ChartRequest _chartRequest = new();
 
         //Class instaces
@@ -58,7 +59,7 @@ namespace DashboardUI
                 paletteTypes.Add(colorPalette.PaletteType);
 
             comboBoxPaletteType.Items.AddRange(paletteTypes.Distinct().ToArray());
-            comboBoxPaletteType.SelectedIndex = 0;
+            comboBoxPaletteType.SelectedIndex = 2;
 
             //axis value size combobox
             comboBoxAxisValueSize.Items.AddRange(new string[] { "6", "7", "8", "9", "10" });
@@ -134,7 +135,7 @@ namespace DashboardUI
 
         #endregion
 
-        public async void buttonUpdate_Click(object sender, EventArgs e)
+        public async void buttonUpdate_Click(object sender, EventArgs e, ChartRequest filteredRequest = null)
         {
             if (!_dataGridForm.isDataListed)
             {
@@ -142,7 +143,14 @@ namespace DashboardUI
                 return;
             }
 
-            _chartRequest = _dataGridForm.GenerateChartData();
+            if (filteredRequest == null)
+            {
+                _chartRequest = _dataGridForm.GenerateChartData();
+            }
+            else
+            {
+                _chartRequest = filteredRequest;
+            }
 
             //generates color list according to palette type
             ColorPresentationAlgorithm();
@@ -209,21 +217,35 @@ namespace DashboardUI
 
             for (int i = 1; i < _chartRequest.Legends.Count; i++)
             {
-                //myColor = Color.FromArgb(238 - (i * (238 - 204) / divider), 217 + (i * (247 - 217) / divider), 145 + (i * (244 - 145) / divider));
-                AddSeriaToChart(_chartRequest.Legends[i], _chartRequest.Series[i], _chartRequest.Months, SeriesChartType.StackedArea, _colorList[i - 1], short.Parse(comboBoxAreaBorder.Text));
+                if (_chartRequest.isActive[i])
+                {
+                    //myColor = Color.FromArgb(238 - (i * (238 - 204) / divider), 217 + (i * (247 - 217) / divider), 145 + (i * (244 - 145) / divider));
+                    AddSeriaToChart(_chartRequest.Legends[i], _chartRequest.Series[i], _chartRequest.Months, SeriesChartType.StackedArea, _colorList[i - 1], short.Parse(comboBoxAreaBorder.Text));
+                }
             }
 
             //for department capacity line
-            AddSeriaToChartLine(_chartRequest.Legends[0], _chartRequest.Series[0], _chartRequest.Months, SeriesChartType.Line, short.Parse(comboBoxLineWidth.Text));
+            if (_chartRequest.isActive[0])
+            {
+                AddSeriaToChartLine(_chartRequest.Legends[0], _chartRequest.Series[0], _chartRequest.Months, SeriesChartType.Line, short.Parse(comboBoxLineWidth.Text));
+            }
 
             for (int i = 0; i < areaChart.Legends.Count; i++)
             {
-                areaChart.Legends[i].Alignment = StringAlignment.Center;
-                areaChart.Legends[i].Font = new Font("Calibri", 8);
-                areaChart.Legends[i].AutoFitMinFontSize = 7;
-                areaChart.Legends[i].IsTextAutoFit = true;
-                areaChart.Legends[i].LegendStyle = LegendStyle.Table;
+                if (_chartRequest.isActive[i])
+                {
+                    areaChart.Legends[i].Alignment = StringAlignment.Center;
+                    areaChart.Legends[i].Font = new Font("Calibri", 8);
+                    areaChart.Legends[i].AutoFitMinFontSize = 7;
+                    areaChart.Legends[i].IsTextAutoFit = true;
+                    areaChart.Legends[i].LegendStyle = LegendStyle.Table;
+                }
             }
+        }
+
+        public async void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            buttonUpdate.Click += (sender, e) => buttonUpdate_Click(sender, e, null);
         }
 
         private void AddSeriaToChartLine(string serieName, List<double> data, List<double> months, SeriesChartType type, int borderWidth = 1)
@@ -386,7 +408,7 @@ namespace DashboardUI
                 else
                     isHiden = true;
 
-                buttonUpdate_Click(sender, e);
+                buttonUpdate_Click(sender, e, _chartRequest);
             }
         }
 
@@ -399,7 +421,7 @@ namespace DashboardUI
                 else
                     isRotated = true;
 
-                buttonUpdate_Click(sender, e);
+                buttonUpdate_Click(sender, e, _chartRequest);
             }
         }
 
@@ -407,7 +429,7 @@ namespace DashboardUI
         {
             if (!isInitial)
             {
-                buttonUpdate_Click(sender, e);
+                buttonUpdate_Click(sender, e, _chartRequest);
             }
         }
 
@@ -415,7 +437,7 @@ namespace DashboardUI
         {
             if (!isInitial)
             {
-                buttonUpdate_Click(sender, e);
+                buttonUpdate_Click(sender, e, _chartRequest);
             }
         }
 
@@ -423,7 +445,7 @@ namespace DashboardUI
         {
             if (!isInitial)
             {
-                buttonUpdate_Click(sender, e);
+                buttonUpdate_Click(sender, e, _chartRequest);
             }
         }
 
@@ -431,7 +453,7 @@ namespace DashboardUI
         {
             if (!isInitial)
             {
-                buttonUpdate_Click(sender, e);
+                buttonUpdate_Click(sender, e, _chartRequest);
             }
         }
 
@@ -439,7 +461,7 @@ namespace DashboardUI
         {
             if (!isInitial)
             {
-                buttonUpdate_Click(sender, e);
+                buttonUpdate_Click(sender, e, _chartRequest);
             }
         }
 
@@ -447,7 +469,7 @@ namespace DashboardUI
         {
             if (!isInitial)
             {
-                buttonUpdate_Click(sender, e);
+                buttonUpdate_Click(sender, e, _chartRequest);
             }
         }
 
@@ -455,7 +477,7 @@ namespace DashboardUI
         {
             if (!isInitial)
             {
-                buttonUpdate_Click(sender, e);
+                buttonUpdate_Click(sender, e, _chartRequest);
             }
         }
 
@@ -463,7 +485,7 @@ namespace DashboardUI
         {
             if (!isInitial)
             {
-                buttonUpdate_Click(sender, e);
+                buttonUpdate_Click(sender, e, _chartRequest);
             }
         }
 
@@ -471,7 +493,7 @@ namespace DashboardUI
         {
             if (!isInitial)
             {
-                buttonUpdate_Click(sender, e);
+                buttonUpdate_Click(sender, e, _chartRequest);
             }
         }
 
@@ -479,11 +501,35 @@ namespace DashboardUI
         {
             if (!isInitial)
             {
-                buttonUpdate_Click(sender, e);
+                buttonUpdate_Click(sender, e, _chartRequest);
             }
         }
 
         #endregion
 
+        #region Filter Series Function
+
+        private void buttonFilterSeries_Click(object sender, EventArgs e)
+        {
+            if (filterSeriesForm == null)
+            {
+                filterSeriesForm = new FilterSeriesForm(_chartRequest);
+                filterSeriesForm.FormClosed += FilterSeriesForm_FormClosed;
+                Point buttonLocation = new Point(buttonFilterSeries.Location.X - 210, buttonFilterSeries.Location.Y + 25);
+                filterSeriesForm.Location = this.PointToScreen(buttonLocation);
+                filterSeriesForm.ShowDialog();
+            }
+            else
+                filterSeriesForm.Activate();
+        }
+
+        private void FilterSeriesForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            _chartRequest = filterSeriesForm._filteredRequest;
+            buttonUpdate_Click(sender, e, _chartRequest);
+            filterSeriesForm = null;
+        }
+
+        #endregion
     }
 }

@@ -158,7 +158,7 @@ namespace DashboardUI
             else
                 chartForm.Activate();
 
-            chartForm.buttonUpdate_Click(sender, e);
+            chartForm.buttonUpdate_Click(sender, e, null);
         }
 
         private void buttonChart_Click(object sender, EventArgs e)

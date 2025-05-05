@@ -517,13 +517,11 @@ namespace DashboardUI
 
         private void dbGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            Debug.Print("Cell end edit event");
             EditCell(dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex], _cellValueBegin);
         }
 
         private void dbGrid_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            Debug.Print("Cell begin edit event");
             _cellValueBegin = dbGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
         }
 
@@ -987,6 +985,7 @@ namespace DashboardUI
             List<string> legends = new();
             List<List<double>> series = new();
             List<double> months = new();
+            List<bool> isActive = new();
 
 
             #region list of months
@@ -1002,7 +1001,7 @@ namespace DashboardUI
             for (int i = 2; i < dbGrid.Rows.Count; i++)
             {
                 legends.Add(dbGrid.Rows[i].Cells[0].Value.ToString());
-
+                isActive.Add(true);
                 //string serieName = "series" + i.ToString();
                 //list of series
                 List<double> templist = new();
@@ -1021,6 +1020,7 @@ namespace DashboardUI
             chartRequest.Months = months;
             chartRequest.Series = series;
             chartRequest.Legends = legends;
+            chartRequest.isActive = isActive;
 
             return chartRequest;
         }
@@ -1053,13 +1053,11 @@ namespace DashboardUI
 
         private async void buttonSave_Click(object sender, EventArgs e)
         {
-            Debug.Print(_databaseOperations.Count.ToString());
-
             await WriteOnDatabaseAsync();
 
             labelStatus.Text = "Done";
 
-            //alertBox.SuccessAlert("Saved");
+            alertBox.SuccessAlert("All data saved");
         }
 
         private async Task WriteOnDatabaseAsync()
