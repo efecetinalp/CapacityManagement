@@ -53,6 +53,7 @@ namespace DashboardUI
         public bool isDataListed = false;
         private int _rowIndex;
         private int _departmentIndex;
+        private int _managementIndex;
         private List<Project> _listedProjects = new();
         private List<Management> _listedManagements = new();
         private List<Department> _listedDepartments = new();
@@ -446,7 +447,7 @@ namespace DashboardUI
         {
             if (createForm == null)
             {
-                Management management = managementManager.GetByName(comboBoxManagement.Text).Data;
+                Management management = managementManager.GetById(_managementIndex).Data;
                 Department department = departmentManager.GetById(_departmentIndex).Data;
                 createForm = new CreateProjectForm(management, department, categoryManager, projectManager, userManager);
                 createForm.FormClosed += CreateForm_FormClosed;
@@ -898,14 +899,15 @@ namespace DashboardUI
         {
             if (comboBoxManagement.SelectedIndex >= 0)
             {
-                var managementId = _listedManagements[comboBoxManagement.SelectedIndex].ManagementId;
+                _managementIndex = _listedManagements[comboBoxManagement.SelectedIndex].ManagementId;
+                //var managementId = _listedManagements[comboBoxManagement.SelectedIndex].ManagementId;
 
                 //update department comboBox
                 comboBoxDepartment.Items.Clear();
                 comboBoxManagement.ResetText();
                 comboBoxDepartment.SelectedIndex = -1;
 
-                _listedDepartments = departmentManager.GetAllByManagementId(managementId).Data;
+                _listedDepartments = departmentManager.GetAllByManagementId(_managementIndex).Data;
                 foreach (var department in _listedDepartments)
                 {
                     comboBoxDepartment.Items.Add(department.DepartmentName);

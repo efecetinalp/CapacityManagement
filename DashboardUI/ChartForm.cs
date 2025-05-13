@@ -215,6 +215,7 @@ namespace DashboardUI
             //chartArea.AxisY.LabelStyle.ForeColor = Color.DarkGray;
             chartArea.AxisY.LabelStyle.Font = new Font("Calibri", short.Parse(comboBoxAxisValueSize.Text));
 
+            //capacity areas
             for (int i = 1; i < _chartRequest.Legends.Count; i++)
             {
                 if (_chartRequest.isActive[i])
@@ -274,6 +275,7 @@ namespace DashboardUI
             newSerie.ChartArea = "ChartArea1";
             newSerie.ChartType = type;
             newSerie.BorderWidth = borderWidth;
+            newSerie.ToolTip = serieName;
             for (int i = 0; i < data.Count; i++)
             {
                 newSerie.Points.AddXY(months[i], data[i]);
@@ -388,7 +390,7 @@ namespace DashboardUI
                 //generates area type color list
                 for (int i = 0; i < colorCount; i++)
                 {
-                    if (i >= _colorDetails.Data.Count)
+                    if (colorIndex >= _colorDetails.Data.Count - 1)
                         colorIndex = 0;
 
                     _colorList.Add(_colorDetails.Data[colorIndex].GetColorCode);
